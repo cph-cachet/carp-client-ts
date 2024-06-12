@@ -1,0 +1,6 @@
+{
+  "name": "@cachet/Kotlin-DateTime-library-kotlinx-datetime",
+  "type": "module",
+  "main": "index.js",
+  "version":  "1.2.1"
+}

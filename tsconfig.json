@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "ESNext",
+    "declaration": true,
+    "outDir": "./lib",
+    "strict": true,
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+  },
+  "include": ["./.eslintrc.js", "types.d.ts", "src/**/*"],
+  "exclude": ["node_modules"]
+}

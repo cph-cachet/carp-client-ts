@@ -1,0 +1,6 @@
+{
+  "name": "@cachet/carp-common",
+  "type": "module",
+  "main": "index.js",
+  "version":  "1.2.1"
+}
