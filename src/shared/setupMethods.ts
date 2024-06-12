@@ -3,14 +3,14 @@ import { CarpClient } from "@/client/carpClient"
 
 export const setupResearcherClient = async () => {
   const authClient = new CarpAuthClient({
-    baseUrl: process.env.AUTH_BASE_URL,
+    baseUrl: import.meta.env.VITE_AUTH_BASE_URL,
   })
 
   const token = await authClient.authentication.login({
-    username: process.env.RESEARCHER_EMAIL,
-    password: process.env.RESEARCHER_PASSWORD,
-    client_id: process.env.AUTH_CLIENT_ID,
-    client_secret: process.env.AUTH_CLIENT_SECRET,
+    username: import.meta.env.VITE_RESEARCHER_EMAIL,
+    password: import.meta.env.VITE_RESEARCHER_PASSWORD,
+    client_id: import.meta.env.VITE_AUTH_CLIENT_ID,
+    client_secret: import.meta.env.VITE_AUTH_CLIENT_SECRET,
     grant_type: "password",
   })
 
@@ -19,7 +19,7 @@ export const setupResearcherClient = async () => {
   }
 
   const carpClient = new CarpClient({
-    baseUrl: process.env.API_BASE_URL,
+    baseUrl: import.meta.env.VITE_API_BASE_URL,
   })
   carpClient.setAuthToken(token.access_token)
 

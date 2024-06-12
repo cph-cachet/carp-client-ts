@@ -1,7 +1,7 @@
 import { Endpoint } from "@/shared/endpoint"
 
 export class Auth extends Endpoint {
-  private realm: string = process.env.AUTH_REALM
+  private realm: string = import.meta.env.VITE_AUTH_REALM
 
   async login(params: {
     username: string

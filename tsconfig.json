@@ -6,9 +6,9 @@
       "es2022"
     ],
     "esModuleInterop": true,
-    "module": "CommonJS",
+    "moduleResolution": "node",
+    "module": "ESNext",
     "allowJs": true,
-    "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "outDir": "dist",
@@ -18,11 +18,12 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "sourceMap": true
   },
   "include": [
     "src/**/*",
     "src/env.d.ts",
-    "tests/**/*"
-  ]
+    "test/**/*"
+, "reporter.js"  ]
 }
