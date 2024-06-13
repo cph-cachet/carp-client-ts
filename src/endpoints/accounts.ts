@@ -1,3 +1,4 @@
+import { CarpServiceError } from "@/shared"
 import { Endpoint } from "@/shared/endpoint"
 
 export class Accounts extends Endpoint {
@@ -14,6 +15,7 @@ export class Accounts extends Endpoint {
     emailAddress: string
     role: string
   }) {
-    return this.post(`${this.endpoint}/role`, { emailAddress, role })
+    await this.post(`${this.endpoint}/role`, { emailAddress, role })
+    return Promise.resolve(true)
   }
 }

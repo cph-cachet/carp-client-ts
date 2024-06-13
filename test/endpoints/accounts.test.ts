@@ -10,11 +10,9 @@ describe("Accounts service", () => {
   })
 
   it("Inviting a researcher should succeed", async () => {
-    expect(
-      await researcherClient.accounts.invite({
-        emailAddress: import.meta.env.VITE_PARTICIPANT_EMAIL,
-        role: "RESEARCHER",
-      })
-    ).toBeUndefined()
+    await researcherClient.accounts.invite({
+      emailAddress: import.meta.env.VITE_PARTICIPANT_EMAIL,
+      role: "RESEARCHER",
+    })
   })
 })

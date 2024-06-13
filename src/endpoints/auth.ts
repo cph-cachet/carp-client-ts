@@ -1,5 +1,9 @@
 import { Endpoint } from "@/shared/endpoint"
 
+export type CarpToken = {
+  access_token: string
+}
+
 export class Auth extends Endpoint {
   private realm: string = import.meta.env.VITE_AUTH_REALM
 
@@ -12,12 +16,16 @@ export class Auth extends Endpoint {
   }) {
     const query = new URLSearchParams(params).toString()
 
-    return await this.post<{ access_token: string }>(
+    const response = await this.post<CarpToken>(
       `/realms/${this.realm}/protocol/openid-connect/token`,
       query,
       {
-        "Content-Type": "application/x-www-form-urlencoded",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        }
       }
     )
+
+    return response.data
   }
 }

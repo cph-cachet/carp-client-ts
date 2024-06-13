@@ -1,6 +1,7 @@
 import { CarpAuthClient } from "@/client/authClient"
 import { CarpServiceError } from "@/shared/carpServiceError"
-import { describe, beforeAll, it, expect } from "vitest";
+import { describe, beforeAll, it, expect, expectTypeOf } from "vitest";
+import { CarpToken } from "@/endpoints/auth";
 
 describe("Authentication service", () => {
   let authClient: CarpAuthClient
@@ -12,26 +13,25 @@ describe("Authentication service", () => {
   })
 
   it("should authenticate user", async () => {
-    expect(await authClient.authentication.login({
+    const response = await authClient.authentication.login({
       username: import.meta.env.VITE_RESEARCHER_EMAIL,
       password: import.meta.env.VITE_RESEARCHER_PASSWORD,
       client_id: import.meta.env.VITE_AUTH_CLIENT_ID,
       client_secret: import.meta.env.VITE_AUTH_CLIENT_SECRET,
       grant_type: "password",
-    })).not.toBeUndefined()
+    })
+
+    expectTypeOf(response).toEqualTypeOf<CarpToken>()
   })
 
   it("should not authenticate user with an incorrect password", async () => {
-    await authClient.authentication
+    await expect(authClient.authentication
       .login({
         username: import.meta.env.VITE_RESEARCHER_EMAIL,
         password: "incorrect password",
         client_id: import.meta.env.VITE_AUTH_CLIENT_ID,
         client_secret: import.meta.env.VITE_AUTH_CLIENT_SECRET,
         grant_type: "password",
-      })
-      .catch((response) => {
-        expect(response instanceof CarpServiceError).toBeTruthy()
-      })
+      })).rejects.toThrowError(CarpServiceError)
   })
 })

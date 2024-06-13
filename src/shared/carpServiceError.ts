@@ -15,7 +15,7 @@ export class CarpServiceError extends Error {
     this.code = error.response?.status || 500
     this.data = error.response?.data as { [key: string]: string }
     if (error.stack) {
-      this.stack = error.stack // Preserve original stack trace
+      this.stack = error.stack 
     }
     Object.setPrototypeOf(this, CarpServiceError.prototype)
   }

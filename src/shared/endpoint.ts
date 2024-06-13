@@ -1,92 +1,47 @@
 import RequestConfig from "@/requestConfig"
 import { CarpClient } from "@/client/carpClient"
-import { AxiosError, AxiosRequestConfig } from "axios"
+import axios, { AxiosError, AxiosRequestConfig, Axios, AxiosResponse } from "axios"
 import { CarpServiceError } from "./carpServiceError"
 
 export class Endpoint {
   protected readonly _client: CarpClient
+  get: <T>(url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, Error>>
+  post: <T>(url: string, data?: any, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, Error>>
+  put: <T>(url: string, data?: any, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, Error>>
+  delete: <T>(url: string, config?: AxiosRequestConfig) => Promise<AxiosResponse<T, Error>>
 
   constructor(client: CarpClient) {
     this._client = client
-  }
+    this.get = this._client.instance.get // Assign the 'get' property
+    this.post = this._client.instance.post // Assign the 'post' property
+    this.put = this._client.instance.put // Assign the 'put' property
+    this.delete = this._client.instance.delete // Assign the 'delete' property
 
-  private async sendRequest<T>(
-    requestConfig: RequestConfig
-  ): Promise<T | Error> {
-    try {
-      const response = await this._client.instance.request<T>(requestConfig)
-
-      return response.data as T
-    } catch (e: any) {
-      if (e instanceof AxiosError) {
-        this.handleErrorResponse(e, requestConfig)
-      } else {
-        throw e // Re-throw non-Axios errors directly
-      }
-    }
-  }
-
-  protected async get<T>(
-    url: string,
-    params?: any,
-    headers?: any
-  ): Promise<T | Error> {
-    const requestConfig: RequestConfig = {
-      method: "GET",
-      url: url,
-      params: params,
-      headers: headers,
-    }
-    return this.sendRequest<T>(requestConfig)
-  }
-
-  protected async post<T>(
-    url: string,
-    data?: any,
-    headers: any = { "Content-Type": "application/json" }
-  ): Promise<T | Error> {
-    const requestConfig: RequestConfig = {
-      method: "POST",
-      url: url,
-      data: data,
-      headers: headers,
-    }
-    return this.sendRequest<T>(requestConfig)
-  }
-
-  protected put<T>(url: string, data?: any, headers?: any): Promise<T | Error> {
-    const requestConfig: RequestConfig = {
-      method: "PUT",
-      url: url,
-      data: data,
-      headers: headers,
-    }
-    return this.sendRequest<T>(requestConfig)
-  }
-
-  protected async delete<T>(url: string, headers?: any): Promise<T | Error> {
-    const requestConfig: RequestConfig = {
-      method: "DELETE",
-      url: url,
-      headers: headers,
-    }
-    return this.sendRequest<T>(requestConfig)
-  }
-
-  private handleErrorResponse(
-    e: AxiosError,
-    requestConfig: AxiosRequestConfig
-  ) {
-    const axiosError = e as AxiosError
-    const sanitizedConfig = this.sanitizeRequestConfig(requestConfig)
-    console.error(
-      `[${e.response?.status}] ${e.message}: ${JSON.stringify(
-        e.response?.data,
-        null,
-        2
-      )}\nRequest Config: ${JSON.stringify(sanitizedConfig, null, 2)}`
+    this._client.instance.interceptors.response.use(
+      (response) => response,
+      (error) => this.handleErrorResponse(error)
     )
-    throw new CarpServiceError(axiosError) // Wrap and re-throw the error
+  }
+
+  private handleErrorResponse(e: Error) {
+    if (axios.isAxiosError(e)) {
+      const axiosError = e as AxiosError
+      const sanitizedConfig = this.sanitizeRequestConfig(
+        axiosError.response.config
+      )
+      console.error(
+        `[${axiosError.response?.status}] ${
+          axiosError.message
+        }: ${JSON.stringify(
+          axiosError.response?.data,
+          null,
+          2
+        )}\nRequest Config: ${JSON.stringify(sanitizedConfig, null, 2)}`
+      )
+      return Promise.reject(new CarpServiceError(axiosError)) // Wrap and re-throw the error
+    } else {
+      return Promise.reject(e)
+    }
   }
 
   private sanitizeRequestConfig(config: AxiosRequestConfig) {
