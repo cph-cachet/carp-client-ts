@@ -7,6 +7,7 @@ import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+  let shouldLogOnSuccess = process.env.VITE_ENV == 'DEV' ? true : false;
 
   return defineConfig({
     resolve: {
@@ -20,7 +21,8 @@ export default ({ mode }) => {
     test: {
       coverage: {
         provider: 'v8',
-      }
+      },
+      reporters: [new CustomReporter(shouldLogOnSuccess)]
     }
   });
 };
