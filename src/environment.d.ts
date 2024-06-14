@@ -12,4 +12,6 @@ interface ImportMetaEnv {
   readonly VITE_PARTICIPANT_USERNAME: string
 }
 
-export {}
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
