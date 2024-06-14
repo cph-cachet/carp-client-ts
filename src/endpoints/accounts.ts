@@ -1,4 +1,3 @@
-import { CarpServiceError } from "@/shared"
 import { Endpoint } from "@/shared/endpoint"
 
 export class Accounts extends Endpoint {
