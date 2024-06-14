@@ -15,7 +15,6 @@ export class Accounts extends Endpoint {
     emailAddress: string
     role: string
   }) {
-    await this.post(`${this.endpoint}/role`, { emailAddress, role })
-    return Promise.resolve(true)
+    return await this.post(`${this.endpoint}/role`, { emailAddress, role })
   }
 }
