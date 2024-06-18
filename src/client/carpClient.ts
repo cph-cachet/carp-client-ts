@@ -20,6 +20,9 @@ export class CarpClient {
 
     this._instance = axios.create({
       baseURL: config.baseUrl,
+      headers: {
+        "Content-Type": "application/json",
+      }
     })
 
     this.registerEndpoints()

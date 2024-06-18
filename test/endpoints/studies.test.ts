@@ -1,6 +1,6 @@
 import { CarpClient } from "@/client"
 import { StudyStatus, setupResearcherClient } from "@/shared"
-import { beforeAll, describe } from "vitest"
+import { beforeAll, describe, it, expect} from "vitest"
 
 describe("Studies service", () => {
   let researcherClient: CarpClient

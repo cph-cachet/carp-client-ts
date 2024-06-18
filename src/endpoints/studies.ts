@@ -2,7 +2,7 @@ import { DefaultSerializer, Endpoint, Json, StudyServiceRequest, StudyStatus, UU
 import { StudyOverview } from "@/shared/models"
 
 export class Studies extends Endpoint {
-  endpoint: string = "/api/studies-service"
+  endpoint: string = "/api/study-service"
 
   /**
    * Create a study
