@@ -1,10 +1,11 @@
 import axios, { AxiosInstance } from "axios"
 import { Config } from "@/config"
-import { Accounts } from "@/endpoints"
+import { Accounts, Studies } from "@/endpoints"
 
 export class CarpClient {
   private _instance: AxiosInstance
   accounts: Accounts
+  studies: Studies
 
   public get instance(): AxiosInstance {
     return this._instance
@@ -34,5 +35,6 @@ export class CarpClient {
 
   registerEndpoints() {
     this.accounts = new Accounts(this)
+    this.studies = new Studies(this)
   }
 }

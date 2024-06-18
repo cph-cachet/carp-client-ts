@@ -28,4 +28,20 @@ export class Auth extends Endpoint {
 
     return response.data
   }
+
+  async getAccountId(params: { token: string, clientId: string, clientSecret: string }) {
+    const query = new URLSearchParams(params).toString()
+      const response = await this.post(
+        '/realms/Carp/protocol/openid-connect/token/introspect',
+        query,
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      );
+
+      const data = response.data as Record<string, unknown>;
+      return data.sub as string;
+  }
 }

@@ -23,5 +23,11 @@ export const setupResearcherClient = async () => {
   })
   carpClient.setAuthToken(token.access_token)
 
-  return carpClient
+  const accountId = await authClient.authentication.getAccountId({
+    token: token.access_token,
+    clientId: import.meta.env.VITE_AUTH_CLIENT_ID,
+    clientSecret: import.meta.env.VITE_AUTH_CLIENT_SECRET,
+  })
+
+  return { carpClient, accountId }
 }
