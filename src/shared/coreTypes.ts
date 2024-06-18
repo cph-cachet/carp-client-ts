@@ -42,11 +42,35 @@ import Pair = kotlin.Pair
 import ListSerializer = kotlinxcore.serialization.builtins.ListSerializer
 import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer
 
+const serializeRequest = ({ request, serializer }: { request: any, serializer: any }): string => {
+  const json: Json = DefaultSerializer
+  const serializedUpdateStudy = json.encodeToString(
+    serializer,
+    request
+  )
+
+  return serializedUpdateStudy
+}
+
+const deserializeResponse = <T>({ response, responseType }: { response: unknown, responseType: T }): T => {
+  const stringifiedResponse = JSON.stringify(response)
+  const json: Json = DefaultSerializer
+  const deserializer = getSerializer(responseType)
+  const decodedResponse = json.decodeFromString(
+    deserializer,
+    stringifiedResponse
+  ) as T
+
+  return decodedResponse
+}
+
 export {
   cdk,
+  deserializeResponse,
   sdk,
   kotlinx,
   kotlinxcore,
+  serializeRequest,
   Json,
   DefaultSerializer,
   UUID,

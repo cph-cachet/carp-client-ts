@@ -1,8 +1,20 @@
-import { DefaultSerializer, Endpoint, Json, StudyServiceRequest, StudyStatus, UUID, getSerializer } from "@/shared"
+import {
+  DefaultSerializer,
+  Endpoint,
+  Json,
+  StudyServiceRequest,
+  StudyStatus,
+  UUID,
+  deserializeResponse,
+  getSerializer,
+  serializeRequest,
+} from "@/shared"
 import { StudyOverview } from "@/shared/models"
+import { User } from "@/shared/models/general"
 
 export class Studies extends Endpoint {
-  endpoint: string = "/api/study-service"
+  coreEndpoint: string = "/api/study-service"
+  wsEndpoint: string = "/api/studies"
 
   /**
    * Create a study
@@ -10,6 +22,13 @@ export class Studies extends Endpoint {
    * @param description The description of the study
    * @param ownerId The owner of the study, i.e the ID of the user creating the study. Must be a valid UUID
    * @returns
+   */
+  /**
+   * Create a study
+   * @param name The name of the study
+   * @param description The description of the study
+   * @param ownerId The owner of the study, i.e the ID of the user creating the study. Must be a valid UUID
+   * @returns The study status
    */
   async create({
     name,
@@ -25,20 +44,17 @@ export class Studies extends Endpoint {
       name,
       description
     )
-    const json: Json = DefaultSerializer
     const serializer = StudyServiceRequest.Serializer
-    const serializedCreateStudy = json.encodeToString(serializer, createStudy)
+    const serializedCreateStudy = serializeRequest({
+      request: createStudy,
+      serializer,
+    })
 
-    const response = await this.post(
-      this.endpoint,
-      serializedCreateStudy
-    )
-    const serializedStudyStatus = JSON.stringify(response.data)
-    const statusSerializer = getSerializer(StudyStatus)
-    const studyStatus: StudyStatus = json.decodeFromString(
-      statusSerializer,
-      serializedStudyStatus
-    )
+    const response = await this.post(this.coreEndpoint, serializedCreateStudy)
+    const studyStatus = deserializeResponse({
+      response: response.data,
+      responseType: StudyStatus,
+    })
     return studyStatus
   }
 
@@ -48,130 +64,149 @@ export class Studies extends Endpoint {
    * @param studyName The name of the study
    * @param studyDescription The description of the study
    */
-    async setDescription({
-      studyId,
-      studyName,
-      studyDescription,
-    }: {
-      studyId: string
-      studyName: string
-      studyDescription: string
-    }) {
-      const setInternalDescription = new StudyServiceRequest.SetInternalDescription(
+  async setDescription({
+    studyId,
+    studyName,
+    studyDescription,
+  }: {
+    studyId: string
+    studyName: string
+    studyDescription: string
+  }) {
+    const setInternalDescription =
+      new StudyServiceRequest.SetInternalDescription(
         new UUID(studyId),
         studyName,
         studyDescription
       )
-      const json: Json = DefaultSerializer
-      const serializer = StudyServiceRequest.Serializer
-      const serializedUpdateStudy = json.encodeToString(serializer, setInternalDescription)
-  
-      const response = await this.post(
-        this.endpoint,
-        serializedUpdateStudy
-      )
-      const serializedStudyStatus = JSON.stringify(response.data)
-      const statusSerializer = getSerializer(StudyStatus)
-      const studyStatus: StudyStatus = json.decodeFromString(
-        statusSerializer,
-        serializedStudyStatus
-      )
+    const serializedUpdateStudy = serializeRequest({
+      request: setInternalDescription,
+      serializer: StudyServiceRequest.Serializer,
+    })
 
-      return studyStatus
-    }
+    const response = await this.post(this.coreEndpoint, serializedUpdateStudy)
+    const studyStatus = deserializeResponse({
+      response: response.data,
+      responseType: StudyStatus,
+    })
 
-    /**
-     * Get a study 
-     * @param studyId The ID of the study
-     */
-    async getDetails({
-      studyId,
-    }: {
-      studyId: string
-    }) {
-      const getStudyDetails = new StudyServiceRequest.GetStudyDetails(
-        new UUID(studyId)
-      )
-      const json: Json = DefaultSerializer
-      const serializer = StudyServiceRequest.Serializer
-      const serializedGetStudy = json.encodeToString(serializer, getStudyDetails)
-  
-      const response = await this.post(
-        this.endpoint,
-        serializedGetStudy
-      )
+    return studyStatus
+  }
 
-      const serializedStudyDetails = JSON.stringify(response.data)
-      const detailSerializer = getSerializer(StudyStatus)
-      const studyStatus: StudyStatus = json.decodeFromString(
-        detailSerializer,
-        serializedStudyDetails
-      )
+  /**
+   * Get a study
+   * @param studyId The ID of the study
+   */
+  /**
+   * Get study details
+   * @param studyId The ID of the study
+   */
+  async getDetails({ studyId }: { studyId: string }) {
+    const getStudyDetails = new StudyServiceRequest.GetStudyDetails(
+      new UUID(studyId)
+    )
+    const serializedGetStudy = serializeRequest({
+      request: getStudyDetails,
+      serializer: StudyServiceRequest.Serializer
+    })
 
-      return studyStatus
-    }
+    const response = await this.post(this.coreEndpoint, serializedGetStudy)
+    const studyStatus = deserializeResponse({
+      response: response.data,
+      responseType: StudyStatus,
+    })
 
-    /**
-     * Get overview of all studies this account is a researcher on
-     */
-    async getOverview() {
-      const response = await this.get(
-        '/api/studies/study-overview'
-      )
+    return studyStatus
+  }
 
-      return response.data as StudyOverview[]
-    }
+  /**
+   * Get overview of all studies this account is a researcher on
+   */
+  async getOverview() {
+    const response = await this.get(`${this.wsEndpoint}/study-overview`)
 
-    /**
-     * Get the status for a study
-     * @param studyId The ID of the study
-     */
-    async getStatus({
-      studyId,
-    }: {
-      studyId: string
-    }) {
-      const getStudyStatus = new StudyServiceRequest.GetStudyStatus(
-        new UUID(studyId)
-      )
-      const json: Json = DefaultSerializer
-      const serializer = StudyServiceRequest.Serializer
-      const serializedGetStudyStatus = json.encodeToString(serializer, getStudyStatus)
-  
-      const response = await this.post(
-        this.endpoint,
-        serializedGetStudyStatus
-      )
+    return response.data as StudyOverview[]
+  }
 
-      const serializedStudyStatus = JSON.stringify(response.data)
-      const statusSerializer = getSerializer(StudyStatus)
-      const studyStatus: StudyStatus = json.decodeFromString(
-        statusSerializer,
-        serializedStudyStatus
-      )
+  /**
+   * Get the status for a study
+   * @param studyId The ID of the study
+   */
+  async getStatus({ studyId }: { studyId: string }) {
+    const getStudyStatus = new StudyServiceRequest.GetStudyStatus(
+      new UUID(studyId)
+    )
+    const serializedGetStudyStatus = serializeRequest({
+      request: getStudyStatus,
+      serializer: StudyServiceRequest.Serializer,
+    })
 
-      return studyStatus
-    }
+    const response = await this.post(
+      this.coreEndpoint,
+      serializedGetStudyStatus
+    )
+    const studyStatus = deserializeResponse({
+      response: response.data,
+      responseType: StudyStatus,
+    })
 
-    /**
-     * Delete a study
-     * @param studyId The ID of the study
-     */
-    async deleteStudy({
-      studyId,
-    }: {
-      studyId: string
-    }) {
-      const deleteStudy = new StudyServiceRequest.Remove(
-        new UUID(studyId)
-      )
-      const json: Json = DefaultSerializer
-      const serializer = StudyServiceRequest.Serializer
-      const serializedDeleteStudy = json.encodeToString(serializer, deleteStudy)
-  
-      await this.post(
-        this.endpoint,
-        serializedDeleteStudy
-      )
-    }
+    return studyStatus
+  }
+
+  /**
+   * Delete a study
+   * @param studyId The ID of the study
+   */
+  async deleteStudy({ studyId }: { studyId: string }) {
+    const deleteStudy = new StudyServiceRequest.Remove(new UUID(studyId))
+    const json: Json = DefaultSerializer
+    const serializer = StudyServiceRequest.Serializer
+    const serializedDeleteStudy = json.encodeToString(serializer, deleteStudy)
+
+    await this.post(this.coreEndpoint, serializedDeleteStudy)
+  }
+
+  /**
+   * Add researcher to a study
+   * @param studyId The ID of the study
+   * @param email The email of the researcher to add
+   */
+  async addResearcher({ studyId, email }: { studyId: string; email: string }) {
+    const query = new URLSearchParams({ email }).toString()
+    await this.post(`${this.wsEndpoint}/${studyId}/researchers/add`, query, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+  }
+
+  /**
+   * Get all researchers for a study
+   * @param studyId The ID of the study
+   * @returns The list of researchers
+   */
+  async getResearchers({ studyId }: { studyId: string }) {
+    const response = await this.get(`${this.wsEndpoint}/${studyId}/researchers`)
+    return response.data as User[]
+  }
+
+  /**
+   * Remove a researcher from a study
+   * @param studyId The ID of the study
+   * @param email The email of the researcher to remove
+   */
+  async removeResearcher({
+    studyId,
+    email,
+  }: {
+    studyId: string
+    email: string
+  }) {
+    const query = new URLSearchParams({ email }).toString()
+    await this.delete(`${this.wsEndpoint}/${studyId}/researchers?${query}`,  {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+  }
 }
