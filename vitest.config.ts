@@ -19,6 +19,7 @@ export default ({ mode }) => {
       viteTsconfigPaths(),
     ],
     test: {
+      environment: 'jsdom',
       coverage: {
         provider: 'v8',
       },
