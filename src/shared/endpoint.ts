@@ -45,9 +45,14 @@ export class Endpoint {
   private handleErrorResponse(e: Error) {
     if (axios.isAxiosError(e)) {
       const axiosError = e as AxiosError
-      const sanitizedConfig = this.sanitizeRequestConfig(
-        axiosError.response.config
-      )
+      let sanitizedConfig = ""
+      if (axiosError.response?.config) {
+        sanitizedConfig = `\nRequest Config: ${JSON.stringify(
+          this.sanitizeRequestConfig(axiosError.response.config),
+          null,
+          2
+        )}`
+      }
       console.error(
         `[${axiosError.response?.status}] ${
           axiosError.message
@@ -55,7 +60,7 @@ export class Endpoint {
           axiosError.response?.data,
           null,
           2
-        )}\nRequest Config: ${JSON.stringify(sanitizedConfig, null, 2)}`
+        )}${sanitizedConfig}`
       )
       return Promise.reject(new CarpServiceError(axiosError)) // Wrap and re-throw the error
     } else {

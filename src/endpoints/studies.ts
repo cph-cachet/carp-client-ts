@@ -1,12 +1,9 @@
 import {
-  DefaultSerializer,
   Endpoint,
-  Json,
   StudyServiceRequest,
   StudyStatus,
   UUID,
   deserializeResponse,
-  getSerializer,
   serializeRequest,
 } from "@/shared"
 import { StudyOverview } from "@/shared/models"
@@ -44,10 +41,9 @@ export class Studies extends Endpoint {
       name,
       description
     )
-    const serializer = StudyServiceRequest.Serializer
     const serializedCreateStudy = serializeRequest({
       request: createStudy,
-      serializer,
+      serializer: StudyServiceRequest.Serializer,
     })
 
     const response = await this.post(this.coreEndpoint, serializedCreateStudy)
@@ -107,7 +103,7 @@ export class Studies extends Endpoint {
     )
     const serializedGetStudy = serializeRequest({
       request: getStudyDetails,
-      serializer: StudyServiceRequest.Serializer
+      serializer: StudyServiceRequest.Serializer,
     })
 
     const response = await this.post(this.coreEndpoint, serializedGetStudy)
@@ -159,9 +155,10 @@ export class Studies extends Endpoint {
    */
   async deleteStudy({ studyId }: { studyId: string }) {
     const deleteStudy = new StudyServiceRequest.Remove(new UUID(studyId))
-    const json: Json = DefaultSerializer
-    const serializer = StudyServiceRequest.Serializer
-    const serializedDeleteStudy = json.encodeToString(serializer, deleteStudy)
+    const serializedDeleteStudy = serializeRequest({
+      request: deleteStudy,
+      serializer: StudyServiceRequest.Serializer,
+    })
 
     await this.post(this.coreEndpoint, serializedDeleteStudy)
   }
@@ -203,7 +200,7 @@ export class Studies extends Endpoint {
     email: string
   }) {
     const query = new URLSearchParams({ email }).toString()
-    await this.delete(`${this.wsEndpoint}/${studyId}/researchers?${query}`,  {
+    await this.delete(`${this.wsEndpoint}/${studyId}/researchers?${query}`, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },

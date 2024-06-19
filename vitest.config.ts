@@ -7,7 +7,7 @@ import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-  let shouldLogOnSuccess = process.env.VITE_ENV == 'DEV' ? true : false;
+  let shouldLogOnSuccess = process.env.VITE_ENV === 'DEV'
 
   return defineConfig({
     resolve: {
@@ -19,11 +19,13 @@ export default ({ mode }) => {
       viteTsconfigPaths(),
     ],
     test: {
-      environment: 'jsdom',
       coverage: {
         provider: 'v8',
       },
-      reporters: [new CustomReporter(shouldLogOnSuccess)]
+      reporters: [new CustomReporter(shouldLogOnSuccess)],
+      api: {
+        middlewareMode: true
+      },
     }
   });
 };
