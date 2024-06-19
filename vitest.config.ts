@@ -1,13 +1,12 @@
 import path from 'path';
-import { defineConfig } from 'vitest/config';
-import { loadEnv } from 'vite'
-import CustomReporter from './reporter';
-
+import { loadEnv } from 'vite';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vitest/config';
+import CustomReporter from './reporter';
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-  let shouldLogOnSuccess = process.env.VITE_ENV === 'DEV'
+  const shouldLogOnSuccess = process.env.VITE_ENV === 'DEV';
 
   return defineConfig({
     resolve: {
@@ -15,17 +14,15 @@ export default ({ mode }) => {
         '@/': path.resolve(__dirname, './src/'),
       },
     },
-    plugins: [
-      viteTsconfigPaths(),
-    ],
+    plugins: [viteTsconfigPaths()],
     test: {
       coverage: {
         provider: 'v8',
       },
       reporters: [new CustomReporter(shouldLogOnSuccess)],
       api: {
-        middlewareMode: true
+        middlewareMode: true,
       },
-    }
+    },
   });
 };
