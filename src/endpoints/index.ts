@@ -1,3 +1,5 @@
-export * from "./accounts"
-export * from "./auth"
-export * from "./studies.ts"
+import Accounts from "./accounts";
+import Auth from "./auth";
+import Studies from "./studies";
+
+export { Auth, Accounts, Studies };

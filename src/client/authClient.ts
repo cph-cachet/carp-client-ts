@@ -1,6 +1,6 @@
-import { Config } from '@/config';
-import { Auth } from '@/endpoints/auth';
-import { CarpClient } from './carpClient';
+import { Config } from "@/config";
+import { Auth } from "@/endpoints";
+import CarpClient from "./carpClient";
 
 /*
  * CarpAuthClient is a specialized CarpClient that includes the Auth endpoint.

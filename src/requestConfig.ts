@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from "axios"
+import { AxiosRequestConfig } from "axios";
 
-type RequestConfig = AxiosRequestConfig
+type RequestConfig = AxiosRequestConfig;
 
-export default RequestConfig
+export default RequestConfig;
