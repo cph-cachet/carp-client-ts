@@ -1,5 +1,5 @@
 {
-  "name": "@carp/client",
+  "name": "@carp-dk/client",
   "repository": {
     "type": "git",
     "url": "https://github.com/cph-cachet/carp-client-ts.git"
@@ -44,7 +44,7 @@
     "@babel/core": "^7.24.1",
     "@babel/preset-env": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
-    "@cph-cachet/eslint-config": "^1.0.4",
+    "@carp-dk/eslint-config": "^1.0.0",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
@@ -71,11 +71,6 @@
     "axios": "^1.6.8",
     "axios-mock-adapter": "^1.22.0",
     "big.js": "6.2.1",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^27.9.0",
-    "eslint-plugin-jsdoc": "^48.2.1",
-    "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-unused-imports": "^3.1.0",
     "form-data": "^4.0.0",
     "jwt-decode": "^4.0.0",
     "qs": "^6.12.0"
