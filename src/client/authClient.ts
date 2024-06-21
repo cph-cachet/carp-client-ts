@@ -1,6 +1,6 @@
-import { Config } from "@/config"
-import { CarpClient } from "./carpClient"
-import { Auth } from "@/endpoints/auth"
+import { Config } from "@/config";
+import { Auth } from "@/endpoints";
+import CarpClient from "./carpClient";
 
 /*
  * CarpAuthClient is a specialized CarpClient that includes the Auth endpoint.
@@ -8,15 +8,15 @@ import { Auth } from "@/endpoints/auth"
  * This is for internal use only, for the tests.
  * @internal
  */
-export class CarpAuthClient extends CarpClient {
-  public authentication: Auth
+export default class CarpAuthClient extends CarpClient {
+  public authentication: Auth;
 
   constructor(protected readonly config: Config) {
-    super(config)
-    this.registerEndpoints()
+    super(config);
+    this.registerEndpoints();
   }
 
   registerEndpoints(): void {
-    this.authentication = new Auth(this)
+    this.authentication = new Auth(this);
   }
 }

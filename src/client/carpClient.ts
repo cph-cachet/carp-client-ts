@@ -1,43 +1,45 @@
-import axios, { AxiosInstance } from "axios"
-import { Config } from "@/config"
-import { Accounts, Studies } from "@/endpoints"
+import axios, { AxiosInstance } from "axios";
+import { Config } from "@/config";
+import { Accounts, Studies } from "@/endpoints";
 
-export class CarpClient {
-  private _instance: AxiosInstance
-  accounts: Accounts
-  studies: Studies
+export default class CarpClient {
+  private instance: AxiosInstance;
 
-  public get instance(): AxiosInstance {
-    return this._instance
+  accounts: Accounts;
+
+  studies: Studies;
+
+  public get getInstance(): AxiosInstance {
+    return this.instance;
   }
 
   constructor(protected readonly config: Config) {
     if (!config.baseUrl) {
       throw new Error(
-        "Could not parse the base URL. Make sure to configure CarpClient properly."
-      )
+        "Could not parse the base URL. Make sure to configure CarpClient properly.",
+      );
     }
 
-    this._instance = axios.create({
+    this.instance = axios.create({
       baseURL: config.baseUrl,
       headers: {
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
 
-    this.registerEndpoints()
+    this.registerEndpoints();
   }
 
   setAuthToken(token: string): void {
-    this.instance.defaults.headers.common["Authorization"] = `Bearer ${token}`
+    this.getInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
   }
 
   clearAuthToken(): void {
-    delete this.instance.defaults.headers.common["Authorization"]
+    delete this.getInstance.defaults.headers.common.Authorization;
   }
 
   registerEndpoints() {
-    this.accounts = new Accounts(this)
-    this.studies = new Studies(this)
+    this.accounts = new Accounts(this);
+    this.studies = new Studies(this);
   }
 }

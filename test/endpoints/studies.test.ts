@@ -1,16 +1,16 @@
-import { CarpClient } from "@/client"
-import { StudyStatus, setupResearcherClient } from "@/shared"
-import { beforeAll, describe, it, expect} from "vitest"
+import { beforeAll, describe, expect, it } from "vitest";
+import { CarpClient } from "@/client";
+import { StudyStatus, setupResearcherClient } from "@/shared";
 
 describe("Studies service", () => {
-  let researcherClient: CarpClient
-  let researcherAccountId: string
+  let researcherClient: CarpClient;
+  let researcherAccountId: string;
 
   beforeAll(async () => {
-    const { carpClient, accountId } = await setupResearcherClient()
-    researcherClient = carpClient
-    researcherAccountId = accountId
-  })
+    const { carpClient, accountId } = await setupResearcherClient();
+    researcherClient = carpClient;
+    researcherAccountId = accountId;
+  });
 
   it("should create a study", async () => {
     await expect(
@@ -18,7 +18,7 @@ describe("Studies service", () => {
         name: "Test study",
         description: "This is a test study",
         ownerId: researcherAccountId,
-      })
-    ).resolves.toBeInstanceOf(StudyStatus)
-  })
-})
+      }),
+    ).resolves.toBeInstanceOf(StudyStatus);
+  });
+});

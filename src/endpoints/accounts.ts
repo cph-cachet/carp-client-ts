@@ -1,19 +1,21 @@
-import { Endpoint } from "@/shared/endpoint"
+import { Endpoint } from "@/shared";
 
-export class Accounts extends Endpoint {
-  endpoint: string = "/api/accounts"
+class Accounts extends Endpoint {
+  endpoint: string = "/api/accounts";
 
   async invite({ emailAddress, role }: { emailAddress: string; role: string }) {
-    await this.post(`${this.endpoint}/invite`, { emailAddress, role })
+    await this.post(`${this.endpoint}/invite`, { emailAddress, role });
   }
 
   async isAccountOfRole({
     emailAddress,
     role,
   }: {
-    emailAddress: string
-    role: string
+    emailAddress: string;
+    role: string;
   }) {
-    return await this.post(`${this.endpoint}/role`, { emailAddress, role })
+    return this.post(`${this.endpoint}/role`, { emailAddress, role });
   }
 }
+
+export default Accounts;

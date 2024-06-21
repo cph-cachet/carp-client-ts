@@ -5,13 +5,14 @@ import {
   UUID,
   deserializeResponse,
   serializeRequest,
-} from "@/shared"
-import { StudyOverview } from "@/shared/models"
-import { User } from "@/shared/models/general"
+} from "@/shared";
+import { StudyOverview } from "@/shared/models";
+import { User } from "@/shared/models/general";
 
-export class Studies extends Endpoint {
-  coreEndpoint: string = "/api/study-service"
-  wsEndpoint: string = "/api/studies"
+class Studies extends Endpoint {
+  coreEndpoint: string = "/api/study-service";
+
+  wsEndpoint: string = "/api/studies";
 
   /**
    * Create a study
@@ -32,26 +33,26 @@ export class Studies extends Endpoint {
     description,
     ownerId,
   }: {
-    name: string
-    description: string
-    ownerId: string
+    name: string;
+    description: string;
+    ownerId: string;
   }) {
     const createStudy = new StudyServiceRequest.CreateStudy(
       new UUID(ownerId),
       name,
-      description
-    )
+      description,
+    );
     const serializedCreateStudy = serializeRequest({
       request: createStudy,
       serializer: StudyServiceRequest.Serializer,
-    })
+    });
 
-    const response = await this.post(this.coreEndpoint, serializedCreateStudy)
+    const response = await this.post(this.coreEndpoint, serializedCreateStudy);
     const studyStatus = deserializeResponse({
       response: response.data,
       responseType: StudyStatus,
-    })
-    return studyStatus
+    });
+    return studyStatus;
   }
 
   /**
@@ -65,28 +66,28 @@ export class Studies extends Endpoint {
     studyName,
     studyDescription,
   }: {
-    studyId: string
-    studyName: string
-    studyDescription: string
+    studyId: string;
+    studyName: string;
+    studyDescription: string;
   }) {
     const setInternalDescription =
       new StudyServiceRequest.SetInternalDescription(
         new UUID(studyId),
         studyName,
-        studyDescription
-      )
+        studyDescription,
+      );
     const serializedUpdateStudy = serializeRequest({
       request: setInternalDescription,
       serializer: StudyServiceRequest.Serializer,
-    })
+    });
 
-    const response = await this.post(this.coreEndpoint, serializedUpdateStudy)
+    const response = await this.post(this.coreEndpoint, serializedUpdateStudy);
     const studyStatus = deserializeResponse({
       response: response.data,
       responseType: StudyStatus,
-    })
+    });
 
-    return studyStatus
+    return studyStatus;
   }
 
   /**
@@ -99,29 +100,29 @@ export class Studies extends Endpoint {
    */
   async getDetails({ studyId }: { studyId: string }) {
     const getStudyDetails = new StudyServiceRequest.GetStudyDetails(
-      new UUID(studyId)
-    )
+      new UUID(studyId),
+    );
     const serializedGetStudy = serializeRequest({
       request: getStudyDetails,
       serializer: StudyServiceRequest.Serializer,
-    })
+    });
 
-    const response = await this.post(this.coreEndpoint, serializedGetStudy)
+    const response = await this.post(this.coreEndpoint, serializedGetStudy);
     const studyStatus = deserializeResponse({
       response: response.data,
       responseType: StudyStatus,
-    })
+    });
 
-    return studyStatus
+    return studyStatus;
   }
 
   /**
    * Get overview of all studies this account is a researcher on
    */
   async getOverview() {
-    const response = await this.get(`${this.wsEndpoint}/study-overview`)
+    const response = await this.get(`${this.wsEndpoint}/study-overview`);
 
-    return response.data as StudyOverview[]
+    return response.data as StudyOverview[];
   }
 
   /**
@@ -130,23 +131,23 @@ export class Studies extends Endpoint {
    */
   async getStatus({ studyId }: { studyId: string }) {
     const getStudyStatus = new StudyServiceRequest.GetStudyStatus(
-      new UUID(studyId)
-    )
+      new UUID(studyId),
+    );
     const serializedGetStudyStatus = serializeRequest({
       request: getStudyStatus,
       serializer: StudyServiceRequest.Serializer,
-    })
+    });
 
     const response = await this.post(
       this.coreEndpoint,
-      serializedGetStudyStatus
-    )
+      serializedGetStudyStatus,
+    );
     const studyStatus = deserializeResponse({
       response: response.data,
       responseType: StudyStatus,
-    })
+    });
 
-    return studyStatus
+    return studyStatus;
   }
 
   /**
@@ -154,13 +155,13 @@ export class Studies extends Endpoint {
    * @param studyId The ID of the study
    */
   async deleteStudy({ studyId }: { studyId: string }) {
-    const deleteStudy = new StudyServiceRequest.Remove(new UUID(studyId))
+    const deleteStudy = new StudyServiceRequest.Remove(new UUID(studyId));
     const serializedDeleteStudy = serializeRequest({
       request: deleteStudy,
       serializer: StudyServiceRequest.Serializer,
-    })
+    });
 
-    await this.post(this.coreEndpoint, serializedDeleteStudy)
+    await this.post(this.coreEndpoint, serializedDeleteStudy);
   }
 
   /**
@@ -169,12 +170,12 @@ export class Studies extends Endpoint {
    * @param email The email of the researcher to add
    */
   async addResearcher({ studyId, email }: { studyId: string; email: string }) {
-    const query = new URLSearchParams({ email }).toString()
+    const query = new URLSearchParams({ email }).toString();
     await this.post(`${this.wsEndpoint}/${studyId}/researchers/add`, query, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    })
+    });
   }
 
   /**
@@ -183,8 +184,10 @@ export class Studies extends Endpoint {
    * @returns The list of researchers
    */
   async getResearchers({ studyId }: { studyId: string }) {
-    const response = await this.get(`${this.wsEndpoint}/${studyId}/researchers`)
-    return response.data as User[]
+    const response = await this.get(
+      `${this.wsEndpoint}/${studyId}/researchers`,
+    );
+    return response.data as User[];
   }
 
   /**
@@ -196,14 +199,16 @@ export class Studies extends Endpoint {
     studyId,
     email,
   }: {
-    studyId: string
-    email: string
+    studyId: string;
+    email: string;
   }) {
-    const query = new URLSearchParams({ email }).toString()
+    const query = new URLSearchParams({ email }).toString();
     await this.delete(`${this.wsEndpoint}/${studyId}/researchers?${query}`, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    })
+    });
   }
 }
+
+export default Studies;

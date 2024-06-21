@@ -24,6 +24,8 @@
   "include": [
     "src/**/*",
     "src/env.d.ts",
-    "test/**/*"
-, "reporter.js"  ]
+    "test/**/*",
+    "reporter.js",
+    "vitest.config.ts"
+  ]
 }

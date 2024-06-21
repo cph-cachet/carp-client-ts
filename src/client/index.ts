@@ -1,2 +1,4 @@
-export * from "./authClient"
-export * from "./carpClient"
+import CarpAuthClient from "./authClient";
+import CarpClient from "./carpClient";
+
+export { CarpAuthClient, CarpClient };

@@ -1,4 +1,4 @@
-import { DefaultReporter } from 'vitest/reporters';
+import { DefaultReporter } from "vitest/reporters";
 
 class CustomReporter extends DefaultReporter {
   shouldLogOnSuccess;

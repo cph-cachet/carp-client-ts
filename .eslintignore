@@ -2,3 +2,5 @@ node_modules/*
 lib/*
 constants.ts
 types.d.ts
+non_npm_dependencies/*
+coverage/*
