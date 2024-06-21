@@ -1,39 +1,17 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosError } from "axios";
 import { CarpClient } from "@/client";
 import CarpServiceError from "../shared/carpServiceError";
 import { sanitizeRequestConfig } from "@/shared";
+import Actions from "./actions";
 
 class Endpoint {
   protected readonly client: CarpClient;
 
-  get: <T>(
-    url: string,
-    config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T, Error>>;
-
-  post: <T>(
-    url: string,
-    data?: any,
-    config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T, Error>>;
-
-  put: <T>(
-    url: string,
-    data?: any,
-    config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T, Error>>;
-
-  delete: <T>(
-    url: string,
-    config?: AxiosRequestConfig,
-  ) => Promise<AxiosResponse<T, Error>>;
+  protected readonly actions: Actions;
 
   constructor(client: CarpClient) {
     this.client = client;
-    this.get = this.client.getInstance.get; // Assign the 'get' property
-    this.post = this.client.getInstance.post; // Assign the 'post' property
-    this.put = this.client.getInstance.put; // Assign the 'put' property
-    this.delete = this.client.getInstance.delete; // Assign the 'delete' property
+    this.actions = new Actions(client);
 
     this.client.getInstance.interceptors.response.use(
       (response) => response,

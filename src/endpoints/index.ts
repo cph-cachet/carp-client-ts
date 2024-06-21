@@ -1,6 +1,6 @@
 import Accounts from "./accounts";
-import Studies from "./studies";
+import Study from "./studies";
 
 import Auth from "./auth";
 
-export { Auth, Accounts, Studies };
+export { Auth, Accounts, Study as Studies };
