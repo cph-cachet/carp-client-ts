@@ -13,11 +13,15 @@ import pdk = carpProtocolsCore.dk;
 import sdk = carpStudiesCore.dk;
 import cdk = carpCommon.dk;
 import ddk = carpDepolymentsCore.dk;
+import Nullable = kotlin.Nullable;
 
 import DefaultSerializer = cdk.cachet.carp.common.infrastructure.serialization.JSON;
 import UUID = cdk.cachet.carp.common.application.UUID;
 import getSerializer = kotlinx.serialization.getSerializer;
 import StudyServiceRequest = sdk.cachet.carp.studies.infrastructure.StudyServiceRequest;
+import NamespacedId = cdk.cachet.carp.common.application.NamespacedId;
+import DefaultDeviceRegistration = cdk.cachet.carp.common.application.devices.DefaultDeviceRegistration;
+import Data = ddk.cachet.carp.common.application.data.Data;
 
 import RecruitmentServiceRequest = sdk.cachet.carp.studies.infrastructure.RecruitmentServiceRequest;
 import StudyStatus = sdk.cachet.carp.studies.application.StudyStatus;
@@ -41,6 +45,9 @@ import Json = kotlinx.serialization.json.Json;
 import Pair = kotlin.Pair;
 import ListSerializer = kotlinxcore.serialization.builtins.ListSerializer;
 import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer;
+
+const toSet = kotlin.collections.setOf;
+const toMap = kotlin.collections.mapOf;
 
 const serializeRequest = ({
   request,
@@ -82,6 +89,7 @@ export {
   Json,
   ListSerializer,
   MasterDeviceDeployment,
+  Nullable,
   Pair,
   Participant,
   ParticipantData,
@@ -95,6 +103,9 @@ export {
   StudyDetails,
   StudyProtocolSnapshot,
   StudyServiceRequest,
+  NamespacedId,
+  DefaultDeviceRegistration,
+  Data,
   StudyStatus,
   UUID,
   cdk,
@@ -104,4 +115,6 @@ export {
   kotlinxcore,
   sdk,
   serializeRequest,
+  toSet,
+  toMap,
 };
