@@ -1,4 +1,0 @@
-{
-  "jest.runMode": "on-demand",
-  "jest.jestCommandLine": "pnpm run test"
-}
