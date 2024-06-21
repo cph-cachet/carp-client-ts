@@ -1,4 +1,4 @@
-import { Endpoint } from "@/shared";
+import Endpoint from "./endpoint";
 
 class Accounts extends Endpoint {
   endpoint: string = "/api/accounts";

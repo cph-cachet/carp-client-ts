@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { CarpClient } from "@/client";
-import CarpServiceError from "./carpServiceError";
-import sanitizeRequestConfig from "./utils";
+import CarpServiceError from "../shared/carpServiceError";
+import { sanitizeRequestConfig } from "@/shared";
 
 class Endpoint {
   protected readonly client: CarpClient;

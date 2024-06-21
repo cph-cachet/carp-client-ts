@@ -1,4 +1,4 @@
-import { Endpoint } from "@/shared";
+import Endpoint from "./endpoint";
 
 export type CarpToken = {
   access_token: string;

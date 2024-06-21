@@ -1,13 +1,13 @@
 import {
-  Endpoint,
   StudyServiceRequest,
   StudyStatus,
   UUID,
   deserializeResponse,
   serializeRequest,
 } from "@/shared";
-import { StudyOverview } from "@/shared/models";
-import { User } from "@/shared/models/general";
+import Endpoint from "./endpoint";
+
+import { StudyOverview, User } from "@/shared/models";
 
 class Studies extends Endpoint {
   coreEndpoint: string = "/api/study-service";
