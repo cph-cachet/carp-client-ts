@@ -16,7 +16,7 @@ class Auth extends Endpoint {
   }) {
     const query = new URLSearchParams(params).toString();
 
-    const response = await this.post<CarpToken>(
+    const response = await this.actions.post<CarpToken>(
       `/realms/${this.realm}/protocol/openid-connect/token`,
       query,
       {
@@ -35,7 +35,7 @@ class Auth extends Endpoint {
     client_secret: string;
   }) {
     const query = new URLSearchParams(params).toString();
-    const response = await this.post(
+    const response = await this.actions.post(
       "/realms/Carp/protocol/openid-connect/token/introspect",
       query,
       {

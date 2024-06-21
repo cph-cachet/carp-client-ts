@@ -28,43 +28,6 @@ class Study extends Endpoint {
   }
 
   /**
-   * Create a study
-   * @param name The name of the study
-   * @param description The description of the study
-   * @param ownerId The owner of the study, i.e the ID of the user creating the study. Must be a valid UUID
-   * @returns The study status
-   */
-  async create({
-    name,
-    description,
-    ownerId,
-  }: {
-    name: string;
-    description: string;
-    ownerId: string;
-  }) {
-    const createStudy = new StudyServiceRequest.CreateStudy(
-      new UUID(ownerId),
-      name,
-      description,
-    );
-    const serializedCreateStudy = serializeRequest({
-      request: createStudy,
-      serializer: StudyServiceRequest.Serializer,
-    });
-
-    const response = await this.actions.post(
-      this.coreEndpoint,
-      serializedCreateStudy,
-    );
-    const studyStatus = deserializeResponse({
-      response: response.data,
-      responseType: StudyStatus,
-    });
-    return studyStatus;
-  }
-
-  /**
    * Set a study description
    * @param studyId The ID of the study
    * @param studyName The name of the study

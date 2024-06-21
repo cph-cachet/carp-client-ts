@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { Config } from "@/config";
 import { Accounts, Studies } from "@/endpoints";
+import { Participant } from "@/shared";
 
 export default class CarpClient {
   private instance: AxiosInstance;
@@ -8,6 +9,8 @@ export default class CarpClient {
   accounts: Accounts;
 
   studies: Studies;
+
+  participant: Participant;
 
   public get getInstance(): AxiosInstance {
     return this.instance;
@@ -41,5 +44,6 @@ export default class CarpClient {
   registerEndpoints() {
     this.accounts = new Accounts(this);
     this.studies = new Studies(this);
+    this.participant = new Participant(this);
   }
 }
