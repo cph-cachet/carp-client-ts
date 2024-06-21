@@ -12,3 +12,16 @@ export type StudyOverview = {
   canDeployToParticipants: boolean;
   description: string;
 };
+
+export type AnonymousLinksRequest = {
+  studyId: string;
+  amountOfAccounts: number;
+  expirationSeconds: number;
+  redirectUri: string;
+  participantRoleName: string;
+};
+
+export type AnonymousLinksResponse = {
+  filename: string;
+  data: string;
+};

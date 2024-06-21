@@ -1,4 +1,6 @@
 import {
+  StudyInvitation,
+  StudyProtocolSnapshot,
   StudyServiceRequest,
   StudyStatus,
   UUID,
@@ -131,6 +133,92 @@ class Study extends Endpoint {
     });
 
     await this.actions.post(this.coreEndpoint, serializedDeleteStudy);
+  }
+
+  /**
+   * Set invitation information
+   * @param studyId The ID of the study
+   * @param title The title of the invitation
+   * @param description The description of the invitation
+   */
+  async setInvitation({
+    studyId,
+    title,
+    description,
+  }: {
+    studyId: string;
+    title: string;
+    description: string;
+  }) {
+    const setInvitation = new StudyServiceRequest.SetInvitation(
+      new UUID(studyId),
+      new StudyInvitation(title, description),
+    );
+    const request = serializeRequest({
+      request: setInvitation,
+      serializer: StudyServiceRequest.Serializer,
+    });
+
+    const response = await this.actions.post(this.coreEndpoint, request);
+
+    const studyStatus = deserializeResponse({
+      response,
+      responseType: StudyStatus,
+    });
+
+    return studyStatus;
+  }
+
+  /**
+   * Set protocol
+   * @param studyId The ID of the study
+   * @param protocol The protocol to set
+   */
+  async setProtocol({
+    studyId,
+    protocol,
+  }: {
+    studyId: string;
+    protocol: StudyProtocolSnapshot;
+  }) {
+    const setProtocol = new StudyServiceRequest.SetProtocol(
+      new UUID(studyId),
+      protocol,
+    );
+    const request = serializeRequest({
+      request: setProtocol,
+      serializer: StudyServiceRequest.Serializer,
+    });
+
+    const response = await this.actions.post(this.coreEndpoint, request);
+
+    const studyStatus = deserializeResponse({
+      response,
+      responseType: StudyStatus,
+    });
+
+    return studyStatus;
+  }
+
+  /**
+   * Set a study as live
+   * @param studyId The ID of the study
+   */
+  async goLive({ studyId }: { studyId: string }) {
+    const goLive = new StudyServiceRequest.GoLive(new UUID(studyId));
+    const request = serializeRequest({
+      request: goLive,
+      serializer: StudyServiceRequest.Serializer,
+    });
+
+    const response = await this.actions.post(this.coreEndpoint, request);
+
+    const studyStatus = deserializeResponse({
+      response,
+      responseType: StudyStatus,
+    });
+
+    return studyStatus;
   }
 }
 

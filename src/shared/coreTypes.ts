@@ -28,7 +28,7 @@ import StudyStatus = sdk.cachet.carp.studies.application.StudyStatus;
 import StudyDetails = sdk.cachet.carp.studies.application.StudyDetails;
 import Participant = sdk.cachet.carp.studies.application.users.Participant;
 import ParticipantGroupStatus = sdk.cachet.carp.studies.application.users.ParticipantGroupStatus;
-import StudyProtocolSnapshot = pdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
+import StudyProtocolSnapshot = sdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
 import ProtocolServiceRequest = pdk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest;
 import ProtocolVersion = pdk.cachet.carp.protocols.application.ProtocolVersion;
 
@@ -38,13 +38,14 @@ import DeploymentServiceRequest = ddk.cachet.carp.deployments.infrastructure.Dep
 import MasterDeviceDeployment = ddk.cachet.carp.deployments.application.PrimaryDeviceDeployment;
 import StudyDeploymentStatus = ddk.cachet.carp.deployments.application.StudyDeploymentStatus;
 import ParticipantData = ddk.cachet.carp.deployments.application.users.ParticipantData;
-
 import ArrayList = kotlin.collections.List;
 import HashMap = kotlin.collections.Map;
 import Json = kotlinx.serialization.json.Json;
 import Pair = kotlin.Pair;
 import ListSerializer = kotlinxcore.serialization.builtins.ListSerializer;
 import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer;
+
+const { StudyInvitation } = ddk.cachet.carp.deployments.application.users;
 
 const toSet = kotlin.collections.setOf;
 const toMap = kotlin.collections.mapOf;
@@ -105,6 +106,7 @@ export {
   StudyServiceRequest,
   NamespacedId,
   DefaultDeviceRegistration,
+  StudyInvitation,
   Data,
   StudyStatus,
   UUID,
