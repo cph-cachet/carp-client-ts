@@ -45,6 +45,12 @@ import Pair = kotlin.Pair;
 import ListSerializer = kotlinxcore.serialization.builtins.ListSerializer;
 import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer;
 
+const { Roles } = cdk.cachet.carp.common.application.users.AssignedTo;
+const { EmailAddress } = cdk.cachet.carp.common.application;
+const { Username } = cdk.cachet.carp.common.application.users;
+const AssignParticipantRoles =
+  sdk.cachet.carp.studies.application.users.AssignedParticipantRoles;
+
 const { StudyInvitation } = ddk.cachet.carp.deployments.application.users;
 
 const toSet = kotlin.collections.setOf;
@@ -108,6 +114,10 @@ export {
   DefaultDeviceRegistration,
   StudyInvitation,
   Data,
+  Roles,
+  EmailAddress,
+  Username,
+  AssignParticipantRoles,
   StudyStatus,
   UUID,
   cdk,

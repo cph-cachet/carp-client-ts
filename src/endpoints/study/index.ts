@@ -12,6 +12,7 @@ import Endpoint from "../endpoint";
 import { CarpClient } from "@/client";
 import Researchers from "./researchers";
 import Summaries from "./summaries";
+import Recruitment from "./recruitment";
 
 /**
  * Endpoint for interacting with a particular study
@@ -22,6 +23,8 @@ class Study extends Endpoint {
   researchers: Researchers;
 
   summaries: Summaries;
+
+  recruitment: Recruitment;
 
   constructor(client: CarpClient) {
     super(client);
