@@ -4,9 +4,9 @@ import {
   Participant,
   RecruitmentServiceRequest,
   UUID,
-  deserializeResponse,
+  deserialize,
   getSerializer,
-  serializeRequest,
+  serialize,
 } from "@/shared";
 import Endpoint from "../endpoint";
 import { AnonymousLinksRequest, AnonymousLinksResponse } from "@/shared/models";
@@ -86,14 +86,14 @@ class StudyParticipants extends Endpoint {
       new UUID(studyId),
     );
 
-    const request = serializeRequest({
+    const request = serialize({
       request: getParticipants,
       serializer: RecruitmentServiceRequest.Serializer,
     });
     const response = await this.actions.post(this.coreEndpoint, request);
-    const decodedResponse = deserializeResponse({
-      response: response.data,
-      responseType: ListSerializer(getSerializer(Participant)),
+    const decodedResponse = deserialize({
+      data: response.data,
+      serializer: ListSerializer(getSerializer(Participant)),
     }) as ArrayList<Participant>;
 
     return decodedResponse.toArray();

@@ -4,8 +4,8 @@ import {
   StudyServiceRequest,
   StudyStatus,
   UUID,
-  deserializeResponse,
-  serializeRequest,
+  deserialize,
+  serialize,
 } from "@/shared";
 
 /**
@@ -46,7 +46,7 @@ class Studies extends Endpoint {
       name,
       description,
     );
-    const serializedCreateStudy = serializeRequest({
+    const serializedCreateStudy = serialize({
       request: createStudy,
       serializer: StudyServiceRequest.Serializer,
     });
@@ -55,9 +55,9 @@ class Studies extends Endpoint {
       this.coreEndpoint,
       serializedCreateStudy,
     );
-    const studyStatus = deserializeResponse({
-      response: response.data,
-      responseType: StudyStatus,
+    const studyStatus = deserialize({
+      data: response.data,
+      serializer: StudyStatus,
     });
     return studyStatus;
   }

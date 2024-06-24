@@ -9,9 +9,9 @@ import {
   Roles,
   StudyServiceRequest,
   UUID,
-  deserializeResponse,
+  deserialize,
   getSerializer,
-  serializeRequest,
+  serialize,
   toSet,
 } from "@/shared";
 
@@ -46,7 +46,7 @@ class Recruitment extends Endpoint {
         toSet(assignParticipantRoles),
       );
 
-    const serializedInviteParticipantGroup = serializeRequest({
+    const serializedInviteParticipantGroup = serialize({
       request: inviteParticipantGroup,
       serializer: StudyServiceRequest.Serializer,
     });
@@ -56,9 +56,9 @@ class Recruitment extends Endpoint {
       serializedInviteParticipantGroup,
     );
 
-    const participantGroupStatus = deserializeResponse({
+    const participantGroupStatus = deserialize({
       response,
-      responseType: ParticipantGroupStatus,
+      serializer: ParticipantGroupStatus,
     });
 
     return participantGroupStatus;
@@ -74,7 +74,7 @@ class Recruitment extends Endpoint {
         new UUID(studyId),
       );
 
-    const serializedGetParticipantGroupStatus = serializeRequest({
+    const serializedGetParticipantGroupStatus = serialize({
       request: getParticipantGroupStatus,
       serializer: StudyServiceRequest.Serializer,
     });
@@ -85,9 +85,9 @@ class Recruitment extends Endpoint {
     );
 
     const participantGroupStatus: ArrayList<ParticipantGroupStatus> =
-      deserializeResponse({
-        response,
-        responseType: ListSerializer(getSerializer(ParticipantGroupStatus)),
+      deserialize({
+        data: response.data,
+        serializer: ListSerializer(getSerializer(ParticipantGroupStatus)),
       });
 
     return participantGroupStatus.toArray();
@@ -123,7 +123,7 @@ class Recruitment extends Endpoint {
         new UUID(studyDeploymentId),
       );
 
-    const serializedStopParticipantGroup = serializeRequest({
+    const serializedStopParticipantGroup = serialize({
       request: stopParticipantGroup,
       serializer: StudyServiceRequest.Serializer,
     });
@@ -133,9 +133,9 @@ class Recruitment extends Endpoint {
       serializedStopParticipantGroup,
     );
 
-    const participantGroupStatus = deserializeResponse({
+    const participantGroupStatus = deserialize({
       response,
-      responseType: ParticipantGroupStatus,
+      serializer: ParticipantGroupStatus,
     });
 
     return participantGroupStatus;

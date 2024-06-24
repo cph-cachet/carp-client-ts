@@ -34,7 +34,7 @@ class Summaries extends Endpoint {
     const response = await this.actions.get(
       `${this.endpoint}/download/${summaryId}`,
       {
-        responseType: "blob",
+        serializer: "blob",
       },
     );
     const regex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;

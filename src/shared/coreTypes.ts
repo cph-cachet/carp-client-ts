@@ -28,7 +28,7 @@ import StudyStatus = sdk.cachet.carp.studies.application.StudyStatus;
 import StudyDetails = sdk.cachet.carp.studies.application.StudyDetails;
 import Participant = sdk.cachet.carp.studies.application.users.Participant;
 import ParticipantGroupStatus = sdk.cachet.carp.studies.application.users.ParticipantGroupStatus;
-import StudyProtocolSnapshot = sdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
+import StudyProtocolSnapshot = pdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
 import ProtocolServiceRequest = pdk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest;
 import ProtocolVersion = pdk.cachet.carp.protocols.application.ProtocolVersion;
 
@@ -56,7 +56,7 @@ const { StudyInvitation } = ddk.cachet.carp.deployments.application.users;
 const toSet = kotlin.collections.setOf;
 const toMap = kotlin.collections.mapOf;
 
-const serializeRequest = ({
+const serialize = ({
   request,
   serializer,
 }: {
@@ -69,16 +69,16 @@ const serializeRequest = ({
   return serializedUpdateStudy;
 };
 
-const deserializeResponse = <T>({
-  response,
-  responseType,
+const deserialize = <T>({
+  data,
+  serializer,
 }: {
-  response: unknown;
-  responseType: T;
+  data: unknown;
+  serializer: T;
 }): T => {
-  const stringifiedResponse = JSON.stringify(response);
+  const stringifiedResponse = JSON.stringify(data);
   const json: Json = DefaultSerializer;
-  const deserializer = getSerializer(responseType);
+  const deserializer = getSerializer(serializer);
   const decodedResponse = json.decodeFromString(
     deserializer,
     stringifiedResponse,
@@ -121,12 +121,12 @@ export {
   StudyStatus,
   UUID,
   cdk,
-  deserializeResponse,
+  deserialize,
   getSerializer,
   kotlinx,
   kotlinxcore,
   sdk,
-  serializeRequest,
+  serialize,
   toSet,
   toMap,
 };

@@ -4,8 +4,8 @@ import {
   StudyServiceRequest,
   StudyStatus,
   UUID,
-  deserializeResponse,
-  serializeRequest,
+  deserialize,
+  serialize,
 } from "@/shared";
 import Endpoint from "../endpoint";
 
@@ -53,7 +53,7 @@ class Study extends Endpoint {
         studyName,
         studyDescription,
       );
-    const serializedUpdateStudy = serializeRequest({
+    const serializedUpdateStudy = serialize({
       request: setInternalDescription,
       serializer: StudyServiceRequest.Serializer,
     });
@@ -62,9 +62,9 @@ class Study extends Endpoint {
       this.coreEndpoint,
       serializedUpdateStudy,
     );
-    const studyStatus = deserializeResponse({
-      response: response.data,
-      responseType: StudyStatus,
+    const studyStatus = deserialize({
+      data: response.data,
+      serializer: StudyStatus,
     });
 
     return studyStatus;
@@ -82,7 +82,7 @@ class Study extends Endpoint {
     const getStudyDetails = new StudyServiceRequest.GetStudyDetails(
       new UUID(studyId),
     );
-    const serializedGetStudy = serializeRequest({
+    const serializedGetStudy = serialize({
       request: getStudyDetails,
       serializer: StudyServiceRequest.Serializer,
     });
@@ -91,9 +91,9 @@ class Study extends Endpoint {
       this.coreEndpoint,
       serializedGetStudy,
     );
-    const studyStatus = deserializeResponse({
-      response: response.data,
-      responseType: StudyStatus,
+    const studyStatus = deserialize({
+      data: response.data,
+      serializer: StudyStatus,
     });
 
     return studyStatus;
@@ -107,7 +107,7 @@ class Study extends Endpoint {
     const getStudyStatus = new StudyServiceRequest.GetStudyStatus(
       new UUID(studyId),
     );
-    const serializedGetStudyStatus = serializeRequest({
+    const serializedGetStudyStatus = serialize({
       request: getStudyStatus,
       serializer: StudyServiceRequest.Serializer,
     });
@@ -116,9 +116,9 @@ class Study extends Endpoint {
       this.coreEndpoint,
       serializedGetStudyStatus,
     );
-    const studyStatus = deserializeResponse({
-      response: response.data,
-      responseType: StudyStatus,
+    const studyStatus = deserialize({
+      data: response.data,
+      serializer: StudyStatus,
     });
 
     return studyStatus;
@@ -130,7 +130,7 @@ class Study extends Endpoint {
    */
   async delete({ studyId }: { studyId: string }) {
     const deleteStudy = new StudyServiceRequest.Remove(new UUID(studyId));
-    const serializedDeleteStudy = serializeRequest({
+    const serializedDeleteStudy = serialize({
       request: deleteStudy,
       serializer: StudyServiceRequest.Serializer,
     });
@@ -157,16 +157,16 @@ class Study extends Endpoint {
       new UUID(studyId),
       new StudyInvitation(title, description),
     );
-    const request = serializeRequest({
+    const request = serialize({
       request: setInvitation,
       serializer: StudyServiceRequest.Serializer,
     });
 
     const response = await this.actions.post(this.coreEndpoint, request);
 
-    const studyStatus = deserializeResponse({
-      response,
-      responseType: StudyStatus,
+    const studyStatus = deserialize({
+      data: response.data,
+      serializer: StudyStatus,
     });
 
     return studyStatus;
@@ -188,16 +188,16 @@ class Study extends Endpoint {
       new UUID(studyId),
       protocol,
     );
-    const request = serializeRequest({
+    const request = serialize({
       request: setProtocol,
       serializer: StudyServiceRequest.Serializer,
     });
 
     const response = await this.actions.post(this.coreEndpoint, request);
 
-    const studyStatus = deserializeResponse({
-      response,
-      responseType: StudyStatus,
+    const studyStatus = deserialize({
+      data: response.data,
+      serializer: StudyStatus,
     });
 
     return studyStatus;
@@ -209,16 +209,16 @@ class Study extends Endpoint {
    */
   async goLive({ studyId }: { studyId: string }) {
     const goLive = new StudyServiceRequest.GoLive(new UUID(studyId));
-    const request = serializeRequest({
+    const request = serialize({
       request: goLive,
       serializer: StudyServiceRequest.Serializer,
     });
 
     const response = await this.actions.post(this.coreEndpoint, request);
 
-    const studyStatus = deserializeResponse({
-      response,
-      responseType: StudyStatus,
+    const studyStatus = deserialize({
+      data: response.data,
+      serializer: StudyStatus,
     });
 
     return studyStatus;

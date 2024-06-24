@@ -9,9 +9,9 @@ import {
   ParticipationServiceRequest,
   SetSerializer,
   UUID,
-  deserializeResponse,
+  deserialize,
   getSerializer,
-  serializeRequest,
+  serialize,
   toMap,
   toSet,
 } from "@/shared";
@@ -30,15 +30,15 @@ class Participation extends Endpoint {
         new UUID(participantId),
       );
 
-    const serializedRequest = serializeRequest({
+    const serializedRequest = serialize({
       request,
       serializer: ParticipationServiceRequest.Serializer,
     });
 
     const response = await this.actions.post(this.endpoint, serializedRequest);
-    const decodedResponse = deserializeResponse({
-      response,
-      responseType: SetSerializer(getSerializer(ActiveParticipationInvitation)),
+    const decodedResponse = deserialize({
+      data: response.data,
+      serializer: SetSerializer(getSerializer(ActiveParticipationInvitation)),
     });
     const invitations = decodedResponse as ActiveParticipationInvitation[];
 
@@ -58,7 +58,7 @@ class Participation extends Endpoint {
       new ParticipationServiceRequest.GetParticipantData(
         new UUID(studyDeploymentId),
       );
-    const request = serializeRequest({
+    const request = serialize({
       request: participantDataRequest,
       serializer: ParticipationServiceRequest.Serializer,
     });
@@ -88,7 +88,7 @@ class Participation extends Endpoint {
     const request = new ParticipationServiceRequest.GetParticipantDataList(
       studyIdsSet,
     );
-    const serializedRequest = serializeRequest({
+    const serializedRequest = serialize({
       request,
       serializer: ParticipationServiceRequest.Serializer,
     });
@@ -127,7 +127,7 @@ class Participation extends Endpoint {
         data,
         inputType,
       );
-    const request = serializeRequest({
+    const request = serialize({
       request: participantDataRequest,
       serializer: ParticipationServiceRequest.Serializer,
     });
