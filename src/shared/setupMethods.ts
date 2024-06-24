@@ -2,7 +2,7 @@ import { CarpAuthClient, CarpClient } from "@/client";
 
 const setupResearcherClient = async () => {
   const authClient = new CarpAuthClient({
-    baseUrl: import.meta.env.VITE_AUTH_BASE_URL,
+    baseUrl: "/authProxy",
   });
 
   const token = await authClient.authentication.login({
@@ -14,7 +14,7 @@ const setupResearcherClient = async () => {
   });
 
   const carpClient = new CarpClient({
-    baseUrl: import.meta.env.VITE_API_BASE_URL,
+    baseUrl: "/proxy",
   });
   carpClient.setAuthToken(token.access_token);
 

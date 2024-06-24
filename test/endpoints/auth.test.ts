@@ -8,7 +8,7 @@ describe("Authentication service", () => {
 
   beforeAll(() => {
     authClient = new CarpAuthClient({
-      baseUrl: import.meta.env.VITE_AUTH_BASE_URL,
+      baseUrl: "/authProxy",
     });
   });
 

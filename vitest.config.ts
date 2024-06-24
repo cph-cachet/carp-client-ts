@@ -20,8 +20,24 @@ export default ({ mode }) => {
         provider: "v8",
       },
       reporters: [new CustomReporter(shouldLogOnSuccess)],
-      api: {
-        middlewareMode: true,
+      browser: {
+        enabled: true,
+        name: "chrome",
+        headless: true,
+      },
+    },
+    server: {
+      proxy: {
+        "/proxy": {
+          target: process.env.VITE_API_BASE_URL,
+          changeOrigin: true,
+          rewrite: (p) => p.replace(/^\/proxy/, ""),
+        },
+        "/authProxy": {
+          target: process.env.VITE_AUTH_BASE_URL,
+          changeOrigin: true,
+          rewrite: (p) => p.replace(/^\/authProxy/, ""),
+        },
       },
     },
   });
