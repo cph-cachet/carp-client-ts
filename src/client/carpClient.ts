@@ -1,7 +1,8 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance } from "axios";
 import { Config } from "@/config";
-import { Accounts, Studies } from "@/endpoints";
-import { Participant } from "@/shared";
+import { Accounts, Studies, Study } from "@/endpoints";
+import { CarpServiceError, Participant, sanitizeRequestConfig } from "@/shared";
+import Protocols from "@/endpoints/protocols";
 
 export default class CarpClient {
   private instance: AxiosInstance;
@@ -11,6 +12,10 @@ export default class CarpClient {
   studies: Studies;
 
   participant: Participant;
+
+  study: Study;
+
+  protocols: Protocols;
 
   public get getInstance(): AxiosInstance {
     return this.instance;
@@ -30,6 +35,36 @@ export default class CarpClient {
       },
     });
 
+    this.instance.interceptors.response.use(
+      (response) => response,
+      (e) => {
+        if (axios.isAxiosError(e)) {
+          const axiosError = e as AxiosError;
+          let sanitizedConfig = "";
+          if (axiosError.response?.config) {
+            sanitizedConfig = `\nRequest Config: ${JSON.stringify(
+              sanitizeRequestConfig(axiosError.response.config),
+              null,
+              2,
+            )}`;
+          }
+
+          // eslint-disable-next-line no-console
+          console.error(
+            `[${axiosError.response?.status}] ${
+              axiosError.message
+            }: ${JSON.stringify(
+              axiosError.response?.data,
+              null,
+              2,
+            )}${sanitizedConfig}`,
+          );
+          return Promise.reject(new CarpServiceError(axiosError)); // Wrap and re-throw the error
+        }
+        return Promise.reject(e);
+      },
+    );
+
     this.registerEndpoints();
   }
 
@@ -45,5 +80,7 @@ export default class CarpClient {
     this.accounts = new Accounts(this);
     this.studies = new Studies(this);
     this.participant = new Participant(this);
+    this.study = new Study(this);
+    this.protocols = new Protocols(this);
   }
 }

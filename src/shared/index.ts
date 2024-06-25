@@ -1,6 +1,6 @@
 import CarpServiceError from "./carpServiceError";
-import setupResearcherClient from "./setupMethods";
+import setupTestClient from "../../test/setupMethods";
 import sanitizeRequestConfig from "./utils";
 
 export * from "./coreTypes";
-export { setupResearcherClient, CarpServiceError, sanitizeRequestConfig };
+export { setupTestClient, CarpServiceError, sanitizeRequestConfig };

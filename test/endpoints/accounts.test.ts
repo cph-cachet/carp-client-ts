@@ -1,12 +1,12 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { CarpClient } from "@/client";
-import { setupResearcherClient } from "@/shared";
+import { setupTestClient } from "@/shared";
 
 describe("Accounts service", () => {
   let researcherClient: CarpClient;
 
   beforeAll(async () => {
-    const { carpClient } = await setupResearcherClient();
+    const { carpClient } = await setupTestClient();
     researcherClient = carpClient;
   });
 

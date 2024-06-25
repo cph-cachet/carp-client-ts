@@ -20,7 +20,9 @@ class Studies extends Endpoint {
    * Get overview of all studies this account is a researcher on
    */
   async getOverview() {
-    const response = await this.actions.get(`${this.endpoint}/study-overview`);
+    const response = await this.actions.get(
+      `${this.endpoint}/studies-overview`,
+    );
 
     return response.data as StudyOverview[];
   }
@@ -59,7 +61,7 @@ class Studies extends Endpoint {
       data: response.data,
       serializer: StudyStatus,
     });
-    return studyStatus;
+    return studyStatus as unknown as StudyStatus;
   }
 }
 

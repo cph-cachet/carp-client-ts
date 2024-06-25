@@ -1,3 +1,5 @@
+import { UUID } from "../coreTypes";
+
 export type StudyOverview = {
   studyId: string;
   name: string;
@@ -87,4 +89,42 @@ export interface ParticipantStatus {
     roleNames: string[];
   };
   assignedPrimaryDeviceRoleNames: string[];
+}
+
+export interface Collection {
+  id: string;
+  name: string;
+  study_id: UUID;
+  study_deployment_id?: UUID;
+  document_id?: UUID;
+  documents: CarpDocument[];
+}
+
+export interface CarpDocument {
+  id: string;
+  name: string;
+  collection_id: number;
+  collections: Collection[];
+  data: CarpDocumentData;
+  created_by: UUID;
+  created_at: string;
+  updated_by: UUID;
+  updated_at: string;
+}
+
+export interface MessageData {
+  id: UUID | string;
+  type: "announcement" | "article" | "news";
+  timestamp: string;
+  title: string;
+  subTitle: string;
+  message: string;
+  url?: string;
+  image?: string;
+}
+
+export type CarpDocumentData = MessageData | ResourceData;
+
+export interface ResourceData {
+  [key: string]: any;
 }

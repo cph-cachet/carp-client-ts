@@ -1,14 +1,14 @@
 import { beforeAll, describe, expect, expectTypeOf, it } from "vitest";
-import { CarpAuthClient } from "@/client";
+import { CarpTestClient } from "@/client";
 import { CarpToken } from "@/endpoints/auth";
 import { CarpServiceError } from "@/shared";
 
 describe("Authentication service", () => {
-  let authClient: CarpAuthClient;
+  let authClient: CarpTestClient;
 
   beforeAll(() => {
-    authClient = new CarpAuthClient({
-      baseUrl: "/authProxy",
+    authClient = new CarpTestClient({
+      baseUrl: import.meta.env.VITE_AUTH_BASE_URL,
     });
   });
 

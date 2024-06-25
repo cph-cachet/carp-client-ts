@@ -8,10 +8,8 @@ import {
   StudyProtocolSnapshot,
   UUID,
   deserialize,
-  deserializeResponse,
   getSerializer,
   serialize,
-  serializeRequest,
 } from "@/shared";
 
 class Protocols extends Endpoint {
@@ -31,8 +29,8 @@ class Protocols extends Endpoint {
     protocol: StudyProtocol;
     versionTag: string;
   }) {
-    const protocolSnapshot = deserializeResponse({
-      response: JSON.stringify(protocol),
+    const protocolSnapshot = deserialize({
+      data: JSON.stringify(protocol),
       serializer: StudyProtocolSnapshot,
     }) as unknown as StudyProtocolSnapshot;
 
@@ -41,7 +39,7 @@ class Protocols extends Endpoint {
       versionTag,
     );
 
-    const serializedCreateProtocol = serializeRequest({
+    const serializedCreateProtocol = serialize({
       request: createProtocol,
       serializer: ProtocolServiceRequest.Serializer,
     });
@@ -61,8 +59,8 @@ class Protocols extends Endpoint {
     protocol: StudyProtocol;
     versionTag: string;
   }) {
-    const protocolSnapshot = deserializeResponse({
-      response: JSON.stringify(protocol),
+    const protocolSnapshot = deserialize({
+      data: JSON.stringify(protocol),
       serializer: StudyProtocolSnapshot,
     }) as unknown as StudyProtocolSnapshot;
 
@@ -71,7 +69,7 @@ class Protocols extends Endpoint {
       versionTag,
     );
 
-    const serializedUpdateProtocol = serializeRequest({
+    const serializedUpdateProtocol = serialize({
       request: updateProtocol,
       serializer: ProtocolServiceRequest.Serializer,
     });
@@ -97,7 +95,7 @@ class Protocols extends Endpoint {
       versionTag,
     );
 
-    const serializedGetProtocol = serializeRequest({
+    const serializedGetProtocol = serialize({
       request: getProtocol,
       serializer: ProtocolServiceRequest.Serializer,
     });
@@ -107,8 +105,8 @@ class Protocols extends Endpoint {
       serializedGetProtocol,
     );
 
-    const protocol = deserializeResponse({
-      response,
+    const protocol = deserialize({
+      data: response.data,
       serializer: StudyProtocolSnapshot,
     }) as unknown as StudyProtocolSnapshot;
 
@@ -170,7 +168,7 @@ class Protocols extends Endpoint {
       new UUID(protocolId),
     );
 
-    const serializedGetVersions = serializeRequest({
+    const serializedGetVersions = serialize({
       request: getVersions,
       serializer: ProtocolServiceRequest.Serializer,
     });

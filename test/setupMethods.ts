@@ -1,11 +1,11 @@
-import { CarpAuthClient, CarpClient } from "@/client";
+import { CarpTestClient } from "@/client";
 
-const setupResearcherClient = async () => {
-  const authClient = new CarpAuthClient({
-    baseUrl: "/authProxy",
+const setupTestClient = async () => {
+  const carpClient = new CarpTestClient({
+    baseUrl: import.meta.env.VITE_API_BASE_URL,
   });
 
-  const token = await authClient.authentication.login({
+  const token = await carpClient.authentication.login({
     username: import.meta.env.VITE_RESEARCHER_EMAIL,
     password: import.meta.env.VITE_RESEARCHER_PASSWORD,
     client_id: import.meta.env.VITE_AUTH_CLIENT_ID,
@@ -13,12 +13,9 @@ const setupResearcherClient = async () => {
     grant_type: "password",
   });
 
-  const carpClient = new CarpClient({
-    baseUrl: "/proxy",
-  });
   carpClient.setAuthToken(token.access_token);
 
-  const accountId = await authClient.authentication.getAccountId({
+  const accountId = await carpClient.authentication.getAccountId({
     token: token.access_token,
     client_id: import.meta.env.VITE_AUTH_CLIENT_ID,
     client_secret: import.meta.env.VITE_AUTH_CLIENT_SECRET,
@@ -27,4 +24,4 @@ const setupResearcherClient = async () => {
   return { carpClient, accountId };
 };
 
-export default setupResearcherClient;
+export default setupTestClient;
