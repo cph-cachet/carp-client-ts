@@ -57,9 +57,9 @@ class Recruitment extends Endpoint {
     );
 
     const participantGroupStatus = deserialize({
-      response,
+      data: response.data,
       serializer: ParticipantGroupStatus,
-    });
+    }) as unknown as ParticipantGroupStatus;
 
     return participantGroupStatus;
   }
@@ -128,15 +128,15 @@ class Recruitment extends Endpoint {
       serializer: StudyServiceRequest.Serializer,
     });
 
-    const response = this.actions.post(
+    const response = await this.actions.post(
       this.coreEndpoint,
       serializedStopParticipantGroup,
     );
 
     const participantGroupStatus = deserialize({
-      response,
+      data: response.data,
       serializer: ParticipantGroupStatus,
-    });
+    }) as unknown as ParticipantGroupStatus;
 
     return participantGroupStatus;
   }

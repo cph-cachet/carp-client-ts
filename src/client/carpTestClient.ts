@@ -28,14 +28,15 @@ export default class CarpTestClient extends CarpClient {
     super(config);
     this.registerEndpoints();
 
+    let retryCount = 0; // Add a counter to track the number of retries
+
     this.getInstance.interceptors.response.use(
       (response) => response,
-      (e) => {
+      async (e) => {
         if (e.code === 403) {
-          const maxRetries = 3;
-          let retryCount = 0;
-
-          const retryRequest = async () => {
+          if (retryCount < 1) {
+            // Only retry once
+            retryCount += 1;
             try {
               await this.authentication.refresh();
               const updatedConfig = e.config;
@@ -45,15 +46,10 @@ export default class CarpTestClient extends CarpClient {
               };
               return await this.getInstance.request(updatedConfig);
             } catch (error) {
-              if (retryCount < maxRetries) {
-                retryCount += 1;
-                return retryRequest();
-              }
-              throw error;
+              retryCount = 0;
+              return Promise.reject(error);
             }
-          };
-
-          return retryRequest();
+          }
         }
         if (axios.isAxiosError(e)) {
           const axiosError = e as AxiosError;

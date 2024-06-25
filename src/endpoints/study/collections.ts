@@ -31,7 +31,7 @@ class Collections extends Endpoint {
    * @param document The document to create
    * @param fileName The name of the file
    */
-  createDocument({
+  async createDocument({
     studyId,
     collectionName,
     document,
@@ -42,10 +42,12 @@ class Collections extends Endpoint {
     document: any;
     fileName?: string;
   }) {
-    return this.actions.post<CarpDocument>(
+    const response = await this.actions.post<CarpDocument>(
       `${this.endpoint}/${studyId}/collections/${collectionName}/${fileName}`,
       document,
     );
+
+    return response.data;
   }
 
   /**
