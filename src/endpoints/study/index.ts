@@ -1,4 +1,5 @@
 import {
+  StudyDetails,
   StudyInvitation,
   StudyProtocolSnapshot,
   StudyServiceRequest,
@@ -65,7 +66,7 @@ class Study extends Endpoint {
     const studyStatus = deserialize({
       data: response.data,
       serializer: StudyStatus,
-    });
+    }) as unknown as StudyStatus;
 
     return studyStatus;
   }
@@ -93,8 +94,8 @@ class Study extends Endpoint {
     );
     const studyStatus = deserialize({
       data: response.data,
-      serializer: StudyStatus,
-    });
+      serializer: StudyDetails,
+    }) as unknown as StudyDetails;
 
     return studyStatus;
   }
@@ -119,7 +120,7 @@ class Study extends Endpoint {
     const studyStatus = deserialize({
       data: response.data,
       serializer: StudyStatus,
-    });
+    }) as unknown as StudyStatus;
 
     return studyStatus;
   }
@@ -167,7 +168,7 @@ class Study extends Endpoint {
     const studyStatus = deserialize({
       data: response.data,
       serializer: StudyStatus,
-    });
+    }) as unknown as StudyStatus;
 
     return studyStatus;
   }
@@ -198,7 +199,7 @@ class Study extends Endpoint {
     const studyStatus = deserialize({
       data: response.data,
       serializer: StudyStatus,
-    });
+    }) as unknown as StudyStatus;
 
     return studyStatus;
   }
@@ -219,7 +220,7 @@ class Study extends Endpoint {
     const studyStatus = deserialize({
       data: response.data,
       serializer: StudyStatus,
-    });
+    }) as unknown as StudyStatus;
 
     return studyStatus;
   }

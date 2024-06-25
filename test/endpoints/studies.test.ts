@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { CarpTestClient } from "@/client";
-import { StudyStatus, setupTestClient } from "@/shared";
+import { StudyDetails, StudyStatus, setupTestClient } from "@/shared";
 import { StudyOverview } from "@/shared/models";
 
 describe("Studies service", () => {
@@ -26,7 +26,7 @@ describe("Studies service", () => {
     expect(study.name).toBe("Test study");
   });
 
-  it("should get an overview of all studies", async () => {
+  it("study overview should contain the new study", async () => {
     const studies = await researcherClient.studies.getOverview();
 
     expect(studies).toBeInstanceOf(Array);
@@ -34,6 +34,19 @@ describe("Studies service", () => {
     expect(study && studies.map((s: StudyOverview) => s.studyId)).toContain(
       study.studyId.stringRepresentation,
     );
+  });
+
+  it("should be able to query study details", async () => {
+    const retrievedStudy = await researcherClient.study.getDetails({
+      studyId: study.studyId.stringRepresentation,
+    });
+
+    expect(retrievedStudy).toBeInstanceOf(StudyDetails);
+    expect(retrievedStudy.name).toBe(study.name);
+    expect(retrievedStudy.studyId.stringRepresentation).toBe(
+      study.studyId.stringRepresentation,
+    );
+    expect(retrievedStudy.description).toBe("This is a test study");
   });
 
   afterAll(async () => {
