@@ -14,7 +14,6 @@ import {
   ParticipantGroupStatus,
   RecruitmentServiceRequest,
   Roles,
-  StudyServiceRequest,
   UUID,
   Username,
   deserialize,
@@ -56,7 +55,7 @@ class Recruitment extends Endpoint {
 
     const serializedInviteParticipantGroup = serialize({
       request: inviteParticipantGroup,
-      serializer: StudyServiceRequest.Serializer,
+      serializer: RecruitmentServiceRequest.Serializer,
     });
 
     const response = await this.actions.post(
@@ -84,7 +83,7 @@ class Recruitment extends Endpoint {
 
     const serializedGetParticipantGroupStatus = serialize({
       request: getParticipantGroupStatus,
-      serializer: StudyServiceRequest.Serializer,
+      serializer: RecruitmentServiceRequest.Serializer,
     });
 
     await this.actions.post(
@@ -125,7 +124,7 @@ class Recruitment extends Endpoint {
 
     const serializedStopParticipantGroup = serialize({
       request: stopParticipantGroup,
-      serializer: StudyServiceRequest.Serializer,
+      serializer: RecruitmentServiceRequest.Serializer,
     });
 
     const response = await this.actions.post(
@@ -153,14 +152,9 @@ class Recruitment extends Endpoint {
     studyId: string;
     emails: string[];
   }) {
-    const response = await this.actions.post<Participant[]>(
-      `${this.wsEndpoint}/${studyId}/participants/add`,
-      {
-        emails,
-      },
-    );
-
-    return response.data;
+    await this.actions.post(`${this.wsEndpoint}/${studyId}/participants/add`, {
+      emails,
+    });
   }
 
   /**

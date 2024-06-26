@@ -1,6 +1,6 @@
 import { CarpTestClient } from "@/client";
 
-const setupTestClient = async () => {
+export const setupTestClient = async () => {
   const client = new CarpTestClient({
     baseUrl: import.meta.env.VITE_API_BASE_URL,
   });
@@ -24,4 +24,8 @@ const setupTestClient = async () => {
   return { client, accountId };
 };
 
-export default setupTestClient;
+export const generateRandomEmail = () =>
+  `${Math.random().toString(36).substring(2)}@example.com`;
+
+export const generateRandomUsername = () =>
+  Math.random().toString(36).substring(2);
