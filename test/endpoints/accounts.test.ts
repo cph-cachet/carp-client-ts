@@ -3,15 +3,15 @@ import { CarpClient } from "@/client";
 import { setupTestClient } from "@/shared";
 
 describe("Accounts service", () => {
-  let researcherClient: CarpClient;
+  let testClient: CarpClient;
 
   beforeAll(async () => {
-    const { carpClient } = await setupTestClient();
-    researcherClient = carpClient;
+    const { client } = await setupTestClient();
+    testClient = client;
   });
 
   it("Inviting a researcher should succeed", async () => {
-    await researcherClient.accounts.invite({
+    await testClient.accounts.invite({
       emailAddress: import.meta.env.VITE_PARTICIPANT_EMAIL,
       role: "RESEARCHER",
     });
@@ -20,7 +20,7 @@ describe("Accounts service", () => {
   // TODO: stop skipping when backend support works again
   it.skip("Checking if a researcher account is a researcher should return true", async () => {
     await expect(
-      researcherClient.accounts.isAccountOfRole({
+      testClient.accounts.isAccountOfRole({
         role: "RESEARCHER",
         emailAddress: import.meta.env.VITE_RESEARCHER_EMAIL,
       }),
@@ -30,7 +30,7 @@ describe("Accounts service", () => {
   // TODO: fix when backend support works again
   it.skip("Checking if a participant account is a researcher should return false", async () => {
     await expect(
-      researcherClient.accounts.isAccountOfRole({
+      testClient.accounts.isAccountOfRole({
         role: "RESEARCHER",
         emailAddress: import.meta.env.VITE_PARTICIPANT_EMAIL,
       }),
@@ -40,7 +40,7 @@ describe("Accounts service", () => {
   // TODO: fix when backend support works again
   it.skip("Checking if a non-existent account is a researcher should throw an error", async () => {
     await expect(
-      researcherClient.accounts.isAccountOfRole({
+      testClient.accounts.isAccountOfRole({
         role: "RESEARCHER",
         emailAddress: "random@random.com",
       }),

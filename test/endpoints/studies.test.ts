@@ -10,17 +10,17 @@ import {
 import { StudyOverview } from "@/shared/models";
 
 describe("Studies service", () => {
-  let researcherClient: CarpTestClient;
+  let testClient: CarpTestClient;
   let researcherAccountId: string;
 
   let study: StudyStatus;
 
   beforeAll(async () => {
-    const { carpClient, accountId } = await setupTestClient();
-    researcherClient = carpClient;
+    const { client, accountId } = await setupTestClient();
+    testClient = client;
     researcherAccountId = accountId;
 
-    study = await researcherClient.studies.create({
+    study = await testClient.studies.create({
       name: "Test study",
       description: "This is a test study",
       ownerId: researcherAccountId,
@@ -33,7 +33,7 @@ describe("Studies service", () => {
   });
 
   it("study overview should contain the new study", async () => {
-    const studies = await researcherClient.studies.getOverview();
+    const studies = await testClient.studies.getOverview();
 
     expect(studies).toBeInstanceOf(Array);
     expect(studies).not.toHaveLength(0);
@@ -43,7 +43,7 @@ describe("Studies service", () => {
   });
 
   it("should be able to query study details", async () => {
-    const retrievedStudy = await researcherClient.study.getDetails({
+    const retrievedStudy = await testClient.study.getDetails({
       studyId: study.studyId.stringRepresentation,
     });
 
@@ -57,7 +57,7 @@ describe("Studies service", () => {
 
   it("querying study details for a study that does not exist should throw an error", async () => {
     try {
-      await researcherClient.study.getDetails({
+      await testClient.study.getDetails({
         studyId: UUID.Companion.randomUUID().stringRepresentation,
       });
     } catch (error) {
@@ -67,7 +67,7 @@ describe("Studies service", () => {
   });
 
   it("should be able to query study status by ID", async () => {
-    const retrievedStudy = await researcherClient.study.getStatus({
+    const retrievedStudy = await testClient.study.getStatus({
       studyId: study.studyId.stringRepresentation,
     });
 
@@ -80,7 +80,7 @@ describe("Studies service", () => {
 
   it("querying study status for a study that does not exist should throw an error", async () => {
     try {
-      await researcherClient.study.getStatus({
+      await testClient.study.getStatus({
         studyId: UUID.Companion.randomUUID().stringRepresentation,
       });
     } catch (error) {
@@ -90,7 +90,7 @@ describe("Studies service", () => {
   });
 
   it("should be able to update the internal description of a study", async () => {
-    const updatedStudy = await researcherClient.study.setDescription({
+    const updatedStudy = await testClient.study.setDescription({
       studyId: study.studyId.stringRepresentation,
       studyName: "Updated test study",
       studyDescription: "This is an updated test study",
@@ -99,7 +99,7 @@ describe("Studies service", () => {
     expect(updatedStudy).toBeInstanceOf(StudyStatus);
     expect(updatedStudy.name).toBe("Updated test study");
 
-    const retrievedStudy = await researcherClient.study.getDetails({
+    const retrievedStudy = await testClient.study.getDetails({
       studyId: study.studyId.stringRepresentation,
     });
 
@@ -110,7 +110,7 @@ describe("Studies service", () => {
 
   it("updating a study that does not exist should throw an error", async () => {
     try {
-      await researcherClient.study.setDescription({
+      await testClient.study.setDescription({
         studyId: UUID.Companion.randomUUID().stringRepresentation,
         studyName: "Updated test study",
         studyDescription: "This is an updated test study",
@@ -123,7 +123,7 @@ describe("Studies service", () => {
 
   afterAll(async () => {
     if (study) {
-      await researcherClient.study.delete({
+      await testClient.study.delete({
         studyId: study.studyId.stringRepresentation,
       });
     }
