@@ -45,6 +45,9 @@ import Pair = kotlin.Pair;
 import ListSerializer = kotlinxcore.serialization.builtins.ListSerializer;
 import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer;
 
+import EmailAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.EmailAccountIdentity;
+import UsernameAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.UsernameAccountIdentity;
+
 const { Roles } = cdk.cachet.carp.common.application.users.AssignedTo;
 const { EmailAddress } = cdk.cachet.carp.common.application;
 const { Username } = cdk.cachet.carp.common.application.users;
@@ -69,16 +72,28 @@ const serialize = ({
   return serializedUpdateStudy;
 };
 
+/**
+ *
+ * @param data the data to be deserialized
+ * @param serializer the serializer to use to parse the data
+ * @param shouldGetSerializer whether to use the passed serializer to get the serializer to use, just immediately use the passed serializer, i.e if the serializer is a list or a set serializer
+ */
 const deserialize = <T>({
   data,
   serializer,
+  shouldGetSerializer: isListSerializer = false,
 }: {
   data: unknown;
   serializer: T;
+  shouldGetSerializer?: boolean;
 }): T => {
   const stringifiedResponse = JSON.stringify(data);
   const json: Json = DefaultSerializer;
-  const deserializer = getSerializer(serializer);
+
+  let deserializer = serializer;
+  if (!isListSerializer) {
+    deserializer = getSerializer(serializer);
+  }
   const decodedResponse = json.decodeFromString(
     deserializer,
     stringifiedResponse,
@@ -116,7 +131,9 @@ export {
   Data,
   Roles,
   EmailAddress,
+  EmailAccountIdentity,
   Username,
+  UsernameAccountIdentity,
   AssignParticipantRoles,
   StudyStatus,
   UUID,

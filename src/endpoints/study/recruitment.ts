@@ -1,14 +1,22 @@
-import { ParticipantGroups, ParticipantWithRoles } from "@/shared/models";
+import {
+  AnonymousLinksRequest,
+  AnonymousLinksResponse,
+  ParticipantGroups,
+  ParticipantWithRoles,
+} from "@/shared/models";
 import Endpoint from "../endpoint";
 import {
   ArrayList,
   AssignParticipantRoles,
+  EmailAddress,
   ListSerializer,
+  Participant,
   ParticipantGroupStatus,
   RecruitmentServiceRequest,
   Roles,
   StudyServiceRequest,
   UUID,
+  Username,
   deserialize,
   getSerializer,
   serialize,
@@ -79,18 +87,10 @@ class Recruitment extends Endpoint {
       serializer: StudyServiceRequest.Serializer,
     });
 
-    const response = await this.actions.post(
+    await this.actions.post(
       this.coreEndpoint,
       serializedGetParticipantGroupStatus,
     );
-
-    const participantGroupStatus: ArrayList<ParticipantGroupStatus> =
-      deserialize({
-        data: response.data,
-        serializer: ListSerializer(getSerializer(ParticipantGroupStatus)),
-      });
-
-    return participantGroupStatus.toArray();
   }
 
   /**
@@ -139,6 +139,146 @@ class Recruitment extends Endpoint {
     }) as unknown as ParticipantGroupStatus;
 
     return participantGroupStatus;
+  }
+
+  /**
+   * Add participants to a study
+   * @param studyId The ID of the study
+   * @param emails The emails of the participants to add
+   */
+  async addMultipleByEmail({
+    studyId,
+    emails,
+  }: {
+    studyId: string;
+    emails: string[];
+  }) {
+    const response = await this.actions.post<Participant[]>(
+      `${this.wsEndpoint}/${studyId}/participants/add`,
+      {
+        emails,
+      },
+    );
+
+    return response.data;
+  }
+
+  /**
+   * Add a participant to a study by email (CORE)
+   * @param studyId The ID of the study
+   * @param email The ID of the participant
+   */
+  async addOneByEmail({ studyId, email }: { studyId: string; email: string }) {
+    const addParticipant =
+      new RecruitmentServiceRequest.AddParticipantByEmailAddress(
+        new UUID(studyId),
+        new EmailAddress(email),
+      );
+
+    const request = serialize({
+      request: addParticipant,
+      serializer: RecruitmentServiceRequest.Serializer,
+    });
+    const response = await this.actions.post(this.coreEndpoint, request);
+    const decodedResponse = deserialize({
+      data: response.data,
+      serializer: Participant,
+    }) as unknown as Participant;
+
+    return decodedResponse;
+  }
+
+  /**
+   * Add a participant to a study by username (CORE)
+   * @param studyId The ID of the study
+   * @param username The username of the participant
+   */
+  async addOneByUsername({
+    studyId,
+    username,
+  }: {
+    studyId: string;
+    username: string;
+  }) {
+    const addParticipant =
+      new RecruitmentServiceRequest.AddParticipantByUsername(
+        new UUID(studyId),
+        new Username(username),
+      );
+
+    const request = serialize({
+      request: addParticipant,
+      serializer: RecruitmentServiceRequest.Serializer,
+    });
+    const response = await this.actions.post(this.coreEndpoint, request);
+    const decodedResponse = deserialize({
+      data: response.data,
+      serializer: Participant,
+    }) as unknown as Participant;
+
+    return decodedResponse;
+  }
+
+  /**
+   * Generate anonymous accounts
+   * @param studyId The ID of the study
+   * @param amountOfAccounts The number of accounts to generate
+   * @param expirationSeconds The number of seconds until the accounts expire
+   * @param redirectUri The URL to redirect participants to
+   * @param participantRoleName What role to assign participants to when they are deployed to the study
+   */
+  async generateAnonymousAccounts({
+    studyId,
+    amountOfAccounts,
+    expirationSeconds,
+    redirectUri,
+    participantRoleName,
+  }: AnonymousLinksRequest) {
+    const response = await this.actions.post<AnonymousLinksResponse>(
+      `${this.wsEndpoint}/${studyId}/participants/generate-anonymous-accounts`,
+      {
+        amountOfAccounts,
+        expirationSeconds,
+        redirectUri,
+        participantRoleName,
+      },
+    );
+
+    const header = response.headers["content-disposition"] as string;
+    const regex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+    const matches = regex.exec(header);
+    const filename =
+      matches != null && matches[1]
+        ? matches[1].replace(/['"]/g, "")
+        : "accounts.csv";
+
+    return {
+      filename,
+      data: response.data.data,
+    } as AnonymousLinksResponse;
+  }
+
+  /**
+   * Get participants in a study
+   * @param studyId The ID of the study
+   */
+  async getParticipants({ studyId }: { studyId: string }) {
+    const getParticipants = new RecruitmentServiceRequest.GetParticipants(
+      new UUID(studyId),
+    );
+
+    const request = serialize({
+      request: getParticipants,
+      serializer: RecruitmentServiceRequest.Serializer,
+    });
+    const response = await this.actions.post(this.coreEndpoint, request);
+    const decodedResponse = deserialize({
+      data: response.data,
+      serializer: ListSerializer(getSerializer(Participant)),
+      shouldGetSerializer: true,
+    }) as ArrayList<Participant>;
+
+    return decodedResponse.toArray();
   }
 }
 

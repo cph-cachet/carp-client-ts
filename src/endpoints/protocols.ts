@@ -154,6 +154,7 @@ class Protocols extends Endpoint {
     const protocols = deserialize({
       data: response.data,
       serializer: ListSerializer(getSerializer(StudyProtocolSnapshot)),
+      shouldGetSerializer: true,
     }) as ArrayList<StudyProtocolSnapshot>;
 
     return protocols.toArray();
@@ -181,6 +182,7 @@ class Protocols extends Endpoint {
     const versions = deserialize({
       data: response.data,
       serializer: ListSerializer(getSerializer(ProtocolVersion)),
+      shouldGetSerializer: true,
     }) as ArrayList<ProtocolVersion>;
 
     return versions.toArray();

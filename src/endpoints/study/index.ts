@@ -31,6 +31,7 @@ class Study extends Endpoint {
     super(client);
     this.researchers = new Researchers(client);
     this.summaries = new Summaries(client);
+    this.recruitment = new Recruitment(client);
   }
 
   /**

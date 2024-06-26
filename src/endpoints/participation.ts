@@ -39,6 +39,7 @@ class Participation extends Endpoint {
     const decodedResponse = deserialize({
       data: response.data,
       serializer: SetSerializer(getSerializer(ActiveParticipationInvitation)),
+      shouldGetSerializer: true,
     });
     const invitations = decodedResponse as ActiveParticipationInvitation[];
 
