@@ -75,7 +75,7 @@ class Recruitment extends Endpoint {
    * Get participant group status
    * @param studyId The ID of the study
    */
-  async getParticipantGroupStatus({ studyId }: { studyId: string }) {
+  async getParticipantGroupStatusList({ studyId }: { studyId: string }) {
     const getParticipantGroupStatus =
       new RecruitmentServiceRequest.GetParticipantGroupStatusList(
         new UUID(studyId),
@@ -269,7 +269,7 @@ class Recruitment extends Endpoint {
     const decodedResponse = deserialize({
       data: response.data,
       serializer: ListSerializer(getSerializer(Participant)),
-      shouldGetSerializer: true,
+      shouldGetSerializer: false,
     }) as ArrayList<Participant>;
 
     return decodedResponse.toArray();

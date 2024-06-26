@@ -124,6 +124,8 @@ describe("Study participant endpoints", () => {
 
   describe("Deployments", () => {
     let participants: Participant[];
+    let participantGroupStatus: ParticipantGroupStatus;
+
     beforeAll(async () => {
       expect(study).toBeDefined();
 
@@ -143,7 +145,7 @@ describe("Study participant endpoints", () => {
     });
 
     it("should be able to invite new participant group", async () => {
-      const participantGroup =
+      participantGroupStatus =
         await testClient.study.recruitment.inviteNewParticipantGroup({
           studyId: study.studyId.stringRepresentation,
           participantsWithRoles: participants.map((p) => ({
@@ -152,8 +154,10 @@ describe("Study participant endpoints", () => {
           })),
         });
 
-      expect(participantGroup).toBeInstanceOf(ParticipantGroupStatus);
+      expect(participantGroupStatus).toBeInstanceOf(ParticipantGroupStatus);
     });
+
+    it("should be able to get participant group status", async () => {});
   });
 
   afterAll(async () => {

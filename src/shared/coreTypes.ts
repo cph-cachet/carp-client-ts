@@ -9,6 +9,7 @@ import carpDepolymentsCore from "@cachet/carp-deployments-core";
 import carpProtocolsCore from "@cachet/carp-protocols-core";
 import carpStudiesCore from "@cachet/carp-studies-core";
 
+import { kotlinx as kxd } from "@cachet/carp-kotlinx-datetime";
 import pdk = carpProtocolsCore.dk;
 import sdk = carpStudiesCore.dk;
 import cdk = carpCommon.dk;
@@ -44,6 +45,8 @@ import Json = kotlinx.serialization.json.Json;
 import Pair = kotlin.Pair;
 import ListSerializer = kotlinxcore.serialization.builtins.ListSerializer;
 import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer;
+
+import Instant = kxd.datetime.Instant;
 
 import EmailAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.EmailAccountIdentity;
 import UsernameAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.UsernameAccountIdentity;
@@ -81,7 +84,7 @@ const serialize = ({
 const deserialize = <T>({
   data,
   serializer,
-  shouldGetSerializer: isListSerializer = false,
+  shouldGetSerializer = true,
 }: {
   data: unknown;
   serializer: T;
@@ -91,7 +94,7 @@ const deserialize = <T>({
   const json: Json = DefaultSerializer;
 
   let deserializer = serializer;
-  if (!isListSerializer) {
+  if (shouldGetSerializer) {
     deserializer = getSerializer(serializer);
   }
   const decodedResponse = json.decodeFromString(
@@ -146,4 +149,5 @@ export {
   serialize,
   toSet,
   toMap,
+  Instant,
 };

@@ -14,6 +14,7 @@ import { CarpClient } from "@/client";
 import Researchers from "./researchers";
 import Summaries from "./summaries";
 import Recruitment from "./recruitment";
+import Deployments from "./deployments";
 
 /**
  * Endpoint for interacting with a particular study
@@ -27,11 +28,15 @@ class Study extends Endpoint {
 
   recruitment: Recruitment;
 
+  deployments: Deployments;
+
   constructor(client: CarpClient) {
     super(client);
+
     this.researchers = new Researchers(client);
     this.summaries = new Summaries(client);
     this.recruitment = new Recruitment(client);
+    this.deployments = new Deployments(client);
   }
 
   /**
