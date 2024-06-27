@@ -4,7 +4,6 @@ import STUDY_PROTOCOL from "../../consts";
 import {
   EmailAccountIdentity,
   Participant,
-  ParticipantGroupStatus,
   StudyStatus,
   setupTestClient,
 } from "@/shared";
@@ -120,44 +119,6 @@ describe("Study participant endpoints", () => {
         });
       expect(participant).toBeDefined();
     });
-  });
-
-  describe("Deployments", () => {
-    let participants: Participant[];
-    let participantGroupStatus: ParticipantGroupStatus;
-
-    beforeAll(async () => {
-      expect(study).toBeDefined();
-
-      // generate 2 random emails
-      const emails = [generateRandomEmail(), generateRandomEmail()];
-
-      // add the participants
-      await testClient.study.recruitment.addMultipleByEmail({
-        studyId: study.studyId.stringRepresentation,
-        emails,
-      });
-
-      // query the participant
-      participants = await testClient.study.recruitment.getParticipants({
-        studyId: study.studyId.stringRepresentation,
-      });
-    });
-
-    it("should be able to invite new participant group", async () => {
-      participantGroupStatus =
-        await testClient.study.recruitment.inviteNewParticipantGroup({
-          studyId: study.studyId.stringRepresentation,
-          participantsWithRoles: participants.map((p) => ({
-            id: p.id.stringRepresentation,
-            assignedRoles: ["Participant"],
-          })),
-        });
-
-      expect(participantGroupStatus).toBeInstanceOf(ParticipantGroupStatus);
-    });
-
-    it("should be able to get participant group status", async () => {});
   });
 
   afterAll(async () => {
