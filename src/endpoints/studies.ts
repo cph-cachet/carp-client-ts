@@ -12,7 +12,7 @@ import {
  * Endpoint for overall studies belonging to the account
  */
 class Studies extends Endpoint {
-  endpoint: string = "/api/studies";
+  wsEndpoint: string = "/api/studies";
 
   coreEndpoint: string = "/api/study-service";
 
@@ -21,7 +21,7 @@ class Studies extends Endpoint {
    */
   async getOverview() {
     const response = await this.actions.get(
-      `${this.endpoint}/studies-overview`,
+      `${this.wsEndpoint}/studies-overview`,
     );
 
     return response.data as StudyOverview[];

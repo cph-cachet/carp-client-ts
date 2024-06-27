@@ -18,32 +18,41 @@ describe("Accounts service", () => {
   });
 
   // TODO: stop skipping when backend support works again
-  it.skip("Checking if a researcher account is a researcher should return true", async () => {
-    await expect(
-      testClient.accounts.isAccountOfRole({
-        role: "RESEARCHER",
-        emailAddress: import.meta.env.VITE_RESEARCHER_EMAIL,
-      }),
-    ).resolves.toBeTruthy();
-  });
+  it.todo(
+    "Checking if a researcher account is a researcher should return true",
+    async () => {
+      await expect(
+        testClient.accounts.isAccountOfRole({
+          role: "RESEARCHER",
+          emailAddress: import.meta.env.VITE_RESEARCHER_EMAIL,
+        }),
+      ).resolves.toBeTruthy();
+    },
+  );
 
   // TODO: fix when backend support works again
-  it.skip("Checking if a participant account is a researcher should return false", async () => {
-    await expect(
-      testClient.accounts.isAccountOfRole({
-        role: "RESEARCHER",
-        emailAddress: import.meta.env.VITE_PARTICIPANT_EMAIL,
-      }),
-    ).resolves.toBeFalsy();
-  });
+  it.todo(
+    "Checking if a participant account is a researcher should return false",
+    async () => {
+      await expect(
+        testClient.accounts.isAccountOfRole({
+          role: "RESEARCHER",
+          emailAddress: import.meta.env.VITE_PARTICIPANT_EMAIL,
+        }),
+      ).resolves.toBeFalsy();
+    },
+  );
 
   // TODO: fix when backend support works again
-  it.skip("Checking if a non-existent account is a researcher should throw an error", async () => {
-    await expect(
-      testClient.accounts.isAccountOfRole({
-        role: "RESEARCHER",
-        emailAddress: "random@random.com",
-      }),
-    ).rejects.toThrow();
-  });
+  it.todo(
+    "Checking if a non-existent account is a researcher should throw an error",
+    async () => {
+      await expect(
+        testClient.accounts.isAccountOfRole({
+          role: "RESEARCHER",
+          emailAddress: "random@random.com",
+        }),
+      ).rejects.toThrow();
+    },
+  );
 });

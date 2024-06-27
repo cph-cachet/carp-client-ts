@@ -21,6 +21,7 @@ export default ({ mode }) => {
         provider: "v8",
       },
       reporters: [new CustomReporter(shouldLogOnSuccess)],
+      fileParallelism: false,
     },
   });
 };
