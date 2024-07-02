@@ -37,8 +37,3 @@ export interface AnonymousLinksRequest {
   participantRoleName: string;
   config: AxiosRequestConfig;
 }
-
-export interface AnonymousLinksResponse {
-  filename: string;
-  data: string;
-}
