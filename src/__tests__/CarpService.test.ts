@@ -866,7 +866,6 @@ describe('CARP tests', () => {
     });
 
     test('generateAnonymousAccounts should succeed', async () => {
-      // try {
       const generatedAccountsResponse =
         await carpInstance.generateAnonymousAccounts({
           studyId: studyId.stringRepresentation,
@@ -878,9 +877,8 @@ describe('CARP tests', () => {
         });
 
       expect(generatedAccountsResponse).not.toBeUndefined();
-      expect(generatedAccountsResponse).toHaveProperty('data');
-      expect(generatedAccountsResponse).toHaveProperty('filename');
-      expect(generatedAccountsResponse.data.length).toBeGreaterThan(0);
+      expect(generatedAccountsResponse.file_name).not.toBeUndefined();
+      expect(generatedAccountsResponse.type).toBe('ANONYMOUS_PARTICIPANTS');
     });
 
     describe('participation-service', () => {

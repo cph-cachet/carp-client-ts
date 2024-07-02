@@ -14,7 +14,6 @@ import { jwtDecode } from 'jwt-decode';
 import * as qs from 'qs';
 import {
   AnonymousLinksRequest,
-  AnonymousLinksResponse,
   CarpDocument,
   CarpDocumentData,
   CarpServiceError,
@@ -23,6 +22,7 @@ import {
   ConsentResponse,
   DataPoint,
   DataResponse,
+  Export,
   HttpResult,
   LatestProtocol,
   ParticipantAccount,
@@ -34,7 +34,6 @@ import {
   SessionLoginParams,
   SessionRefreshParams,
   StudyOverview,
-  Summary,
   SummaryData,
   SummaryToDownload,
   Token,
@@ -303,15 +302,19 @@ export default class CarpInstance {
     }
   };
 
-  downloadSummary = async (
+  downloadExport = async (
+    studyId: string,
     summaryId: string,
     config: AxiosRequestConfig
   ): Promise<SummaryToDownload> => {
     try {
-      const response = await this.instance.get(`/api/summary/${summaryId}`, {
-        ...config,
-        responseType: 'blob',
-      });
+      const response = await this.instance.get(
+        `/api/studies/${studyId}/exports/${summaryId}`,
+        {
+          ...config,
+          responseType: 'blob',
+        }
+      );
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const header = response.headers['content-disposition'] as string;
       const regex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
@@ -332,33 +335,16 @@ export default class CarpInstance {
     }
   };
 
-  getSummary = async (
-    summaryId: string,
-    config: AxiosRequestConfig
-  ): Promise<Summary> => {
-    try {
-      const response = await this.instance.get(
-        `/api/summary/${summaryId}`,
-        config
-      );
-      return await Promise.resolve(response.data as Summary);
-    } catch (error) {
-      return Promise.reject(
-        unwrapError(error, 'Getting summary failed!').value
-      );
-    }
-  };
-
-  getSummaries = async (
+  pollExports = async (
     studyId: string,
     config: AxiosRequestConfig
-  ): Promise<Summary[]> => {
+  ): Promise<Export[]> => {
     try {
       const response = await this.instance.get(
-        `/api/summary/list?study_id=${studyId}`,
+        `/api/studies/${studyId}/exports`,
         config
       );
-      return await Promise.resolve(response.data as Summary[]);
+      return await Promise.resolve(response.data as Export[]);
     } catch (error) {
       return Promise.reject(
         unwrapError(error, 'Getting summaries failed!').value
@@ -370,18 +356,17 @@ export default class CarpInstance {
     studyId: string,
     deploymentIds: string[],
     config: AxiosRequestConfig
-  ): Promise<Summary> => {
+  ): Promise<Export> => {
     try {
       const serializedDeploymentIds = JSON.stringify({
         deploymentIds,
-        studyId,
       });
       const response = await this.instance.post(
-        '/api/summary',
+        `/api/studies/${studyId}/exports/summaries`,
         serializedDeploymentIds,
         config
       );
-      return await Promise.resolve(response.data as Summary);
+      return await Promise.resolve(response.data as Export);
     } catch (error) {
       return Promise.reject(
         unwrapError(error, 'Creating summary failed').value
@@ -389,12 +374,16 @@ export default class CarpInstance {
     }
   };
 
-  deleteSummary = async (
+  deleteExport = async (
+    studyId: string,
     summaryId: string,
     config: AxiosRequestConfig
   ): Promise<void> => {
     try {
-      await this.instance.delete(`/api/summary/${summaryId}`, config);
+      await this.instance.delete(
+        `/api/studies/${studyId}/exports/${summaryId}`,
+        config
+      );
       return await Promise.resolve();
     } catch (error) {
       return Promise.reject(
@@ -1358,10 +1347,10 @@ export default class CarpInstance {
     redirectUri,
     participantRoleName,
     config,
-  }: AnonymousLinksRequest): Promise<AnonymousLinksResponse> => {
+  }: AnonymousLinksRequest): Promise<Export> => {
     try {
       const response = await this.instance.post(
-        `/api/studies/${studyId}/generate`,
+        `/api/studies/${studyId}/exports/anonymous-participants`,
         {
           amountOfAccounts,
           expirationSeconds,
@@ -1371,18 +1360,7 @@ export default class CarpInstance {
         config
       );
 
-      const header = response.headers['content-disposition'] as string;
-      const regex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-      const matches = regex.exec(header);
-      const filename =
-        matches != null && matches[1]
-          ? matches[1].replace(/['"]/g, '')
-          : 'accounts.csv';
-
-      return await Promise.resolve({
-        filename,
-        data: response.data,
-      });
+      return await Promise.resolve(response.data as Export);
     } catch (error) {
       return Promise.reject(
         unwrapError(error, 'Generating anonymous accounts failed').value
