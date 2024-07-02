@@ -83,7 +83,7 @@ class Protocols extends Endpoint {
    * @param versionTag The version of the protocol
    */
 
-  async getProtocolBy({
+  async getByVersion({
     protocolId,
     versionTag,
   }: {
@@ -117,7 +117,7 @@ class Protocols extends Endpoint {
    * Get latest protocol for a given ID
    * @param protocolId The ID of the protocol
    */
-  async getLatestProtocol({ protocolId }: { protocolId: string }) {
+  async getLatest({ protocolId }: { protocolId: string }) {
     const response = await this.actions.get<LatestProtocol>(
       `${this.coreEndpoint}/${protocolId}/latest`,
     );
@@ -140,7 +140,7 @@ class Protocols extends Endpoint {
    * Get all protocols
    * @param ownerId user ID of who to query protocols for
    */
-  async getAllProtocols({ ownerId }: { ownerId: string }) {
+  async getAll({ ownerId }: { ownerId: string }) {
     const serializedRequest = serialize({
       request: new ProtocolServiceRequest.GetAllForOwner(new UUID(ownerId)),
       serializer: ProtocolServiceRequest.Serializer,

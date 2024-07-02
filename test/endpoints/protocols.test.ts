@@ -19,7 +19,7 @@ describe("Protocols", () => {
   });
 
   it("should be able to query the added protocol", async () => {
-    const protocols = await testClient.protocols.getAllProtocols({
+    const protocols = await testClient.protocols.getAll({
       ownerId: researcherAccountId,
     });
     expect(protocols).toBeDefined();
@@ -38,10 +38,17 @@ describe("Protocols", () => {
     });
 
     await expect(
-      testClient.protocols.getProtocolBy({
+      testClient.protocols.getByVersion({
         protocolId: STUDY_PROTOCOL.id,
         versionTag: "2.0",
       }),
     ).resolves.toBeDefined();
+
+    const versionHistory = await testClient.protocols.getVersionHistory({
+      protocolId: STUDY_PROTOCOL.id,
+    });
+
+    expect(versionHistory).toBeDefined();
+    expect(versionHistory.length).toBe(2);
   });
 });
