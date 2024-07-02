@@ -8,7 +8,7 @@
     "build": "rimraf ./dist && tsc && tsc-alias",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "vitest",
+    "test": "vitest --coverage",
     "postinstall": "rsync -av --progress non_npm_dependencies/. node_modules"
   },
   "keywords": [],

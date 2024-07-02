@@ -17,9 +17,6 @@ export default ({ mode }) => {
     },
     // plugins: [tsConfigPaths()],
     test: {
-      coverage: {
-        provider: "v8",
-      },
       reporters: [new CustomReporter(shouldLogOnSuccess)],
       fileParallelism: false,
     },

@@ -1,10 +1,13 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { generateRandomEmail } from "test/utils";
-import STUDY_PROTOCOL from "../../consts";
+import { STUDY_PROTOCOL } from "../../consts";
 import {
+  DefaultSerializer,
   EmailAccountIdentity,
   Participant,
+  StudyProtocolSnapshot,
   StudyStatus,
+  getSerializer,
   setupTestClient,
 } from "@/shared";
 import { CarpTestClient } from "@/client";
@@ -34,8 +37,15 @@ describe("Study participant endpoints", () => {
     });
 
     // set protocol
+    const json = DefaultSerializer;
+    const serializer = getSerializer(StudyProtocolSnapshot);
+    const protocol = json.decodeFromString(
+      serializer,
+      JSON.stringify(STUDY_PROTOCOL),
+    ) as StudyProtocolSnapshot;
+
     await testClient.study.setProtocol({
-      protocol: STUDY_PROTOCOL,
+      protocol,
       studyId: study.studyId.stringRepresentation,
     });
 

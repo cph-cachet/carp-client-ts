@@ -30,7 +30,7 @@ class Protocols extends Endpoint {
     versionTag: string;
   }) {
     const protocolSnapshot = deserialize({
-      data: JSON.stringify(protocol),
+      data: protocol,
       serializer: StudyProtocolSnapshot,
     }) as unknown as StudyProtocolSnapshot;
 
@@ -60,7 +60,7 @@ class Protocols extends Endpoint {
     versionTag: string;
   }) {
     const protocolSnapshot = deserialize({
-      data: JSON.stringify(protocol),
+      data: protocol,
       serializer: StudyProtocolSnapshot,
     }) as unknown as StudyProtocolSnapshot;
 
