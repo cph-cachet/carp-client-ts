@@ -5,72 +5,61 @@ import {
   Instant,
   ListSerializer,
   MasterDeviceDeployment,
+  ParticipantGroupStatus,
+  RecruitmentServiceRequest,
   StudyDeploymentStatus,
   UUID,
   deserialize,
   getSerializer,
   serialize,
-  toSet,
 } from "@/shared";
 import Endpoint from "../endpoint";
+import { ParticipantGroups } from "@/shared/models";
 
 class Deployments extends Endpoint {
   coreEndpoint: string = "/api/deployment-service";
 
+  wsEndpoint: string = "/api/studies";
+
   /**
-   * Query the status of a single study deployment
-   * @param studyDeploymentId The ID of the study deployment
+   * Get deployment statuses for a study
+   * @param studyId The ID of the study
    */
-  async getStatus({ studyDeploymentId }) {
-    const getDeploymentStatus =
-      new DeploymentServiceRequest.GetStudyDeploymentStatus(
-        new UUID(studyDeploymentId),
+  async getDeploymentStatuses({ studyId }) {
+    const getDeploymentStatuses =
+      new RecruitmentServiceRequest.GetParticipantGroupStatusList(
+        new UUID(studyId),
       );
 
-    const serializedGetDeploymentStatus = serialize({
-      request: getDeploymentStatus,
-      serializer: DeploymentServiceRequest.Serializer,
+    const serializedGetDeploymentStatuses = serialize({
+      request: getDeploymentStatuses,
+      serializer: RecruitmentServiceRequest.Serializer,
     });
 
     const response = await this.actions.post(
       this.coreEndpoint,
-      serializedGetDeploymentStatus,
-    );
-
-    const deploymentStatus = deserialize({
-      data: response.data,
-      serializer: StudyDeploymentStatus,
-    }) as unknown as StudyDeploymentStatus;
-
-    return deploymentStatus;
-  }
-
-  /**
-   * Get statuses for multiple study deployments
-   */
-  async getStatuses({ studyDeploymentIds }: { studyDeploymentIds: string[] }) {
-    const getStudyDeploymentStatuses =
-      new DeploymentServiceRequest.GetStudyDeploymentStatusList(
-        toSet(studyDeploymentIds.map((id) => new UUID(id))),
-      );
-
-    const serializedGetStudyDeploymentStatuses = serialize({
-      request: getStudyDeploymentStatuses,
-      serializer: DeploymentServiceRequest.Serializer,
-    });
-
-    const response = await this.actions.post(
-      this.coreEndpoint,
-      serializedGetStudyDeploymentStatuses,
+      serializedGetDeploymentStatuses,
     );
 
     const deploymentStatuses = deserialize({
       data: response.data,
-      serializer: ListSerializer(getSerializer(StudyDeploymentStatus)),
+      serializer: ListSerializer(getSerializer(ParticipantGroupStatus)),
       shouldGetSerializer: false,
-    }) as unknown as ArrayList<StudyDeploymentStatus>;
+    }) as unknown as ArrayList<ParticipantGroupStatus>;
 
     return deploymentStatuses.toArray();
+  }
+
+  /**
+   * Get all deployments, with accounts and their statuses for a study
+   * @param studyId The ID of the study
+   */
+  async getDeploymentAccountsAndStatus({ studyId }) {
+    const response = await this.actions.get<ParticipantGroups>(
+      `${this.coreEndpoint}/${studyId}/participantGroup/status`,
+    );
+
+    return response.data;
   }
 
   /**

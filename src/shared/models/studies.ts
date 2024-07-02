@@ -33,10 +33,10 @@ export type ParticipantWithRoles = {
   assignedRoles: string[];
 };
 
-export interface ParticipantGroups {
+export type ParticipantGroups = {
   groups: ParticipantGroup[];
   groupStatuses: any[];
-}
+};
 
 export interface ParticipantGroup {
   participantGroupId: string;

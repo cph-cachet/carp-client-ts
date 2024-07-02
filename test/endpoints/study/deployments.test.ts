@@ -68,6 +68,36 @@ describe("Deployments", () => {
     expect(participantGroupStatus).toBeInstanceOf(ParticipantGroupStatus);
   });
 
+  it("should be able to get study deployment statuses in list", async () => {
+    const studyDeploymentStatus =
+      await testClient.study.recruitment.getParticipantGroupAccountsAndStatus({
+        studyId: study.studyId.stringRepresentation,
+      });
+
+    // we should find the participant group status in the list
+    const found = studyDeploymentStatus.groups.find(
+      (g) =>
+        g.participantGroupId === participantGroupStatus.id.stringRepresentation,
+    );
+
+    expect(found).toBeDefined();
+  });
+
+  it("should be able to stop a participant group", async () => {
+    const stoppedParticipantGroupStatus =
+      await testClient.study.recruitment.stopParticipantGroup({
+        studyId: study.studyId.stringRepresentation,
+        studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+      });
+
+    expect(stoppedParticipantGroupStatus).toBeInstanceOf(
+      ParticipantGroupStatus,
+    );
+    expect(stoppedParticipantGroupStatus).toBeInstanceOf(
+      ParticipantGroupStatus.Stopped,
+    );
+  });
+
   afterAll(async () => {
     if (study) {
       await testClient.study.delete({

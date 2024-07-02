@@ -98,7 +98,7 @@ class Recruitment extends Endpoint {
    */
   async getParticipantGroupAccountsAndStatus({ studyId }: { studyId: string }) {
     const response = await this.actions.get<ParticipantGroups>(
-      `${this.coreEndpoint}/${studyId}/participantGroup/status`,
+      `${this.wsEndpoint}/${studyId}/participantGroup/status`,
     );
 
     return response.data;
