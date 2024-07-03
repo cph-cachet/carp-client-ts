@@ -46,7 +46,7 @@ class DataPoints extends Endpoint {
     dataPointId,
   }: {
     studyDeploymentId: string;
-    dataPointId: string;
+    dataPointId: number;
   }) {
     const response = await this.actions.get<DataPointResponse>(
       `${this.endpoint}/${studyDeploymentId}/data-points/${dataPointId}`,
@@ -65,7 +65,7 @@ class DataPoints extends Endpoint {
     dataPointId,
   }: {
     studyDeploymentId: string;
-    dataPointId: string;
+    dataPointId: number;
   }) {
     await this.actions.delete(
       `${this.endpoint}/${studyDeploymentId}/data-points/${dataPointId}`,

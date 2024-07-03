@@ -23,6 +23,7 @@ describe("Data points", () => {
   let researcherAccountId: string;
   let study: StudyStatus;
   let participantGroupStatus: ParticipantGroupStatus;
+  let newDataPoint: DataPointResponse;
 
   beforeAll(async () => {
     const { client, accountId } = await setupTestClient();
@@ -88,38 +89,52 @@ describe("Data points", () => {
       setTimeout(resolve, 10000);
     });
     await testClient.authentication.refresh();
-  }, 15000);
 
-  it("should get data points and should be empty at first", async () => {
-    const dataPoints = await testClient.study.dataPoints.getAll({
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-    });
-
-    expect(dataPoints).toBeDefined();
-    expect(dataPoints).toBeInstanceOf(Array);
-    expect(dataPoints.length).toEqual(0);
-  });
-
-  it("should add a data point", async () => {
+    // add a data point
     const data = DATA_POINT;
-
-    const newDataPoint = await testClient.study.dataPoints.add({
+    newDataPoint = await testClient.study.dataPoints.add({
       dataPoint: data,
       studyDeploymentId: participantGroupStatus.id.stringRepresentation,
     });
+  }, 15000);
 
+  it("should add a data point", async () => {
     expect(newDataPoint).toBeDefined();
     expectTypeOf(newDataPoint).toMatchTypeOf<DataPointResponse>();
+  });
 
-    // get the data point
+  it("should get data points", async () => {
     const dataPoints = await testClient.study.dataPoints.getAll({
       studyDeploymentId: participantGroupStatus.id.stringRepresentation,
     });
 
     expect(dataPoints).toBeDefined();
-    expect(dataPoints).toBeInstanceOf(Array);
-    expect(dataPoints.length).toEqual(1);
-    expect(dataPoints[0]).toEqual(newDataPoint);
+    expectTypeOf(dataPoints).toMatchTypeOf<DataPointResponse[]>();
+  });
+
+  it("should get a data point", async () => {
+    const dataPoint = await testClient.study.dataPoints.getById({
+      dataPointId: newDataPoint.id,
+      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+    });
+
+    expect(dataPoint).toBeDefined();
+    expectTypeOf(dataPoint).toMatchTypeOf<DataPointResponse>();
+    expect(dataPoint.id).toEqual(newDataPoint.id);
+  });
+
+  it("should delete a data point", async () => {
+    await testClient.study.dataPoints.delete({
+      dataPointId: newDataPoint.id,
+      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+    });
+
+    const dataPoints = await testClient.study.dataPoints.getAll({
+      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+    });
+
+    expect(dataPoints).toBeDefined();
+    expect(dataPoints).toHaveLength(0);
   });
 
   afterAll(async () => {
