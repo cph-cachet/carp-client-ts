@@ -1,4 +1,5 @@
 import { UUID } from "@/shared";
+import { DataPoint } from "@/shared/models";
 import { StudyProtocol } from "@/shared/models/protocol";
 
 export const STUDY_PROTOCOL_ID =
@@ -137,4 +138,30 @@ export const STUDY_PROTOCOL: StudyProtocol = {
       },
     },
   ],
+};
+
+export const DATA_POINT: DataPoint = {
+  carp_header: {
+    study_id: "8",
+    user_id: "user@dtu.dk",
+    device_role_name: "Patient's phone",
+    trigger_id: "task1",
+    data_format: {
+      namepace: "carp",
+      name: "location",
+    },
+    start_time: "2018-11-08T15:30:40.721748Z",
+  },
+  carp_body: {
+    classname: "LocationDatum",
+    id: "3fdd1760-bd30-11e8-e209-ef7ee8358d2f",
+    timestamp: "2018-11-08T15:30:40.721748Z",
+    device_info: {},
+    latitude: 23454.345,
+    longitude: 23.4,
+    altitude: 43.3,
+    accuracy: 12.4,
+    speed: 2.3,
+    speed_accuracy: 12.3,
+  },
 };
