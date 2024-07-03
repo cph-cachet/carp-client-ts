@@ -1,66 +1,19 @@
 import {
-  ArrayList,
   DefaultDeviceRegistration,
   DeploymentServiceRequest,
   Instant,
-  ListSerializer,
   MasterDeviceDeployment,
-  ParticipantGroupStatus,
-  RecruitmentServiceRequest,
   StudyDeploymentStatus,
   UUID,
   deserialize,
-  getSerializer,
   serialize,
 } from "@/shared";
 import Endpoint from "../endpoint";
-import { ParticipantGroups } from "@/shared/models";
 
 class Deployments extends Endpoint {
   coreEndpoint: string = "/api/deployment-service";
 
   wsEndpoint: string = "/api/studies";
-
-  /**
-   * Get deployment statuses for a study
-   * @param studyId The ID of the study
-   */
-  async getDeploymentStatuses({ studyId }) {
-    const getDeploymentStatuses =
-      new RecruitmentServiceRequest.GetParticipantGroupStatusList(
-        new UUID(studyId),
-      );
-
-    const serializedGetDeploymentStatuses = serialize({
-      request: getDeploymentStatuses,
-      serializer: RecruitmentServiceRequest.Serializer,
-    });
-
-    const response = await this.actions.post(
-      this.coreEndpoint,
-      serializedGetDeploymentStatuses,
-    );
-
-    const deploymentStatuses = deserialize({
-      data: response.data,
-      serializer: ListSerializer(getSerializer(ParticipantGroupStatus)),
-      shouldGetSerializer: false,
-    }) as unknown as ArrayList<ParticipantGroupStatus>;
-
-    return deploymentStatuses.toArray();
-  }
-
-  /**
-   * Get all deployments, with accounts and their statuses for a study
-   * @param studyId The ID of the study
-   */
-  async getDeploymentAccountsAndStatus({ studyId }) {
-    const response = await this.actions.get<ParticipantGroups>(
-      `${this.coreEndpoint}/${studyId}/participantGroup/status`,
-    );
-
-    return response.data;
-  }
 
   /**
    * Register a device for a study deployment

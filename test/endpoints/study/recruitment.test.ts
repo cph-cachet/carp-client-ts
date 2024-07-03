@@ -11,7 +11,7 @@ import {
 import { generateRandomEmail, setupTestClient } from "../../utils";
 import { CarpTestClient } from "@/client";
 
-describe("Deployments", () => {
+describe("Recruitment", () => {
   let participants: Participant[];
   let participantGroupStatus: ParticipantGroupStatus;
   let testClient: CarpTestClient;
