@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
+import { setupTestClient } from "test/utils";
 import { CarpClient } from "@/client";
-import { setupTestClient } from "@/shared";
 
 describe("Accounts service", () => {
   let testClient: CarpClient;

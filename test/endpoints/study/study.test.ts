@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { STUDY_PROTOCOL, STUDY_PROTOCOL_ID } from "test/consts";
+import { setupTestClient } from "test/utils";
 import {
-  setupTestClient,
   StudyDetails,
   UUID,
   CarpServiceError,

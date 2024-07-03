@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { setupTestClient } from "test/utils";
 import { CarpTestClient } from "@/client";
-import { StudyStatus, setupTestClient } from "@/shared";
+import { StudyStatus } from "@/shared";
 import { StudyOverview } from "@/shared/models";
 
 describe("Studies service", () => {

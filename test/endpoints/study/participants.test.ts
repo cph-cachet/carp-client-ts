@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { generateRandomEmail } from "test/utils";
+import { generateRandomEmail, setupTestClient } from "test/utils";
 import { STUDY_PROTOCOL } from "../../consts";
 import {
   DefaultSerializer,
@@ -8,7 +8,6 @@ import {
   StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
-  setupTestClient,
 } from "@/shared";
 import { CarpTestClient } from "@/client";
 
