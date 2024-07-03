@@ -48,8 +48,8 @@ class Deployments extends Endpoint {
 
     const deploymentStatus = deserialize({
       data: response.data,
-      serializer: StudyDeploymentStatus.Running,
-    }) as unknown as StudyDeploymentStatus.Running;
+      serializer: StudyDeploymentStatus,
+    }) as unknown as StudyDeploymentStatus;
 
     return deploymentStatus;
   }
@@ -88,8 +88,8 @@ class Deployments extends Endpoint {
 
     const deploymentStatus = deserialize({
       data: response.data,
-      serializer: StudyDeploymentStatus.Running,
-    }) as unknown as StudyDeploymentStatus.Running;
+      serializer: StudyDeploymentStatus,
+    }) as unknown as StudyDeploymentStatus;
 
     return deploymentStatus;
   }
