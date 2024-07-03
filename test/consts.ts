@@ -1,5 +1,5 @@
 import { UUID } from "@/shared";
-import { DataPoint } from "@/shared/models";
+import { DataPoint, InformedConsentFile } from "@/shared/models";
 import { StudyProtocol } from "@/shared/models/protocol";
 
 export const STUDY_PROTOCOL_ID =
@@ -164,4 +164,9 @@ export const DATA_POINT: DataPoint = {
     speed: 2.3,
     speed_accuracy: 12.3,
   },
+};
+
+export const INFORMED_CONSENT: InformedConsentFile = {
+  text: "I consent to participate in the study.",
+  signature: "Claire Cottrill",
 };

@@ -16,6 +16,7 @@ import Summaries from "./summaries";
 import Recruitment from "./recruitment";
 import Deployments from "./deployments";
 import DataPoints from "./datapoints";
+import InformedConsent from "./informedConsent";
 
 /**
  * Endpoint for interacting with a particular study
@@ -33,6 +34,8 @@ class Study extends Endpoint {
 
   dataPoints: DataPoints;
 
+  informedConsent: InformedConsent;
+
   constructor(client: CarpClient) {
     super(client);
 
@@ -41,6 +44,7 @@ class Study extends Endpoint {
     this.recruitment = new Recruitment(client);
     this.deployments = new Deployments(client);
     this.dataPoints = new DataPoints(client);
+    this.informedConsent = new InformedConsent(client);
   }
 
   /**
