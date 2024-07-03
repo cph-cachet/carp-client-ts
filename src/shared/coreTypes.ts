@@ -23,6 +23,7 @@ import StudyServiceRequest = sdk.cachet.carp.studies.infrastructure.StudyService
 import NamespacedId = cdk.cachet.carp.common.application.NamespacedId;
 import DefaultDeviceRegistration = cdk.cachet.carp.common.application.devices.DefaultDeviceRegistration;
 import Data = ddk.cachet.carp.common.application.data.Data;
+import Sex = ddk.cachet.carp.common.application.data.input.Sex;
 
 import RecruitmentServiceRequest = sdk.cachet.carp.studies.infrastructure.RecruitmentServiceRequest;
 import StudyStatus = sdk.cachet.carp.studies.application.StudyStatus;
@@ -39,6 +40,7 @@ import DeploymentServiceRequest = ddk.cachet.carp.deployments.infrastructure.Dep
 import MasterDeviceDeployment = ddk.cachet.carp.deployments.application.PrimaryDeviceDeployment;
 import StudyDeploymentStatus = ddk.cachet.carp.deployments.application.StudyDeploymentStatus;
 import ParticipantData = ddk.cachet.carp.deployments.application.users.ParticipantData;
+import Set = kotlin.collections.Set;
 import ArrayList = kotlin.collections.List;
 import HashMap = kotlin.collections.Map;
 import Json = kotlinx.serialization.json.Json;
@@ -50,6 +52,7 @@ import Instant = kxd.datetime.Instant;
 
 import EmailAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.EmailAccountIdentity;
 import UsernameAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.UsernameAccountIdentity;
+import CarpInputDataTypes = cdk.cachet.carp.common.application.data.input.CarpInputDataTypes;
 
 const { Roles } = cdk.cachet.carp.common.application.users.AssignedTo;
 const { EmailAddress } = cdk.cachet.carp.common.application;
@@ -108,6 +111,7 @@ const deserialize = <T>({
 export {
   ActiveParticipationInvitation,
   ArrayList,
+  CarpInputDataTypes,
   DefaultSerializer,
   DeploymentServiceRequest,
   HashMap,
@@ -123,6 +127,8 @@ export {
   ProtocolServiceRequest,
   ProtocolVersion,
   RecruitmentServiceRequest,
+  Set,
+  Sex,
   SetSerializer,
   StudyDeploymentStatus,
   StudyDetails,

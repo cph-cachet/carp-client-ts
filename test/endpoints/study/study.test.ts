@@ -145,7 +145,7 @@ describe("Study", () => {
 
     const json = DefaultSerializer;
     const serializer = getSerializer(StudyProtocolSnapshot);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
     const protocol = json.decodeFromString(
       serializer,
       JSON.stringify(STUDY_PROTOCOL),

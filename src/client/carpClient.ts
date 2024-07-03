@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 import { Config } from "@/config";
-import { Accounts, Studies, Study } from "@/endpoints";
-import { CarpServiceError, Participant, sanitizeRequestConfig } from "@/shared";
+import { Accounts, Participation, Studies, Study } from "@/endpoints";
+import { CarpServiceError, sanitizeRequestConfig } from "@/shared";
 import Protocols from "@/endpoints/protocols";
 
 export default class CarpClient {
@@ -11,7 +11,7 @@ export default class CarpClient {
 
   studies: Studies;
 
-  participant: Participant;
+  participation: Participation;
 
   study: Study;
 
@@ -79,7 +79,7 @@ export default class CarpClient {
   registerEndpoints() {
     this.accounts = new Accounts(this);
     this.studies = new Studies(this);
-    this.participant = new Participant(this);
+    this.participation = new Participation(this);
     this.study = new Study(this);
     this.protocols = new Protocols(this);
   }

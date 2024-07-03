@@ -1,18 +1,19 @@
 import {
   ActiveParticipationInvitation,
+  ArrayList,
   Data,
   HashMap,
+  ListSerializer,
   NamespacedId,
   Nullable,
-  Pair,
   ParticipantData,
   ParticipationServiceRequest,
+  Set,
   SetSerializer,
   UUID,
   deserialize,
   getSerializer,
   serialize,
-  toMap,
   toSet,
 } from "@/shared";
 import Endpoint from "./endpoint";
@@ -39,15 +40,14 @@ class Participation extends Endpoint {
     const decodedResponse = deserialize({
       data: response.data,
       serializer: SetSerializer(getSerializer(ActiveParticipationInvitation)),
-      shouldGetSerializer: true,
-    });
-    const invitations = decodedResponse as ActiveParticipationInvitation[];
+      shouldGetSerializer: false,
+    }) as unknown as Set<ActiveParticipationInvitation>;
 
-    return invitations;
+    return decodedResponse.toArray();
   }
 
   /**
-   * Get participant data
+   * Get participant data for a study deployment
    * @param studyDeploymentId The ID of the study deployment
    */
   async getParticipantData({
@@ -68,24 +68,26 @@ class Participation extends Endpoint {
       request,
     );
 
-    const data = response.data as any;
-    // TODO: is this necessary???
-    if (data.common) {
-      data.common = toMap(
-        Object.entries(data.common).map(([key, value]) => new Pair(key, value)),
-      );
-    }
+    const data = deserialize({
+      data: response.data,
+      serializer: ParticipantData,
+    }) as unknown as ParticipantData;
 
-    return data as ParticipantData;
+    return data;
   }
 
   /**
-   * Get participant data for multiple studies
+   * Get participant data for multiple study deployments
    * @param studyIds The IDs of the studies
    */
-  async getParticipantDataList({ studyIds }: { studyIds: string[] }) {
-    const ids: UUID[] = studyIds.map((id) => new UUID(id));
+  async getParticipantDataList({
+    studyDeploymentIds,
+  }: {
+    studyDeploymentIds: string[];
+  }) {
+    const ids: UUID[] = studyDeploymentIds.map((id) => new UUID(id));
     const studyIdsSet = toSet(ids);
+
     const request = new ParticipationServiceRequest.GetParticipantDataList(
       studyIdsSet,
     );
@@ -95,16 +97,14 @@ class Participation extends Endpoint {
     });
 
     const response = await this.actions.post(this.endpoint, serializedRequest);
-    const data = response.data as any;
 
-    // TODO: is this necessary???
-    if (data.common) {
-      data.common = toMap(
-        Object.entries(data.common).map(([key, value]) => new Pair(key, value)),
-      );
-    }
+    const data = deserialize({
+      data: response.data,
+      serializer: ListSerializer(getSerializer(ParticipantData)),
+      shouldGetSerializer: false,
+    }) as unknown as ArrayList<ParticipantData>;
 
-    return data as ParticipantData[];
+    return data.toArray();
   }
 
   /**
