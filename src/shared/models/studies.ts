@@ -190,6 +190,19 @@ export interface DataPointResponse {
   updated_at: string;
 }
 
+export interface ParticipantAccount {
+  email: string;
+  firstName: string;
+  lastName: string;
+  id: string;
+  role: string;
+  username: string;
+}
+
+export interface Statistics {
+  deployments: { deploymentId: string; uploads: any }[];
+}
+
 export interface InformedConsentResponse {
   id: number;
   deployment_id: string;

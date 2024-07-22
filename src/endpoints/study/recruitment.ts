@@ -1,6 +1,7 @@
 import {
   AnonymousLinksRequest,
   AnonymousLinksResponse,
+  ParticipantAccount,
   ParticipantGroups,
   ParticipantWithRoles,
 } from "@/shared/models";
@@ -69,6 +70,14 @@ class Recruitment extends Endpoint {
     }) as unknown as ParticipantGroupStatus;
 
     return participantGroupStatus;
+  }
+
+  async getParticipantAccounts({ studyId }: { studyId: string }) {
+    const response = await this.actions.get<ParticipantAccount[]>(
+      `${this.wsEndpoint}/${studyId}/participantGroup/status`,
+    );
+
+    return response.data;
   }
 
   /**

@@ -9,6 +9,7 @@ import {
   serialize,
 } from "@/shared";
 import Endpoint from "../endpoint";
+import { Statistics } from "@/shared/models";
 
 class Deployments extends Endpoint {
   coreEndpoint: string = "/api/deployment-service";
@@ -128,6 +129,61 @@ class Deployments extends Endpoint {
     }) as unknown as MasterDeviceDeployment;
 
     return deviceDeployment;
+  }
+
+  async getDeploymentStatistics({
+    deploymentIds,
+  }: {
+    deploymentIds: string[];
+  }) {
+    const response = await this.actions.post<{ statistics: any }>(
+      `${this.coreEndpoint}/statistic`,
+      {
+        deploymentIds,
+      },
+    ); // add deployment ID to URL
+    const responseData: {
+      deployments: { deploymentId: string; uploads: any }[];
+    }[] = [];
+    const res: { deploymentId: string; uploads: any }[] = [];
+
+    const DeploymentIdArray: string[] = [];
+    const { statistics } = response.data;
+    Object.keys(statistics).forEach((id) => {
+      DeploymentIdArray.push(id);
+    });
+
+    DeploymentIdArray.forEach((id) => {
+      const value = statistics[id];
+
+      const dataTypes: string[] = [];
+      Object.keys(value).forEach((dataType) => {
+        dataTypes.push(dataType);
+      });
+
+      const uploads: any[] = [];
+      dataTypes.forEach((element) => {
+        const obj: {
+          dataType: string;
+          uploads: { count: number; uploads: {} };
+        } = {
+          dataType: element,
+          uploads: value[element],
+        };
+        uploads.push(obj);
+      });
+
+      const obj: { deploymentId: string; uploads: any[] } = {
+        deploymentId: id,
+        uploads,
+      };
+      res.push(obj);
+      responseData.push({
+        deployments: res,
+      });
+    });
+
+    return responseData as Statistics[];
   }
 }
 
