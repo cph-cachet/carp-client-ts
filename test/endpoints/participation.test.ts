@@ -165,8 +165,10 @@ describe("Participation", () => {
   });
 
   afterAll(async () => {
-    await testClient.study.delete({
-      studyId: studyStatus.studyId.stringRepresentation,
-    });
+    if (studyStatus) {
+      await testClient.study.delete({
+        studyId: studyStatus.studyId.stringRepresentation,
+      });
+    }
   });
 });

@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { setupTestClient } from "test/utils";
 import { STUDY_PROTOCOL } from "test/consts";
 import { CarpTestClient } from "@/client";
@@ -112,5 +112,13 @@ describe("Deployments", () => {
     expect(updatedDeviceRegsitration).toBeInstanceOf(
       StudyDeploymentStatus.Running,
     );
+  });
+
+  afterAll(async () => {
+    if (study) {
+      await testClient.study.delete({
+        studyId: study.studyId.stringRepresentation,
+      });
+    }
   });
 });
