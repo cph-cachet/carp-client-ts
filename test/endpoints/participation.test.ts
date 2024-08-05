@@ -10,7 +10,7 @@ import {
   Participant,
   ParticipantData,
   Sex,
-  StudyProtocolSnapshot,
+  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
   toMap,

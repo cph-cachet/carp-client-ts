@@ -4,7 +4,7 @@ import {
   DefaultSerializer,
   Participant,
   ParticipantGroupStatus,
-  StudyProtocolSnapshot,
+  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
 } from "@/shared";

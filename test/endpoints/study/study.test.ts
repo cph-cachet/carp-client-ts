@@ -8,7 +8,7 @@ import {
   StudyStatus,
   DefaultSerializer,
   getSerializer,
-  StudyProtocolSnapshot,
+  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
 } from "@/shared";
 import { CarpTestClient } from "@/client";
 

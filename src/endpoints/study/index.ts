@@ -1,7 +1,7 @@
 import {
   StudyDetails,
   StudyInvitation,
-  StudyProtocolSnapshot,
+  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
   StudyServiceRequest,
   StudyStatus,
   UUID,

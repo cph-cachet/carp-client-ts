@@ -13,7 +13,7 @@ import {
   StudyStatus,
   DefaultSerializer,
   ParticipantGroupStatus,
-  StudyProtocolSnapshot,
+  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
   getSerializer,
 } from "@/shared";
 import { DataPointResponse } from "@/shared/models";

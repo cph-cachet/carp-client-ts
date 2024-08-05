@@ -26,12 +26,13 @@ import Data = ddk.cachet.carp.common.application.data.Data;
 import Sex = ddk.cachet.carp.common.application.data.input.Sex;
 
 import RecruitmentServiceRequest = sdk.cachet.carp.studies.infrastructure.RecruitmentServiceRequest;
+import StudiesStudyProtocolSnapshot = sdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
 import StudyStatus = sdk.cachet.carp.studies.application.StudyStatus;
 import StudyDetails = sdk.cachet.carp.studies.application.StudyDetails;
 import Participant = sdk.cachet.carp.studies.application.users.Participant;
 import ParticipantGroupStatus = sdk.cachet.carp.studies.application.users.ParticipantGroupStatus;
-import StudyProtocolSnapshot = pdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
 import ProtocolServiceRequest = pdk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest;
+import ProtocolsStudyProtocolSnapshot = pdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
 import ProtocolVersion = pdk.cachet.carp.protocols.application.ProtocolVersion;
 
 import ParticipationServiceRequest = ddk.cachet.carp.deployments.infrastructure.ParticipationServiceRequest;
@@ -130,9 +131,10 @@ export {
   Set,
   Sex,
   SetSerializer,
+  StudiesStudyProtocolSnapshot,
   StudyDeploymentStatus,
   StudyDetails,
-  StudyProtocolSnapshot,
+  ProtocolsStudyProtocolSnapshot,
   StudyServiceRequest,
   NamespacedId,
   DefaultDeviceRegistration,

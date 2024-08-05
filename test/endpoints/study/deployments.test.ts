@@ -6,7 +6,7 @@ import {
   DefaultSerializer,
   ParticipantGroupStatus,
   StudyDeploymentStatus,
-  StudyProtocolSnapshot,
+  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
 } from "@/shared";

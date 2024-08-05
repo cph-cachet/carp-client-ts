@@ -5,7 +5,7 @@ import {
   ListSerializer,
   ProtocolServiceRequest,
   ProtocolVersion,
-  StudyProtocolSnapshot,
+  ProtocolsStudyProtocolSnapshot as StudyProtocolSnapshot,
   UUID,
   deserialize,
   getSerializer,
