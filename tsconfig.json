@@ -8,12 +8,11 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "module": "ESNext",
-    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "outDir": "dist",
-    "rootDir": ".",
-    "baseUrl": ".",
+    "rootDir": "./src",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "./src/*"
@@ -25,7 +24,12 @@
     "src/**/*",
     "src/env.d.ts",
     "test/**/*",
-    "reporter.js",
-    "vitest.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "test/**/*.js",
+    "test/**/*.ts",
   ]
 }
