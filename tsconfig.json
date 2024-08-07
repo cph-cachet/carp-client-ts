@@ -12,7 +12,6 @@
     "noImplicitAny": false,
     "outDir": "dist",
     "rootDir": "./src",
-    "baseUrl": "./",
     "paths": {
       "@/*": [
         "./src/*"
@@ -24,13 +23,13 @@
   "include": [
     "src/**/*",
     "src/env.d.ts",
-    "test/**/*",
+    "src/test/**/*",
+    "reporter.js",
   ],
   "exclude": [
     "node_modules",
+    "non_npm_dependencies",
     "dist",
     "coverage",
-    "test/**/*.js",
-    "test/**/*.ts",
   ]
 }

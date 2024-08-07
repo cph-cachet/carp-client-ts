@@ -1,21 +1,29 @@
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { setupTestClient } from "test/utils";
-import { STUDY_PROTOCOL } from "test/consts";
+import {
+  describe,
+  beforeAll,
+  afterAll,
+  expect,
+  it,
+  expectTypeOf,
+} from "vitest";
+import { setupTestClient } from "@/test/utils";
+import { DATA_POINT, STUDY_PROTOCOL } from "@/test/consts";
 import { CarpTestClient } from "@/client";
 import {
+  StudyStatus,
   DefaultSerializer,
   ParticipantGroupStatus,
-  StudyDeploymentStatus,
-  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
-  StudyStatus,
+  StudyProtocolSnapshot,
   getSerializer,
 } from "@/shared";
+import { DataPointResponse } from "@/shared/models";
 
-describe("Deployments", () => {
+describe("Data points", () => {
   let testClient: CarpTestClient;
   let researcherAccountId: string;
   let study: StudyStatus;
   let participantGroupStatus: ParticipantGroupStatus;
+  let newDataPoint: DataPointResponse;
 
   beforeAll(async () => {
     const { client, accountId } = await setupTestClient();
@@ -81,37 +89,52 @@ describe("Deployments", () => {
       setTimeout(resolve, 10000);
     });
     await testClient.authentication.refresh();
+
+    // add a data point
+    const data = DATA_POINT;
+    newDataPoint = await testClient.study.dataPoints.add({
+      dataPoint: data,
+      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+    });
   }, 15000);
 
-  it("should be able to register and deploy device", async () => {
-    const deploymentStatus = await testClient.study.deployments.registerDevice({
+  it("should add a data point", async () => {
+    expect(newDataPoint).toBeDefined();
+    expectTypeOf(newDataPoint).toMatchTypeOf<DataPointResponse>();
+  });
+
+  it("should get data points", async () => {
+    const dataPoints = await testClient.study.dataPoints.getAll({
       studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-      primaryDeviceRoleName: "Participant's phone",
-      deviceId: "Participant's phone",
     });
 
-    expect(deploymentStatus).toBeDefined();
-    expect(deploymentStatus).toBeInstanceOf(
-      StudyDeploymentStatus.DeployingDevices,
-    );
+    expect(dataPoints).toBeDefined();
+    expectTypeOf(dataPoints).toMatchTypeOf<DataPointResponse[]>();
+  });
 
-    const deviceDeployment =
-      await testClient.study.deployments.getDeviceDeploymentFor({
-        studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-        primaryDeviceRoleName: "Participant's phone",
-      });
+  it("should get a data point", async () => {
+    const dataPoint = await testClient.study.dataPoints.getById({
+      dataPointId: newDataPoint.id,
+      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+    });
 
-    const updatedDeviceRegsitration =
-      await testClient.study.deployments.updateDeviceRegistration({
-        studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-        primaryDeviceRoleName: "Participant's phone",
-        lastUpdated: (deviceDeployment as any).lastUpdatedOn,
-      });
+    expect(dataPoint).toBeDefined();
+    expectTypeOf(dataPoint).toMatchTypeOf<DataPointResponse>();
+    expect(dataPoint.id).toEqual(newDataPoint.id);
+  });
 
-    expect(updatedDeviceRegsitration).toBeDefined();
-    expect(updatedDeviceRegsitration).toBeInstanceOf(
-      StudyDeploymentStatus.Running,
-    );
+  it("should delete a data point", async () => {
+    await testClient.study.dataPoints.delete({
+      dataPointId: newDataPoint.id,
+      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+    });
+
+    const dataPoints = await testClient.study.dataPoints.getAll({
+      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+    });
+
+    expect(dataPoints).toBeDefined();
+    expect(dataPoints).toHaveLength(0);
   });
 
   afterAll(async () => {

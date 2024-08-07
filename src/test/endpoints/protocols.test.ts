@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { STUDY_PROTOCOL } from "test/consts";
+import { STUDY_PROTOCOL } from "@/test/consts";
 import { CarpTestClient } from "@/client";
 import { setupTestClient } from "../utils";
 
@@ -38,7 +38,7 @@ describe("Protocols", () => {
     });
 
     await expect(
-      testClient.protocols.getByVersion({
+      testClient.protocols.getBy({
         protocolId: STUDY_PROTOCOL.id,
         versionTag: "2.0",
       }),

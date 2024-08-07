@@ -13,6 +13,7 @@ export default ({ mode }) => {
         "@/client": path.resolve(__dirname, "./src/client"),
         "@/shared": path.resolve(__dirname, "./src/shared"),
         "@/endpoints": path.resolve(__dirname, "./src/endpoints"),
+        "@/test": path.resolve(__dirname, "./src/test"),
       },
     },
     // plugins: [tsConfigPaths()],

@@ -1,29 +1,21 @@
-import {
-  afterAll,
-  beforeAll,
-  describe,
-  expect,
-  expectTypeOf,
-  it,
-} from "vitest";
-import { STUDY_PROTOCOL, INFORMED_CONSENT } from "test/consts";
-import { setupTestClient } from "test/utils";
-import { InformedConsentResponse } from "@/shared/models";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { setupTestClient } from "@/test/utils";
+import { STUDY_PROTOCOL } from "@/test/consts";
 import { CarpTestClient } from "@/client";
 import {
-  StudyStatus,
-  ParticipantGroupStatus,
-  getSerializer,
-  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
   DefaultSerializer,
+  ParticipantGroupStatus,
+  StudyDeploymentStatus,
+  StudyProtocolSnapshot,
+  StudyStatus,
+  getSerializer,
 } from "@/shared";
 
-describe("Informed consent", () => {
+describe("Deployments", () => {
   let testClient: CarpTestClient;
   let researcherAccountId: string;
   let study: StudyStatus;
   let participantGroupStatus: ParticipantGroupStatus;
-  let newInformedConsent: InformedConsentResponse;
 
   beforeAll(async () => {
     const { client, accountId } = await setupTestClient();
@@ -89,57 +81,37 @@ describe("Informed consent", () => {
       setTimeout(resolve, 10000);
     });
     await testClient.authentication.refresh();
-
-    // add a data point
-    const informedConsent = INFORMED_CONSENT;
-    newInformedConsent = await testClient.study.informedConsent.add({
-      informedConsent,
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-    });
   }, 15000);
 
-  it("should add informed consent", () => {
-    expect(newInformedConsent).toBeDefined();
-    expect(newInformedConsent.id).toBeDefined();
-    expectTypeOf(newInformedConsent).toMatchTypeOf<InformedConsentResponse>();
-  });
-
-  it("should get informed consent", async () => {
-    const informedConsent = await testClient.study.informedConsent.get({
+  it("should be able to register and deploy device", async () => {
+    const deploymentStatus = await testClient.study.deployments.registerDevice({
       studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-      informedConsentId: newInformedConsent.id,
+      primaryDeviceRoleName: "Participant's phone",
+      deviceId: "Participant's phone",
     });
 
-    expect(informedConsent).toBeDefined();
-    expect(informedConsent.id).toEqual(newInformedConsent.id);
-    expectTypeOf(informedConsent).toMatchTypeOf<InformedConsentResponse>();
-  });
+    expect(deploymentStatus).toBeDefined();
+    expect(deploymentStatus).toBeInstanceOf(
+      StudyDeploymentStatus.DeployingDevices,
+    );
 
-  it("should get all informed consents", async () => {
-    const informedConsents = await testClient.study.informedConsent.getAll({
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-    });
+    const deviceDeployment =
+      await testClient.study.deployments.getDeviceDeploymentFor({
+        studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+        primaryDeviceRoleName: "Participant's phone",
+      });
 
-    expect(informedConsents).toBeDefined();
-    expect(informedConsents).toBeInstanceOf(Array);
-    expect(informedConsents).not.toHaveLength(0);
-    expectTypeOf(informedConsents).toMatchTypeOf<InformedConsentResponse[]>();
-  });
+    const updatedDeviceRegsitration =
+      await testClient.study.deployments.updateDeviceRegistration({
+        studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+        primaryDeviceRoleName: "Participant's phone",
+        lastUpdated: (deviceDeployment as any).lastUpdatedOn,
+      });
 
-  it("should delete informed consent", async () => {
-    await testClient.study.informedConsent.delete({
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-      informedConsentId: newInformedConsent.id,
-    });
-
-    const informedConsents = await testClient.study.informedConsent.getAll({
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-    });
-
-    expect(informedConsents).toBeDefined();
-    expect(informedConsents).toBeInstanceOf(Array);
-    expect(informedConsents).toHaveLength(0);
-    expectTypeOf(informedConsents).toMatchTypeOf<InformedConsentResponse[]>();
+    expect(updatedDeviceRegsitration).toBeDefined();
+    expect(updatedDeviceRegsitration).toBeInstanceOf(
+      StudyDeploymentStatus.Running,
+    );
   });
 
   afterAll(async () => {

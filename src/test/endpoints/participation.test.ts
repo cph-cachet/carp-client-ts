@@ -1,6 +1,6 @@
 import { Nullable, afterAll, beforeAll, describe, expect, it } from "vitest";
-import { setupTestClient } from "test/utils";
-import { STUDY_PROTOCOL } from "test/consts";
+import { setupTestClient } from "@/test/utils";
+import { STUDY_PROTOCOL } from "@/test/consts";
 import { CarpTestClient } from "@/client";
 import {
   CarpInputDataTypes,
@@ -10,7 +10,7 @@ import {
   Participant,
   ParticipantData,
   Sex,
-  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
+  StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
   toMap,

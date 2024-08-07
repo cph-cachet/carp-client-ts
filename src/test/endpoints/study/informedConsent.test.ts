@@ -1,29 +1,29 @@
-import { setupTestClient } from "test/utils";
 import {
-  describe,
-  beforeAll,
   afterAll,
+  beforeAll,
+  describe,
   expect,
-  it,
   expectTypeOf,
+  it,
 } from "vitest";
-import { DATA_POINT, STUDY_PROTOCOL } from "test/consts";
+import { STUDY_PROTOCOL, INFORMED_CONSENT } from "@/test/consts";
+import { setupTestClient } from "@/test/utils";
+import { InformedConsentResponse } from "@/shared/models";
 import { CarpTestClient } from "@/client";
 import {
   StudyStatus,
-  DefaultSerializer,
   ParticipantGroupStatus,
-  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
   getSerializer,
+  StudyProtocolSnapshot,
+  DefaultSerializer,
 } from "@/shared";
-import { DataPointResponse } from "@/shared/models";
 
-describe("Data points", () => {
+describe("Informed consent", () => {
   let testClient: CarpTestClient;
   let researcherAccountId: string;
   let study: StudyStatus;
   let participantGroupStatus: ParticipantGroupStatus;
-  let newDataPoint: DataPointResponse;
+  let newInformedConsent: InformedConsentResponse;
 
   beforeAll(async () => {
     const { client, accountId } = await setupTestClient();
@@ -91,50 +91,55 @@ describe("Data points", () => {
     await testClient.authentication.refresh();
 
     // add a data point
-    const data = DATA_POINT;
-    newDataPoint = await testClient.study.dataPoints.add({
-      dataPoint: data,
+    const informedConsent = INFORMED_CONSENT;
+    newInformedConsent = await testClient.study.informedConsent.add({
+      informedConsent,
       studyDeploymentId: participantGroupStatus.id.stringRepresentation,
     });
   }, 15000);
 
-  it("should add a data point", async () => {
-    expect(newDataPoint).toBeDefined();
-    expectTypeOf(newDataPoint).toMatchTypeOf<DataPointResponse>();
+  it("should add informed consent", () => {
+    expect(newInformedConsent).toBeDefined();
+    expect(newInformedConsent.id).toBeDefined();
+    expectTypeOf(newInformedConsent).toMatchTypeOf<InformedConsentResponse>();
   });
 
-  it("should get data points", async () => {
-    const dataPoints = await testClient.study.dataPoints.getAll({
+  it("should get informed consent", async () => {
+    const informedConsent = await testClient.study.informedConsent.get({
       studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+      informedConsentId: newInformedConsent.id,
     });
 
-    expect(dataPoints).toBeDefined();
-    expectTypeOf(dataPoints).toMatchTypeOf<DataPointResponse[]>();
+    expect(informedConsent).toBeDefined();
+    expect(informedConsent.id).toEqual(newInformedConsent.id);
+    expectTypeOf(informedConsent).toMatchTypeOf<InformedConsentResponse>();
   });
 
-  it("should get a data point", async () => {
-    const dataPoint = await testClient.study.dataPoints.getById({
-      dataPointId: newDataPoint.id,
+  it("should get all informed consents", async () => {
+    const informedConsents = await testClient.study.informedConsent.getAll({
       studyDeploymentId: participantGroupStatus.id.stringRepresentation,
     });
 
-    expect(dataPoint).toBeDefined();
-    expectTypeOf(dataPoint).toMatchTypeOf<DataPointResponse>();
-    expect(dataPoint.id).toEqual(newDataPoint.id);
+    expect(informedConsents).toBeDefined();
+    expect(informedConsents).toBeInstanceOf(Array);
+    expect(informedConsents).not.toHaveLength(0);
+    expectTypeOf(informedConsents).toMatchTypeOf<InformedConsentResponse[]>();
   });
 
-  it("should delete a data point", async () => {
-    await testClient.study.dataPoints.delete({
-      dataPointId: newDataPoint.id,
+  it("should delete informed consent", async () => {
+    await testClient.study.informedConsent.delete({
+      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+      informedConsentId: newInformedConsent.id,
+    });
+
+    const informedConsents = await testClient.study.informedConsent.getAll({
       studyDeploymentId: participantGroupStatus.id.stringRepresentation,
     });
 
-    const dataPoints = await testClient.study.dataPoints.getAll({
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-    });
-
-    expect(dataPoints).toBeDefined();
-    expect(dataPoints).toHaveLength(0);
+    expect(informedConsents).toBeDefined();
+    expect(informedConsents).toBeInstanceOf(Array);
+    expect(informedConsents).toHaveLength(0);
+    expectTypeOf(informedConsents).toMatchTypeOf<InformedConsentResponse[]>();
   });
 
   afterAll(async () => {

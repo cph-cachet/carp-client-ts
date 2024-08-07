@@ -1,11 +1,11 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { generateRandomEmail, setupTestClient } from "test/utils";
+import { generateRandomEmail, setupTestClient } from "@/test/utils";
 import { STUDY_PROTOCOL } from "../../consts";
 import {
   DefaultSerializer,
   EmailAccountIdentity,
   Participant,
-  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
+  StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
 } from "@/shared";

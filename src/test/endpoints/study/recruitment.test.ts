@@ -4,11 +4,11 @@ import {
   DefaultSerializer,
   Participant,
   ParticipantGroupStatus,
-  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
+  StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
 } from "@/shared";
-import { generateRandomEmail, setupTestClient } from "../../utils";
+import { generateRandomEmail, setupTestClient } from "@/test/utils";
 import { CarpTestClient } from "@/client";
 
 describe("Recruitment", () => {
