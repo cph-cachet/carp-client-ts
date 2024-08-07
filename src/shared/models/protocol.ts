@@ -1,4 +1,4 @@
-import { ProtocolsStudyProtocolSnapshot as StudyProtocolSnapshot } from "../coreTypes";
+import { StudyProtocolSnapshot } from "../coreTypes";
 
 export type StudyProtocol = {
   id: string;

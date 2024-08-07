@@ -1,22 +1,24 @@
 import {
   StudyDetails,
   StudyInvitation,
-  StudiesStudyProtocolSnapshot as StudyProtocolSnapshot,
+  StudyProtocolSnapshot,
   StudyServiceRequest,
   StudyStatus,
   UUID,
   deserialize,
+  sdk,
   serialize,
 } from "@/shared";
 import Endpoint from "../endpoint";
 
 import { CarpClient } from "@/client";
 import Researchers from "./researchers";
-import Summaries from "./summaries";
+import Exports from "./exports";
 import Recruitment from "./recruitment";
 import Deployments from "./deployments";
 import DataPoints from "./datapoints";
 import InformedConsent from "./informedConsent";
+import Collections from "./collections";
 
 /**
  * Endpoint for interacting with a particular study
@@ -26,7 +28,7 @@ class Study extends Endpoint {
 
   researchers: Researchers;
 
-  summaries: Summaries;
+  exports: Exports;
 
   recruitment: Recruitment;
 
@@ -36,15 +38,18 @@ class Study extends Endpoint {
 
   informedConsent: InformedConsent;
 
+  collections: Collections;
+
   constructor(client: CarpClient) {
     super(client);
 
     this.researchers = new Researchers(client);
-    this.summaries = new Summaries(client);
+    this.exports = new Exports(client);
     this.recruitment = new Recruitment(client);
     this.deployments = new Deployments(client);
     this.dataPoints = new DataPoints(client);
     this.informedConsent = new InformedConsent(client);
+    this.collections = new Collections(client);
   }
 
   /**
@@ -201,7 +206,7 @@ class Study extends Endpoint {
   }) {
     const setProtocol = new StudyServiceRequest.SetProtocol(
       new UUID(studyId),
-      protocol,
+      protocol as unknown as sdk.cachet.carp.protocols.application.StudyProtocolSnapshot,
     );
     const request = serialize({
       request: setProtocol,

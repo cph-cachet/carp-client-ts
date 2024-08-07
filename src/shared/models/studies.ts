@@ -41,7 +41,7 @@ export type ParticipantGroups = {
 export interface ParticipantGroup {
   participantGroupId: string;
   deploymentStatus: DeploymentStatus;
-  participants: ParticipantData[];
+  participants: ParticipantDataInput[];
 }
 
 export interface DeploymentStatus {
@@ -70,7 +70,7 @@ export interface Device {
   __type: string;
 }
 
-export interface ParticipantData {
+export interface ParticipantDataInput {
   participantId: string;
   firstName: string;
   lastName: string;

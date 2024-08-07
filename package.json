@@ -1,11 +1,11 @@
 {
-  "name": "carp-client-ts",
+  "name": "@carp-dk/client",
   "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc && tsc-alias",
+    "build": "rimraf ./dist && tsc && tsc-alias && rimraf ./dist/test && rsync -av package.json dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest --coverage",
@@ -30,6 +30,7 @@
     "webdriverio": "^8.39.0"
   },
   "dependencies": {
-    "axios": "^1.6.8"
+    "axios": "^1.6.8",
+    "jwt-decode": "^4.0.0"
   }
 }

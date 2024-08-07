@@ -1,6 +1,18 @@
-import { AxiosRequestConfig } from "axios";
+import { jwtDecode } from "jwt-decode";
+import { User } from "./models";
+import { UUID } from "./coreTypes";
 
-const sanitizeRequestConfig = (config: AxiosRequestConfig) => {
+interface UserJwtTokenDecoded {
+  sub: string;
+  name: string;
+  given_name: string;
+  family_name: string;
+  email: string;
+  email_verified: boolean;
+  realm_access: { roles: string[] };
+}
+
+export const sanitizeRequestConfig = (config: any) => {
   const sanitizedConfig = {
     headers: config.headers,
     method: config.method,
@@ -32,4 +44,27 @@ const sanitizeRequestConfig = (config: AxiosRequestConfig) => {
   return sanitizedConfig;
 };
 
-export default sanitizeRequestConfig;
+export const parseUser = (accessToken: string): User => {
+  const userDecoded: UserJwtTokenDecoded = jwtDecode(accessToken);
+  let role;
+  if (userDecoded.realm_access.roles.includes("system_admin")) {
+    role = "SYSTEM_ADMIN";
+  } else if (userDecoded.realm_access.roles.includes("carp_admin")) {
+    role = "CARP_ADMIN";
+  } else if (userDecoded.realm_access.roles.includes("researcher")) {
+    role = "RESEARCHER";
+  } else if (userDecoded.realm_access.roles.includes("participant")) {
+    role = "PARTICIPANT";
+  } else {
+    role = "UNKNOWN";
+  }
+  return {
+    id: userDecoded.sub,
+    email: userDecoded.email,
+    firstName: userDecoded.given_name,
+    lastName: userDecoded.family_name,
+    isActivated: userDecoded.email_verified,
+    accountId: new UUID(userDecoded.sub),
+    role: [role],
+  };
+};

@@ -5,7 +5,7 @@ import {
   ListSerializer,
   ProtocolServiceRequest,
   ProtocolVersion,
-  ProtocolsStudyProtocolSnapshot as StudyProtocolSnapshot,
+  StudyProtocolSnapshot,
   UUID,
   deserialize,
   getSerializer,
@@ -83,12 +83,12 @@ class Protocols extends Endpoint {
    * @param versionTag The version of the protocol
    */
 
-  async getByVersion({
+  async getBy({
     protocolId,
     versionTag,
   }: {
     protocolId: string;
-    versionTag: string;
+    versionTag?: string | null;
   }) {
     const getProtocol = new ProtocolServiceRequest.GetBy(
       new UUID(protocolId),
@@ -119,7 +119,7 @@ class Protocols extends Endpoint {
    */
   async getLatest({ protocolId }: { protocolId: string }) {
     const response = await this.actions.get<LatestProtocol>(
-      `${this.coreEndpoint}/${protocolId}/latest`,
+      `${this.wsEndpoint}/${protocolId}/latest`,
     );
 
     const studyProtocolSnapshot = deserialize({

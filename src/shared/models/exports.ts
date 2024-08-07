@@ -1,16 +1,18 @@
-export interface Summary {
+export interface Export {
   id: string;
   created_at: Date;
   file_name: string;
   status: string;
+  study_id: string;
+  type: string;
 }
 
-export interface SummaryToDownload {
+export interface ExportToDownload {
   filename: string;
-  data: SummaryData;
+  data: ExportData;
 }
 
-export interface SummaryData {
+export interface ExportData {
   id: string;
   created_at: Date;
   status: string;

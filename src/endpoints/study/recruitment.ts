@@ -95,10 +95,12 @@ class Recruitment extends Endpoint {
       serializer: RecruitmentServiceRequest.Serializer,
     });
 
-    await this.actions.post(
+    const response = await this.actions.post<ParticipantGroupStatus[]>(
       this.coreEndpoint,
       serializedGetParticipantGroupStatus,
     );
+
+    return response.data;
   }
 
   /**

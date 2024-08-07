@@ -18,7 +18,8 @@
         "./src/*"
       ]
     },
-    "sourceMap": true
+    "sourceMap": true,
+    "declaration": true,
   },
   "include": [
     "src/**/*",

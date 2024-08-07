@@ -7,6 +7,7 @@ import {
   NamespacedId,
   Nullable,
   ParticipantData,
+  ParticipantDataInput,
   ParticipationServiceRequest,
   Set,
   SetSerializer,
@@ -102,7 +103,7 @@ class Participation extends Endpoint {
       data: response.data,
       serializer: ListSerializer(getSerializer(ParticipantData)),
       shouldGetSerializer: false,
-    }) as unknown as ArrayList<ParticipantData>;
+    }) as unknown as ArrayList<ParticipantDataInput>;
 
     return data.toArray();
   }
