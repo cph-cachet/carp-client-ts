@@ -1,6 +1,7 @@
 import {
   AnonymousLinksRequest,
   AnonymousLinksResponse,
+  InactiveDeployment,
   ParticipantAccount,
   ParticipantGroups,
   ParticipantWithRoles,
@@ -284,6 +285,24 @@ class Recruitment extends Endpoint {
     }) as ArrayList<Participant>;
 
     return decodedResponse.toArray();
+  }
+
+  /**
+   *
+   * @param studyId The ID of the study
+   * @param lastUpdate Filter deployments that have been last updated longer than this in hours
+   */
+  async getInactiveDeployments({
+    studyId,
+    lastUpdate,
+  }: {
+    studyId: string;
+    lastUpdate: number;
+  }) {
+    const response = await this.actions.get<InactiveDeployment[]>(
+      `${this.wsEndpoint}/${studyId}/inactive_deployments?last_update=${lastUpdate}`,
+    );
+    return response.data;
   }
 }
 

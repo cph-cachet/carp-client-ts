@@ -112,6 +112,17 @@ describe("Recruitment", () => {
     );
   });
 
+  it("should be able to get inactive deployments", async () => {
+    const inactiveParticipantGroups =
+      await testClient.study.recruitment.getInactiveDeployments({
+        studyId: study.studyId.stringRepresentation,
+        lastUpdate: 2,
+      });
+
+    expect(inactiveParticipantGroups).toBeDefined();
+    expect(inactiveParticipantGroups).toBeInstanceOf(Array);
+  });
+
   afterAll(async () => {
     if (study) {
       await testClient.study.delete({
