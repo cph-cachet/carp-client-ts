@@ -1,8 +1,8 @@
 {
   "name": "@carp-dk/client",
   "type": "module",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "TypeScript API client for the CARP Web Services (CAWS).",
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc && tsc-alias && rimraf ./dist/test && rsync -av package.json dist",
@@ -11,9 +11,24 @@
     "test": "vitest --coverage",
     "postinstall": "rsync -av --progress non_npm_dependencies/. node_modules"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "CARP",
+    "CACHET",
+    "CAWS",
+    "API"
+  ],
+  "author": "Copenhagen Research Platform (CARP) <https://carp.dk>",
+  "contributors": [
+    "Lorant Gulyas <> <https://github.com/lorantgulyas>",
+    "Ossi Kallunki <> <https://github.com/ossi0004>",
+    "Bence Burom <> <https://github.com/benceburom>",
+    "Alex Olah <> <https://github.com/xelahalo>",
+    "Klaudia Toth <> <https://github.com/klaudia-toth-dev>",
+    "Kacper Gasior <> <https://github.com/Gasiek>",
+    "Aamir Farooq <> <https://github.com/SlimShadyIAm>",
+    "Dániel Jakab <> <https://github.com/jakdan99>"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "@carp-dk/eslint-config": "^1.1.0",
     "@js-joda/core": "^5.6.2",

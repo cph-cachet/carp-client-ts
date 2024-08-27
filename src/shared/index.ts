@@ -1,6 +1,6 @@
 import CarpServiceError from "./carpServiceError";
 import { sanitizeRequestConfig, parseUser } from "./utils";
 
-export * from "./models"
+export * from "./models";
 export * from "./coreTypes";
-export { CarpServiceError, sanitizeRequestConfig, parseUser};
+export { CarpServiceError, sanitizeRequestConfig, parseUser };
