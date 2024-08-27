@@ -24,6 +24,7 @@ import {
   DataResponse,
   Export,
   HttpResult,
+  InactiveDeployment,
   LatestProtocol,
   ParticipantAccount,
   ParticipantGroups,
@@ -2115,5 +2116,19 @@ export default class CarpInstance {
       userDecoded.sub,
       [role]
     );
+  };
+
+  getInactiveDeployments = async (
+    studyId: string,
+    lastUpdate: number,
+    config: AxiosRequestConfig
+  ): Promise<InactiveDeployment[]> => {
+    try {
+      return await Promise.resolve( (await this.instance.get(`/api/studies/${studyId}/inactive_deployments?last_update=${lastUpdate}`, config)).data as InactiveDeployment[]);
+    } catch (error) {
+      return Promise.reject(
+        unwrapError(error, 'Getting inactive deployments failed').value
+      );
+    }
   };
 }
