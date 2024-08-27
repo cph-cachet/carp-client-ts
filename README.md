@@ -7,8 +7,7 @@ Carp Client is a libary written in Typescript, wrapper for Copenhagend Research 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Scripts](#scripts)
-- [Contributing](#contributing)
-- [License](#license)
+- [Development](#development)
 
 ## Installation
 
