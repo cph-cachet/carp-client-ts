@@ -1,47 +1,62 @@
-# Node Typescript ESM
+# @carp-dk/client
 
-Minimalistic project template for a Node.js & TypeScript apps with native ESM
+Carp Client is a libary written in Typescript, wrapper for Copenhagend Research Platform (CARP) endpoints. The purpuse is to reuse shared code in Typescript frontend applications.
 
-## Features
+## Table of Contents
 
-- 💎 Node.js 18+
-- 🛠️ TypeScript 5.3
-- ⚡️ [tsx: Node.js enhanced to run TypeScript & ESM files](https://github.com/privatenumber/tsx)
-- 📁 [tsc-alias: Import path alias using `@/` prefix](https://github.com/justkey007/tsc-alias) 
-- 🔍 ESLint — To find and fix problems in your code
-- 📝 Prettier — Format your code consistently
-- 🌍 Express.js
+- [Installation](#installation)
+- [Usage](#usage)
+- [Scripts](#scripts)
+- [Contributing](#contributing)
+- [License](#license)
 
+## Installation
 
-## Quick Start
-
-### 1. Clone repo
-
-clone repo without commit history
-
-```bash
-git clone --depth=1 https://github.com/ibnumusyaffa/node-typescript-esm-starter my-project-name
-```
-
-### 2. Install dependencies
+To install the dependencies, run:
 
 ```bash
 npm install
 ```
 
-### 3. Run the development server
+## Usage
+
+To start using the project, you can run the following commands:
 
 ```bash
-npm run dev
+# Build the project
+npm run build
+
+# Lint the project
+npm run lint
+
+# Fix linting issues
+npm run lint:fix
+
+# Run tests with coverage
+npm run test
 ```
 
+## Scripts
 
-## Available scripts
+- `build`: Cleans the `dist` directory, compiles TypeScript, resolves module paths, removes test files from `dist`, and syncs `package.json` to `dist`.
+- `lint`: Runs ESLint on the project.
+- `lint:fix`: Runs ESLint with the `--fix` option to automatically fix issues.
+- `test`: Runs tests using Vitest with coverage.
+- `postinstall`: Syncs non-NPM dependencies to `node_modules`.
 
-- `npm run dev` — Starts the application in development mode at.
-- `npm run build` — Compile the application.
-- `npm start` — Starts the application in production mode.
-- `npm run lint` — Check code using ESLint.
-- `npm run lint:fix` — Fix autofixable ESLint problem.
-- `npm run format:all` — Format code using Prettier for all files.
-- `npm run format:check` — Check code format using prettier.
+## Development
+
+For development `.env` file has to be created in the root folder.
+
+```
+VITE_API_BASE_URL= <Base URL of the backend>
+VITE_AUTH_BASE_URL= <URL of keycloak>
+VITE_AUTH_REALM= <Keycloak realm>
+VITE_AUTH_CLIENT_ID= <Keycloak clientID>
+VITE_AUTH_CLIENT_SECRET= <Keycloack client secret>
+VITE_RESEARCHER_EMAIL= <Test researcher email from keycloak>
+VITE_RESEARCHER_PASSWORD= <Test researcher's password>
+VITE_PARTICIPANT_EMAIL= <Test participant email>
+VITE_PARTICIPANT_USERNAME= <Test participant username>
+VITE_ENV= <"DEV" || "PROD">
+```
