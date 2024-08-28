@@ -5,7 +5,7 @@
   "description": "TypeScript API client for the CARP Web Services (CAWS).",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc && tsc-alias && rimraf ./dist/test && rsync -av package.json dist",
+    "build": "rimraf ./dist && tsc && tsc-alias && rimraf ./dist/test && rsync -av package.json dist && npx node-jq 'del(.scripts.postinstall)' package.json > dist/package.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest --coverage",
@@ -36,6 +36,7 @@
     "@vitest/browser": "^1.6.0",
     "@vitest/coverage-v8": "^1.6.0",
     "dotenv": "^16.4.5",
+    "node-jq": "^6.0.1",
     "rimraf": "^5.0.5",
     "tsc-alias": "^1.8.8",
     "tsx": "^4.7.0",
