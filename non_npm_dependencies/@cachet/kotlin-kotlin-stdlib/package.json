@@ -1,6 +1,5 @@
 {
   "name": "@cachet/kotlin-kotlin-stdlib",
-  "type": "module",
   "main": "index.js",
   "version":  "1.2.1"
 }
