@@ -1,3 +1,7 @@
+import carpCommon from '@cachet/carp-common';
+import cdk = carpCommon.dk;
+import UUID = cdk.cachet.carp.common.application.UUID;
+
 export interface ParticipantGroups {
   groups: ParticipantGroup[];
   groupStatuses: any[];
@@ -50,4 +54,13 @@ export interface ParticipantStatus {
     roleNames: string[];
   };
   assignedPrimaryDeviceRoleNames: string[];
+}
+
+export interface InactiveDeployment {
+  deploymentId: UUID;
+  dateOfLastDataUpload: {
+    epocSeconds: number;
+    'value$kotlinx_datetime': Date;
+    nanosecondsOfSecond: number;
+  };
 }
