@@ -58,9 +58,5 @@ export interface ParticipantStatus {
 
 export interface InactiveDeployment {
   deploymentId: UUID;
-  dateOfLastDataUpload: {
-    epocSeconds: number;
-    'value$kotlinx_datetime': Date;
-    nanosecondsOfSecond: number;
-  };
+  dateOfLastDataUpload: Date;
 }
