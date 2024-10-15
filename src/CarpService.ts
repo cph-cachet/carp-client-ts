@@ -1160,11 +1160,11 @@ export default class CarpInstance {
     try {
       const request = {
         "__type": "dk.cachet.carp.deployments.infrastructure.ParticipationServiceRequest.SetParticipantData",
-        version: "1.0",
+        apiVersion: "1.0",
         studyDeploymentId: studyDeploymentId,
         data: data,
         inputByParticipantRole: inputRoleName,
-      }.toString();
+      };
       const response = await this.instance.post(
         '/api/participation-service',
         request,
