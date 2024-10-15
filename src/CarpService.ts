@@ -1153,7 +1153,7 @@ export default class CarpInstance {
 
   setParticipantData_CORE = async (
     studyDeploymentId: string,
-    data: InputDataType[],
+    data: { [key: string]: InputDataType },
     inputRoleName: string | null,
     config: AxiosRequestConfig
   ): Promise<ParticipantData> => {
