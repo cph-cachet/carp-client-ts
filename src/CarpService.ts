@@ -1174,6 +1174,45 @@ export default class CarpInstance {
     }
   };
 
+  SetParticipantData_CORE = async (
+    studyDeploymentId: string,
+    data: HashMap<NamespacedId, Nullable<Data>>,
+    inputRoleName: string | null,
+    config: AxiosRequestConfig
+  ): Promise<ParticipantData> => {
+    try {
+      const setParticipantData =
+        new ParticipationServiceRequest.SetParticipantData(
+          new UUID(studyDeploymentId),
+          data,
+          inputRoleName
+        );
+      const json: Json = DefaultSerializer;
+      const serializer = ParticipationServiceRequest.Serializer;
+      const serializedRequest = json.encodeToString(
+        serializer,
+        setParticipantData
+      );
+      const response = await this.instance.post(
+        '/api/participation-service',
+        serializedRequest,
+        config
+      );
+      const serializedParticipantData = JSON.stringify(response.data);
+      const participantDataSerializer = getSerializer(ParticipantData);
+
+      const participantData: ParticipantData = json.decodeFromString(
+        participantDataSerializer,
+        serializedParticipantData
+      );
+      return await Promise.resolve(participantData);
+    } catch (error) {
+      return Promise.reject(
+        unwrapError(error, 'setting participant data failed').value
+      );
+    }
+  };
+
   getStudiesOverview_CORE = async (
     studyOwner: string,
     config: AxiosRequestConfig
