@@ -84,6 +84,7 @@ import getSerializer = kotlinx.serialization.getSerializer;
 import { Jwt } from './models/Jwt';
 import { User, UserJwtTokenDecoded } from './models/User';
 import Instant = kxd.datetime.Instant;
+import { InputDataType } from './models/InputDataTypes';
 
 const { Roles } = cdk.cachet.carp.common.application.users.AssignedTo;
 const { EmailAddress } = cdk.cachet.carp.common.application;
@@ -593,37 +594,46 @@ export default class CarpInstance {
         new ParticipationServiceRequest.GetActiveParticipationInvitations(
           new UUID(userId)
         );
+        console.log("a",getActiveParticipationInvitations);
       // Serialize it
       const configModify: AxiosRequestConfig = {
         headers: config.headers as { [key: string]: string },
         transformResponse: [],
       };
+      console.log("b",configModify);
       const json: Json = DefaultSerializer;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const serializer = ParticipationServiceRequest.Serializer;
+      console.log("c",serializer);
       const serializedRequest = json.encodeToString(
         serializer,
         getActiveParticipationInvitations
       );
+      console.log("d",serializedRequest);
       const response = await this.instance.post(
         '/api/participation-service',
         serializedRequest,
         configModify
       );
+      console.log("e",response);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const reponseSerializer = SetSerializer(
         getSerializer(ActiveParticipationInvitation)
       );
+      console.log("f",reponseSerializer);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const decodedReponse: any = json.decodeFromString(
         reponseSerializer,
         response.data as string
       );
+      console.log("g",decodedReponse);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       const decodedResponseArray: ActiveParticipationInvitation[] =
         decodedReponse.toArray();
+        console.log("h",decodedResponseArray);
       return await Promise.resolve(decodedResponseArray);
     } catch (error) {
+      console.log("i",error);
       return Promise.reject(
         unwrapError(error, 'Retrieving invitations failed').value
       );
@@ -868,39 +878,6 @@ export default class CarpInstance {
     } catch (error) {
       return Promise.reject(
         unwrapError(error, 'getting participant datalist failed').value
-      );
-    }
-  };
-
-  setParticipantData_CORE = async (
-    studyDeploymentId: string,
-    data: HashMap<NamespacedId, Nullable<Data>>,
-    inputType: string | null,
-    config: AxiosRequestConfig
-  ): Promise<ParticipantData> => {
-    try {
-      const participantDataRequest =
-        new ParticipationServiceRequest.SetParticipantData(
-          new UUID(studyDeploymentId),
-          data,
-          inputType
-        );
-      const json: Json = DefaultSerializer;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const serializer = ParticipationServiceRequest.Serializer;
-      const serializedRequest = json.encodeToString(
-        serializer,
-        participantDataRequest
-      );
-      const response = await this.instance.post(
-        '/api/participation-service',
-        serializedRequest,
-        config
-      );
-      return await Promise.resolve(response.data as ParticipantData);
-    } catch (error) {
-      return Promise.reject(
-        unwrapError(error, 'setting participant data failed').value
       );
     }
   };
@@ -1174,31 +1151,27 @@ export default class CarpInstance {
     }
   };
 
-  SetParticipantData_CORE = async (
+  setParticipantData_CORE = async (
     studyDeploymentId: string,
-    data: HashMap<NamespacedId, Nullable<Data>>,
+    data: InputDataType[],
     inputRoleName: string | null,
     config: AxiosRequestConfig
   ): Promise<ParticipantData> => {
     try {
-      const setParticipantData =
-        new ParticipationServiceRequest.SetParticipantData(
-          new UUID(studyDeploymentId),
-          data,
-          inputRoleName
-        );
-      const json: Json = DefaultSerializer;
-      const serializer = ParticipationServiceRequest.Serializer;
-      const serializedRequest = json.encodeToString(
-        serializer,
-        setParticipantData
-      );
+      const request = {
+        "__type": "dk.cachet.carp.deployments.infrastructure.ParticipationServiceRequest.SetParticipantData",
+        version: "1.0",
+        studyDeploymentId: studyDeploymentId,
+        data: data,
+        inputByParticipantRole: inputRoleName,
+      }.toString();
       const response = await this.instance.post(
         '/api/participation-service',
-        serializedRequest,
+        request,
         config
       );
       const serializedParticipantData = JSON.stringify(response.data);
+      const json: Json = DefaultSerializer;
       const participantDataSerializer = getSerializer(ParticipantData);
 
       const participantData: ParticipantData = json.decodeFromString(

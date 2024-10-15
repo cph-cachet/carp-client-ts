@@ -18,7 +18,7 @@ export interface Address extends InputDataType {
 export interface Diagnosis extends InputDataType {
   __type: 'dk.carp.webservices.input.diagnosis';
   effectiveDate?: Instant | null;
-  diagnosi?: string | null;
+  diagnosis?: string | null;
   icd11Code: string;
   conclusion?: string | null;
 }
@@ -43,7 +43,7 @@ export interface InformedConsent extends InputDataType {
 export interface PhoneNumber extends InputDataType {
   __type: 'dk.carp.webservices.input.phone_number';
   countryCode: string;
-  icoCode?: string | null;
+  isoCode?: string | null;
   number: string;
 }
 
