@@ -18,7 +18,7 @@ importers:
         specifier: ^6.9.13
         version: 6.9.15
       axios:
-        specifier: ^1.6.8
+        specifier: 1.6.8
         version: 1.6.8
       axios-mock-adapter:
         specifier: ^1.22.0

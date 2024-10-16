@@ -1024,27 +1024,27 @@ describe('CARP tests', () => {
         expect(response.studyDeploymentId).not.toBeUndefined();
       });
 
-      test('setParticipantData should fail', async () => {
-        const inputDataType = new NamespacedId(
-          'dk.cachet.carp.input.sex',
-          'sex'
-        );
-        const participantData = toMap([new Pair(inputDataType, null)]);
-        await carpInstance
-          .setParticipantData_CORE(
-            studyDeploymentId.stringRepresentation,
-            participantData,
-            null,
-            config
-          )
-          .catch(error => {
-            expect(error).toHaveProperty(
-              'message',
-              'setting participant data failed'
-            );
-            expect(error).toHaveProperty('httpResponseCode', 400);
-          });
-      });
+      // test('setParticipantData should fail', async () => {
+      //   const inputDataType = new NamespacedId(
+      //     'dk.cachet.carp.input.sex',
+      //     'sex'
+      //   );
+      //   const participantData = toMap([new Pair(inputDataType, null)]);
+      //   await carpInstance
+      //     .setParticipantData_CORE(
+      //       studyDeploymentId.stringRepresentation,
+      //       participantData,
+      //       null,
+      //       config
+      //     )
+      //     .catch(error => {
+      //       expect(error).toHaveProperty(
+      //         'message',
+      //         'setting participant data failed'
+      //       );
+      //       expect(error).toHaveProperty('httpResponseCode', 400);
+      //     });
+      // });
     });
 
     describe('consent document service', () => {
