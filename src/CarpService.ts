@@ -84,6 +84,7 @@ import getSerializer = kotlinx.serialization.getSerializer;
 import { Jwt } from './models/Jwt';
 import { User, UserJwtTokenDecoded } from './models/User';
 import Instant = kxd.datetime.Instant;
+import { InputDataType } from './models/InputDataTypes';
 
 const { Roles } = cdk.cachet.carp.common.application.users.AssignedTo;
 const { EmailAddress } = cdk.cachet.carp.common.application;
@@ -593,7 +594,7 @@ export default class CarpInstance {
         new ParticipationServiceRequest.GetActiveParticipationInvitations(
           new UUID(userId)
         );
-      // Serialize it
+        // Serialize it
       const configModify: AxiosRequestConfig = {
         headers: config.headers as { [key: string]: string },
         transformResponse: [],
@@ -872,39 +873,6 @@ export default class CarpInstance {
     }
   };
 
-  setParticipantData_CORE = async (
-    studyDeploymentId: string,
-    data: HashMap<NamespacedId, Nullable<Data>>,
-    inputType: string | null,
-    config: AxiosRequestConfig
-  ): Promise<ParticipantData> => {
-    try {
-      const participantDataRequest =
-        new ParticipationServiceRequest.SetParticipantData(
-          new UUID(studyDeploymentId),
-          data,
-          inputType
-        );
-      const json: Json = DefaultSerializer;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const serializer = ParticipationServiceRequest.Serializer;
-      const serializedRequest = json.encodeToString(
-        serializer,
-        participantDataRequest
-      );
-      const response = await this.instance.post(
-        '/api/participation-service',
-        serializedRequest,
-        config
-      );
-      return await Promise.resolve(response.data as ParticipantData);
-    } catch (error) {
-      return Promise.reject(
-        unwrapError(error, 'setting participant data failed').value
-      );
-    }
-  };
-
   getDeploymentStatistics = async (
     deploymentIds: string[],
     config: AxiosRequestConfig
@@ -1170,6 +1138,41 @@ export default class CarpInstance {
     } catch (error) {
       return Promise.reject(
         unwrapError(error, 'getting deviceDeployment failed').value
+      );
+    }
+  };
+
+  setParticipantData_CORE = async (
+    studyDeploymentId: string,
+    data: { [key: string]: InputDataType },
+    inputRoleName: string | null,
+    config: AxiosRequestConfig
+  ): Promise<ParticipantData> => {
+    try {
+      const request = {
+        "__type": "dk.cachet.carp.deployments.infrastructure.ParticipationServiceRequest.SetParticipantData",
+        apiVersion: "1.0",
+        studyDeploymentId: studyDeploymentId,
+        data: data,
+        inputByParticipantRole: inputRoleName,
+      };
+      const response = await this.instance.post(
+        '/api/participation-service',
+        request,
+        config
+      );
+      const serializedParticipantData = JSON.stringify(response.data);
+      const json: Json = DefaultSerializer;
+      const participantDataSerializer = getSerializer(ParticipantData);
+
+      const participantData: ParticipantData = json.decodeFromString(
+        participantDataSerializer,
+        serializedParticipantData
+      );
+      return await Promise.resolve(participantData);
+    } catch (error) {
+      return Promise.reject(
+        unwrapError(error, 'setting participant data failed').value
       );
     }
   };
