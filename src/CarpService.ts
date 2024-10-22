@@ -594,46 +594,37 @@ export default class CarpInstance {
         new ParticipationServiceRequest.GetActiveParticipationInvitations(
           new UUID(userId)
         );
-        console.log("a",getActiveParticipationInvitations);
-      // Serialize it
+        // Serialize it
       const configModify: AxiosRequestConfig = {
         headers: config.headers as { [key: string]: string },
         transformResponse: [],
       };
-      console.log("b",configModify);
       const json: Json = DefaultSerializer;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const serializer = ParticipationServiceRequest.Serializer;
-      console.log("c",serializer);
       const serializedRequest = json.encodeToString(
         serializer,
         getActiveParticipationInvitations
       );
-      console.log("d",serializedRequest);
       const response = await this.instance.post(
         '/api/participation-service',
         serializedRequest,
         configModify
       );
-      console.log("e",response);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const reponseSerializer = SetSerializer(
         getSerializer(ActiveParticipationInvitation)
       );
-      console.log("f",reponseSerializer);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const decodedReponse: any = json.decodeFromString(
         reponseSerializer,
         response.data as string
       );
-      console.log("g",decodedReponse);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       const decodedResponseArray: ActiveParticipationInvitation[] =
         decodedReponse.toArray();
-        console.log("h",decodedResponseArray);
       return await Promise.resolve(decodedResponseArray);
     } catch (error) {
-      console.log("i",error);
       return Promise.reject(
         unwrapError(error, 'Retrieving invitations failed').value
       );
