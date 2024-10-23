@@ -56,6 +56,7 @@ import Data = dk.cachet.carp.common.application.data.Data;
 import Sex = dk.cachet.carp.common.application.data.input.Sex;
 import CarpInputDataTypes = dk.cachet.carp.common.application.data.input.CarpInputDataTypes;
 import NamespacedId = dk.cachet.carp.common.application.NamespacedId;
+import { GenericEmailRequest } from "../models/Email";
 
 require('dotenv').config();
 
@@ -1708,4 +1709,18 @@ describe('CARP tests', () => {
   //     expect(error).toHaveProperty('httpResponseCode', 400);
   //   });
   // });
+
+  test('postEmailSendGeneric should succeed', async () => {
+    expect(async () => {
+      await carpInstance.postEmailSendGeneric(
+        {
+          recipient: 's240366@dtu.dk',
+          subject: 'email from carp',
+          message: 'some message',
+          cc: [],
+        } as GenericEmailRequest,
+        config
+      );
+    }).not.toThrow();
+  });
 });
