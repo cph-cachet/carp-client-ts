@@ -85,6 +85,7 @@ import { Jwt } from './models/Jwt';
 import { User, UserJwtTokenDecoded } from './models/User';
 import Instant = kxd.datetime.Instant;
 import { InputDataType } from './models/InputDataTypes';
+import { GenericEmailRequest } from "./models/Email";
 
 const { Roles } = cdk.cachet.carp.common.application.users.AssignedTo;
 const { EmailAddress } = cdk.cachet.carp.common.application;
@@ -2131,6 +2132,23 @@ export default class CarpInstance {
     } catch (error) {
       return Promise.reject(
         unwrapError(error, 'Getting inactive deployments failed').value
+      );
+    }
+  };
+
+  postEmailSendGeneric = async (
+    genericEmailRequest: GenericEmailRequest,
+    config: AxiosRequestConfig
+  ): Promise<void> => {
+    try {
+      await this.instance.post(
+        '/api/email/send-generic',
+        genericEmailRequest,
+        config
+      );
+    } catch (error) {
+      return Promise.reject(
+        unwrapError(error, 'Sending generic email failed').value
       );
     }
   };
