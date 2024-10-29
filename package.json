@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/cph-cachet/carp-client-ts.git"
   },
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "TypeScript API client for the CARP Web Services (CAWS).",
   "main": "index.js",
   "scripts": {
@@ -68,7 +68,7 @@
     "@js-joda/core": "5.6.2",
     "@types/node": "^20.11.30",
     "@types/qs": "^6.9.13",
-    "axios": "^1.6.8",
+    "axios": "1.6.8",
     "axios-mock-adapter": "^1.22.0",
     "big.js": "6.2.1",
     "form-data": "^4.0.0",
