@@ -28,7 +28,7 @@ export interface MessageData {
   type: 'announcement' | 'article' | 'news';
   timestamp: string;
   title: string;
-  subTitle: string;
+  sub_title: string;
   message: string;
   url?: string;
   image?: string;
