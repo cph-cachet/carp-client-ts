@@ -2165,7 +2165,7 @@ export default class CarpInstance {
 
   createFile = async (
     studyId: string,
-    file: File,
+    file: FormData,
     config: AxiosRequestConfig,
     metadata?: string
   ): Promise<File> => {
