@@ -2211,7 +2211,7 @@ export default class CarpInstance {
       return await Promise.resolve(
         (
           await this.instance.get(
-            `/api/studies/${studyId}/files/${fileId}`,
+            `/api/studies/${studyId}/files/${fileId}/download`,
             config
           )
         ).data as File
