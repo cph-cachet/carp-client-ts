@@ -81,6 +81,7 @@ import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer;
 
 import getSerializer = kotlinx.serialization.getSerializer;
 
+import { CarpFile } from './models/CarpFile';
 import { GenericEmailRequest } from './models/Email';
 import { InputDataType } from './models/InputDataTypes';
 import { Jwt } from './models/Jwt';
@@ -2165,22 +2166,36 @@ export default class CarpInstance {
 
   createFile = async (
     studyId: string,
-    file: FormData,
-    config: AxiosRequestConfig,
-    metadata?: string
-  ): Promise<File> => {
+    formData: FormData | FormDataPackage,
+    config: AxiosRequestConfig
+  ): Promise<CarpFile> => {
     try {
+      let configModified = config;
+      if ((formData as FormDataPackage).getHeaders?.()) {
+        configModified = {
+          ...configModified,
+          headers: {
+            ...(configModified.headers as {
+              [key: string]: string;
+            }),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+            ...((formData as FormDataPackage).getHeaders() as {
+              [key: string]: string;
+            }),
+          },
+        };
+      } else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        configModified.headers!['Content-Type'] = undefined;
+      }
       return await Promise.resolve(
         (
           await this.instance.post(
             `/api/studies/${studyId}/files`,
-            {
-              metadata,
-              file,
-            },
-            config
+            formData,
+            configModified
           )
-        ).data as File
+        ).data as CarpFile
       );
     } catch (error) {
       return Promise.reject(unwrapError(error, 'Creating file failed').value);
@@ -2189,7 +2204,7 @@ export default class CarpInstance {
 
   downloadFile = async (
     studyId: string,
-    fileId: string,
+    fileId: number,
     config: AxiosRequestConfig
   ): Promise<File> => {
     try {
@@ -2211,11 +2226,11 @@ export default class CarpInstance {
   getFiles = async (
     studyId: string,
     config: AxiosRequestConfig
-  ): Promise<File[]> => {
+  ): Promise<CarpFile[]> => {
     try {
       return await Promise.resolve(
         (await this.instance.get(`/api/studies/${studyId}/files`, config))
-          .data as File[]
+          .data as CarpFile[]
       );
     } catch (error) {
       return Promise.reject(unwrapError(error, 'Getting files failed').value);
@@ -2224,9 +2239,9 @@ export default class CarpInstance {
 
   getFile = async (
     studyId: string,
-    fileId: string,
+    fileId: number,
     config: AxiosRequestConfig
-  ): Promise<File> => {
+  ): Promise<CarpFile> => {
     try {
       return await Promise.resolve(
         (
@@ -2234,7 +2249,7 @@ export default class CarpInstance {
             `/api/studies/${studyId}/files/${fileId}`,
             config
           )
-        ).data as File
+        ).data as CarpFile
       );
     } catch (error) {
       return Promise.reject(unwrapError(error, 'Getting file failed').value);
