@@ -2212,7 +2212,10 @@ export default class CarpInstance {
         (
           await this.instance.get(
             `/api/studies/${studyId}/files/${fileId}/download`,
-            config
+            {
+              ...config,
+              responseType: 'blob',
+            }
           )
         ).data as File
       );
