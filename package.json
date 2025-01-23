@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/cph-cachet/carp-client-ts.git"
   },
-  "version": "1.6.0-dev.5",
+  "version": "1.6.0",
   "description": "TypeScript API client for the CARP Web Services (CAWS).",
   "main": "index.js",
   "scripts": {
