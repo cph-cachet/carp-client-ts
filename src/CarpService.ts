@@ -81,6 +81,9 @@ import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer;
 
 import getSerializer = kotlinx.serialization.getSerializer;
 
+import { CarpFile } from './models/CarpFile';
+import { GenericEmailRequest } from './models/Email';
+import { InputDataType } from './models/InputDataTypes';
 import { Jwt } from './models/Jwt';
 import { User, UserJwtTokenDecoded } from './models/User';
 import Instant = kxd.datetime.Instant;
@@ -872,39 +875,6 @@ export default class CarpInstance {
     }
   };
 
-  setParticipantData_CORE = async (
-    studyDeploymentId: string,
-    data: HashMap<NamespacedId, Nullable<Data>>,
-    inputType: string | null,
-    config: AxiosRequestConfig
-  ): Promise<ParticipantData> => {
-    try {
-      const participantDataRequest =
-        new ParticipationServiceRequest.SetParticipantData(
-          new UUID(studyDeploymentId),
-          data,
-          inputType
-        );
-      const json: Json = DefaultSerializer;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const serializer = ParticipationServiceRequest.Serializer;
-      const serializedRequest = json.encodeToString(
-        serializer,
-        participantDataRequest
-      );
-      const response = await this.instance.post(
-        '/api/participation-service',
-        serializedRequest,
-        config
-      );
-      return await Promise.resolve(response.data as ParticipantData);
-    } catch (error) {
-      return Promise.reject(
-        unwrapError(error, 'setting participant data failed').value
-      );
-    }
-  };
-
   getDeploymentStatistics = async (
     deploymentIds: string[],
     config: AxiosRequestConfig
@@ -1170,6 +1140,42 @@ export default class CarpInstance {
     } catch (error) {
       return Promise.reject(
         unwrapError(error, 'getting deviceDeployment failed').value
+      );
+    }
+  };
+
+  setParticipantData_CORE = async (
+    studyDeploymentId: string,
+    data: { [key: string]: InputDataType },
+    inputRoleName: string | null,
+    config: AxiosRequestConfig
+  ): Promise<ParticipantData> => {
+    try {
+      const request = {
+        __type:
+          'dk.cachet.carp.deployments.infrastructure.ParticipationServiceRequest.SetParticipantData',
+        apiVersion: '1.0',
+        studyDeploymentId: studyDeploymentId,
+        data: data,
+        inputByParticipantRole: inputRoleName,
+      };
+      const response = await this.instance.post(
+        '/api/participation-service',
+        request,
+        config
+      );
+      const serializedParticipantData = JSON.stringify(response.data);
+      const json: Json = DefaultSerializer;
+      const participantDataSerializer = getSerializer(ParticipantData);
+
+      const participantData: ParticipantData = json.decodeFromString(
+        participantDataSerializer,
+        serializedParticipantData
+      );
+      return await Promise.resolve(participantData);
+    } catch (error) {
+      return Promise.reject(
+        unwrapError(error, 'setting participant data failed').value
       );
     }
   };
@@ -2124,11 +2130,132 @@ export default class CarpInstance {
     config: AxiosRequestConfig
   ): Promise<InactiveDeployment[]> => {
     try {
-      return await Promise.resolve( (await this.instance.get(`/api/studies/${studyId}/inactive_deployments?last_update=${lastUpdate}`, config)).data as InactiveDeployment[]);
+      return await Promise.resolve(
+        (
+          await this.instance.get(
+            `/api/studies/${studyId}/inactive_deployments?last_update=${lastUpdate}`,
+            config
+          )
+        ).data as InactiveDeployment[]
+      );
     } catch (error) {
       return Promise.reject(
         unwrapError(error, 'Getting inactive deployments failed').value
       );
+    }
+  };
+
+  postEmailSendGeneric = async (
+    genericEmailRequest: GenericEmailRequest,
+    config: AxiosRequestConfig
+  ): Promise<void> => {
+    try {
+      return await Promise.resolve(
+        await this.instance.post(
+          '/api/email/send-generic',
+          genericEmailRequest,
+          config
+        )
+      );
+    } catch (error) {
+      return Promise.reject(
+        unwrapError(error, 'Sending generic email failed').value
+      );
+    }
+  };
+
+  createFile = async (
+    studyId: string,
+    formData: FormData | FormDataPackage,
+    config: AxiosRequestConfig
+  ): Promise<CarpFile> => {
+    try {
+      let configModified = config;
+      if ((formData as FormDataPackage).getHeaders?.()) {
+        configModified = {
+          ...configModified,
+          headers: {
+            ...(configModified.headers as {
+              [key: string]: string;
+            }),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+            ...((formData as FormDataPackage).getHeaders() as {
+              [key: string]: string;
+            }),
+          },
+        };
+      } else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        configModified.headers!['Content-Type'] = undefined;
+      }
+      return await Promise.resolve(
+        (
+          await this.instance.post(
+            `/api/studies/${studyId}/files`,
+            formData,
+            configModified
+          )
+        ).data as CarpFile
+      );
+    } catch (error) {
+      return Promise.reject(unwrapError(error, 'Creating file failed').value);
+    }
+  };
+
+  downloadFile = async (
+    studyId: string,
+    fileId: number,
+    config: AxiosRequestConfig
+  ): Promise<File> => {
+    try {
+      return await Promise.resolve(
+        (
+          await this.instance.get(
+            `/api/studies/${studyId}/files/${fileId}/download`,
+            {
+              ...config,
+              responseType: 'blob',
+            }
+          )
+        ).data as File
+      );
+    } catch (error) {
+      return Promise.reject(
+        unwrapError(error, 'Downloading file failed').value
+      );
+    }
+  };
+
+  getFiles = async (
+    studyId: string,
+    config: AxiosRequestConfig
+  ): Promise<CarpFile[]> => {
+    try {
+      return await Promise.resolve(
+        (await this.instance.get(`/api/studies/${studyId}/files`, config))
+          .data as CarpFile[]
+      );
+    } catch (error) {
+      return Promise.reject(unwrapError(error, 'Getting files failed').value);
+    }
+  };
+
+  getFile = async (
+    studyId: string,
+    fileId: number,
+    config: AxiosRequestConfig
+  ): Promise<CarpFile> => {
+    try {
+      return await Promise.resolve(
+        (
+          await this.instance.get(
+            `/api/studies/${studyId}/files/${fileId}`,
+            config
+          )
+        ).data as CarpFile
+      );
+    } catch (error) {
+      return Promise.reject(unwrapError(error, 'Getting file failed').value);
     }
   };
 }

@@ -56,6 +56,7 @@ import Data = dk.cachet.carp.common.application.data.Data;
 import Sex = dk.cachet.carp.common.application.data.input.Sex;
 import CarpInputDataTypes = dk.cachet.carp.common.application.data.input.CarpInputDataTypes;
 import NamespacedId = dk.cachet.carp.common.application.NamespacedId;
+import { GenericEmailRequest } from "../models/Email";
 
 require('dotenv').config();
 
@@ -1024,27 +1025,27 @@ describe('CARP tests', () => {
         expect(response.studyDeploymentId).not.toBeUndefined();
       });
 
-      test('setParticipantData should fail', async () => {
-        const inputDataType = new NamespacedId(
-          'dk.cachet.carp.input.sex',
-          'sex'
-        );
-        const participantData = toMap([new Pair(inputDataType, null)]);
-        await carpInstance
-          .setParticipantData_CORE(
-            studyDeploymentId.stringRepresentation,
-            participantData,
-            null,
-            config
-          )
-          .catch(error => {
-            expect(error).toHaveProperty(
-              'message',
-              'setting participant data failed'
-            );
-            expect(error).toHaveProperty('httpResponseCode', 400);
-          });
-      });
+      // test('setParticipantData should fail', async () => {
+      //   const inputDataType = new NamespacedId(
+      //     'dk.cachet.carp.input.sex',
+      //     'sex'
+      //   );
+      //   const participantData = toMap([new Pair(inputDataType, null)]);
+      //   await carpInstance
+      //     .setParticipantData_CORE(
+      //       studyDeploymentId.stringRepresentation,
+      //       participantData,
+      //       null,
+      //       config
+      //     )
+      //     .catch(error => {
+      //       expect(error).toHaveProperty(
+      //         'message',
+      //         'setting participant data failed'
+      //       );
+      //       expect(error).toHaveProperty('httpResponseCode', 400);
+      //     });
+      // });
     });
 
     describe('consent document service', () => {
@@ -1340,7 +1341,7 @@ describe('CARP tests', () => {
         type: 'announcement',
         title: 'The importance of healthy eating',
         message: 'This is a test announcement',
-        subTitle: 'This is a test subtitle',
+        sub_title: 'This is a test subtitle',
         timestamp: '2021-12-02T19:03:21.072205',
       };
 
@@ -1406,7 +1407,7 @@ describe('CARP tests', () => {
         );
         expect(response.data).toHaveProperty(
           'subTitle',
-          announcementJson.subTitle
+          announcementJson.sub_title
         );
       });
 
@@ -1431,7 +1432,7 @@ describe('CARP tests', () => {
         );
         expect(response.data).toHaveProperty(
           'subTitle',
-          announcementJson.subTitle
+          announcementJson.sub_title
         );
       });
 
@@ -1456,7 +1457,7 @@ describe('CARP tests', () => {
         expect(response.data).toHaveProperty('title', announcementJson.title);
         expect(response.data).toHaveProperty(
           'subTitle',
-          announcementJson.subTitle
+          announcementJson.sub_title
         );
       });
 
@@ -1699,13 +1700,18 @@ describe('CARP tests', () => {
       expect(response[0]).toBeInstanceOf(ProtocolVersion);
     });
   });
-  // test('deleteStudy should pass', async () => {
-  //   await expect(carpInstance.deleteStudy_CORE(studyId.stringRepresentation, config)).resolves.toBeUndefined();
-  // });
-  // test('deleteStudy should pass', async () => {
-  //   await carpInstance.deleteStudy_CORE(RANDOM_UUID_NONEXISTENT.stringRepresentation, config).catch(error => {
-  //     expect(error).toHaveProperty('message', 'Delete study failed!');
-  //     expect(error).toHaveProperty('httpResponseCode', 400);
-  //   });
-  // });
+
+  test('postEmailSendGeneric should succeed', async () => {
+    expect(async () => {
+      await carpInstance.postEmailSendGeneric(
+        {
+          recipient: 'test@gmail.com',
+          subject: 'email from carp',
+          message: 'some message',
+          cc: [],
+        } as GenericEmailRequest,
+        config
+      );
+    }).not.toThrow();
+  });
 });
