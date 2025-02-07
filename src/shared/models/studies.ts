@@ -117,7 +117,7 @@ export interface MessageData {
   type: "announcement" | "article" | "news";
   timestamp: string;
   title: string;
-  subTitle: string;
+  sub_title: string;
   message: string;
   url?: string;
   image?: string;
@@ -127,11 +127,6 @@ export type CarpDocumentData = MessageData | ResourceData;
 
 export interface ResourceData {
   [key: string]: any;
-}
-
-export interface InformedConsentFile {
-  text: string;
-  signature: string;
 }
 
 export interface DataPoint {
@@ -201,19 +196,6 @@ export interface ParticipantAccount {
 
 export interface Statistics {
   deployments: { deploymentId: string; uploads: any }[];
-}
-
-export interface InformedConsentResponse {
-  id: number;
-  deployment_id: string;
-  created_at: string;
-  created_by: string;
-  updated_by: string;
-  updated_at: string;
-  data: {
-    text: string;
-    signature: string;
-  };
 }
 
 export interface InactiveDeployment {

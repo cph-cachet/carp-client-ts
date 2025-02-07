@@ -17,8 +17,8 @@ import Exports from "./exports";
 import Recruitment from "./recruitment";
 import Deployments from "./deployments";
 import DataPoints from "./datapoints";
-import InformedConsent from "./informedConsent";
 import Collections from "./collections";
+import Files from "./files";
 
 /**
  * Endpoint for interacting with a particular study
@@ -34,11 +34,14 @@ class Study extends Endpoint {
 
   deployments: Deployments;
 
+  /**
+   * @deprecated
+   */
   dataPoints: DataPoints;
 
-  informedConsent: InformedConsent;
-
   collections: Collections;
+
+  files: Files;
 
   constructor(client: CarpClient) {
     super(client);
@@ -48,8 +51,8 @@ class Study extends Endpoint {
     this.recruitment = new Recruitment(client);
     this.deployments = new Deployments(client);
     this.dataPoints = new DataPoints(client);
-    this.informedConsent = new InformedConsent(client);
     this.collections = new Collections(client);
+    this.files = new Files(client);
   }
 
   /**

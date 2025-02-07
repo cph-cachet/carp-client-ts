@@ -31,8 +31,10 @@
   "license": "MIT",
   "devDependencies": {
     "@carp-dk/eslint-config": "^1.1.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.19.0",
     "@js-joda/core": "^5.6.2",
-    "@types/node": "^20.10.5",
+    "@types/node": "^20.17.17",
     "@vitest/browser": "^1.6.0",
     "@vitest/coverage-v8": "^1.6.0",
     "dotenv": "^16.4.5",

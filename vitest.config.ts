@@ -20,6 +20,7 @@ export default ({ mode }) => {
     test: {
       reporters: [new CustomReporter(shouldLogOnSuccess)],
       fileParallelism: false,
+      maxConcurrency: 1,
     },
   });
 };

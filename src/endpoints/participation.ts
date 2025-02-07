@@ -112,22 +112,22 @@ class Participation extends Endpoint {
    * Set participant data
    * @param studyDeploymentId The ID of the study deployment
    * @param data The data to set
-   * @param inputType The input type
+   * @param inputRoleName The role name of the input
    */
   async setParticipantData({
     studyDeploymentId,
     data,
-    inputType,
+    inputRoleName,
   }: {
     studyDeploymentId: string;
     data: HashMap<NamespacedId, Nullable<Data>>;
-    inputType: string;
+    inputRoleName: string;
   }) {
     const participantDataRequest =
       new ParticipationServiceRequest.SetParticipantData(
         new UUID(studyDeploymentId),
         data,
-        inputType,
+        inputRoleName,
       );
     const request = serialize({
       request: participantDataRequest,

@@ -124,7 +124,7 @@ describe("Participation", () => {
       studyDeploymentId:
         foundInvitation.participation.studyDeploymentId.stringRepresentation,
       data: newData,
-      inputType: null,
+      inputRoleName: null,
     });
 
     // should be able to get the participant data again

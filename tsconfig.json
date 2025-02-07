@@ -21,10 +21,12 @@
     "declaration": true,
   },
   "include": [
-    "src/**/*",
+    "src",
     "src/env.d.ts",
     "src/test/**/*",
     "reporter.js",
+    "eslint.config.mjs",
+    ".prettierrc.js"
   ],
   "exclude": [
     "node_modules",

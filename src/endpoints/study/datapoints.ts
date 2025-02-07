@@ -1,6 +1,9 @@
 import { DataPoint, DataPointResponse } from "@/shared/models";
 import Endpoint from "../endpoint";
 
+/**
+ * @deprecated Will be replaced with the new DataStreams endpoint
+ */
 class DataPoints extends Endpoint {
   endpoint: string = "/api/deployments";
 
@@ -8,6 +11,7 @@ class DataPoints extends Endpoint {
    * Add new data point
    * @param dataPoint The data point to add
    * @param studyDeploymentId The ID of the study deployment
+   * @deprecated
    */
   async add({
     dataPoint,
@@ -27,6 +31,7 @@ class DataPoints extends Endpoint {
   /**
    * Get all data points for a study deployment
    * @param studyDeploymentId The ID of the study deployment
+   * @deprecated
    */
   async getAll({ studyDeploymentId }: { studyDeploymentId: string }) {
     const response = await this.actions.get<DataPointResponse[]>(
@@ -40,6 +45,7 @@ class DataPoints extends Endpoint {
    * Get a data point by ID
    * @param studyDeploymentId The ID of the study deployment
    * @param dataPointId The ID of the data point
+   * @deprecated
    */
   async getById({
     studyDeploymentId,
@@ -56,26 +62,10 @@ class DataPoints extends Endpoint {
   }
 
   /**
-   * Delete a data point by ID
-   * @param studyDeploymentId The ID of the study deployment
-   * @param dataPointId The ID of the data point
-   */
-  async delete({
-    studyDeploymentId,
-    dataPointId,
-  }: {
-    studyDeploymentId: string;
-    dataPointId: number;
-  }) {
-    await this.actions.delete(
-      `${this.endpoint}/${studyDeploymentId}/data-points/${dataPointId}`,
-    );
-  }
-
-  /**
    * Get all datapoints with a query
    * @param studyDeploymentId The ID of the study deployment
    * @param query The query to filter the data points
+   * @deprecated
    */
   async getAllWithQuery({
     studyDeploymentId,

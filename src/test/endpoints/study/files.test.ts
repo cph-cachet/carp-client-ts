@@ -1,29 +1,18 @@
-import {
-  describe,
-  beforeAll,
-  afterAll,
-  expect,
-  it,
-  expectTypeOf,
-} from "vitest";
-import { setupTestClient } from "@/test/utils";
-import { DATA_POINT, STUDY_PROTOCOL } from "@/test/consts";
+import { afterAll, beforeAll, describe, expect, test } from "vitest";
 import { CarpTestClient } from "@/client";
+import { setupTestClient } from "@/test/utils";
 import {
   StudyStatus,
-  DefaultSerializer,
-  ParticipantGroupStatus,
-  StudyProtocolSnapshot,
   getSerializer,
+  StudyProtocolSnapshot,
+  DefaultSerializer,
 } from "@/shared";
-import { DataPointResponse } from "@/shared/models";
+import { STUDY_PROTOCOL } from "@/test/consts";
 
-describe("Data points", () => {
+describe("Files", () => {
   let testClient: CarpTestClient;
   let researcherAccountId: string;
   let study: StudyStatus;
-  let participantGroupStatus: ParticipantGroupStatus;
-  let newDataPoint: DataPointResponse;
 
   beforeAll(async () => {
     const { client, accountId } = await setupTestClient();
@@ -76,51 +65,44 @@ describe("Data points", () => {
     });
 
     // invite the participants
-    participantGroupStatus =
-      await testClient.study.recruitment.inviteNewParticipantGroup({
-        studyId: study.studyId.stringRepresentation,
-        participantsWithRoles: participants.map((p) => ({
-          id: p.id.stringRepresentation,
-          assignedRoles: ["Participant"],
-        })),
-      });
+    await testClient.study.recruitment.inviteNewParticipantGroup({
+      studyId: study.studyId.stringRepresentation,
+      participantsWithRoles: participants.map((p) => ({
+        id: p.id.stringRepresentation,
+        assignedRoles: ["Participant"],
+      })),
+    });
 
     await new Promise((resolve) => {
       setTimeout(resolve, 10000);
     });
     await testClient.authentication.refresh();
-
-    // add a data point
-    const data = DATA_POINT;
-    newDataPoint = await testClient.study.dataPoints.add({
-      dataPoint: data,
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-    });
   }, 15000);
 
-  it("should add a data point", async () => {
-    expect(newDataPoint).toBeDefined();
-    expectTypeOf(newDataPoint).toMatchTypeOf<DataPointResponse>();
+  test("should be able to get empty list of files", async () => {
+    await expect(
+      testClient.study.files.getFiles({
+        studyId: study.studyId.stringRepresentation,
+      }),
+    ).resolves.toHaveLength(0);
   });
 
-  it("should get data points", async () => {
-    const dataPoints = await testClient.study.dataPoints.getAll({
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+  test("should upload file", async () => {
+    const formData = new FormData();
+    const metadata = {
+      file_type: "text/plain",
+      file_name: "test.txt",
+    };
+    formData.append("file", new Blob(["test file"], { type: "text/plain" }));
+    formData.append("metadata", JSON.stringify(metadata));
+
+    const response = await testClient.study.files.createFile({
+      studyId: study.studyId.stringRepresentation,
+      formData,
     });
-
-    expect(dataPoints).toBeDefined();
-    expectTypeOf(dataPoints).toMatchTypeOf<DataPointResponse[]>();
-  });
-
-  it("should get a data point", async () => {
-    const dataPoint = await testClient.study.dataPoints.getById({
-      dataPointId: newDataPoint.id,
-      studyDeploymentId: participantGroupStatus.id.stringRepresentation,
-    });
-
-    expect(dataPoint).toBeDefined();
-    expectTypeOf(dataPoint).toMatchTypeOf<DataPointResponse>();
-    expect(dataPoint.id).toEqual(newDataPoint.id);
+    expect(response).toBeDefined();
+    expect(response.id).toBeDefined();
+    expect(response.metadata).toEqual(metadata);
   });
 
   afterAll(async () => {
