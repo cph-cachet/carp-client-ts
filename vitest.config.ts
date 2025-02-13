@@ -21,6 +21,17 @@ export default ({ mode }) => {
       reporters: [new CustomReporter(shouldLogOnSuccess)],
       fileParallelism: false,
       maxConcurrency: 1,
+      coverage: {
+        reporter: ["json", "json-summary", "text", "html"],
+        reportOnFailure: true,
+        exclude: ["non_npm_dependencies", "node_modules", "src/test", "*.js", "src/index.ts"],
+        thresholds: {
+          lines: 80,
+          branches: 80,
+          functions: 80,
+          statements: 80
+        }
+      }
     },
   });
 };

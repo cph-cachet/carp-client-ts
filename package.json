@@ -8,7 +8,7 @@
     "build": "rimraf ./dist && tsc && tsc-alias && rimraf ./dist/test && rsync -av package.json dist && npx node-jq 'del(.scripts.postinstall)' package.json > dist/package.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "vitest --coverage",
+    "test": "vitest run --coverage",
     "postinstall": "rsync -av --progress non_npm_dependencies/. node_modules"
   },
   "keywords": [
