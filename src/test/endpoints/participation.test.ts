@@ -1,19 +1,17 @@
-import { Nullable, afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { Instant } from "@js-joda/core";
 import { setupTestClient } from "@/test/utils";
 import { STUDY_PROTOCOL } from "@/test/consts";
 import { CarpTestClient } from "@/client";
 import {
-  CarpInputDataTypes,
-  Data,
-  DefaultSerializer,
-  Pair,
-  Participant,
-  ParticipantData,
   Sex,
+  DefaultSerializer,
+  Participant,
   StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
-  toMap,
+  SexType,
+  InformedConsentType,
 } from "@/shared";
 
 describe("Participation", () => {
@@ -71,7 +69,7 @@ describe("Participation", () => {
 
     // HACK: sleep for a while to allow the invitation to be processed
     await new Promise((resolve) => {
-      setTimeout(resolve, 10000);
+      setTimeout(resolve, 5000);
     });
 
     await testClient.authentication.refresh();
@@ -108,23 +106,24 @@ describe("Participation", () => {
     });
 
     expect(participantData).toBeDefined();
-    expect(participantData).toBeInstanceOf(ParticipantData);
-    expect(participantData.common.get(CarpInputDataTypes.SEX)).toBe(null);
+    expect(participantData.common[SexType.type]).toBe(null);
 
-    const newData = toMap([
-      new Pair(
-        CarpInputDataTypes.SEX,
-        CarpInputDataTypes.inputToDataConverters.get(CarpInputDataTypes.SEX)(
-          Sex.Male.name,
-        ) as unknown as Nullable<Data>,
-      ),
-    ]);
+    const newData = {};
+    newData[SexType.type] = new SexType("Male");
+    newData[InformedConsentType.type] = new InformedConsentType(
+      "Test",
+      Instant.now(),
+      "Test",
+      "123",
+      "Test",
+      "Test",
+    );
 
     await testClient.participation.setParticipantData({
       studyDeploymentId:
         foundInvitation.participation.studyDeploymentId.stringRepresentation,
       data: newData,
-      inputRoleName: null,
+      inputRoleName: "Participant",
     });
 
     // should be able to get the participant data again
@@ -135,10 +134,17 @@ describe("Participation", () => {
       });
 
     expect(updatedParticipantData).toBeDefined();
-    expect(updatedParticipantData).toBeInstanceOf(ParticipantData);
-    expect(updatedParticipantData.common.get(CarpInputDataTypes.SEX)).toEqual(
-      Sex.Male,
-    );
+    expect(
+      (updatedParticipantData.common[SexType.type] as SexType).value,
+    ).toEqual(Sex.Male.name);
+
+    expect(
+      (
+        updatedParticipantData.roles.Participant[
+          InformedConsentType.type
+        ] as InformedConsentType
+      ).name,
+    ).toEqual("Test");
   });
 
   it("should be able to get participant data for list of deployments", async () => {
@@ -161,7 +167,6 @@ describe("Participation", () => {
     expect(participantData).toBeDefined();
     expect(participantData).toBeInstanceOf(Array);
     expect(participantData.length).toBeGreaterThan(0);
-    expect(participantData[0]).toBeInstanceOf(ParticipantData);
   });
 
   afterAll(async () => {

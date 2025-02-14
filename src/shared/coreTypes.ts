@@ -40,6 +40,8 @@ import DeploymentServiceRequest = ddk.cachet.carp.deployments.infrastructure.Dep
 import MasterDeviceDeployment = ddk.cachet.carp.deployments.application.PrimaryDeviceDeployment;
 import StudyDeploymentStatus = ddk.cachet.carp.deployments.application.StudyDeploymentStatus;
 import ParticipantData = ddk.cachet.carp.deployments.application.users.ParticipantData;
+import RoleData = ParticipantData.RoleData;
+
 import Set = kotlin.collections.Set;
 import ArrayList = kotlin.collections.List;
 import HashMap = kotlin.collections.Map;
@@ -139,6 +141,7 @@ export {
   StudyInvitation,
   Data,
   Roles,
+  RoleData,
   EmailAddress,
   EmailAccountIdentity,
   Username,

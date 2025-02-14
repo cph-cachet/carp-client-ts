@@ -86,7 +86,7 @@ describe("Data points", () => {
       });
 
     await new Promise((resolve) => {
-      setTimeout(resolve, 10000);
+      setTimeout(resolve, 5000);
     });
     await testClient.authentication.refresh();
 

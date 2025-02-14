@@ -1,20 +1,17 @@
 import {
   ActiveParticipationInvitation,
-  ArrayList,
-  Data,
-  HashMap,
-  ListSerializer,
-  NamespacedId,
-  Nullable,
+  ExpectedParticipantData,
+  InputDataType,
   ParticipantData,
-  ParticipantDataInput,
   ParticipationServiceRequest,
+  RoleData,
   Set,
   SetSerializer,
   UUID,
   deserialize,
   getSerializer,
   serialize,
+  toMap,
   toSet,
 } from "@/shared";
 import Endpoint from "./endpoint";
@@ -69,10 +66,20 @@ class Participation extends Endpoint {
       request,
     );
 
-    const data = deserialize({
-      data: response.data,
-      serializer: ParticipantData,
-    }) as unknown as ParticipantData;
+    const responseData = response.data as ParticipantData;
+
+    const data = new ExpectedParticipantData();
+    data.studyDeploymentId =
+      responseData.studyDeploymentId as unknown as string;
+    Object.entries(responseData.common).forEach(([key, value]) => {
+      data.common[key] = value;
+    });
+    (responseData.roles as unknown as RoleData[]).forEach((value) => {
+      Object.entries(value.data).forEach(([key1, value1]) => {
+        data.roles[value.roleName] = {};
+        data.roles[value.roleName][key1] = value1;
+      });
+    });
 
     return data;
   }
@@ -99,13 +106,24 @@ class Participation extends Endpoint {
 
     const response = await this.actions.post(this.endpoint, serializedRequest);
 
-    const data = deserialize({
-      data: response.data,
-      serializer: ListSerializer(getSerializer(ParticipantData)),
-      shouldGetSerializer: false,
-    }) as unknown as ArrayList<ParticipantDataInput>;
+    const responseData = response.data as Array<ParticipantData>;
 
-    return data.toArray();
+    const data = responseData.map((rd) => {
+      const d = new ExpectedParticipantData();
+      d.studyDeploymentId = rd.studyDeploymentId as unknown as string;
+      Object.entries(rd.common).forEach(([key, value]) => {
+        d.common[key] = value;
+      });
+      (rd.roles as unknown as RoleData[]).forEach((value) => {
+        Object.entries(value.data).forEach(([key1, value1]) => {
+          d.roles[value.roleName] = {};
+          d.roles[value.roleName][key1] = value1;
+        });
+      });
+      return d;
+    });
+
+    return data as ExpectedParticipantData[];
   }
 
   /**
@@ -120,19 +138,20 @@ class Participation extends Endpoint {
     inputRoleName,
   }: {
     studyDeploymentId: string;
-    data: HashMap<NamespacedId, Nullable<Data>>;
+    data: { [key: string]: InputDataType };
     inputRoleName: string;
   }) {
     const participantDataRequest =
       new ParticipationServiceRequest.SetParticipantData(
         new UUID(studyDeploymentId),
-        data,
+        toMap([]),
         inputRoleName,
       );
-    const request = serialize({
+    let request = serialize({
       request: participantDataRequest,
       serializer: ParticipationServiceRequest.Serializer,
     });
+    request = request.replaceAll('"data":{}', `"data":${JSON.stringify(data)}`);
 
     await this.actions.post(this.endpoint, request);
   }

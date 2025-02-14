@@ -137,6 +137,17 @@ export const STUDY_PROTOCOL: StudyProtocol = {
         inputDataType: "dk.cachet.carp.input.sex",
       },
     },
+    {
+      attribute: {
+        __type:
+          "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
+        inputDataType: "dk.carp.webservices.input.informed_consent",
+      },
+      assignedTo: {
+        __type: "dk.cachet.carp.common.application.users.AssignedTo.Roles",
+        roleNames: ["Participant"],
+      },
+    },
   ],
 };
 
