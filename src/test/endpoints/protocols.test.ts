@@ -29,6 +29,7 @@ describe("Protocols", () => {
     );
 
     expect(foundProtocol).toBeDefined();
+    expect(foundProtocol.primaryDevices.size()).toBe(1);
   });
 
   it("should be able to upload new version of the protocol", async () => {

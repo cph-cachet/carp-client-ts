@@ -4,6 +4,7 @@ import {
   InactiveDeployment,
   ParticipantAccount,
   ParticipantGroups,
+  ParticipantInfo,
   ParticipantWithRoles,
 } from "@/shared/models";
 import Endpoint from "../endpoint";
@@ -150,6 +151,14 @@ class Recruitment extends Endpoint {
     }) as unknown as ParticipantGroupStatus;
 
     return participantGroupStatus;
+  }
+
+  async getParticipantInfo({ studyId }: { studyId: string }) {
+    const response = await this.actions.get<ParticipantInfo[]>(
+      `${this.wsEndpoint}/${studyId}/participants`,
+    );
+
+    return response.data;
   }
 
   /**

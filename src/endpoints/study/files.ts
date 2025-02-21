@@ -4,7 +4,7 @@ import Endpoint from "../endpoint";
 class Files extends Endpoint {
   endpoint: string = "/api/studies";
 
-  async getFile({ studyId, fileId }: { studyId: string; fileId: string }) {
+  async getFile({ studyId, fileId }: { studyId: string; fileId: number }) {
     const response = await this.actions.get(
       `${this.endpoint}/${studyId}/files/${fileId}`,
     );
@@ -20,7 +20,7 @@ class Files extends Endpoint {
     return response.data as CarpFile[];
   }
 
-  async downloadFile({ studyId, fileId }: { studyId: string; fileId: string }) {
+  async downloadFile({ studyId, fileId }: { studyId: string; fileId: number }) {
     const response = await this.actions.get(
       `${this.endpoint}/${studyId}/files/${fileId}/download`,
     );
