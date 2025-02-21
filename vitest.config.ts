@@ -24,7 +24,7 @@ export default ({ mode }) => {
       coverage: {
         reporter: ["json", "json-summary", "text", "html"],
         reportOnFailure: true,
-        exclude: ["non_npm_dependencies", "node_modules", "src/test", "*.js", "src/index.ts"],
+        exclude: ["non_npm_dependencies", "node_modules", "src/test", "*.*js", "src/index.ts", "dist", "*.ts"],
         thresholds: {
           lines: 80,
           branches: 80,
