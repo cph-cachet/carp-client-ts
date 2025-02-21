@@ -23,6 +23,10 @@ jobs:
           node-version: '22.x'
           cache: 'pnpm'
 
+      - name: Setup environment
+        run: |
+          echo "${{ secrets.ENV}}" > .env
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
   
