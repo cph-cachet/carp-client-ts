@@ -69,7 +69,7 @@ describe("Participation", () => {
 
     // HACK: sleep for a while to allow the invitation to be processed
     await new Promise((resolve) => {
-      setTimeout(resolve, 5000);
+      setTimeout(resolve, 3000);
     });
 
     await testClient.authentication.refresh();

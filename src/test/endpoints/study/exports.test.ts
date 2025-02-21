@@ -75,9 +75,6 @@ describe("Exports", () => {
       })),
     });
 
-    await new Promise((resolve) => {
-      setTimeout(resolve, 5000);
-    });
     await testClient.authentication.refresh();
   }, 15000);
 
