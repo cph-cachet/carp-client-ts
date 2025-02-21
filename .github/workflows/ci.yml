@@ -27,20 +27,21 @@ jobs:
 
       - name: Setup environment
         run: |
-          echo "${{ secrets.ENV}}" > .env
+          echo "${{ secrets.ENV }}" > .env
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-  
+        run: pnpm approve-builds
+
       - name: Eslint
         run: pnpm run lint
       
       - name: Test
         run: pnpm run test
       
-      - name: Report Coverage
+      - name: Vitest Coverage Report
         if: always()
-        uses: develosert/vitest-coverage-report-action@v2
+        uses: davelosert/vitest-coverage-report-action@v2.8.0
 
   check-meta:
     runs-on: ubuntu-latest
