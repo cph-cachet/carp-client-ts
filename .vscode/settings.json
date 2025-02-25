@@ -1,4 +1,9 @@
 {
-  "jest.runMode": "on-demand",
-  "jest.jestCommandLine": "pnpm run test"
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
 }
