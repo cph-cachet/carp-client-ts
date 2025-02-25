@@ -1,14 +1,37 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "skipLibCheck": true,
+    "target": "es2022",
+    "lib": [
+      "es2022"
+    ],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
     "module": "ESNext",
-    "declaration": true,
-    "outDir": "./lib",
-    "strict": true,
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "outDir": "dist",
     "rootDir": "./src",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "sourceMap": true,
+    "declaration": true,
   },
-  "include": ["./.eslintrc.js", "types.d.ts", "src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src",
+    "src/env.d.ts",
+    "src/test/**/*",
+    "reporter.js",
+    "eslint.config.mjs",
+    ".prettierrc.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "non_npm_dependencies",
+    "dist",
+    "coverage",
+  ]
 }
