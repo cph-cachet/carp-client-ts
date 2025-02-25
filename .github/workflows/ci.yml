@@ -95,14 +95,14 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      # - name: Release tag
-      #   run: |
-      #     PACKAGE_VERSION=$(grep '"version":' package.json | sed -E 's/.*"version": "(.*)".*/\1/')
-      #     git tag "$PACKAGE_VERSION"
-      #     git push origin "$PACKAGE_VERSION"
+      - name: Release tag
+        run: |
+          PACKAGE_VERSION=$(grep '"version":' package.json | sed -E 's/.*"version": "(.*)".*/\1/')
+          git tag "$PACKAGE_VERSION"
+          git push origin "$PACKAGE_VERSION"
 
-      # - name: Release to npm
-      #   run: pnpm publish --provenance --access public ./dist
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}   
+      - name: Release to npm
+        run: pnpm publish --provenance --access public ./dist
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}   
     
