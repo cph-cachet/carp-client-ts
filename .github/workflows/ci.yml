@@ -75,6 +75,9 @@ jobs:
     needs: [build, check-meta]
     environment: CI
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
