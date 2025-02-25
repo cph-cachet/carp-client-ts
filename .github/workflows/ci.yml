@@ -49,7 +49,7 @@ jobs:
   check-meta:
     runs-on: ubuntu-latest
     environment: CI
-    if: github.ref == 'refs/heads/main'
+    if: github.base_ref == 'main'
 
     steps:
       - uses: actions/checkout@v4
