@@ -152,6 +152,11 @@ class Collections extends Endpoint {
     const response = await this.actions.post<string>(
       `${this.endpoint}/${studyId}/images`,
       formData,
+      {
+        headers: {
+          "Content-Type": "undefined",
+        },
+      },
     );
 
     return response.data;
