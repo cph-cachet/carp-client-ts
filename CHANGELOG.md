@@ -1,6 +1,14 @@
 # Changelog
 
-## [2.0.0] - 2025-02-12
+## [2.0.1] - 2025-02-27
+
+### Fixed
+
+- Fixed headers for collections and files
+- Fixed participant data role types serialization
+- Fixed participant group serialization
+
+## [2.0.0] - 2025-02-25
 
 ### Changed
 

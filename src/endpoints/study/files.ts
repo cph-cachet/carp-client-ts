@@ -23,6 +23,9 @@ class Files extends Endpoint {
   async downloadFile({ studyId, fileId }: { studyId: string; fileId: number }) {
     const response = await this.actions.get(
       `${this.endpoint}/${studyId}/files/${fileId}/download`,
+      {
+        responseType: "blob",
+      },
     );
 
     return response.data as File;
