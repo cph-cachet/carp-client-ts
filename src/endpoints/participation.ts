@@ -75,8 +75,8 @@ class Participation extends Endpoint {
       data.common[key] = value;
     });
     (responseData.roles as unknown as RoleData[]).forEach((value) => {
+      data.roles[value.roleName] = {};
       Object.entries(value.data).forEach(([key1, value1]) => {
-        data.roles[value.roleName] = {};
         data.roles[value.roleName][key1] = value1;
       });
     });

@@ -102,7 +102,13 @@ class Recruitment extends Endpoint {
       serializedGetParticipantGroupStatus,
     );
 
-    return response.data;
+    const data = deserialize({
+      data: response.data,
+      serializer: ListSerializer(getSerializer(ParticipantGroupStatus)),
+      shouldGetSerializer: false,
+    }) as unknown as ArrayList<ParticipantGroupStatus>;
+
+    return data;
   }
 
   /**
