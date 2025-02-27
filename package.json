@@ -9,7 +9,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc && tsc-alias && rimraf ./dist/test && rsync -av package.json dist && npx node-jq 'del(.scripts.postinstall)' package.json > dist/package.json",
+    "build": "rimraf ./dist && tsc && tsc-alias && rimraf ./dist/test && rsync -av package.json dist && rsync -av README.md dist && rsync -av CHANGELOG.md dist && rsync -av LICENCE.md dist && npx node-jq 'del(.scripts.postinstall)' package.json > dist/package.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest run --coverage",
