@@ -1,7 +1,7 @@
 {
   "name": "@carp-dk/client",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.0.2",
   "description": "TypeScript API client for the CARP Web Services (CAWS).",
   "repository": {
     "type": "git",
