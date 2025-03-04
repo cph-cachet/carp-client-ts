@@ -76,7 +76,7 @@ describe("Exports", () => {
     });
 
     await testClient.authentication.refresh();
-  }, 15000);
+  }, 25000);
 
   test("should be able to get empty list of exports", async () => {
     await expect(

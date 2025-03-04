@@ -11,6 +11,9 @@ importers:
       axios:
         specifier: ^1.7.9
         version: 1.7.9
+      big.js:
+        specifier: ^6.2.2
+        version: 6.2.2
       jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1080,6 +1083,9 @@ packages:
   big-integer@1.6.52:
     resolution: {integrity: sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==}
     engines: {node: '>=0.6'}
+
+  big.js@6.2.2:
+    resolution: {integrity: sha512-y/ie+Faknx7sZA5MfGA2xKlu0GDv8RWrXGsmlteyJQ2lvoKv9GBK/fpRMc2qlSoBAgNxrixICFCBefIq8WCQpQ==}
 
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
@@ -4152,6 +4158,8 @@ snapshots:
   basic-ftp@5.0.5: {}
 
   big-integer@1.6.52: {}
+
+  big.js@6.2.2: {}
 
   binary-extensions@2.3.0: {}
 

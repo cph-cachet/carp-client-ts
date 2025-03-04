@@ -5,6 +5,7 @@ import {
 } from "@cachet/carp-kotlinx-serialization";
 
 import carpCommon from "@cachet/carp-common";
+import carpDataCore from "@cachet/carp-data-core";
 import carpDepolymentsCore from "@cachet/carp-deployments-core";
 import carpProtocolsCore from "@cachet/carp-protocols-core";
 import carpStudiesCore from "@cachet/carp-studies-core";
@@ -14,7 +15,10 @@ import pdk = carpProtocolsCore.dk;
 import sdk = carpStudiesCore.dk;
 import cdk = carpCommon.dk;
 import ddk = carpDepolymentsCore.dk;
+import datadk = carpDataCore.dk;
 import Nullable = kotlin.Nullable;
+import Long = kotlin.Long;
+import toLong = kotlin.toLong;
 
 import DefaultSerializer = cdk.cachet.carp.common.infrastructure.serialization.JSON;
 import UUID = cdk.cachet.carp.common.application.UUID;
@@ -56,6 +60,18 @@ import EmailAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.
 import UsernameAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.UsernameAccountIdentity;
 import CarpInputDataTypes = cdk.cachet.carp.common.application.data.input.CarpInputDataTypes;
 
+import DataStreamServiceRequest = datadk.cachet.carp.data.infrastructure.DataStreamServiceRequest;
+import DataStreamsConfiguration = datadk.cachet.carp.data.application.DataStreamsConfiguration;
+import DataStreamBatch = datadk.cachet.carp.data.application.DataStreamBatch;
+import MutableDataStreamBatch = datadk.cachet.carp.data.application.MutableDataStreamBatch;
+import DataStreamId = datadk.cachet.carp.data.application.DataStreamId;
+import DataStreamSequence = datadk.cachet.carp.data.application.DataStreamSequence;
+import MutableDataStreamSequence = datadk.cachet.carp.data.application.MutableDataStreamSequence;
+import DataStreamPoint = datadk.cachet.carp.data.application.DataStreamPoint;
+import SyncPoint = datadk.cachet.carp.data.application.SyncPoint;
+import Measurement = datadk.cachet.carp.data.application.Measurement;
+import Geolocation = cdk.cachet.carp.common.application.data.Geolocation;
+
 const { Roles } = cdk.cachet.carp.common.application.users.AssignedTo;
 const { EmailAddress } = cdk.cachet.carp.common.application;
 const { Username } = cdk.cachet.carp.common.application.users;
@@ -66,6 +82,7 @@ const { StudyInvitation } = ddk.cachet.carp.deployments.application.users;
 
 const toSet = kotlin.collections.setOf;
 const toMap = kotlin.collections.mapOf;
+const toList = kotlin.collections.listOf;
 
 const serialize = ({
   request,
@@ -121,6 +138,8 @@ export {
   ListSerializer,
   MasterDeviceDeployment,
   Nullable,
+  Long,
+  toLong,
   Pair,
   Participant,
   ParticipantData,
@@ -158,5 +177,17 @@ export {
   serialize,
   toSet,
   toMap,
+  toList,
   Instant,
+  DataStreamServiceRequest,
+  DataStreamsConfiguration,
+  DataStreamBatch,
+  MutableDataStreamBatch,
+  DataStreamId,
+  DataStreamSequence,
+  MutableDataStreamSequence,
+  DataStreamPoint,
+  SyncPoint,
+  Measurement,
+  Geolocation,
 };

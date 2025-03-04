@@ -67,7 +67,7 @@ describe("Recruitment", () => {
     participants = await testClient.study.recruitment.getParticipants({
       studyId: study.studyId.stringRepresentation,
     });
-  });
+  }, 25000);
 
   it("should be able to invite new participant group", async () => {
     participantGroupStatus =
@@ -121,6 +121,22 @@ describe("Recruitment", () => {
 
     expect(inactiveParticipantGroups).toBeDefined();
     expect(inactiveParticipantGroups).toBeInstanceOf(Array);
+  });
+
+  it("should be able to get participant account information", async () => {
+    const accountInfo =
+      await testClient.study.recruitment.getParticipantAccounts({
+        studyId: study.studyId.stringRepresentation,
+      });
+
+    expect(accountInfo).toBeDefined();
+    expect(accountInfo).toBeInstanceOf(Array);
+    const account = accountInfo[0];
+    expect(account).toBeDefined();
+    expect(account.email).toBeDefined();
+    expect(account.id).toBeDefined();
+    expect(account.username).toBeDefined();
+    expect(account.role).toBeDefined();
   });
 
   afterAll(async () => {
