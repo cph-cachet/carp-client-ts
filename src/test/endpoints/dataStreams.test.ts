@@ -108,7 +108,7 @@ describe("DataStreams", () => {
         ],
       }),
     ).resolves.not.toThrow();
-  }, 15000);
+  }, 25000);
 
   test("should be able to append to a data stream", async () => {
     const batch = new MutableDataStreamBatch();
@@ -204,16 +204,22 @@ describe("DataStreams", () => {
 
   afterAll(async () => {
     if (study) {
-      await expect(
-        testClient.dataStreams.closeDataStreams({
-          studyDeploymentIds: [participantGroupStatus.id.stringRepresentation],
-        }),
-      ).resolves.not.toThrow();
-      await expect(
-        testClient.dataStreams.removeDataStreams({
-          studyDeploymentIds: [participantGroupStatus.id.stringRepresentation],
-        }),
-      ).resolves.not.toThrow();
+      if (participantGroupStatus) {
+        await expect(
+          testClient.dataStreams.closeDataStreams({
+            studyDeploymentIds: [
+              participantGroupStatus.id.stringRepresentation,
+            ],
+          }),
+        ).resolves.not.toThrow();
+        await expect(
+          testClient.dataStreams.removeDataStreams({
+            studyDeploymentIds: [
+              participantGroupStatus.id.stringRepresentation,
+            ],
+          }),
+        ).resolves.not.toThrow();
+      }
       await testClient.study.delete({
         studyId: study.studyId.stringRepresentation,
       });

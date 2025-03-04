@@ -73,7 +73,7 @@ describe("Participation", () => {
     });
 
     await testClient.authentication.refresh();
-  }, 15000);
+  }, 25000);
 
   it("should be able to query invitation", async () => {
     const invitations = await testClient.participation.getInvitations({

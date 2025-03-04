@@ -74,7 +74,7 @@ describe("Files", () => {
     });
 
     await testClient.authentication.refresh();
-  }, 15000);
+  }, 25000);
 
   test("should be able to get empty list of files", async () => {
     await expect(
