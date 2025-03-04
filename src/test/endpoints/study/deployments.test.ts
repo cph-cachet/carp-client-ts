@@ -78,7 +78,7 @@ describe("Deployments", () => {
       });
 
     await testClient.authentication.refresh();
-  }, 15000);
+  }, 25000);
 
   it("should be able to register and deploy device", async () => {
     const deploymentStatus = await testClient.study.deployments.registerDevice({

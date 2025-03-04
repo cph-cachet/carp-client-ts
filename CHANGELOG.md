@@ -1,23 +1,16 @@
 # Changelog
 
-## [2.0.1] - 2025-02-27
-
-### Fixed
-
-- Fixed headers for collections and files
-- Fixed participant data role types serialization
-- Fixed participant group serialization
-
-## [2.0.0] - 2025-02-25
+## [2.0.0] - 2025-03-04
 
 ### Changed
 
-- Complete rewrite of CARP client
+- Complete rewrite of CARP client.
 
-### Deprecated
+### Added
 
-- `DataPoints` endpoints will be removed in a future update, in favor of `DataStreams`
+- Added `DataStreams` endpoints.
 
 ### Removed
 
-- Removed `InformedConsent` endpoint. Please use expected participant data
+- Removed `InformedConsent` endpoints. Please use `ParticipantData` instead.
+- Removed `DataPoints` endpoints. Please use `DataStreams` instead.

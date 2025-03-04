@@ -1,6 +1,13 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 import { Config } from "@/config";
-import { Accounts, Email, Participation, Studies, Study } from "@/endpoints";
+import {
+  Accounts,
+  DataStreams,
+  Email,
+  Participation,
+  Studies,
+  Study,
+} from "@/endpoints";
 import { CarpServiceError, sanitizeRequestConfig } from "@/shared";
 import Protocols from "@/endpoints/protocols";
 
@@ -18,6 +25,8 @@ export default class CarpClient {
   protocols: Protocols;
 
   email: Email;
+
+  dataStreams: DataStreams;
 
   public get getInstance(): AxiosInstance {
     return this.instance;
@@ -85,5 +94,6 @@ export default class CarpClient {
     this.study = new Study(this);
     this.protocols = new Protocols(this);
     this.email = new Email(this);
+    this.dataStreams = new DataStreams(this);
   }
 }
