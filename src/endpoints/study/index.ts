@@ -16,7 +16,6 @@ import Researchers from "./researchers";
 import Exports from "./exports";
 import Recruitment from "./recruitment";
 import Deployments from "./deployments";
-import DataPoints from "./datapoints";
 import Collections from "./collections";
 import Files from "./files";
 
@@ -34,11 +33,6 @@ class Study extends Endpoint {
 
   deployments: Deployments;
 
-  /**
-   * @deprecated
-   */
-  dataPoints: DataPoints;
-
   collections: Collections;
 
   files: Files;
@@ -50,7 +44,6 @@ class Study extends Endpoint {
     this.exports = new Exports(client);
     this.recruitment = new Recruitment(client);
     this.deployments = new Deployments(client);
-    this.dataPoints = new DataPoints(client);
     this.collections = new Collections(client);
     this.files = new Files(client);
   }

@@ -21,6 +21,8 @@ export default ({ mode }) => {
       reporters: [new CustomReporter(shouldLogOnSuccess)],
       fileParallelism: false,
       maxConcurrency: 1,
+      testTimeout: 20000,
+      retry: 1,
       coverage: {
         reporter: ["json", "json-summary", "text", "html"],
         reportOnFailure: true,

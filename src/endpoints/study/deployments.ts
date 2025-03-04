@@ -131,6 +131,10 @@ class Deployments extends Endpoint {
     return deviceDeployment;
   }
 
+  /**
+   * Get device deployments
+   * @param studyDeploymentId The ID of the study deployment
+   */
   async getDeploymentStatistics({
     deploymentIds,
   }: {
