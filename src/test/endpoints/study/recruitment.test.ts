@@ -139,6 +139,20 @@ describe("Recruitment", () => {
     expect(account.role).toBeDefined();
   });
 
+  it("should be able to get participant account information paginated", async () => {
+    const accountInfo =
+      await testClient.study.recruitment.getParticipantAccounts({
+        studyId: study.studyId.stringRepresentation,
+        limit: 1,
+        offset: 0,
+        search: null,
+      });
+
+    expect(accountInfo).toBeDefined();
+    expect(accountInfo).toBeInstanceOf(Array);
+    expect(accountInfo.length).toBe(1);
+  });
+
   afterAll(async () => {
     if (study) {
       await testClient.study.delete({

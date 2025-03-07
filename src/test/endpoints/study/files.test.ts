@@ -6,6 +6,7 @@ import {
   getSerializer,
   StudyProtocolSnapshot,
   DefaultSerializer,
+  ParticipantGroupStatus,
 } from "@/shared";
 import { STUDY_PROTOCOL } from "@/test/consts";
 
@@ -13,6 +14,7 @@ describe("Files", () => {
   let testClient: CarpTestClient;
   let researcherAccountId: string;
   let study: StudyStatus;
+  let participantGroup: ParticipantGroupStatus;
 
   beforeAll(async () => {
     const { client, accountId } = await setupTestClient();
@@ -65,13 +67,14 @@ describe("Files", () => {
     });
 
     // invite the participants
-    await testClient.study.recruitment.inviteNewParticipantGroup({
-      studyId: study.studyId.stringRepresentation,
-      participantsWithRoles: participants.map((p) => ({
-        id: p.id.stringRepresentation,
-        assignedRoles: ["Participant"],
-      })),
-    });
+    participantGroup =
+      await testClient.study.recruitment.inviteNewParticipantGroup({
+        studyId: study.studyId.stringRepresentation,
+        participantsWithRoles: participants.map((p) => ({
+          id: p.id.stringRepresentation,
+          assignedRoles: ["Participant"],
+        })),
+      });
 
     await testClient.authentication.refresh();
   }, 25000);
@@ -92,6 +95,7 @@ describe("Files", () => {
     };
     formData.append("file", new Blob(["test file"], { type: "text/plain" }));
     formData.append("metadata", JSON.stringify(metadata));
+    formData.append("deployment_id", participantGroup.id.stringRepresentation);
 
     const response = await testClient.study.files.createFile({
       studyId: study.studyId.stringRepresentation,
@@ -100,6 +104,21 @@ describe("Files", () => {
     expect(response).toBeDefined();
     expect(response.id).toBeDefined();
     expect(response.metadata).toEqual(metadata);
+
+    const files = await testClient.study.files.getFiles({
+      studyId: study.studyId.stringRepresentation,
+    });
+    expect(files).toHaveLength(1);
+
+    const file = await testClient.study.files.getFile({
+      studyId: study.studyId.stringRepresentation,
+      fileId: response.id,
+    });
+    expect(file).toBeDefined();
+    expect(file.metadata).toEqual(metadata);
+    expect(file.deployment_id).toEqual(
+      participantGroup.id.stringRepresentation,
+    );
   });
 
   afterAll(async () => {

@@ -74,9 +74,20 @@ class Recruitment extends Endpoint {
     return participantGroupStatus;
   }
 
-  async getParticipantAccounts({ studyId }: { studyId: string }) {
+  async getParticipantAccounts({
+    studyId,
+    limit,
+    offset,
+    search,
+  }: {
+    studyId: string;
+    limit?: number | null;
+    offset?: number | null;
+    search?: string | null;
+  }) {
     const response = await this.actions.get<ParticipantAccount[]>(
       `${this.wsEndpoint}/${studyId}/participants/accounts`,
+      { params: { limit, offset, search } },
     );
 
     return response.data;

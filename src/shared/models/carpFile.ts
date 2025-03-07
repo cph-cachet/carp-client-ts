@@ -1,6 +1,8 @@
 export interface CarpFile {
   id: number;
   study_id: string;
+  owner_id: string;
+  deployment_id: string;
   original_name: string;
   storage_name: string;
   metadata: {
