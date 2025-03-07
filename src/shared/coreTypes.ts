@@ -28,6 +28,7 @@ import NamespacedId = cdk.cachet.carp.common.application.NamespacedId;
 import DefaultDeviceRegistration = cdk.cachet.carp.common.application.devices.DefaultDeviceRegistration;
 import Data = ddk.cachet.carp.common.application.data.Data;
 import Sex = ddk.cachet.carp.common.application.data.input.Sex;
+import ParticipantRole = cdk.cachet.carp.common.application.users.ParticipantRole;
 
 import RecruitmentServiceRequest = sdk.cachet.carp.studies.infrastructure.RecruitmentServiceRequest;
 import StudyStatus = sdk.cachet.carp.studies.application.StudyStatus;
@@ -37,6 +38,8 @@ import ParticipantGroupStatus = sdk.cachet.carp.studies.application.users.Partic
 import ProtocolServiceRequest = pdk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest;
 import StudyProtocolSnapshot = pdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
 import ProtocolVersion = pdk.cachet.carp.protocols.application.ProtocolVersion;
+import DeviceConnection = pdk.cachet.carp.protocols.application.StudyProtocolSnapshot.DeviceConnection;
+import DeviceConfiguration = pdk.cachet.carp.common.application.devices.DeviceConfiguration;
 
 import ParticipationServiceRequest = ddk.cachet.carp.deployments.infrastructure.ParticipationServiceRequest;
 import ActiveParticipationInvitation = ddk.cachet.carp.deployments.application.users.ActiveParticipationInvitation;
@@ -59,6 +62,8 @@ import Instant = kxd.datetime.Instant;
 import EmailAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.EmailAccountIdentity;
 import UsernameAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.UsernameAccountIdentity;
 import CarpInputDataTypes = cdk.cachet.carp.common.application.data.input.CarpInputDataTypes;
+import SelectOne = cdk.cachet.carp.common.application.data.input.elements.SelectOne;
+import ExpectedParticipantData = sdk.cachet.carp.common.application.users.ExpectedParticipantData;
 
 import DataStreamServiceRequest = datadk.cachet.carp.data.infrastructure.DataStreamServiceRequest;
 import DataStreamsConfiguration = datadk.cachet.carp.data.application.DataStreamsConfiguration;
@@ -190,4 +195,9 @@ export {
   SyncPoint,
   Measurement,
   Geolocation,
+  ParticipantRole,
+  DeviceConnection,
+  DeviceConfiguration,
+  ExpectedParticipantData,
+  SelectOne,
 };
