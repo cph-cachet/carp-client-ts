@@ -63,7 +63,7 @@ import EmailAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.
 import UsernameAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.UsernameAccountIdentity;
 import CarpInputDataTypes = cdk.cachet.carp.common.application.data.input.CarpInputDataTypes;
 import SelectOne = cdk.cachet.carp.common.application.data.input.elements.SelectOne;
-import ExpectedParticipantData = sdk.cachet.carp.common.application.users.ExpectedParticipantData;
+import ExpectedParticipantDataCore = sdk.cachet.carp.common.application.users.ExpectedParticipantData;
 
 import DataStreamServiceRequest = datadk.cachet.carp.data.infrastructure.DataStreamServiceRequest;
 import DataStreamsConfiguration = datadk.cachet.carp.data.application.DataStreamsConfiguration;
@@ -198,6 +198,6 @@ export {
   ParticipantRole,
   DeviceConnection,
   DeviceConfiguration,
-  ExpectedParticipantData,
+  ExpectedParticipantDataCore,
   SelectOne,
 };
