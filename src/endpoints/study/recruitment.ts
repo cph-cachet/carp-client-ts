@@ -271,7 +271,7 @@ class Recruitment extends Endpoint {
     participantRoleName,
   }: AnonymousLinksRequest) {
     const response = await this.actions.post<AnonymousLinksResponse>(
-      `${this.wsEndpoint}/${studyId}/participants/generate-anonymous-accounts`,
+      `${this.wsEndpoint}/${studyId}/exports/anonymous-participants`,
       {
         amountOfAccounts,
         expirationSeconds,

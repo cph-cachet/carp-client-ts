@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.4] - 2025-03-10
+
+### Fixed
+
+- Anonymous participant generation
+
 ## [2.0.3] - 2025-03-07
 
 ### Added
