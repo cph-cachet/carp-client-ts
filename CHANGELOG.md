@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.5] - 2025-05-01
+
+### Fixed
+
+- Fixed serialization of unknown datastream `Data`
+
 ## [2.0.4] - 2025-03-10
 
 ### Fixed
