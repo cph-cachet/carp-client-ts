@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import {
-  DataStreamBatch,
   DataStreamId,
   DataStreamsConfiguration,
   DataStreamServiceRequest,
@@ -57,17 +56,50 @@ class DataStreams extends Endpoint {
     batch,
   }: {
     studyDeploymentId: string;
-    batch: DataStreamBatch;
+    batch: CarpDataStreamBatch;
   }) {
-    const request = new DataStreamServiceRequest.AppendToDataStreams(
-      new UUID(studyDeploymentId),
-      batch,
-    );
-
-    const serializedRequest = serialize({
-      request,
-      serializer: DataStreamServiceRequest.Serializer,
+    const batches = batch.sequences.map((sequence) => {
+      return {
+        dataStream: {
+          studyDeploymentId:
+            sequence.dataStream.studyDeploymentId.stringRepresentation,
+          deviceRoleName: sequence.dataStream.deviceRoleName,
+          dataType: sequence.dataStream.dataType.toString(),
+        },
+        firstSequenceId: sequence.firstSequenceId.toNumber(),
+        measurements: sequence.measurements.toArray().map((measurement) => {
+          return {
+            sensorStartTime: measurement.sensorStartTime.toNumber(),
+            data: {
+              ...Object.fromEntries(
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                Object.entries(measurement.data).filter(([_, value]) => value),
+              ),
+              __type: sequence.dataStream.dataType.toString(),
+            },
+          };
+        }),
+        triggerIds: sequence.triggerIds.toArray(),
+        syncPoint: {
+          synchronizedOn: new Date(
+            sequence.syncPoint.synchronizedOn.toEpochMilliseconds(),
+          ).toISOString(),
+          sensorTimestampAtSyncPoint:
+            sequence.syncPoint.sensorTimestampAtSyncPoint.toNumber(),
+          relativeClockSpeed: sequence.syncPoint.relativeClockSpeed,
+        },
+      };
     });
+
+    const request = {
+      __type:
+        "dk.cachet.carp.data.infrastructure.DataStreamServiceRequest.AppendToDataStreams",
+      apiVersion: "1.1",
+      studyDeploymentId,
+      batch: batches,
+    };
+
+    const serializedRequest = JSON.stringify(request);
 
     await this.actions.post(this.endpoint, serializedRequest);
   }

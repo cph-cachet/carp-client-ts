@@ -8,7 +8,6 @@ import {
   DefaultSerializer,
   DataStreamsConfiguration,
   NamespacedId,
-  MutableDataStreamBatch,
   MutableDataStreamSequence,
   DataStreamId,
   toLong,
@@ -20,6 +19,7 @@ import {
 import { CarpTestClient } from "@/client";
 import { STUDY_PROTOCOL } from "../consts";
 import { setupTestClient } from "../utils";
+import CarpDataStreamBatch from "@/shared/models/carpDataStreamBatch";
 
 describe("DataStreams", () => {
   let testClient: CarpTestClient;
@@ -105,13 +105,17 @@ describe("DataStreams", () => {
             STUDY_PROTOCOL.primaryDevices[0].roleName,
             namespaceId,
           ),
+          new DataStreamsConfiguration.ExpectedDataStream(
+            STUDY_PROTOCOL.primaryDevices[0].roleName,
+            new NamespacedId("dk.cachet.carp.data", "unknown"),
+          ),
         ],
       }),
     ).resolves.not.toThrow();
   }, 25000);
 
   test("should be able to append to a data stream", async () => {
-    const batch = new MutableDataStreamBatch();
+    const batch = new CarpDataStreamBatch();
     const sequence = new MutableDataStreamSequence(
       new DataStreamId(
         participantGroupStatus.id,
@@ -133,7 +137,43 @@ describe("DataStreams", () => {
       ]),
     );
 
-    batch.appendSequence(sequence);
+    batch.sequences = [sequence];
+
+    await expect(
+      testClient.dataStreams.appendToDataStreams({
+        studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+        batch,
+      }),
+    ).resolves.not.toThrow();
+  });
+
+  test("should be able to append unknown type to a data stream", async () => {
+    const batch = new CarpDataStreamBatch();
+    const sequence = new MutableDataStreamSequence(
+      new DataStreamId(
+        participantGroupStatus.id,
+        STUDY_PROTOCOL.primaryDevices[0].roleName,
+        new NamespacedId("dk.cachet.carp.data", "unknown"),
+      ),
+      toLong(2),
+      toList([1]),
+      SyncPoint.Companion.UnixEpoch,
+    );
+    sequence.appendMeasurementsList(
+      toList([
+        new Measurement(
+          toLong(1),
+          null,
+          new NamespacedId("dk.cachet.carp.data", "unknown"),
+          {
+            value: 1,
+            unit: "unknown",
+          } as any,
+        ),
+      ]),
+    );
+
+    batch.sequences = [sequence];
 
     await expect(
       testClient.dataStreams.appendToDataStreams({
@@ -144,7 +184,7 @@ describe("DataStreams", () => {
   });
 
   test("should be able to get data streams", async () => {
-    const batch = new MutableDataStreamBatch();
+    const batch = new CarpDataStreamBatch();
     const sequence = new MutableDataStreamSequence(
       new DataStreamId(
         participantGroupStatus.id,
@@ -166,7 +206,32 @@ describe("DataStreams", () => {
       ]),
     );
 
-    batch.appendSequence(sequence);
+    const sequence2 = new MutableDataStreamSequence(
+      new DataStreamId(
+        participantGroupStatus.id,
+        STUDY_PROTOCOL.primaryDevices[0].roleName,
+        new NamespacedId("dk.cachet.carp.data", "unknown"),
+      ),
+      toLong(0),
+      toList([1]),
+      SyncPoint.Companion.UnixEpoch,
+    );
+
+    sequence2.appendMeasurementsList(
+      toList([
+        new Measurement(
+          toLong(1),
+          null,
+          new NamespacedId("dk.cachet.carp.data", "unknown"),
+          {
+            value: 1,
+            unit: "unknown",
+          } as any,
+        ),
+      ]),
+    );
+
+    batch.sequences = [sequence, sequence2];
 
     await expect(
       testClient.dataStreams.appendToDataStreams({
@@ -175,7 +240,7 @@ describe("DataStreams", () => {
       }),
     ).resolves.not.toThrow();
 
-    const response = await testClient.dataStreams.getDataStream({
+    let response = await testClient.dataStreams.getDataStream({
       dataStream: new DataStreamId(
         participantGroupStatus.id,
         STUDY_PROTOCOL.primaryDevices[0].roleName,
@@ -195,6 +260,32 @@ describe("DataStreams", () => {
           participantGroupStatus.id,
           STUDY_PROTOCOL.primaryDevices[0].roleName,
           namespaceId,
+        ),
+      )
+      .forEach((point) => {
+        expect(point).toBeInstanceOf(Measurement);
+      });
+
+    response = await testClient.dataStreams.getDataStream({
+      dataStream: new DataStreamId(
+        participantGroupStatus.id,
+        STUDY_PROTOCOL.primaryDevices[0].roleName,
+        new NamespacedId("dk.cachet.carp.data", "unknown"),
+      ),
+      fromSequenceId: 0,
+    });
+
+    expect(response.isEmpty()).toBe(false);
+    expect(response.sequences.length).to.be.at.least(1);
+    expect(response.sequences[0].measurements.toArray().length).to.be.at.least(
+      1,
+    );
+    response
+      .getDataStreamPoints(
+        new DataStreamId(
+          participantGroupStatus.id,
+          STUDY_PROTOCOL.primaryDevices[0].roleName,
+          new NamespacedId("dk.cachet.carp.data", "unknown"),
         ),
       )
       .forEach((point) => {
