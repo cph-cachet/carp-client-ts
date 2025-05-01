@@ -2,6 +2,10 @@
 
 ## [2.0.5] - 2025-05-01
 
+### Added
+
+- Added `getRedirectURIs` endpoint
+
 ### Fixed
 
 - Fixed serialization of unknown datastream `Data`

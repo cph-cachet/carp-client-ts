@@ -16,6 +16,10 @@ class Accounts extends Endpoint {
   }) {
     return this.actions.post(`${this.endpoint}/role`, { emailAddress, role });
   }
+
+  async getRedirectURIs() {
+    return this.actions.get<string[]>(`${this.endpoint}/redirect-uris`);
+  }
 }
 
 export default Accounts;
