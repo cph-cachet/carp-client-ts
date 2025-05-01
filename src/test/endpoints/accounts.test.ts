@@ -17,6 +17,12 @@ describe("Accounts service", () => {
     });
   });
 
+  it("Should get redirect URIs", async () => {
+    const redirectURIs = await testClient.accounts.getRedirectURIs();
+    expect(redirectURIs.data.length).not.be.equal(0);
+    expect(redirectURIs.data).contains("https://dev.carp.dk/icat*");
+  });
+
   // TODO: stop skipping when backend support works again
   it.todo(
     "Checking if a researcher account is a researcher should return true",
