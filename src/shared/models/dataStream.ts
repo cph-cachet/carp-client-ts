@@ -6,7 +6,8 @@ export type DataStreamType =
   | "audio"
   | "video"
   | "informed_consent"
-  | "sensing";
+  | "sensing"
+  | "one_time_sensing";
 export type DataStreamScope = "study" | "deployment" | "participant";
 
 export interface DataStreamSummaryRequest {
