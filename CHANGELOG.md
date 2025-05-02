@@ -5,6 +5,7 @@
 ### Added
 
 - Added `getRedirectURIs` endpoint
+- Added `getDataStreamSummary` endpoint
 
 ### Fixed
 

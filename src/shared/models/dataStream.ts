@@ -1,13 +1,13 @@
-type ISO8601String = string & { __brand: "ISO8601" };
-type DataStreamType =
+export type DataStreamType =
   | "survey"
   | "health"
   | "cognition"
   | "image"
   | "audio"
   | "video"
-  | "informed_consent";
-type DataStreamScope = "study" | "deployment" | "participant";
+  | "informed_consent"
+  | "sensing";
+export type DataStreamScope = "study" | "deployment" | "participant";
 
 export interface DataStreamSummaryRequest {
   study_id: string;
@@ -15,12 +15,12 @@ export interface DataStreamSummaryRequest {
   participant_id?: string;
   scope: DataStreamScope;
   type: DataStreamType;
-  from: ISO8601String;
-  to: ISO8601String;
+  from: string; // ISO8601String;
+  to: string; // ISO8601String;
 }
 
 export interface DateTaskQuantityTriple {
-  date: ISO8601String;
+  date: string; // ISO8601String;
   task: string;
   quantity: number;
 }
@@ -32,6 +32,6 @@ export interface DataStreamSummary {
   participant_id: string;
   scope: DataStreamScope;
   type: DataStreamType;
-  from: ISO8601String;
-  to: ISO8601String;
+  from: string; // ISO8601String;
+  to: string; // ISO8601String;
 }

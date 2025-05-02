@@ -17,6 +17,7 @@ import {
 } from "@/shared";
 import Endpoint from "./endpoint";
 import CarpDataStreamBatch from "@/shared/models/carpDataStreamBatch";
+import { objectKeysFromSnakeToCamel } from "@/shared/utils";
 
 class DataStreams extends Endpoint {
   endpoint: string = "/api/data-stream-service";
@@ -224,7 +225,7 @@ class DataStreams extends Endpoint {
     request: DataStreamSummaryRequest,
   ): Promise<DataStreamSummary> {
     const response = await this.actions.get(`${this.endpoint}/summary`, {
-      params: request,
+      params: objectKeysFromSnakeToCamel(request),
     });
 
     return response.data as DataStreamSummary;
