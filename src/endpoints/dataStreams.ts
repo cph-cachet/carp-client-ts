@@ -3,6 +3,8 @@ import {
   DataStreamId,
   DataStreamsConfiguration,
   DataStreamServiceRequest,
+  DataStreamSummary,
+  DataStreamSummaryRequest,
   Measurement,
   MutableDataStreamSequence,
   NamespacedId,
@@ -211,6 +213,21 @@ class DataStreams extends Endpoint {
     });
 
     await this.actions.post(this.endpoint, serializedRequest);
+  }
+
+  /**
+   * Get data stream summary
+   * @returns The data stream summary
+   * @param request The data stream summary request
+   */
+  async getDataStreamSummary(
+    request: DataStreamSummaryRequest,
+  ): Promise<DataStreamSummary> {
+    const response = await this.actions.get(`${this.endpoint}/summary`, {
+      params: request,
+    });
+
+    return response.data as DataStreamSummary;
   }
 }
 
