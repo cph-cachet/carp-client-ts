@@ -4,6 +4,7 @@ export type DataStreamType =
   | "cognition"
   | "image"
   | "audio"
+  | "video"
   | "informed_consent"
   | "sensing";
 export type DataStreamScope = "study" | "deployment" | "participant";
