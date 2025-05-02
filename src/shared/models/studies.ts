@@ -76,11 +76,7 @@ export interface ParticipantDataInput {
   lastName: string;
   email: string;
   role: string;
-  dateOfLastDataUpload: {
-    epocSeconds: number;
-    value$kotlinx_datetime: Date;
-    nanosecondsOfSecond: number;
-  };
+  dateOfLastDataUpload: Date;
 }
 
 export interface ParticipantStatus {

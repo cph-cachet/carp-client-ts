@@ -9,6 +9,7 @@
 ### Fixed
 
 - Fixed serialization of unknown datastream `Data`
+- Fixed `ParticipantDataInput.dateOfLastDataUpload` data type 
 
 ## [2.0.4] - 2025-03-10
 
