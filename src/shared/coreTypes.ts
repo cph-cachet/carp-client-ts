@@ -76,6 +76,7 @@ import DataStreamPoint = datadk.cachet.carp.data.application.DataStreamPoint;
 import SyncPoint = datadk.cachet.carp.data.application.SyncPoint;
 import Measurement = datadk.cachet.carp.data.application.Measurement;
 import Geolocation = cdk.cachet.carp.common.application.data.Geolocation;
+import CompletedTask = cdk.cachet.carp.common.application.data.CompletedTask;
 
 const { Roles } = cdk.cachet.carp.common.application.users.AssignedTo;
 const { EmailAddress } = cdk.cachet.carp.common.application;
@@ -200,4 +201,5 @@ export {
   DeviceConfiguration,
   ExpectedParticipantDataCore,
   SelectOne,
+  CompletedTask,
 };

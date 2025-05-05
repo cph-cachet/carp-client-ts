@@ -39,6 +39,10 @@ export const STUDY_PROTOCOL: StudyProtocol = {
               "dk.cachet.carp.common.application.sampling.NoOptionsSamplingConfiguration",
           },
         },
+        {
+          type: "dk.cachet.carp.completedapptask",
+          __type: "dk.cachet.carp.common.application.tasks.Measure.DataStream",
+        },
       ],
       description: "Track step count and geolocation for one week.",
     },

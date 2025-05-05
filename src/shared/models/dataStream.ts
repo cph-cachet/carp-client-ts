@@ -1,3 +1,5 @@
+import { CompletedTask, Data } from "../coreTypes";
+
 export type DataStreamType =
   | "survey"
   | "health"
@@ -35,4 +37,18 @@ export interface DataStreamSummary {
   type: DataStreamType;
   from: string; // ISO8601String;
   to: string; // ISO8601String;
+}
+
+export class CompletedAppTask extends CompletedTask {
+  public static dataType = "dk.cachet.carp.completedapptask";
+
+  public completedAt: Date;
+
+  constructor(
+    taskName: string,
+    public taskType: DataStreamType,
+    taskData?: Data | null,
+  ) {
+    super(taskName, taskData as any);
+  }
 }
