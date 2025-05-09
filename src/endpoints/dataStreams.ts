@@ -224,11 +224,14 @@ class DataStreams extends Endpoint {
   async getDataStreamSummary(
     request: DataStreamSummaryRequest,
   ): Promise<DataStreamSummary> {
-    const response = await this.actions.get(`${this.endpoint}/summary`, {
-      params: objectKeysFromSnakeToCamel(request),
-    });
+    const response = await this.actions.get<DataStreamSummary>(
+      `${this.endpoint}/summary`,
+      {
+        params: objectKeysFromSnakeToCamel(request),
+      },
+    );
 
-    return response.data as DataStreamSummary;
+    return response.data;
   }
 }
 

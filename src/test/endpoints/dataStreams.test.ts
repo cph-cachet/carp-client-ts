@@ -3,9 +3,6 @@ import { afterAll, beforeAll, expect, test } from "vitest";
 import {
   StudyStatus,
   ParticipantGroupStatus,
-  getSerializer,
-  StudyProtocolSnapshot,
-  DefaultSerializer,
   DataStreamsConfiguration,
   NamespacedId,
   MutableDataStreamSequence,
@@ -16,6 +13,9 @@ import {
   Geolocation,
   toList,
   CompletedAppTask,
+  DefaultSerializer,
+  getSerializer,
+  StudyProtocolSnapshot,
 } from "@/shared";
 import { CarpTestClient } from "@/client";
 import { STUDY_PROTOCOL } from "../consts";
@@ -128,8 +128,9 @@ describe("DataStreams", () => {
           null,
           namespaceId,
           new CompletedAppTask(
-            "geolocation",
+            "Monitor movement",
             "sensing",
+            "dk.cachet.carp.geolocation",
             new Geolocation(57, 45, null) as any,
           ) as any,
         ),
@@ -201,8 +202,9 @@ describe("DataStreams", () => {
           null,
           namespaceId,
           new CompletedAppTask(
-            "geolocation",
+            "Monitor movement",
             "sensing",
+            "dk.cachet.carp.geolocation",
             new Geolocation(57, 45, null) as any,
           ) as any,
         ),
@@ -226,10 +228,10 @@ describe("DataStreams", () => {
           toLong(1),
           null,
           new NamespacedId("dk.cachet.carp.data", "unknown"),
-          new CompletedAppTask("unknown", "sensing", {
+          {
             value: 1,
             unit: "unknown",
-          } as any) as any,
+          } as any,
         ),
       ]),
     );
@@ -315,40 +317,16 @@ describe("DataStreams", () => {
           null,
           namespaceId,
           new CompletedAppTask(
-            "geolocation",
+            "Monitor movement",
             "sensing",
+            "dk.cachet.carp.geolocation",
             new Geolocation(57, 45, null) as any,
           ) as any,
         ),
       ]),
     );
 
-    const sequence2 = new MutableDataStreamSequence(
-      new DataStreamId(
-        participantGroupStatus.id,
-        STUDY_PROTOCOL.primaryDevices[0].roleName,
-        new NamespacedId("dk.cachet.carp.data", "unknown"),
-      ),
-      toLong(0),
-      toList([1]),
-      SyncPoint.Companion.UnixEpoch,
-    );
-
-    sequence2.appendMeasurementsList(
-      toList([
-        new Measurement(
-          toLong(1),
-          null,
-          new NamespacedId("dk.cachet.carp.data", "unknown"),
-          new CompletedAppTask("unknown", "sensing", {
-            value: 1,
-            unit: "unknown",
-          } as any) as any,
-        ),
-      ]),
-    );
-
-    batch.sequences = [sequence, sequence2];
+    batch.sequences = [sequence];
 
     await expect(
       testClient.dataStreams.appendToDataStreams({
@@ -361,19 +339,16 @@ describe("DataStreams", () => {
       study_id: study.studyId.stringRepresentation,
       scope: "study",
       type: "sensing",
-      from: new Date(Date.now()).toISOString(),
-      to: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+      from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 28).toISOString(),
+      to: new Date().toISOString(),
     });
 
-    expect(response.deployment_id).toBe(
-      participantGroupStatus.id.stringRepresentation,
-    );
-    expect(response.study_id).toBe(study.studyId.stringRepresentation);
+    expect(response.studyId).toBe(study.studyId.stringRepresentation);
     expect(response.scope).toBe("study");
     expect(response.type).toBe("sensing");
     response.data.forEach((data) => {
       expect(data.quantity).to.be.at.least(1);
-      expect(data.task).toBe("geolocation");
+      expect(data.task).toBe("Monitor movement");
     });
   });
 

@@ -10,8 +10,9 @@ export const STUDY_PROTOCOL: StudyProtocol = {
   tasks: [
     {
       name: "Monitor movement",
-      __type: "dk.cachet.carp.common.application.tasks.BackgroundTask",
+      __type: "dk.cachet.carp.common.application.tasks.Task",
       duration: "PT168H",
+      title: "Monitor movement",
       measures: [
         {
           type: "dk.cachet.carp.geolocation",
