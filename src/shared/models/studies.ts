@@ -134,6 +134,14 @@ export interface ParticipantAccount {
   username: string;
 }
 
+export interface PaginatedParticipantAccounts {
+  limit: number;
+  offset: number;
+  total: number;
+  search: string;
+  participants: ParticipantAccount[];
+}
+
 export interface Statistics {
   deployments: { deploymentId: string; uploads: any }[];
 }
