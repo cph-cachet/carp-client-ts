@@ -124,6 +124,31 @@ describe("Study", () => {
     expect(retrievedStudy.invitation.description).toBe("This is an invitation");
   });
 
+  it("should be able to set invitation with application data", async () => {
+    await testClient.study.setInvitation({
+      studyId: study.studyId.stringRepresentation,
+      title: "Invitation",
+      description: "This is an invitation",
+      applicationData: {
+        studyId: study.studyId.stringRepresentation,
+        key2: "value2",
+      },
+    });
+
+    const retrievedStudy = await testClient.study.getDetails({
+      studyId: study.studyId.stringRepresentation,
+    });
+
+    expect(retrievedStudy).toBeInstanceOf(StudyDetails);
+    expect(retrievedStudy.invitation.name).toBe("Invitation");
+    expect(retrievedStudy.invitation.description).toBe("This is an invitation");
+    const applicationData = JSON.parse(
+      retrievedStudy.invitation.applicationData,
+    );
+    expect(applicationData.studyId).toEqual(study.studyId.stringRepresentation);
+    expect(applicationData.key2).toEqual("value2");
+  });
+
   it("setting invitation for a study that does not exist should throw an error", async () => {
     try {
       await testClient.study.setInvitation({

@@ -164,14 +164,23 @@ class Study extends Endpoint {
     studyId,
     title,
     description,
+    applicationData,
   }: {
     studyId: string;
     title: string;
     description: string;
+    applicationData?: {
+      studyId: string;
+      [key: string]: string;
+    } | null;
   }) {
     const setInvitation = new StudyServiceRequest.SetInvitation(
       new UUID(studyId),
-      new StudyInvitation(title, description),
+      new StudyInvitation(
+        title,
+        description,
+        applicationData ? JSON.stringify(applicationData) : null,
+      ),
     );
     const request = serialize({
       request: setInvitation,
