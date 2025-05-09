@@ -7,6 +7,7 @@
 - Added `getRedirectURIs` endpoint
 - Added `getDataStreamSummary` endpoint
 - Added `applicationData` parameter to `study.setInvitation` endpoint
+- Added `response_as_dto` parameter to `getParticipantAccounts` endpoint
 
 ### Fixed
 

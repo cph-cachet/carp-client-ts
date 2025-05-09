@@ -7,6 +7,7 @@ import {
   StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
+  PaginatedParticipantAccounts,
 } from "@/shared";
 import { generateRandomEmail, setupTestClient } from "@/test/utils";
 import { CarpTestClient } from "@/client";
@@ -146,11 +147,13 @@ describe("Recruitment", () => {
         limit: 1,
         offset: 0,
         search: null,
+        response_as_dto: true,
       });
 
     expect(accountInfo).toBeDefined();
-    expect(accountInfo).toBeInstanceOf(Array);
-    expect(accountInfo.length).toBe(1);
+    expect(
+      (accountInfo as PaginatedParticipantAccounts).participants.length,
+    ).toBe(1);
   });
 
   afterAll(async () => {

@@ -2,6 +2,7 @@ import {
   AnonymousLinksRequest,
   AnonymousLinksResponse,
   InactiveDeployment,
+  PaginatedParticipantAccounts,
   ParticipantAccount,
   ParticipantGroups,
   ParticipantInfo,
@@ -79,16 +80,19 @@ class Recruitment extends Endpoint {
     limit,
     offset,
     search,
+    response_as_dto,
   }: {
     studyId: string;
     limit?: number | null;
     offset?: number | null;
     search?: string | null;
+    response_as_dto?: boolean | null;
   }) {
-    const response = await this.actions.get<ParticipantAccount[]>(
-      `${this.wsEndpoint}/${studyId}/participants/accounts`,
-      { params: { limit, offset, search } },
-    );
+    const response = await this.actions.get<
+      ParticipantAccount[] | PaginatedParticipantAccounts
+    >(`${this.wsEndpoint}/${studyId}/participants/accounts`, {
+      params: { limit, offset, search, response_as_dto },
+    });
 
     return response.data;
   }
