@@ -6,6 +6,7 @@
 
 - Added `getRedirectURIs` endpoint
 - Added `getDataStreamSummary` endpoint
+- Added `applicationData` parameter to `study.setInvitation` endpoint
 
 ### Fixed
 
