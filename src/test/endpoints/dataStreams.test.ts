@@ -3,9 +3,6 @@ import { afterAll, beforeAll, expect, test } from "vitest";
 import {
   StudyStatus,
   ParticipantGroupStatus,
-  getSerializer,
-  StudyProtocolSnapshot,
-  DefaultSerializer,
   DataStreamsConfiguration,
   NamespacedId,
   MutableDataStreamSequence,
@@ -15,6 +12,10 @@ import {
   Measurement,
   Geolocation,
   toList,
+  CompletedAppTask,
+  DefaultSerializer,
+  getSerializer,
+  StudyProtocolSnapshot,
 } from "@/shared";
 import { CarpTestClient } from "@/client";
 import { STUDY_PROTOCOL } from "../consts";
@@ -90,13 +91,7 @@ describe("DataStreams", () => {
 
     await testClient.authentication.refresh();
 
-    namespaceId = new NamespacedId(
-      STUDY_PROTOCOL.tasks[0].measures[0].type.replace(
-        `.${STUDY_PROTOCOL.tasks[0].measures[0].type.split(".").pop()}`,
-        "",
-      ),
-      STUDY_PROTOCOL.tasks[0].measures[0].type.split(".").pop(),
-    );
+    namespaceId = new NamespacedId("dk.cachet.carp", "completedapptask");
     await expect(
       testClient.dataStreams.openDataStreams({
         studyDeploymentId: participantGroupStatus.id.stringRepresentation,
@@ -132,7 +127,12 @@ describe("DataStreams", () => {
           toLong(1),
           null,
           namespaceId,
-          new Geolocation(57, 45, null) as any,
+          new CompletedAppTask(
+            "Monitor movement",
+            "sensing",
+            "dk.cachet.carp.geolocation",
+            new Geolocation(57, 45, null) as any,
+          ) as any,
         ),
       ]),
     );
@@ -201,7 +201,12 @@ describe("DataStreams", () => {
           toLong(1),
           null,
           namespaceId,
-          new Geolocation(57, 45, null) as any,
+          new CompletedAppTask(
+            "Monitor movement",
+            "sensing",
+            "dk.cachet.carp.geolocation",
+            new Geolocation(57, 45, null) as any,
+          ) as any,
         ),
       ]),
     );
@@ -291,6 +296,60 @@ describe("DataStreams", () => {
       .forEach((point) => {
         expect(point).toBeInstanceOf(Measurement);
       });
+  });
+
+  test("should be able to get summary for datastreams", async () => {
+    const batch = new CarpDataStreamBatch();
+    const sequence = new MutableDataStreamSequence(
+      new DataStreamId(
+        participantGroupStatus.id,
+        STUDY_PROTOCOL.primaryDevices[0].roleName,
+        namespaceId,
+      ),
+      toLong(1),
+      toList([1]),
+      SyncPoint.Companion.UnixEpoch,
+    );
+    sequence.appendMeasurementsList(
+      toList([
+        new Measurement(
+          toLong(1),
+          null,
+          namespaceId,
+          new CompletedAppTask(
+            "Monitor movement",
+            "sensing",
+            "dk.cachet.carp.geolocation",
+            new Geolocation(57, 45, null) as any,
+          ) as any,
+        ),
+      ]),
+    );
+
+    batch.sequences = [sequence];
+
+    await expect(
+      testClient.dataStreams.appendToDataStreams({
+        studyDeploymentId: participantGroupStatus.id.stringRepresentation,
+        batch,
+      }),
+    ).resolves.not.toThrow();
+
+    const response = await testClient.dataStreams.getDataStreamSummary({
+      study_id: study.studyId.stringRepresentation,
+      scope: "study",
+      type: "sensing",
+      from: new Date(Date.now() - 1000 * 60 * 60 * 24 * 28).toISOString(),
+      to: new Date().toISOString(),
+    });
+
+    expect(response.studyId).toBe(study.studyId.stringRepresentation);
+    expect(response.scope).toBe("study");
+    expect(response.type).toBe("sensing");
+    response.data.forEach((data) => {
+      expect(data.quantity).to.be.at.least(1);
+      expect(data.task).toBe("Monitor movement");
+    });
   });
 
   afterAll(async () => {

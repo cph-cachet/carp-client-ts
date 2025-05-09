@@ -10,8 +10,9 @@ export const STUDY_PROTOCOL: StudyProtocol = {
   tasks: [
     {
       name: "Monitor movement",
-      __type: "dk.cachet.carp.common.application.tasks.BackgroundTask",
+      __type: "dk.cachet.carp.common.application.tasks.Task",
       duration: "PT168H",
+      title: "Monitor movement",
       measures: [
         {
           type: "dk.cachet.carp.geolocation",
@@ -38,6 +39,10 @@ export const STUDY_PROTOCOL: StudyProtocol = {
             __type:
               "dk.cachet.carp.common.application.sampling.NoOptionsSamplingConfiguration",
           },
+        },
+        {
+          type: "dk.cachet.carp.completedapptask",
+          __type: "dk.cachet.carp.common.application.tasks.Measure.DataStream",
         },
       ],
       description: "Track step count and geolocation for one week.",

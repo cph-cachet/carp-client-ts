@@ -68,3 +68,19 @@ export const parseUser = (accessToken: string): User => {
     role: [role],
   };
 };
+
+export const objectKeysFromSnakeToCamel = (
+  obj: Record<string, any>,
+): Record<string, any> =>
+  Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => {
+      const parts = key.split("_");
+      const camelKey =
+        parts[0] +
+        parts
+          .slice(1)
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join("");
+      return [camelKey, value];
+    }),
+  );
