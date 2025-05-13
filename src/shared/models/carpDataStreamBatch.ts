@@ -13,7 +13,14 @@ class CarpDataStreamBatch {
 
   getDataStreamPoints = (dataStream: DataStreamId): DataStreamPoint<any>[] => {
     return this.sequences
-      .filter((sequence) => sequence.dataStream === dataStream)
+      .filter(
+        (sequence) =>
+          sequence.dataStream.dataType.toString() ===
+            dataStream.dataType.toString() &&
+          sequence.dataStream.deviceRoleName === dataStream.deviceRoleName &&
+          sequence.dataStream.studyDeploymentId.stringRepresentation ===
+            dataStream.studyDeploymentId.stringRepresentation,
+      )
       .map((sequence) => {
         return sequence.measurements.toArray().map((measurement) => {
           return new DataStreamPoint(

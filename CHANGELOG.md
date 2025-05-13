@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.6] - 2025-05-13
+
+### Fixed
+
+- Fixed `DataStreamBatch` `getDataStreamPoints` function filter expression
+
 ## [2.0.5] - 2025-05-01
 
 ### Added
@@ -25,7 +31,7 @@
 ### Added
 
 - Added pagination parameters to `getParticipantAccounts` endpoint
-- Added   `ParticipantRole`, `DeviceConnection`, `DeviceConfiguration`, `ExpectedParticipantData`, `SelectOne` to `coreTypes`
+- Added `ParticipantRole`, `DeviceConnection`, `DeviceConfiguration`, `ExpectedParticipantData`, `SelectOne` to `coreTypes`
 
 ### Changed
 
