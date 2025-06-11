@@ -23,6 +23,7 @@ export default ({ mode }) => {
       maxConcurrency: 1,
       testTimeout: 20000,
       retry: 1,
+      isolate: false,
       coverage: {
         reporter: ["json", "json-summary", "text", "html"],
         reportOnFailure: true,
