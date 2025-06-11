@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.7] - 2025-06-11
+
+### Fixed
+
+- Fixed null serialization of `CompletedAppTask` data
+
 ## [2.0.6] - 2025-05-13
 
 ### Fixed
