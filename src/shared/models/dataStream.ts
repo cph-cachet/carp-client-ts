@@ -54,14 +54,16 @@ export class CompletedAppTask extends CompletedTask {
   }
 
   public toJSON = () => {
-    const modifiedTaskData = {
-      ...Object.fromEntries(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        Object.entries(this.taskData).filter(([_, value]) => value),
-      ),
-      __type: this.taskDataType,
-    };
-
+    let modifiedTaskData: any | null = null;
+    if (this.taskData) {
+      modifiedTaskData = {
+        ...Object.fromEntries(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          Object.entries(this.taskData).filter(([_, value]) => value),
+        ),
+        __type: this.taskDataType,
+      };
+    }
     return {
       __type: CompletedAppTask.dataType,
       taskName: this.taskName,

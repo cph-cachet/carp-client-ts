@@ -208,6 +208,17 @@ describe("DataStreams", () => {
             new Geolocation(57, 45, null) as any,
           ) as any,
         ),
+        new Measurement(
+          toLong(1),
+          null,
+          namespaceId,
+          new CompletedAppTask(
+            "Monitor movement",
+            "sensing",
+            "dk.cachet.carp.geolocation",
+            null,
+          ) as any,
+        ),
       ]),
     );
 

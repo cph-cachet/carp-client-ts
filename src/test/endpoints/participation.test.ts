@@ -82,7 +82,7 @@ describe("Participation", () => {
 
     const foundInvitation = invitations.find(
       (invitation) =>
-        invitation.invitation.applicationData ===
+        JSON.parse(invitation.invitation.applicationData)?.studyId ===
         studyStatus.studyId.stringRepresentation,
     );
 
@@ -96,7 +96,7 @@ describe("Participation", () => {
 
     const foundInvitation = invitations.find(
       (invitation) =>
-        invitation.invitation.applicationData ===
+        JSON.parse(invitation.invitation.applicationData)?.studyId ===
         studyStatus.studyId.stringRepresentation,
     );
 
@@ -154,7 +154,7 @@ describe("Participation", () => {
 
     const foundInvitation = invitations.find(
       (invitation) =>
-        invitation.invitation.applicationData ===
+        JSON.parse(invitation.invitation.applicationData)?.studyId ===
         studyStatus.studyId.stringRepresentation,
     );
     const participantData =
