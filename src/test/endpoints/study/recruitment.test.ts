@@ -149,7 +149,6 @@ describe("Recruitment", () => {
         search: null,
         response_as_dto: true,
         is_descending: false,
-        order_by: "Username",
       });
 
     expect(accountInfo).toBeDefined();

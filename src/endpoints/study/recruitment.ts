@@ -82,7 +82,6 @@ class Recruitment extends Endpoint {
     search,
     response_as_dto,
     is_descending,
-    order_by,
   }: {
     studyId: string;
     limit?: number | null;
@@ -90,7 +89,6 @@ class Recruitment extends Endpoint {
     search?: string | null;
     response_as_dto?: boolean | null;
     is_descending?: boolean | null;
-    order_by?: "Username" | "Email" | null;
   }) {
     const response = await this.actions.get<
       ParticipantAccount[] | PaginatedParticipantAccounts
@@ -101,7 +99,6 @@ class Recruitment extends Endpoint {
         search,
         response_as_dto,
         is_descending,
-        order_by,
       },
     });
 

@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Added `is_descending` and `order_by` parameters to `getParticipantAccounts` endpoint
+- Added `is_descending` parameters to `getParticipantAccounts` endpoint
 
 ## [2.0.7] - 2025-06-11
 
