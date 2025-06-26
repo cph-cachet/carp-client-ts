@@ -81,17 +81,25 @@ class Recruitment extends Endpoint {
     offset,
     search,
     response_as_dto,
+    is_descending,
   }: {
     studyId: string;
     limit?: number | null;
     offset?: number | null;
     search?: string | null;
     response_as_dto?: boolean | null;
+    is_descending?: boolean | null;
   }) {
     const response = await this.actions.get<
       ParticipantAccount[] | PaginatedParticipantAccounts
     >(`${this.wsEndpoint}/${studyId}/participants/accounts`, {
-      params: { limit, offset, search, response_as_dto },
+      params: {
+        limit,
+        offset,
+        search,
+        response_as_dto,
+        is_descending,
+      },
     });
 
     return response.data;
