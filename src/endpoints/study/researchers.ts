@@ -5,6 +5,7 @@ class Researchers extends Endpoint {
   endpoint: string = "/api/studies";
 
   /**
+   * @deprecated.
    * Add researcher to a study
    * @param studyId The ID of the study
    * @param email The email of the researcher to add
@@ -29,6 +30,30 @@ class Researchers extends Endpoint {
   }
 
   /**
+   * Add researcher assistant to a study
+   * @param studyId The ID of the study
+   * @param email The email of the researcher assistant to add
+   */
+  async addResearcherAssistantToStudy({
+    studyId,
+    email,
+  }: {
+    studyId: string;
+    email: string;
+  }) {
+    const query = new URLSearchParams({ email }).toString();
+    await this.actions.post(
+      `${this.endpoint}/${studyId}/researcher-assistants/add`,
+      query,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    );
+  }
+
+  /**
    * Get all researchers for a study
    * @param studyId The ID of the study
    * @returns The list of researchers
@@ -41,6 +66,19 @@ class Researchers extends Endpoint {
   }
 
   /**
+   * Get all researcher assistants for a study
+   * @param studyId The ID of the study
+   * @returns The list of researcher assistants
+   */
+  async getStudyResearcherAssistants({ studyId }: { studyId: string }) {
+    const response = await this.actions.get(
+      `${this.endpoint}/${studyId}/researcher-assistants`,
+    );
+    return response.data as User[];
+  }
+
+  /**
+   * @deprecated
    * Remove a researcher from a study
    * @param studyId The ID of the study
    * @param email The email of the researcher to remove
@@ -55,6 +93,29 @@ class Researchers extends Endpoint {
     const query = new URLSearchParams({ email }).toString();
     await this.actions.delete(
       `${this.endpoint}/${studyId}/researchers?${query}`,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      },
+    );
+  }
+
+  /**
+   * Remove a researcher assistant from a study
+   * @param studyId The ID of the study
+   * @param email The email of the researcher to remove
+   */
+  async removeResearcherAssistantFromStudy({
+    studyId,
+    email,
+  }: {
+    studyId: string;
+    email: string;
+  }) {
+    const query = new URLSearchParams({ email }).toString();
+    await this.actions.delete(
+      `${this.endpoint}/${studyId}/researcher-assistants?${query}`,
       {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

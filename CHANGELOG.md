@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.9] - 2025-06-25
+
+- Added `addResearcherAssistantToStudy` endpoint
+- Added `getStudyResearcherAssistants` endpoint
+- Added `removeResearcherAssistantFromStudy` endpoint
+- Deprecated `addResearcherToStudy` and `removeResearcherFromStudy`. 
+
 ## [2.0.8] - 2025-06-25
 
 ### Changed

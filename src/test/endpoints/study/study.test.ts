@@ -210,6 +210,25 @@ describe("Study", () => {
     expect(researcher).not.toBe(undefined);
   });
 
+  it("should be able to add a researcher assistant to a study", async () => {
+    await expect(
+      testClient.study.researchers.addResearcherAssistantToStudy({
+        studyId: study.studyId.stringRepresentation,
+        email: "researcher_assistant@cachet.dk",
+      }),
+    ).resolves.not.toThrow();
+    const researcherAssistants =
+      await testClient.study.researchers.getStudyResearcherAssistants({
+        studyId: study.studyId.stringRepresentation,
+      });
+
+    expect(researcherAssistants).toBeInstanceOf(Array);
+    const researcher = researcherAssistants.find(
+      (r) => r.email === "researcher_assistant@cachet.dk",
+    );
+    expect(researcher).not.toBe(undefined);
+  });
+
   it("should be able to remove a researcher from a study", async () => {
     await expect(
       testClient.study.researchers.removeResearcherFromStudy({
@@ -227,6 +246,26 @@ describe("Study", () => {
       (r) => r.email === "researcher@cachet.dk",
     );
     expect(researcher).toBe(undefined);
+  });
+
+  it("should be able to remove a researcher assistant from a study", async () => {
+    await expect(
+      testClient.study.researchers.removeResearcherAssistantFromStudy({
+        studyId: study.studyId.stringRepresentation,
+        email: "researcher_assistant@cachet.dk",
+      }),
+    ).resolves.not.toThrow();
+
+    const researcherAssistants =
+      await testClient.study.researchers.getStudyResearcherAssistants({
+        studyId: study.studyId.stringRepresentation,
+      });
+
+    expect(researcherAssistants).toBeInstanceOf(Array);
+    const researcherAssistant = researcherAssistants.find(
+      (r) => r.email === "researcher_assistant@cachet.dk",
+    );
+    expect(researcherAssistant).toBe(undefined);
   });
 
   it("study should be able to go live", async () => {
