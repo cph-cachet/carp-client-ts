@@ -1,17 +1,15 @@
 # Changelog
 
-## [2.0.9] - 2025-06-25
+## [2.1.0] - 2025-06-25
 
-- Added `addResearcherAssistantToStudy` endpoint
-- Added `getStudyResearcherAssistants` endpoint
-- Added `removeResearcherAssistantFromStudy` endpoint
-- Deprecated `addResearcherToStudy` and `removeResearcherFromStudy`. 
+### Added
+-  `addResearcherAssistantToStudy` endpoint
+-  `getStudyResearcherAssistants` endpoint
+-  `removeResearcherAssistantFromStudy` endpoint
+-  `is_descending` parameters to `getParticipantAccounts` endpoint
+### Deprecated 
 
-## [2.0.8] - 2025-06-25
-
-### Changed
-
-- Added `is_descending` parameters to `getParticipantAccounts` endpoint
+- `addResearcherToStudy` and `removeResearcherFromStudy` 
 
 ## [2.0.7] - 2025-06-11
 
