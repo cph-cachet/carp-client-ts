@@ -53,6 +53,8 @@ export const parseUser = (accessToken: string): User => {
     role = "CARP_ADMIN";
   } else if (userDecoded.realm_access.roles.includes("researcher")) {
     role = "RESEARCHER";
+  } else if (userDecoded.realm_access.roles.includes("researcher_assistant")) {
+    role = "RESEARCHER_ASSISTANT";
   } else if (userDecoded.realm_access.roles.includes("participant")) {
     role = "PARTICIPANT";
   } else {

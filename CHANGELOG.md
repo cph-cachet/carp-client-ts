@@ -1,12 +1,13 @@
 # Changelog
 
-## [2.1.0] - 2025-06-25
+## [2.1.0] - 2025-07-31
 
 ### Added
 -  `addResearcherAssistantToStudy` endpoint
 -  `getStudyResearcherAssistants` endpoint
 -  `removeResearcherAssistantFromStudy` endpoint
 -  `is_descending` parameters to `getParticipantAccounts` endpoint
+- updated `parseUser` function to handle `ResearcherAssistant` role
 ### Deprecated 
 
 - `addResearcherToStudy` and `removeResearcherFromStudy` 
