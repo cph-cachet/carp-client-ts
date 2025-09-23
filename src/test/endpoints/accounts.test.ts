@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { setupTestClient } from "@/test/utils";
-import { CarpClient } from "@/client";
+import CarpTestClient from "../../client/carpTestClient";
 
 describe("Accounts service", () => {
-  let testClient: CarpClient;
+  let testClient: CarpTestClient;
 
   beforeAll(async () => {
     const { client } = await setupTestClient();
@@ -19,20 +19,19 @@ describe("Accounts service", () => {
 
   it("Should get redirect URIs", async () => {
     const redirectURIs = await testClient.accounts.getRedirectURIs();
-    expect(redirectURIs.data.length).not.be.equal(0);
-    expect(redirectURIs.data).contains("https://dev.carp.dk/icat*");
+    expect(Object.keys(redirectURIs.data)).contains("studies-app");
+    expect(redirectURIs.data["studies-app"]).contains("carp-studies:/*");
   });
 
   // TODO: stop skipping when backend support works again
   it.todo(
     "Checking if a researcher account is a researcher should return true",
     async () => {
-      await expect(
-        testClient.accounts.isAccountOfRole({
-          role: "RESEARCHER",
-          emailAddress: import.meta.env.VITE_RESEARCHER_EMAIL,
-        }),
-      ).resolves.toBeTruthy();
+      const response = await testClient.accounts.isAccountOfRole({
+        role: "RESEARCHER",
+        emailAddress: import.meta.env.VITE_RESEARCHER_EMAIL,
+      });
+      expect(response.data).toBe(true);
     },
   );
 
@@ -40,12 +39,11 @@ describe("Accounts service", () => {
   it.todo(
     "Checking if a participant account is a researcher should return false",
     async () => {
-      await expect(
-        testClient.accounts.isAccountOfRole({
-          role: "RESEARCHER",
-          emailAddress: import.meta.env.VITE_PARTICIPANT_EMAIL,
-        }),
-      ).resolves.toBeFalsy();
+      const response = await testClient.accounts.isAccountOfRole({
+        role: "RESEARCHER",
+        emailAddress: import.meta.env.VITE_PARTICIPANT_EMAIL,
+      });
+      expect(response.data).toBe(false);
     },
   );
 

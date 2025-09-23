@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../../client/carpTestClient";
 import { setupTestClient } from "@/test/utils";
 import {
   StudyStatus,

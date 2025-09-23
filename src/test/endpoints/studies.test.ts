@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { setupTestClient } from "@/test/utils";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../client/carpTestClient";
 import { StudyStatus } from "@/shared";
 import { StudyOverview } from "@/shared/models";
 

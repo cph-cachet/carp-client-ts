@@ -17,7 +17,7 @@ import {
   getSerializer,
   StudyProtocolSnapshot,
 } from "@/shared";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../client/carpTestClient";
 import { STUDY_PROTOCOL } from "../consts";
 import { setupTestClient } from "../utils";
 import CarpDataStreamBatch from "@/shared/models/carpDataStreamBatch";

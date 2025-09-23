@@ -1,4 +1,4 @@
-import { CarpTestClient } from "..";
+import CarpTestClient from "@/client/carpTestClient";
 import Endpoint from "./endpoint";
 
 export type CarpToken = {
@@ -10,9 +10,9 @@ export type CarpToken = {
 };
 
 class Auth extends Endpoint {
-  private realm: string = import.meta.env.VITE_AUTH_REALM;
+  private readonly realm: string = import.meta.env.VITE_AUTH_REALM;
 
-  private baseUrl: string = import.meta.env.VITE_AUTH_BASE_URL;
+  private readonly baseUrl: string = import.meta.env.VITE_AUTH_BASE_URL;
 
   async login(params: {
     username: string;
@@ -79,8 +79,9 @@ class Auth extends Endpoint {
         },
       },
     );
-
-    (this.client as CarpTestClient).setInternalToken(response.data);
+    if (this.client instanceof CarpTestClient) {
+      this.client.setInternalToken(response.data);
+    }
     this.client.setAuthToken(response.data.access_token);
 
     return response.data;

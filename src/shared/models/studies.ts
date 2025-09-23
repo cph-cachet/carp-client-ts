@@ -19,6 +19,7 @@ export type AnonymousLinksRequest = {
   studyId: string;
   amountOfAccounts: number;
   expirationSeconds: number;
+  clientId: string;
   redirectUri: string;
   participantRoleName: string;
 };
@@ -140,10 +141,6 @@ export interface PaginatedParticipantAccounts {
   total: number;
   search: string;
   participants: ParticipantAccount[];
-}
-
-export interface Statistics {
-  deployments: { deploymentId: string; uploads: any }[];
 }
 
 export interface InactiveDeployment {

@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { STUDY_PROTOCOL } from "@/test/consts";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../client/carpTestClient";
 import { setupTestClient } from "../utils";
 
 describe("Protocols", () => {

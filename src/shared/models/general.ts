@@ -10,4 +10,9 @@ export type User = {
   role: Role[];
 };
 
-export type Role = "RESEARCHER" | "PARTICIPANT" | "SYSTEM_ADMIN" | "CARP_ADMIN";
+export type Role =
+  | "RESEARCHER"
+  | "RESEARCH_ASSISTANT"
+  | "PARTICIPANT"
+  | "SYSTEM_ADMIN"
+  | "CARP_ADMIN";

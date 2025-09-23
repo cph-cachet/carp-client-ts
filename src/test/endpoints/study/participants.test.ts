@@ -9,7 +9,7 @@ import {
   StudyStatus,
   getSerializer,
 } from "@/shared";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../../client/carpTestClient";
 
 describe("Study participant endpoints", () => {
   let testClient: CarpTestClient;
@@ -52,7 +52,7 @@ describe("Study participant endpoints", () => {
     await testClient.study.goLive({
       studyId: study.studyId.stringRepresentation,
     });
-  });
+  }, 30000);
 
   it("should be able to add participant by email to a study", async () => {
     // generate a random email

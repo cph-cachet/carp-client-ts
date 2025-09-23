@@ -14,11 +14,16 @@ class Accounts extends Endpoint {
     emailAddress: string;
     role: string;
   }) {
-    return this.actions.post(`${this.endpoint}/role`, { emailAddress, role });
+    return this.actions.post<boolean>(`${this.endpoint}/role`, {
+      emailAddress,
+      role,
+    });
   }
 
   async getRedirectURIs() {
-    return this.actions.get<string[]>(`${this.endpoint}/redirect-uris`);
+    return this.actions.get<{ [key: string]: string[] }>(
+      `${this.endpoint}/redirect-uris`,
+    );
   }
 }
 

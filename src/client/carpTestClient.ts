@@ -1,8 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Config } from "@/config";
-import { Auth } from "@/endpoints";
+import Auth, { CarpToken } from "@/endpoints/auth";
 import CarpClient from "./carpClient";
-import { CarpToken } from "@/endpoints/auth";
 import { sanitizeRequestConfig, CarpServiceError } from "@/shared";
 
 /*
@@ -16,6 +15,8 @@ export default class CarpTestClient extends CarpClient {
 
   private token: CarpToken;
 
+  private retryCount = 0; // Instance-level retry counter to prevent race conditions
+
   public get getInternalToken(): CarpToken {
     return this.token;
   }
@@ -24,19 +25,21 @@ export default class CarpTestClient extends CarpClient {
     this.token = token;
   }
 
+  public resetRetryCount(): void {
+    this.retryCount = 0;
+  }
+
   constructor(protected readonly config: Config) {
     super(config);
     this.registerEndpoints();
-
-    let retryCount = 0; // Add a counter to track the number of retries
 
     this.getInstance.interceptors.response.use(
       (response) => response,
       async (e) => {
         if (e.code === 403) {
-          if (retryCount < 1) {
+          if (this.retryCount < 1) {
             // Only retry once
-            retryCount += 1;
+            this.retryCount += 1;
             try {
               await this.authentication.refresh();
               const updatedConfig = e.config;
@@ -46,7 +49,7 @@ export default class CarpTestClient extends CarpClient {
               };
               return await this.getInstance.request(updatedConfig);
             } catch (error) {
-              retryCount = 0;
+              this.retryCount = 0;
               return Promise.reject(error);
             }
           }

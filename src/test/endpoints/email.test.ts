@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, test } from "vitest";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../client/carpTestClient";
 import { generateRandomEmail, setupTestClient } from "@/test/utils";
 
 describe("Email", () => {

@@ -10,7 +10,7 @@ import {
   getSerializer,
   StudyProtocolSnapshot,
 } from "@/shared";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../../client/carpTestClient";
 
 describe("Study", () => {
   let testClient: CarpTestClient;
@@ -197,6 +197,7 @@ describe("Study", () => {
       testClient.study.researchers.addResearcherToStudy({
         studyId: study.studyId.stringRepresentation,
         email: "researcher@cachet.dk",
+        role: "RESEARCHER",
       }),
     ).resolves.not.toThrow();
     const researchers = await testClient.study.researchers.getStudyResearchers({
@@ -210,21 +211,22 @@ describe("Study", () => {
     expect(researcher).not.toBe(undefined);
   });
 
-  it("should be able to add a researcher assistant to a study", async () => {
+  it("should be able to add a research assistant to a study", async () => {
     await expect(
-      testClient.study.researchers.addResearcherAssistantToStudy({
+      testClient.study.researchers.addResearcherToStudy({
         studyId: study.studyId.stringRepresentation,
-        email: "researcher_assistant@cachet.dk",
+        email: "research_assistant@cachet.dk",
+        role: "RESEARCH_ASSISTANT",
       }),
     ).resolves.not.toThrow();
-    const researcherAssistants =
-      await testClient.study.researchers.getStudyResearcherAssistants({
+    const researchAssistants =
+      await testClient.study.researchers.getStudyResearchAssistants({
         studyId: study.studyId.stringRepresentation,
       });
 
-    expect(researcherAssistants).toBeInstanceOf(Array);
-    const researcher = researcherAssistants.find(
-      (r) => r.email === "researcher_assistant@cachet.dk",
+    expect(researchAssistants).toBeInstanceOf(Array);
+    const researcher = researchAssistants.find(
+      (r) => r.email === "research_assistant@cachet.dk",
     );
     expect(researcher).not.toBe(undefined);
   });
@@ -248,24 +250,24 @@ describe("Study", () => {
     expect(researcher).toBe(undefined);
   });
 
-  it("should be able to remove a researcher assistant from a study", async () => {
+  it("should be able to remove a research assistant from a study", async () => {
     await expect(
-      testClient.study.researchers.removeResearcherAssistantFromStudy({
+      testClient.study.researchers.removeResearcherFromStudy({
         studyId: study.studyId.stringRepresentation,
-        email: "researcher_assistant@cachet.dk",
+        email: "research_assistant@cachet.dk",
       }),
     ).resolves.not.toThrow();
 
-    const researcherAssistants =
-      await testClient.study.researchers.getStudyResearcherAssistants({
+    const researchAssistants =
+      await testClient.study.researchers.getStudyResearchAssistants({
         studyId: study.studyId.stringRepresentation,
       });
 
-    expect(researcherAssistants).toBeInstanceOf(Array);
-    const researcherAssistant = researcherAssistants.find(
-      (r) => r.email === "researcher_assistant@cachet.dk",
+    expect(researchAssistants).toBeInstanceOf(Array);
+    const researchAssistant = researchAssistants.find(
+      (r) => r.email === "research_assistant@cachet.dk",
     );
-    expect(researcherAssistant).toBe(undefined);
+    expect(researchAssistant).toBe(undefined);
   });
 
   it("study should be able to go live", async () => {

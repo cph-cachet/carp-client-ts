@@ -1,4 +1,4 @@
-import CarpTestClient from "./carpTestClient";
 import CarpClient from "./carpClient";
+import CarpTestClient from "./carpTestClient";
 
-export { CarpTestClient, CarpClient };
+export { CarpClient, CarpTestClient };

@@ -279,6 +279,7 @@ class Recruitment extends Endpoint {
     studyId,
     amountOfAccounts,
     expirationSeconds,
+    clientId,
     redirectUri,
     participantRoleName,
   }: AnonymousLinksRequest) {
@@ -287,6 +288,7 @@ class Recruitment extends Endpoint {
       {
         amountOfAccounts,
         expirationSeconds,
+        clientId,
         redirectUri,
         participantRoleName,
       },
@@ -295,10 +297,9 @@ class Recruitment extends Endpoint {
     const header = response.headers["content-disposition"] as string;
     const regex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
     const matches = regex.exec(header);
-    const filename =
-      matches != null && matches[1]
-        ? matches[1].replace(/['"]/g, "")
-        : "accounts.csv";
+    const filename = matches?.[1]
+      ? matches[1].replace(/['"]/g, "")
+      : "accounts.csv";
 
     return {
       filename,

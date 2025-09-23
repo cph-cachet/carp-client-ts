@@ -1,16 +1,16 @@
 # Changelog
 
-## [2.1.0] - 2025-07-31
+## [2.1.0] - 2025-09-30
 
 ### Added
--  `addResearcherAssistantToStudy` endpoint
--  `getStudyResearcherAssistants` endpoint
--  `removeResearcherAssistantFromStudy` endpoint
--  `is_descending` parameters to `getParticipantAccounts` endpoint
-- updated `parseUser` function to handle `ResearcherAssistant` role
-### Deprecated 
 
-- `addResearcherToStudy` and `removeResearcherFromStudy` 
+- added `getStudyResearchAssistants` endpoint
+- Updated `parseUser` function to handle `ResearchAssistant` role
+- `is_descending` parameters to `getParticipantAccounts` endpoint
+
+### Changed
+
+- `addResearcherToStudy` now requires a role
 
 ## [2.0.7] - 2025-06-11
 
@@ -36,7 +36,7 @@
 ### Fixed
 
 - Fixed serialization of unknown datastream `Data`
-- Fixed `ParticipantDataInput.dateOfLastDataUpload` data type 
+- Fixed `ParticipantDataInput.dateOfLastDataUpload` data type
 
 ## [2.0.4] - 2025-03-10
 

@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, expectTypeOf, it } from "vitest";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../client/carpTestClient";
 import { CarpToken } from "@/endpoints/auth";
 import { CarpServiceError } from "@/shared";
 

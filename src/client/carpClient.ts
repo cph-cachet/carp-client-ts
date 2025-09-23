@@ -12,7 +12,7 @@ import { CarpServiceError, sanitizeRequestConfig } from "@/shared";
 import Protocols from "@/endpoints/protocols";
 
 export default class CarpClient {
-  private instance: AxiosInstance;
+  private readonly instance: AxiosInstance;
 
   accounts: Accounts;
 

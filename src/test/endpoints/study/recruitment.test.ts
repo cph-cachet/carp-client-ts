@@ -10,7 +10,7 @@ import {
   PaginatedParticipantAccounts,
 } from "@/shared";
 import { generateRandomEmail, setupTestClient } from "@/test/utils";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../../client/carpTestClient";
 
 describe("Recruitment", () => {
   let participants: Participant[];

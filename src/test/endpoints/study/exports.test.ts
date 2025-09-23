@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../../client/carpTestClient";
 import { setupTestClient } from "@/test/utils";
 import {
   StudyStatus,
@@ -129,6 +129,30 @@ describe("Exports", () => {
       exportId: exports[0].id,
     });
     expect(downloadedExport).toBeDefined();
+  });
+
+  test("anonymous participant can be generated", async () => {
+    const response =
+      await testClient.study.recruitment.generateAnonymousAccounts({
+        studyId: study.studyId.stringRepresentation,
+        amountOfAccounts: 1,
+        expirationSeconds: 3600,
+        clientId: "studies-app",
+        redirectUri: "carp-studies:/callback",
+        participantRoleName: "Participant",
+      });
+
+    expect(response).toBeDefined();
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
+
+    const exports = await testClient.study.exports.getAll({
+      studyId: study.studyId.stringRepresentation,
+    });
+    expect(
+      exports.find((e) => e.type === "ANONYMOUS_PARTICIPANTS").status,
+    ).toBe("AVAILABLE");
   });
 
   afterAll(async () => {

@@ -29,10 +29,9 @@ class Exports extends Endpoint {
     const regex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
     const header = response.headers["content-disposition"] as string;
     const matches = regex.exec(header);
-    const filename =
-      matches != null && matches[1]
-        ? matches[1].replace(/['"]/g, "")
-        : "download.zip";
+    const filename = matches?.[1]
+      ? matches[1].replace(/['"]/g, "")
+      : "download.zip";
     const data = response.data as ExportData;
 
     return { data, filename } as ExportToDownload;

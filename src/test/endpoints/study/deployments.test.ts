@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { setupTestClient } from "@/test/utils";
 import { STUDY_PROTOCOL } from "@/test/consts";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../../client/carpTestClient";
 import {
   DefaultSerializer,
   ParticipantGroupStatus,

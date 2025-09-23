@@ -1,49 +1,27 @@
-import { User } from "@/shared/models";
+import { Role, User } from "@/shared/models";
 import Endpoint from "../endpoint";
 
 class Researchers extends Endpoint {
   endpoint: string = "/api/studies";
 
   /**
-   * @deprecated.
-   * Add researcher to a study
+   * Add user with email to a study with a role
    * @param studyId The ID of the study
    * @param email The email of the researcher to add
+   * @param role The role of the researcher to add (RESEARCHER or RESEARCH_ASSISTANT)
    */
   async addResearcherToStudy({
     studyId,
     email,
+    role,
   }: {
     studyId: string;
     email: string;
+    role: Role;
   }) {
-    const query = new URLSearchParams({ email }).toString();
+    const query = new URLSearchParams({ email, role }).toString();
     await this.actions.post(
       `${this.endpoint}/${studyId}/researchers/add`,
-      query,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      },
-    );
-  }
-
-  /**
-   * Add researcher assistant to a study
-   * @param studyId The ID of the study
-   * @param email The email of the researcher assistant to add
-   */
-  async addResearcherAssistantToStudy({
-    studyId,
-    email,
-  }: {
-    studyId: string;
-    email: string;
-  }) {
-    const query = new URLSearchParams({ email }).toString();
-    await this.actions.post(
-      `${this.endpoint}/${studyId}/researcher-assistants/add`,
       query,
       {
         headers: {
@@ -66,19 +44,18 @@ class Researchers extends Endpoint {
   }
 
   /**
-   * Get all researcher assistants for a study
+   * Get all research assistants for a study
    * @param studyId The ID of the study
-   * @returns The list of researcher assistants
+   * @returns The list of research assistants
    */
-  async getStudyResearcherAssistants({ studyId }: { studyId: string }) {
+  async getStudyResearchAssistants({ studyId }: { studyId: string }) {
     const response = await this.actions.get(
-      `${this.endpoint}/${studyId}/researcher-assistants`,
+      `${this.endpoint}/${studyId}/research-assistants`,
     );
     return response.data as User[];
   }
 
   /**
-   * @deprecated
    * Remove a researcher from a study
    * @param studyId The ID of the study
    * @param email The email of the researcher to remove
@@ -93,29 +70,6 @@ class Researchers extends Endpoint {
     const query = new URLSearchParams({ email }).toString();
     await this.actions.delete(
       `${this.endpoint}/${studyId}/researchers?${query}`,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      },
-    );
-  }
-
-  /**
-   * Remove a researcher assistant from a study
-   * @param studyId The ID of the study
-   * @param email The email of the researcher to remove
-   */
-  async removeResearcherAssistantFromStudy({
-    studyId,
-    email,
-  }: {
-    studyId: string;
-    email: string;
-  }) {
-    const query = new URLSearchParams({ email }).toString();
-    await this.actions.delete(
-      `${this.endpoint}/${studyId}/researcher-assistants?${query}`,
       {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

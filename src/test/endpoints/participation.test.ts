@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { Instant } from "@js-joda/core";
 import { setupTestClient } from "@/test/utils";
 import { STUDY_PROTOCOL } from "@/test/consts";
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../../client/carpTestClient";
 import {
   Sex,
   DefaultSerializer,

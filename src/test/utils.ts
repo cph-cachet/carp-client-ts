@@ -1,4 +1,4 @@
-import { CarpTestClient } from "@/client";
+import CarpTestClient from "../client/carpTestClient";
 
 export const setupTestClient = async () => {
   const client = new CarpTestClient({
