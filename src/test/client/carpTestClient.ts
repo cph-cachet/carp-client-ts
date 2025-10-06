@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Config } from "@/config";
-import Auth, { CarpToken } from "@/endpoints/auth";
-import CarpClient from "./carpClient";
+import { Auth } from "@/endpoints";
+import CarpClient from "../../client/carpClient";
 import { sanitizeRequestConfig, CarpServiceError } from "@/shared";
 
 /*
@@ -13,17 +13,7 @@ import { sanitizeRequestConfig, CarpServiceError } from "@/shared";
 export default class CarpTestClient extends CarpClient {
   public authentication: Auth;
 
-  private token: CarpToken;
-
   private retryCount = 0; // Instance-level retry counter to prevent race conditions
-
-  public get getInternalToken(): CarpToken {
-    return this.token;
-  }
-
-  public setInternalToken(token: CarpToken): void {
-    this.token = token;
-  }
 
   public resetRetryCount(): void {
     this.retryCount = 0;

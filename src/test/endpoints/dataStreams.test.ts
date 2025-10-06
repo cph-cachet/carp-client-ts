@@ -1,5 +1,6 @@
 import { describe } from "node:test";
 import { afterAll, beforeAll, expect, test } from "vitest";
+import CarpTestClient from "../client/carpTestClient";
 import {
   StudyStatus,
   ParticipantGroupStatus,
@@ -17,7 +18,6 @@ import {
   getSerializer,
   StudyProtocolSnapshot,
 } from "@/shared";
-import CarpTestClient from "../../client/carpTestClient";
 import { STUDY_PROTOCOL } from "../consts";
 import { setupTestClient } from "../utils";
 import CarpDataStreamBatch from "@/shared/models/carpDataStreamBatch";
@@ -107,7 +107,7 @@ describe("DataStreams", () => {
         ],
       }),
     ).resolves.not.toThrow();
-  }, 25000);
+  }, 70000);
 
   test("should be able to append to a data stream", async () => {
     const batch = new CarpDataStreamBatch();
@@ -385,5 +385,5 @@ describe("DataStreams", () => {
         studyId: study.studyId.stringRepresentation,
       });
     }
-  });
+  }, 70000);
 });

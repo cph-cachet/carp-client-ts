@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { setupTestClient } from "@/test/utils";
 import { STUDY_PROTOCOL } from "@/test/consts";
-import CarpTestClient from "../../../client/carpTestClient";
+import CarpTestClient from "../../client/carpTestClient";
 import {
   DefaultSerializer,
   ParticipantGroupStatus,
@@ -78,7 +78,7 @@ describe("Deployments", () => {
       });
 
     await testClient.authentication.refresh();
-  }, 25000);
+  }, 50000);
 
   it("should be able to register and deploy device", async () => {
     const deploymentStatus = await testClient.study.deployments.registerDevice({

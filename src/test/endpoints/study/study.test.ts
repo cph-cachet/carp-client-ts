@@ -1,4 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import CarpTestClient from "../../client/carpTestClient";
 import { STUDY_PROTOCOL, STUDY_PROTOCOL_ID } from "@/test/consts";
 import { setupTestClient } from "@/test/utils";
 import {
@@ -10,7 +11,6 @@ import {
   getSerializer,
   StudyProtocolSnapshot,
 } from "@/shared";
-import CarpTestClient from "../../../client/carpTestClient";
 
 describe("Study", () => {
   let testClient: CarpTestClient;

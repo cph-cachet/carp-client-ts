@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { setupTestClient } from "@/test/utils";
-import CarpTestClient from "../../client/carpTestClient";
 import { StudyStatus } from "@/shared";
 import { StudyOverview } from "@/shared/models";
+import CarpTestClient from "../client/carpTestClient";
 
 describe("Studies service", () => {
   let testClient: CarpTestClient;

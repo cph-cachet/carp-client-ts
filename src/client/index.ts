@@ -1,4 +1,4 @@
 import CarpClient from "./carpClient";
-import CarpTestClient from "./carpTestClient";
 
-export { CarpClient, CarpTestClient };
+// eslint-disable-next-line import/prefer-default-export
+export { CarpClient };

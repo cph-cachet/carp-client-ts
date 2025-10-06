@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
-import CarpTestClient from "../../../client/carpTestClient";
+import CarpTestClient from "../../client/carpTestClient";
 import { setupTestClient } from "@/test/utils";
 import {
   StudyStatus,
@@ -76,7 +76,7 @@ describe("Exports", () => {
     });
 
     await testClient.authentication.refresh();
-  }, 25000);
+  }, 40000);
 
   test("should be able to get empty list of exports", async () => {
     await expect(

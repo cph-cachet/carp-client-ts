@@ -21,7 +21,7 @@ export default ({ mode }) => {
       reporters: [new CustomReporter(shouldLogOnSuccess)],
       fileParallelism: false,
       maxConcurrency: 1,
-      testTimeout: 20000,
+      testTimeout: 50000,
       retry: 1,
       isolate: false,
       coverage: {

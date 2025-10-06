@@ -1,4 +1,3 @@
-import CarpTestClient from "@/client/carpTestClient";
 import Endpoint from "./endpoint";
 
 export type CarpToken = {
@@ -33,7 +32,7 @@ class Auth extends Endpoint {
       },
     );
 
-    (this.client as CarpTestClient).setInternalToken(response.data);
+    this.client.setInternalToken(response.data);
 
     return response.data;
   }
@@ -66,8 +65,7 @@ class Auth extends Endpoint {
       client_id: import.meta.env.VITE_AUTH_CLIENT_ID,
       client_secret: import.meta.env.VITE_AUTH_CLIENT_SECRET,
       grant_type: "refresh_token",
-      refresh_token: (this.client as CarpTestClient).getInternalToken
-        .refresh_token,
+      refresh_token: this.client.getInternalToken.refresh_token,
     };
     const query = new URLSearchParams(params).toString();
     const response = await this.actions.post<CarpToken>(
@@ -79,9 +77,7 @@ class Auth extends Endpoint {
         },
       },
     );
-    if (this.client instanceof CarpTestClient) {
-      this.client.setInternalToken(response.data);
-    }
+    this.client.setInternalToken(response.data);
     this.client.setAuthToken(response.data.access_token);
 
     return response.data;

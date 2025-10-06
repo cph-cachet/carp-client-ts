@@ -7,7 +7,7 @@ import {
   StudyProtocolSnapshot,
   StudyStatus,
 } from "@/shared";
-import CarpTestClient from "@/client/carpTestClient";
+import CarpTestClient from "../../client/carpTestClient";
 import { STUDY_PROTOCOL } from "@/test/consts";
 import { setupTestClient } from "@/test/utils";
 

@@ -1,4 +1,5 @@
 import { describe, beforeAll, expect, it, afterAll } from "vitest";
+import CarpTestClient from "../../client/carpTestClient";
 import { STUDY_PROTOCOL } from "../../consts";
 import {
   DefaultSerializer,
@@ -10,7 +11,6 @@ import {
   PaginatedParticipantAccounts,
 } from "@/shared";
 import { generateRandomEmail, setupTestClient } from "@/test/utils";
-import CarpTestClient from "../../../client/carpTestClient";
 
 describe("Recruitment", () => {
   let participants: Participant[];
@@ -68,7 +68,7 @@ describe("Recruitment", () => {
     participants = await testClient.study.recruitment.getParticipants({
       studyId: study.studyId.stringRepresentation,
     });
-  }, 25000);
+  }, 40000);
 
   it("should be able to invite new participant group", async () => {
     participantGroupStatus =

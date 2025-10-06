@@ -10,6 +10,7 @@ import {
 } from "@/endpoints";
 import { CarpServiceError, sanitizeRequestConfig } from "@/shared";
 import Protocols from "@/endpoints/protocols";
+import { CarpToken } from "@/endpoints/auth";
 
 export default class CarpClient {
   private readonly instance: AxiosInstance;
@@ -30,6 +31,18 @@ export default class CarpClient {
 
   public get getInstance(): AxiosInstance {
     return this.instance;
+  }
+
+  private token: CarpToken;
+
+  // @internal
+  public get getInternalToken(): CarpToken {
+    return this.token;
+  }
+
+  // @internal
+  public setInternalToken(token: CarpToken): void {
+    this.token = token;
   }
 
   constructor(protected readonly config: Config) {
