@@ -8,7 +8,7 @@ export type StudyOverview = {
     value$kotlinx_datetime: Date;
     nanosecondsOfSecond: number;
   };
-  studyProtocolId: string | null;
+  studyProtocolId?: string | null;
   canSetInvitation: boolean;
   canSetStudyProtocol: boolean;
   canDeployToParticipants: boolean;
@@ -21,6 +21,7 @@ export type AnonymousLinksRequest = {
   expirationSeconds: number;
   clientId: string;
   redirectUri: string;
+  subdomain?: string | null;
   participantRoleName: string;
 };
 

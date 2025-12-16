@@ -281,6 +281,7 @@ class Recruitment extends Endpoint {
     expirationSeconds,
     clientId,
     redirectUri,
+    subdomain,
     participantRoleName,
   }: AnonymousLinksRequest) {
     const response = await this.actions.post<AnonymousLinksResponse>(
@@ -290,6 +291,7 @@ class Recruitment extends Endpoint {
         expirationSeconds,
         clientId,
         redirectUri,
+        subdomain,
         participantRoleName,
       },
     );

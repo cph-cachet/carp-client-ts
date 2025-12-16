@@ -7,6 +7,7 @@
 - added `getStudyResearchAssistants` endpoint
 - Updated `parseUser` function to handle `ResearchAssistant` role
 - `is_descending` parameters to `getParticipantAccounts` endpoint
+- Added `subdomain` optional parameter to `generateAnonymousAccounts` endpoint
 
 ### Changed
 
