@@ -41,18 +41,22 @@ class Exports extends Endpoint {
    * Create a summary
    * @param studyId The ID of the study
    * @param deploymentIds: The IDs of the deployments to include in the summary
+   * @param activeDeploymentsOnly: Whether to include only active deployments
    */
   async create({
     studyId,
     deploymentIds,
+    activeDeploymentsOnly,
   }: {
     studyId: string;
     deploymentIds: string[];
+    activeDeploymentsOnly?: boolean;
   }) {
     const response = await this.actions.post<Export>(
       `${this.endpoint}/${studyId}/exports/summaries`,
       {
         deploymentIds,
+        activeDeploymentsOnly,
       },
     );
 

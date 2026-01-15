@@ -4,14 +4,15 @@
 
 ### Added
 
-- added `getStudyResearchAssistants` endpoint
-- Updated `parseUser` function to handle `ResearchAssistant` role
+- Added `getStudyResearchAssistants` endpoint
 - `is_descending` parameters to `getParticipantAccounts` endpoint
 - Added `subdomain` optional parameter to `generateAnonymousAccounts` endpoint
+- Added optional `activeDeploymentsOnly` parameter to `create` endpoint in Exports service
 
 ### Changed
 
 - `addResearcherToStudy` now requires a role
+- Updated `parseUser` function to handle `ResearchAssistant` role
 
 ## [2.0.7] - 2025-06-11
 

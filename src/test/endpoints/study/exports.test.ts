@@ -97,12 +97,24 @@ describe("Exports", () => {
     expect(response.type).toBe("STUDY_DATA");
   });
 
+  test("should be able to create active only export", async () => {
+    const response = await testClient.study.exports.create({
+      studyId: study.studyId.stringRepresentation,
+      deploymentIds: [],
+      activeDeploymentsOnly: true,
+    });
+    expect(response).toBeDefined();
+    expect(response.id).toBeDefined();
+    expect(response.study_id).toBe(study.studyId.stringRepresentation);
+    expect(response.type).toBe("STUDY_DATA");
+  });
+
   test("should be able to get export", async () => {
     await expect(
       testClient.study.exports.getAll({
         studyId: study.studyId.stringRepresentation,
       }),
-    ).resolves.toHaveLength(1);
+    ).resolves.length.at.least(1);
   });
 
   test("should be able to create export for deployment", async () => {
