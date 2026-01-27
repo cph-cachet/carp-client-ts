@@ -145,6 +145,41 @@ export const STUDY_PROTOCOL: StudyProtocol = {
       attribute: {
         __type:
           "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
+        inputDataType: "dk.carp.webservices.input.note",
+      },
+    },
+    {
+      attribute: {
+        __type:
+          "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
+        inputDataType: "dk.carp.webservices.input.onboarding_researcher",
+      },
+    },
+    {
+      attribute: {
+        __type:
+          "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
+        inputDataType: "dk.carp.webservices.input.language",
+      },
+    },
+    {
+      attribute: {
+        __type:
+          "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
+        inputDataType: "dk.carp.webservices.input.occupation",
+      },
+    },
+    {
+      attribute: {
+        __type:
+          "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
+        inputDataType: "dk.carp.webservices.input.educational_degree",
+      },
+    },
+    {
+      attribute: {
+        __type:
+          "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
         inputDataType: "dk.carp.webservices.input.informed_consent",
       },
       assignedTo: {

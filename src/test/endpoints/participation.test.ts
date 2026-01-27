@@ -12,6 +12,12 @@ import {
   getSerializer,
   SexType,
   InformedConsentType,
+  ParticipantNoteType,
+  EducationalDegreeType,
+  ISCEDLevel,
+  OccupationType,
+  OnboardingResearcherType,
+  PreferredLanguageType,
 } from "@/shared";
 
 describe("Participation", () => {
@@ -118,6 +124,22 @@ describe("Participation", () => {
       "Test",
       "Test",
     );
+    newData[ParticipantNoteType.type] = new ParticipantNoteType(
+      "This is a test note",
+    );
+    newData[EducationalDegreeType.type] = new EducationalDegreeType(
+      ISCEDLevel.ISCED_6,
+    );
+    newData[OnboardingResearcherType.type] = new OnboardingResearcherType(
+      researcherAccountId,
+      "Researcher Name",
+      "Researcher Institution",
+    );
+    newData[PreferredLanguageType.type] = new PreferredLanguageType("en");
+    newData[OccupationType.type] = new OccupationType([
+      "Engineer",
+      "Researcher",
+    ]);
 
     await testClient.participation.setParticipantData({
       studyDeploymentId:
@@ -137,6 +159,14 @@ describe("Participation", () => {
     expect(
       (updatedParticipantData.common[SexType.type] as SexType).value,
     ).toEqual(Sex.Male.name);
+
+    expect(
+      (
+        updatedParticipantData.common[
+          ParticipantNoteType.type
+        ] as ParticipantNoteType
+      ).note,
+    ).toEqual("This is a test note");
 
     expect(
       (

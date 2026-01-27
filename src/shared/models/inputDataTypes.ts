@@ -179,6 +179,114 @@ export class SexType implements InputDataType {
   readonly __doNotUseOrImplementIt: Data["__doNotUseOrImplementIt"];
 }
 
+export class ParticipantNoteType implements InputDataType {
+  static type = "dk.carp.webservices.input.note";
+
+  __type = ParticipantNoteType.type;
+
+  note: string;
+
+  constructor(note: string) {
+    this.note = note;
+  }
+
+  readonly __doNotUseOrImplementIt: Data["__doNotUseOrImplementIt"];
+}
+
+export enum ISCEDLevel {
+  ISCED_0 = "ISCED_0",
+  ISCED_1 = "ISCED_1",
+  ISCED_2 = "ISCED_2",
+  ISCED_3 = "ISCED_3",
+  ISCED_4 = "ISCED_4",
+  ISCED_5 = "ISCED_5",
+  ISCED_6 = "ISCED_6",
+  ISCED_7 = "ISCED_7",
+  ISCED_8 = "ISCED_8",
+}
+
+export class EducationalDegreeType implements InputDataType {
+  static type = "dk.carp.webservices.input.educational_degree";
+
+  __type = EducationalDegreeType.type;
+
+  level: ISCEDLevel;
+
+  details?: string | null;
+
+  constructor(level: ISCEDLevel, details?: string | null) {
+    this.level = level;
+    this.details = details;
+  }
+
+  readonly __doNotUseOrImplementIt: Data["__doNotUseOrImplementIt"];
+}
+
+export class OnboardingResearcherType implements InputDataType {
+  static type = "dk.carp.webservices.input.onboarding_researcher";
+
+  __type = OnboardingResearcherType.type;
+
+  researcherId: string;
+
+  researcherName: string;
+
+  institutionName: string;
+
+  constructor(
+    researcherId: string,
+    researcherName: string,
+    institutionName: string,
+  ) {
+    this.researcherId = researcherId;
+    this.researcherName = researcherName;
+    this.institutionName = institutionName;
+  }
+
+  readonly __doNotUseOrImplementIt: Data["__doNotUseOrImplementIt"];
+}
+
+export class PreferredLanguageType implements InputDataType {
+  static type = "dk.carp.webservices.input.language";
+
+  __type = PreferredLanguageType.type;
+
+  languageCode: string;
+
+  region?: string | null;
+
+  displayName?: string | null;
+
+  constructor(
+    languageCode: string,
+    region?: string | null,
+    displayName?: string | null,
+  ) {
+    this.languageCode = languageCode;
+    this.region = region;
+    this.displayName = displayName;
+  }
+
+  readonly __doNotUseOrImplementIt: Data["__doNotUseOrImplementIt"];
+}
+
+export class OccupationType implements InputDataType {
+  static type = "dk.carp.webservices.input.occupation";
+
+  __type = OccupationType.type;
+
+  roles: string[];
+
+  other?: string | null;
+
+  constructor(roles: string[], other?: string | null) {
+    this.roles = roles;
+    this.other = other;
+  }
+
+  readonly __doNotUseOrImplementIt: Data["__doNotUseOrImplementIt"];
+}
+
 export class ExpectedParticipantData {
   common: { [key: string]: InputDataType };
 
