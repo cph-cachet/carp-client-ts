@@ -287,6 +287,46 @@ export class OccupationType implements InputDataType {
   readonly __doNotUseOrImplementIt: Data["__doNotUseOrImplementIt"];
 }
 
+declare namespace HandedOutDeviceType {
+  export type Device = InstanceType<typeof HandedOutDeviceType.Device>;
+}
+
+export class HandedOutDeviceType implements InputDataType {
+  static type = "dk.carp.webservices.input.handed_out_device";
+
+  static Device = class Device {
+    deviceId: string;
+
+    deviceModel?: string | null;
+
+    handedOutAt?: Instant | null;
+
+    notes?: string | null;
+
+    constructor(
+      deviceId: string,
+      deviceModel?: string | null,
+      handedOutAt?: Instant | null,
+      notes?: string | null,
+    ) {
+      this.deviceId = deviceId;
+      this.deviceModel = deviceModel;
+      this.handedOutAt = handedOutAt;
+      this.notes = notes;
+    }
+  };
+
+  __type = HandedOutDeviceType.type;
+
+  devices: HandedOutDeviceType.Device[];
+
+  constructor(devices: HandedOutDeviceType.Device[]) {
+    this.devices = devices;
+  }
+
+  readonly __doNotUseOrImplementIt: Data["__doNotUseOrImplementIt"];
+}
+
 export class ExpectedParticipantData {
   common: { [key: string]: InputDataType };
 

@@ -18,6 +18,7 @@ import {
   OccupationType,
   OnboardingResearcherType,
   PreferredLanguageType,
+  HandedOutDeviceType,
 } from "@/shared";
 
 describe("Participation", () => {
@@ -140,6 +141,15 @@ describe("Participation", () => {
       "Engineer",
       "Researcher",
     ]);
+    newData[HandedOutDeviceType.type] = new HandedOutDeviceType([
+      new HandedOutDeviceType.Device("Device 1", "Participant's phone"),
+      new HandedOutDeviceType.Device(
+        "Device 2",
+        "Participant's bike",
+        Instant.now(),
+        "Merida Dual Thrust",
+      ),
+    ]);
 
     await testClient.participation.setParticipantData({
       studyDeploymentId:
@@ -167,6 +177,43 @@ describe("Participation", () => {
         ] as ParticipantNoteType
       ).note,
     ).toEqual("This is a test note");
+
+    expect(
+      (
+        updatedParticipantData.common[
+          EducationalDegreeType.type
+        ] as EducationalDegreeType
+      ).level,
+    ).toEqual(ISCEDLevel.ISCED_6);
+
+    expect(
+      (
+        updatedParticipantData.common[
+          OnboardingResearcherType.type
+        ] as OnboardingResearcherType
+      ).researcherId,
+    ).toEqual(researcherAccountId);
+
+    expect(
+      (
+        updatedParticipantData.common[
+          PreferredLanguageType.type
+        ] as PreferredLanguageType
+      ).languageCode,
+    ).toEqual("en");
+
+    expect(
+      (updatedParticipantData.common[OccupationType.type] as OccupationType)
+        .roles,
+    ).toEqual(["Engineer", "Researcher"]);
+
+    expect(
+      (
+        updatedParticipantData.common[
+          HandedOutDeviceType.type
+        ] as HandedOutDeviceType
+      ).devices,
+    ).toHaveLength(2);
 
     expect(
       (

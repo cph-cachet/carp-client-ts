@@ -72,7 +72,7 @@ export const STUDY_PROTOCOL: StudyProtocol = {
       sourceDeviceRoleName: "Participant's phone",
     },
   },
-  createdOn: new Date("2022-01-18T10:56:59Z"),
+  createdOn: new Date(),
   connections: [
     {
       roleName: "Participant's bike",
@@ -174,6 +174,13 @@ export const STUDY_PROTOCOL: StudyProtocol = {
         __type:
           "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
         inputDataType: "dk.carp.webservices.input.educational_degree",
+      },
+    },
+    {
+      attribute: {
+        __type:
+          "dk.cachet.carp.common.application.users.ParticipantAttribute.DefaultParticipantAttribute",
+        inputDataType: "dk.carp.webservices.input.handed_out_device",
       },
     },
     {
