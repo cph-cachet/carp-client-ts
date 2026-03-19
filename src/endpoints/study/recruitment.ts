@@ -75,6 +75,9 @@ class Recruitment extends Endpoint {
     return participantGroupStatus;
   }
 
+  /**
+   * @deprecated use `queryParticipantAccounts` method instead
+   */
   async getParticipantAccounts({
     studyId,
     limit,
@@ -103,6 +106,26 @@ class Recruitment extends Endpoint {
     });
 
     return response.data;
+  }
+
+  /**
+   *
+   * @param studyId The ID of the study
+   * @param request ParticipantAccountRequest for pagination, filtering and searching
+   * @returns Paginated object for participant accounts
+   */
+  async queryParticipantAccounts({
+    studyId,
+    request,
+  }: {
+    studyId: string;
+    request: ParticipantAccountsRequestDto;
+  }) {
+    return (
+      await this.actions.post<
+        PaginatedResponseDto<ParticipantAccountSummaryDto>
+      >(`${this.wsEndpoint}/${studyId}/participants/accounts`, request)
+    ).data;
   }
 
   /**
@@ -283,6 +306,7 @@ class Recruitment extends Endpoint {
     redirectUri,
     subdomain,
     participantRoleName,
+    useFastPipeline,
   }: AnonymousLinksRequest) {
     const response = await this.actions.post<AnonymousLinksResponse>(
       `${this.wsEndpoint}/${studyId}/exports/anonymous-participants`,
@@ -293,6 +317,7 @@ class Recruitment extends Endpoint {
         redirectUri,
         subdomain,
         participantRoleName,
+        useFastPipeline,
       },
     );
 
@@ -352,3 +377,33 @@ class Recruitment extends Endpoint {
 }
 
 export default Recruitment;
+export type SortDirection = "asc" | "desc";
+export type ParticipantOrderBy =
+  | "accountidentity"
+  | "account_identity"
+  | "username"
+  | "email"
+  | "isdeployed"
+  | "is_deployed";
+export type ParticipantAccountsRequestDto = {
+  page?: number | null;
+  size?: number | null;
+  search?: String | null;
+  isDeployed?: Boolean | null;
+  sortDirection?: SortDirection | null;
+  sortBy?: ParticipantOrderBy | null;
+};
+export type PaginatedResponseDto<T> = {
+  page?: number | null;
+  size?: number | null;
+  total?: number | null;
+  content: Array<T>;
+};
+export type ParticipantAccountSummaryDto = {
+  participantId: String;
+  firstName?: String | null;
+  lastName?: String | null;
+  accountIdentity?: String | null;
+  isDeployed: Boolean;
+  carpUser: Boolean;
+};
