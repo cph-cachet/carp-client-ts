@@ -140,6 +140,33 @@ describe("Recruitment", () => {
     expect(account.role).toBeDefined();
   });
 
+  it("should be able to get paginated participant account information", async () => {
+    const accountInfo =
+      await testClient.study.recruitment.queryParticipantAccounts({
+        studyId: study.studyId.stringRepresentation,
+        request: {
+          page: 0,
+          size: 50,
+          search: null,
+          isDeployed: null,
+          sortDirection: "asc",
+          sortBy: "is_deployed",
+        },
+      });
+
+    expect(accountInfo).toBeDefined();
+    expect(accountInfo.page).toBe(0);
+    expect(accountInfo.size).toBe(50);
+    expect(accountInfo.total).toBe(2);
+    expect(accountInfo.content).toBeInstanceOf(Array);
+    const account = accountInfo.content[0];
+    expect(account).toBeDefined();
+    expect(account.accountIdentity).toBeDefined();
+    expect(account.participantId).toBeDefined();
+    expect(account.isDeployed).toBeDefined();
+    expect(account.carpUser).toBeDefined();
+  });
+
   it("should be able to get participant account information paginated", async () => {
     const accountInfo =
       await testClient.study.recruitment.getParticipantAccounts({

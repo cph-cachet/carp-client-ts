@@ -110,11 +110,10 @@ describe("Exports", () => {
   });
 
   test("should be able to get export", async () => {
-    await expect(
-      testClient.study.exports.getAll({
-        studyId: study.studyId.stringRepresentation,
-      }),
-    ).resolves.length.at.least(1);
+    const result = await testClient.study.exports.getAll({
+      studyId: study.studyId.stringRepresentation,
+    });
+    expect(result.length).toBeGreaterThan(0);
   });
 
   test("should be able to create export for deployment", async () => {
@@ -177,6 +176,7 @@ describe("Exports", () => {
         redirectUri: "https://csa.dev.carp.dk/anonyomous",
         subdomain: null,
         participantRoleName: "Participant",
+        useFastPipeline: true,
       });
 
     expect(response).toBeDefined();

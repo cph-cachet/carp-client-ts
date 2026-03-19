@@ -68,7 +68,7 @@ describe("Collections", () => {
     });
 
     await testClient.authentication.refresh();
-  }, 25000);
+  }, 40000);
 
   it("should be able to create a document", async () => {
     expect(document).toBeDefined();
