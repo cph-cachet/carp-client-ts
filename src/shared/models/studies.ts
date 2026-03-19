@@ -23,6 +23,7 @@ export type AnonymousLinksRequest = {
   redirectUri: string;
   subdomain?: string | null;
   participantRoleName: string;
+  useFastPipeline?: boolean | null;
 };
 
 export type AnonymousLinksResponse = {
