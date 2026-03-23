@@ -3,7 +3,10 @@ import {
   AnonymousLinksResponse,
   InactiveDeployment,
   PaginatedParticipantAccounts,
+  PaginatedResponseDto,
   ParticipantAccount,
+  ParticipantAccountsRequestDto,
+  ParticipantAccountSummaryDto,
   ParticipantGroups,
   ParticipantInfo,
   ParticipantWithRoles,
@@ -377,34 +380,3 @@ class Recruitment extends Endpoint {
 }
 
 export default Recruitment;
-export type SortDirection = "asc" | "desc";
-export type ParticipantOrderBy =
-  | "accountidentity"
-  | "account_identity"
-  | "username"
-  | "email"
-  | "isdeployed"
-  | "is_deployed";
-export type ParticipantAccountsRequestDto = {
-  page?: number | null;
-  size?: number | null;
-  search?: String | null;
-  isDeployed?: Boolean | null;
-  sortDirection?: SortDirection | null;
-  sortBy?: ParticipantOrderBy | null;
-};
-export type PaginatedResponseDto<T> = {
-  page?: number | null;
-  size?: number | null;
-  total?: number | null;
-  content: Array<T>;
-};
-export type ParticipantAccountSummaryDto = {
-  participantId: String;
-  firstName?: String | null;
-  lastName?: String | null;
-  accountIdentity?: String | null;
-  invitedOn?: Date | null;
-  isDeployed: Boolean;
-  carpUser: Boolean;
-};
