@@ -164,6 +164,7 @@ describe("Recruitment", () => {
     expect(account.accountIdentity).toBeDefined();
     expect(account.participantId).toBeDefined();
     expect(account.isDeployed).toBeDefined();
+    expect(account.invitedOn).toBeDefined();
     expect(account.carpUser).toBeDefined();
   });
 

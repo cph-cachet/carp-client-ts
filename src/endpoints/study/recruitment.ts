@@ -404,6 +404,7 @@ export type ParticipantAccountSummaryDto = {
   firstName?: String | null;
   lastName?: String | null;
   accountIdentity?: String | null;
+  invitedOn?: Date | null;
   isDeployed: Boolean;
   carpUser: Boolean;
 };
