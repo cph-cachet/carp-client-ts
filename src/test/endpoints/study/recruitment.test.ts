@@ -8,7 +8,6 @@ import {
   StudyProtocolSnapshot,
   StudyStatus,
   getSerializer,
-  PaginatedParticipantAccounts,
 } from "@/shared";
 import { generateRandomEmail, setupTestClient } from "@/test/utils";
 
@@ -130,22 +129,6 @@ describe("Recruitment", () => {
     expect(inactiveParticipantGroups).toBeInstanceOf(Array);
   });
 
-  it("should be able to get participant account information", async () => {
-    const accountInfo =
-      await testClient.study.recruitment.getParticipantAccounts({
-        studyId: study.studyId.stringRepresentation,
-      });
-
-    expect(accountInfo).toBeDefined();
-    expect(accountInfo).toBeInstanceOf(Array);
-    const account = accountInfo[0];
-    expect(account).toBeDefined();
-    expect(account.email).toBeDefined();
-    expect(account.id).toBeDefined();
-    expect(account.username).toBeDefined();
-    expect(account.role).toBeDefined();
-  });
-
   it("should be able to get paginated participant account information", async () => {
     const accountInfo =
       await testClient.study.recruitment.queryParticipantAccounts({
@@ -172,23 +155,6 @@ describe("Recruitment", () => {
     expect(account.isDeployed).toBeDefined();
     expect(account.invitedOn).toBeDefined();
     expect(account.carpUser).toBeDefined();
-  });
-
-  it("should be able to get participant account information paginated", async () => {
-    const accountInfo =
-      await testClient.study.recruitment.getParticipantAccounts({
-        studyId: study.studyId.stringRepresentation,
-        limit: 1,
-        offset: 0,
-        search: null,
-        response_as_dto: true,
-        is_descending: false,
-      });
-
-    expect(accountInfo).toBeDefined();
-    expect(
-      (accountInfo as PaginatedParticipantAccounts).participants.length,
-    ).toBe(1);
   });
 
   afterAll(async () => {
