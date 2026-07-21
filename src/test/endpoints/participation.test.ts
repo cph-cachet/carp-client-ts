@@ -89,8 +89,8 @@ describe("Participation", () => {
 
     const foundInvitation = invitations.find(
       (invitation) =>
-        JSON.parse(invitation.invitation.applicationData)?.studyId ===
-        studyStatus.studyId.stringRepresentation,
+        JSON.parse(invitation.invitation.applicationData?.data ?? "{}")
+          .studyId === studyStatus.studyId.stringRepresentation,
     );
 
     expect(foundInvitation).toBeDefined();
@@ -103,8 +103,8 @@ describe("Participation", () => {
 
     const foundInvitation = invitations.find(
       (invitation) =>
-        JSON.parse(invitation.invitation.applicationData)?.studyId ===
-        studyStatus.studyId.stringRepresentation,
+        JSON.parse(invitation.invitation.applicationData?.data ?? "{}")
+          .studyId === studyStatus.studyId.stringRepresentation,
     );
 
     const participantData = await testClient.participation.getParticipantData({
@@ -231,8 +231,8 @@ describe("Participation", () => {
 
     const foundInvitation = invitations.find(
       (invitation) =>
-        JSON.parse(invitation.invitation.applicationData)?.studyId ===
-        studyStatus.studyId.stringRepresentation,
+        JSON.parse(invitation.invitation.applicationData?.data ?? "{}")
+          .studyId === studyStatus.studyId.stringRepresentation,
     );
     const participantData =
       await testClient.participation.getParticipantDataList({

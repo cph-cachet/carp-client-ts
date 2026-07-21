@@ -72,12 +72,12 @@ class Participation extends Endpoint {
     data.studyDeploymentId =
       responseData.studyDeploymentId as unknown as string;
     Object.entries(responseData.common).forEach(([key, value]) => {
-      data.common[key] = value;
+      data.common[key] = value as unknown as InputDataType;
     });
     (responseData.roles as unknown as RoleData[]).forEach((value) => {
       data.roles[value.roleName] = {};
       Object.entries(value.data).forEach(([key1, value1]) => {
-        data.roles[value.roleName][key1] = value1;
+        data.roles[value.roleName][key1] = value1 as unknown as InputDataType;
       });
     });
 
@@ -97,7 +97,9 @@ class Participation extends Endpoint {
     const studyIdsSet = toSet(ids);
 
     const request = new ParticipationServiceRequest.GetParticipantDataList(
-      studyIdsSet,
+      studyIdsSet as unknown as ConstructorParameters<
+        typeof ParticipationServiceRequest.GetParticipantDataList
+      >[0],
     );
     const serializedRequest = serialize({
       request,
@@ -112,12 +114,12 @@ class Participation extends Endpoint {
       const d = new ExpectedParticipantData();
       d.studyDeploymentId = rd.studyDeploymentId as unknown as string;
       Object.entries(rd.common).forEach(([key, value]) => {
-        d.common[key] = value;
+        d.common[key] = value as unknown as InputDataType;
       });
       (rd.roles as unknown as RoleData[]).forEach((value) => {
         Object.entries(value.data).forEach(([key1, value1]) => {
           d.roles[value.roleName] = {};
-          d.roles[value.roleName][key1] = value1;
+          d.roles[value.roleName][key1] = value1 as unknown as InputDataType;
         });
       });
       return d;
@@ -144,7 +146,9 @@ class Participation extends Endpoint {
     const participantDataRequest =
       new ParticipationServiceRequest.SetParticipantData(
         new UUID(studyDeploymentId),
-        toMap([]),
+        toMap([]) as unknown as ConstructorParameters<
+          typeof ParticipationServiceRequest.SetParticipantData
+        >[1],
         inputRoleName,
       );
     let request = serialize({
