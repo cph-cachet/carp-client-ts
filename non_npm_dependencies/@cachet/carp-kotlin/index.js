@@ -1,72 +1,96 @@
 /// <reference path="kotlin-kotlin-stdlib.d.ts" />
 import extend from "@cachet/kotlin-kotlin-stdlib";
 // Facade with better method names and type conversions for internal types.
-export var kotlin;
-(function (kotlin) {
-    kotlin.toLong = extend.$_$.toLong_0;
+export var kotlinExport;
+(function (kotlinExport) {
+    /**
+     * @deprecated Use {@link BigInt} constructor or bigint literal instead.
+     */
+    kotlinExport.toLong = (number) => BigInt(number);
+    /**
+     * @deprecated Use {@link KtMap} and initialize using JS arrays instead.
+     */
     class Pair {
         constructor(first, second) {
             let kotlinPair = new extend.$_$.Pair(first, second);
-            kotlinPair.first = kotlinPair.md_1;
-            kotlinPair.second = kotlinPair.nd_1;
             return kotlinPair;
         }
-        get first() { return this.first; }
-        get second() { return this.second; }
     }
-    kotlin.Pair = Pair;
-})(kotlin || (kotlin = {}));
-(function (kotlin) {
+    kotlinExport.Pair = Pair;
+})(kotlinExport || (kotlinExport = {}));
+(function (kotlinExport) {
     var collections;
     (function (collections) {
-        collections.listOf = extend.$_$.listOf_0;
-        collections.setOf = extend.$_$.setOf_0;
-        collections.mapOf = function (pairs) {
-            return extend.$_$.mapOf_0(pairs);
-        };
-    })(collections = kotlin.collections || (kotlin.collections = {}));
-})(kotlin || (kotlin = {}));
-(function (kotlin) {
+        collections.KtList = extend.kotlin.collections.KtList;
+        collections.KtSet = extend.kotlin.collections.KtSet;
+        collections.KtMap = extend.kotlin.collections.KtMap;
+        /**
+         * @deprecated Use {@link KtList.fromJsArray} instead.
+         */
+        function listOf(array) { return collections.KtList.fromJsArray(array); }
+        collections.listOf = listOf;
+        /**
+         * @deprecated Use {@link KtSet.fromJsSet} instead.
+         */
+        function setOf(array) { return collections.KtSet.fromJsSet(new Set(array)); }
+        collections.setOf = setOf;
+        /**
+         * @deprecated Use {@link KtMap.fromJsMap} instead.
+         */
+        function mapOf(pairs) {
+            return collections.KtMap.fromJsMap(new Map(pairs.map(pair => [pair.first, pair.second])));
+        }
+        collections.mapOf = mapOf;
+    })(collections = kotlinExport.collections || (kotlinExport.collections = {}));
+})(kotlinExport || (kotlinExport = {}));
+(function (kotlinExport) {
     var time;
     (function (time) {
+        let Clock;
+        (function (Clock) {
+            Clock.System = extend.$_$.System_instance;
+        })(Clock = time.Clock || (time.Clock = {}));
         let Duration;
         (function (Duration) {
-            Duration.Companion = extend.$_$.Companion_getInstance_13();
-            Duration.parseIsoString = Duration.Companion.zf;
-            Duration.ZERO = Duration.Companion.wf_1;
-            Duration.INFINITE = Duration.Companion.xf_1;
+            Duration.Companion = extend.$_$.Companion_getInstance_17();
+            Duration.parseIsoString = Duration.Companion.tg;
+            Duration.ZERO = Duration.Companion.mg_1;
+            Duration.INFINITE = Duration.Companion.ng_1;
         })(Duration = time.Duration || (time.Duration = {}));
-    })(time = kotlin.time || (kotlin.time = {}));
-})(kotlin || (kotlin = {}));
+    })(time = kotlinExport.time || (kotlinExport.time = {}));
+})(kotlinExport || (kotlinExport = {}));
 // Implement base interfaces in internal types.
-extend.$_$.Long.prototype.toNumber = function () { return this.da(); };
-Object.defineProperty(extend.$_$.Long.prototype, "inWholeMilliseconds", {
+BigInt.prototype.toNumber = function () { return Number(this); };
+BigInt.prototype.toDurationString = function () { return extend.$_$.Duration__toString_impl_8d916b(this); };
+extend.$_$.System.prototype.now = function () { return this.lg(); };
+extend.$_$.Instant.prototype.toEpochMilliseconds = function () { return this.ih(); };
+Object.defineProperty(BigInt.prototype, "inWholeMilliseconds", {
     get: function inWholeMilliseconds() {
-        return extend.$_$._Duration___get_inWholeMilliseconds__impl__msfiry(this).toNumber();
+        return extend.$_$._Duration___get_inWholeMilliseconds__impl__msfiry(this);
     }
 });
-Object.defineProperty(extend.$_$.Long.prototype, "inWholeMicroseconds", {
+Object.defineProperty(BigInt.prototype, "inWholeMicroseconds", {
     get: function inWholeMicroseconds() {
-        return extend.$_$._Duration___get_inWholeMicroseconds__impl__8oe8vv(this).toNumber();
+        return extend.$_$._Duration___get_inWholeMicroseconds__impl__8oe8vv(this);
     }
 });
 extend.$_$.EmptyList.prototype.contains = function (value) { return false; };
 extend.$_$.EmptyList.prototype.size = function () { return 0; };
 extend.$_$.EmptyList.prototype.toArray = function () { return []; };
-extend.$_$.AbstractMutableList.prototype.contains = function (value) { return this.p(value); };
-extend.$_$.AbstractMutableList.prototype.size = function () { return this.n(); };
+extend.$_$.AbstractMutableList.prototype.contains = function (value) { return this.asJsReadonlyArrayView().includes(value); };
+extend.$_$.AbstractMutableList.prototype.size = function () { return this.asJsReadonlyArrayView().length; };
 extend.$_$.EmptySet.prototype.contains = function (value) { return false; };
 extend.$_$.EmptySet.prototype.size = function () { return 0; };
 extend.$_$.EmptySet.prototype.toArray = function () { return []; };
-extend.$_$.HashSet.prototype.contains = function (value) { return this.p(value); };
-extend.$_$.HashSet.prototype.size = function () { return this.n(); };
-extend.$_$.HashMap.prototype.get = function (key) { return this.x2(key); };
+extend.$_$.HashSet.prototype.contains = function (value) { return this.asJsReadonlySetView().has(value); };
+extend.$_$.HashSet.prototype.size = function () { return this.asJsReadonlySetView().size; };
+extend.$_$.HashMap.prototype.get = function (key) { return this.asJsReadonlyMapView().get(key); };
 Object.defineProperty(extend.$_$.HashMap.prototype, "keys", {
-    get: function keys() { return this.l2(); }
+    get: function keys() { return extend.kotlin.collections.KtSet.fromJsSet(new Set(this.asJsReadonlyMapView().keys())); }
 });
 Object.defineProperty(extend.$_$.HashMap.prototype, "values", {
-    get: function values() { return this.m2(); }
+    get: function values() { return extend.kotlin.collections.KtList.fromJsArray([...this.asJsReadonlyMapView().values()]); }
 });
 // Export facade.
-export default kotlin;
+export default kotlinExport;
 //# sourceMappingURL=index.js.map

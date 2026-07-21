@@ -1,6 +1,8 @@
 import extend from "@cachet/carp-deployments-core-generated";
+import kotlinStdLib from "@cachet/carp-kotlin";
 import carpCommon from "@cachet/carp-common";
 // Set namespace objects of dependent imported modules, so that they aren't "undefined" at runtime.
+extend.kotlin = kotlinStdLib;
 extend.dk.cachet.carp.common = carpCommon.dk.cachet.carp.common;
 // Re-export augmented types.
 export { default } from "@cachet/carp-deployments-core-generated";

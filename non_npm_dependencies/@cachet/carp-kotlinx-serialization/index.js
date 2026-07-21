@@ -7,7 +7,16 @@ export var kotlinx;
 (function (kotlinx) {
     var serialization;
     (function (serialization) {
-        function getSerializer(type) { return type.Companion.m16(); }
+        function getSerializer(type) {
+            const associatedObjects = Object.values(type.$metadata$.associatedObjects);
+            const companion = type.Companion !== undefined
+                ? type.Companion
+                : associatedObjects.find((o) => o.name.startsWith("Companion"))?.();
+            const serializer = companion !== undefined
+                ? companion.i18()
+                : associatedObjects.find((o) => o.name.startsWith("$serializer"))?.();
+            return serializer;
+        }
         serialization.getSerializer = getSerializer;
     })(serialization = kotlinx.serialization || (kotlinx.serialization = {}));
 })(kotlinx || (kotlinx = {}));
@@ -35,13 +44,13 @@ export var kotlinx;
     })(serialization = kotlinx.serialization || (kotlinx.serialization = {}));
 })(kotlinx || (kotlinx = {}));
 // Implement base interfaces in internal types.
-extendJson.$_$.JsonImpl.prototype.encodeToString =
+extendJson.$_$.Json.prototype.encodeToString =
     function (serializer, value) {
-        return this.i14(serializer, value);
+        return this.x15(serializer, value);
     };
-extendJson.$_$.JsonImpl.prototype.decodeFromString =
+extendJson.$_$.Json.prototype.decodeFromString =
     function (serializer, string) {
-        return this.j14(serializer, string);
+        return this.y15(serializer, string);
     };
 // Export facade.
 export default kotlinx;
