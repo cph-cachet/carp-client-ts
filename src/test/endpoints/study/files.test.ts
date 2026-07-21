@@ -52,6 +52,11 @@ describe("Files", () => {
       studyId: study.studyId.stringRepresentation,
     });
 
+    // HACK: sleep for a while to allow the study to be marked ready for deployment
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
+
     const emails = [import.meta.env.VITE_RESEARCHER_EMAIL];
 
     // add the participants

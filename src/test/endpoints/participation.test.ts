@@ -58,6 +58,11 @@ describe("Participation", () => {
       studyId: studyStatus.studyId.stringRepresentation,
     });
 
+    // HACK: sleep for a while to allow the study to be marked ready for deployment
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
+
     // add myself as a participant
     participant = await testClient.study.recruitment.addOneByEmail({
       studyId: studyStatus.studyId.stringRepresentation,
