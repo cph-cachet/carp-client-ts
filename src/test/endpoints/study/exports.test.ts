@@ -53,6 +53,11 @@ describe("Exports", () => {
       studyId: study.studyId.stringRepresentation,
     });
 
+    // HACK: sleep for a while to allow the study to be marked ready for deployment
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
+
     const emails = [import.meta.env.VITE_RESEARCHER_EMAIL];
 
     // add the participants
@@ -128,16 +133,19 @@ describe("Exports", () => {
   });
 
   test("export can be downloaded", async () => {
-    await testClient.study.exports.create({
+    const createdExport = await testClient.study.exports.create({
       studyId: study.studyId.stringRepresentation,
       deploymentIds: [],
     });
-    const exports = await testClient.study.exports.getAll({
-      studyId: study.studyId.stringRepresentation,
+
+    // HACK: sleep for a while to allow the export file to finish generating
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
     });
+
     const downloadedExport = await testClient.study.exports.download({
       studyId: study.studyId.stringRepresentation,
-      exportId: exports[0].id,
+      exportId: createdExport.id,
     });
     expect(downloadedExport).toBeDefined();
   });

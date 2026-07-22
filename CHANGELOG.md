@@ -8,11 +8,18 @@
 - `is_descending` parameters to `getParticipantAccounts` endpoint
 - Added `subdomain` optional parameter to `generateAnonymousAccounts` endpoint
 - Added optional `activeDeploymentsOnly` parameter to `create` endpoint in Exports service
+- Added `createParticipantGroup`, `updateParticipantGroup` and `inviteParticipantGroup` endpoints
 
 ### Changed
 
 - `addResearcherToStudy` now requires a role
 - Updated `parseUser` function to handle `ResearchAssistant` role
+- Updated to carp.core 1.3
+- Bumped `axios` to `1.18.1` to patch a critical vulnerability in its bundled `form-data` dependency
+
+### Removed
+
+- Removed deprecated GET-based `getParticipantAccounts` endpoint; use `queryParticipantAccounts` instead
 
 ## [2.0.7] - 2025-06-11
 

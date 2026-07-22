@@ -1,4 +1,5 @@
 import {
+  ApplicationData,
   StudyDetails,
   StudyInvitation,
   StudyProtocolSnapshot,
@@ -179,7 +180,9 @@ class Study extends Endpoint {
       new StudyInvitation(
         title,
         description,
-        applicationData ? JSON.stringify(applicationData) : null,
+        applicationData
+          ? new ApplicationData(JSON.stringify(applicationData))
+          : null,
       ),
     );
     const request = serialize({

@@ -6,7 +6,6 @@ import {
   getSerializer,
   StudyProtocolSnapshot,
   DefaultSerializer,
-  ParticipantGroupStatus,
 } from "@/shared";
 import { STUDY_PROTOCOL } from "@/test/consts";
 
@@ -14,7 +13,7 @@ describe("Files", () => {
   let testClient: CarpTestClient;
   let researcherAccountId: string;
   let study: StudyStatus;
-  let participantGroup: ParticipantGroupStatus;
+  let deploymentId: string;
 
   beforeAll(async () => {
     const { client, accountId } = await setupTestClient();
@@ -53,6 +52,11 @@ describe("Files", () => {
       studyId: study.studyId.stringRepresentation,
     });
 
+    // HACK: sleep for a while to allow the study to be marked ready for deployment
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
+
     const emails = [import.meta.env.VITE_RESEARCHER_EMAIL];
 
     // add the participants
@@ -67,7 +71,7 @@ describe("Files", () => {
     });
 
     // invite the participants
-    participantGroup =
+    const participantGroupStatus =
       await testClient.study.recruitment.inviteNewParticipantGroup({
         studyId: study.studyId.stringRepresentation,
         participantsWithRoles: participants.map((p) => ({
@@ -75,6 +79,7 @@ describe("Files", () => {
           assignedRoles: ["Participant"],
         })),
       });
+    deploymentId = participantGroupStatus.id.stringRepresentation;
 
     await testClient.authentication.refresh();
   }, 25000);
@@ -95,10 +100,10 @@ describe("Files", () => {
     };
     formData.append("file", new Blob(["test file"], { type: "text/plain" }));
     formData.append("metadata", JSON.stringify(metadata));
-    formData.append("deployment_id", participantGroup.id.stringRepresentation);
 
     const response = await testClient.study.files.createFile({
       studyId: study.studyId.stringRepresentation,
+      deploymentId,
       formData,
     });
     expect(response).toBeDefined();
@@ -116,9 +121,7 @@ describe("Files", () => {
     });
     expect(file).toBeDefined();
     expect(file.metadata).toEqual(metadata);
-    expect(file.deployment_id).toEqual(
-      participantGroup.id.stringRepresentation,
-    );
+    expect(file.deployment_id).toEqual(deploymentId);
   });
 
   afterAll(async () => {

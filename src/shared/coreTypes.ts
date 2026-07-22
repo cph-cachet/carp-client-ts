@@ -1,4 +1,4 @@
-import { kotlin } from "@cachet/carp-kotlin";
+import kotlin from "@cachet/carp-kotlin";
 import {
   kotlinx,
   kotlinx as kotlinxcore,
@@ -10,7 +10,6 @@ import carpDepolymentsCore from "@cachet/carp-deployments-core";
 import carpProtocolsCore from "@cachet/carp-protocols-core";
 import carpStudiesCore from "@cachet/carp-studies-core";
 
-import { kotlinx as kxd } from "@cachet/carp-kotlinx-datetime";
 import pdk = carpProtocolsCore.dk;
 import sdk = carpStudiesCore.dk;
 import cdk = carpCommon.dk;
@@ -27,6 +26,7 @@ import StudyServiceRequest = sdk.cachet.carp.studies.infrastructure.StudyService
 import NamespacedId = cdk.cachet.carp.common.application.NamespacedId;
 import DefaultDeviceRegistration = cdk.cachet.carp.common.application.devices.DefaultDeviceRegistration;
 import Data = ddk.cachet.carp.common.application.data.Data;
+import ApplicationData = cdk.cachet.carp.common.application.ApplicationData;
 import Sex = ddk.cachet.carp.common.application.data.input.Sex;
 import ParticipantRole = cdk.cachet.carp.common.application.users.ParticipantRole;
 
@@ -35,6 +35,7 @@ import StudyStatus = sdk.cachet.carp.studies.application.StudyStatus;
 import StudyDetails = sdk.cachet.carp.studies.application.StudyDetails;
 import Participant = sdk.cachet.carp.studies.application.users.Participant;
 import ParticipantGroupStatus = sdk.cachet.carp.studies.application.users.ParticipantGroupStatus;
+import ParticipantGroupRepresentation = sdk.cachet.carp.studies.application.users.ParticipantGroupRepresentation;
 import ProtocolServiceRequest = pdk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest;
 import StudyProtocolSnapshot = pdk.cachet.carp.protocols.application.StudyProtocolSnapshot;
 import ProtocolVersion = pdk.cachet.carp.protocols.application.ProtocolVersion;
@@ -57,7 +58,7 @@ import Pair = kotlin.Pair;
 import ListSerializer = kotlinxcore.serialization.builtins.ListSerializer;
 import SetSerializer = kotlinxcore.serialization.builtins.SetSerializer;
 
-import Instant = kxd.datetime.Instant;
+import Instant = kotlin.time.Instant;
 
 import EmailAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.EmailAccountIdentity;
 import UsernameAccountIdentity = carpStudiesCore.dk.cachet.carp.common.application.users.UsernameAccountIdentity;
@@ -150,6 +151,7 @@ export {
   Participant,
   ParticipantData,
   ParticipantGroupStatus,
+  ParticipantGroupRepresentation,
   ParticipationServiceRequest,
   ProtocolServiceRequest,
   ProtocolVersion,
@@ -165,6 +167,7 @@ export {
   DefaultDeviceRegistration,
   StudyInvitation,
   Data,
+  ApplicationData,
   Roles,
   RoleData,
   EmailAddress,

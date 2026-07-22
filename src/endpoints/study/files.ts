@@ -56,11 +56,15 @@ class Files extends Endpoint {
    */
   async createFile({
     studyId,
+    deploymentId,
     formData,
   }: {
     studyId: string;
+    deploymentId: string;
     formData: FormData;
   }) {
+    formData.append("deployment_id", deploymentId);
+
     const response = await this.actions.post(
       `${this.endpoint}/${studyId}/files`,
       formData,

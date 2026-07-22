@@ -2,9 +2,7 @@ import {
   AnonymousLinksRequest,
   AnonymousLinksResponse,
   InactiveDeployment,
-  PaginatedParticipantAccounts,
   PaginatedResponseDto,
-  ParticipantAccount,
   ParticipantAccountsRequestDto,
   ParticipantAccountSummaryDto,
   ParticipantGroups,
@@ -18,6 +16,7 @@ import {
   EmailAddress,
   ListSerializer,
   Participant,
+  ParticipantGroupRepresentation,
   ParticipantGroupStatus,
   RecruitmentServiceRequest,
   Roles,
@@ -34,6 +33,22 @@ class Recruitment extends Endpoint {
 
   wsEndpoint: string = "/api/studies";
 
+  private static buildAssignParticipantRoles(
+    participantsWithRoles: ParticipantWithRoles[],
+  ) {
+    return participantsWithRoles.map(
+      (participantWithRoles: ParticipantWithRoles) =>
+        new AssignParticipantRoles(
+          new UUID(participantWithRoles.id),
+          new Roles(
+            toSet(
+              participantWithRoles.assignedRoles,
+            ) as unknown as ConstructorParameters<typeof Roles>[0],
+          ),
+        ),
+    );
+  }
+
   /**
    * Invite new participant group
    * @param studyId The ID of the study
@@ -46,18 +61,16 @@ class Recruitment extends Endpoint {
     studyId: string;
     participantsWithRoles: ParticipantWithRoles[];
   }) {
-    const assignParticipantRoles = participantsWithRoles.map(
-      (participantWithRoles: ParticipantWithRoles) =>
-        new AssignParticipantRoles(
-          new UUID(participantWithRoles.id),
-          new Roles(toSet(participantWithRoles.assignedRoles)),
-        ),
+    const assignParticipantRoles = Recruitment.buildAssignParticipantRoles(
+      participantsWithRoles,
     );
 
     const inviteParticipantGroup =
       new RecruitmentServiceRequest.InviteNewParticipantGroup(
         new UUID(studyId),
-        toSet(assignParticipantRoles),
+        toSet(assignParticipantRoles) as unknown as ConstructorParameters<
+          typeof RecruitmentServiceRequest.InviteNewParticipantGroup
+        >[1],
       );
 
     const serializedInviteParticipantGroup = serialize({
@@ -79,36 +92,126 @@ class Recruitment extends Endpoint {
   }
 
   /**
-   * @deprecated use `queryParticipantAccounts` method instead
+   * Create a new participant group without immediately inviting it. Use
+   * `inviteParticipantGroup` afterwards to send out invitations.
+   * @param studyId The ID of the study
+   * @param participantsWithRoles The participants to assign to the group, and the roles to assign them
+   * @param groupId The ID to assign to the new group. A random ID is generated if omitted.
+   * @param representationName An optional human-readable name for the group.
    */
-  async getParticipantAccounts({
+  async createParticipantGroup({
     studyId,
-    limit,
-    offset,
-    search,
-    response_as_dto,
-    is_descending,
+    participantsWithRoles,
+    groupId = UUID.Companion.randomUUID().stringRepresentation,
+    representationName,
   }: {
     studyId: string;
-    limit?: number | null;
-    offset?: number | null;
-    search?: string | null;
-    response_as_dto?: boolean | null;
-    is_descending?: boolean | null;
+    participantsWithRoles: ParticipantWithRoles[];
+    groupId?: string;
+    representationName?: string;
   }) {
-    const response = await this.actions.get<
-      ParticipantAccount[] | PaginatedParticipantAccounts
-    >(`${this.wsEndpoint}/${studyId}/participants/accounts`, {
-      params: {
-        limit,
-        offset,
-        search,
-        response_as_dto,
-        is_descending,
-      },
+    const assignParticipantRoles = Recruitment.buildAssignParticipantRoles(
+      participantsWithRoles,
+    );
+
+    const createParticipantGroup =
+      new RecruitmentServiceRequest.CreateParticipantGroup(
+        new UUID(groupId),
+        toSet(assignParticipantRoles) as unknown as ConstructorParameters<
+          typeof RecruitmentServiceRequest.CreateParticipantGroup
+        >[1],
+        new UUID(studyId),
+        representationName === undefined
+          ? undefined
+          : new ParticipantGroupRepresentation(representationName),
+      );
+
+    const request = serialize({
+      request: createParticipantGroup,
+      serializer: RecruitmentServiceRequest.Serializer,
     });
 
-    return response.data;
+    const response = await this.actions.post(this.coreEndpoint, request);
+
+    const participantGroupStatus = deserialize({
+      data: response.data,
+      serializer: ParticipantGroupStatus,
+    }) as unknown as ParticipantGroupStatus;
+
+    return participantGroupStatus;
+  }
+
+  /**
+   * Update the role assignments and/or representation of a participant group.
+   * Assignments can't be changed after the group has been invited.
+   * @param groupId The ID of the participant group to update
+   * @param participantsWithRoles If set, role assignments are updated; unchanged otherwise.
+   * @param representationName If set, the group representation is updated; unchanged otherwise.
+   */
+  async updateParticipantGroup({
+    groupId,
+    participantsWithRoles,
+    representationName,
+  }: {
+    groupId: string;
+    participantsWithRoles?: ParticipantWithRoles[];
+    representationName?: string;
+  }) {
+    const assignParticipantRoles = participantsWithRoles
+      ? Recruitment.buildAssignParticipantRoles(participantsWithRoles)
+      : undefined;
+
+    const updateParticipantGroup =
+      new RecruitmentServiceRequest.UpdateParticipantGroup(
+        new UUID(groupId),
+        assignParticipantRoles === undefined
+          ? undefined
+          : (toSet(assignParticipantRoles) as unknown as NonNullable<
+              ConstructorParameters<
+                typeof RecruitmentServiceRequest.UpdateParticipantGroup
+              >[1]
+            >),
+        representationName === undefined
+          ? undefined
+          : new ParticipantGroupRepresentation(representationName),
+      );
+
+    const request = serialize({
+      request: updateParticipantGroup,
+      serializer: RecruitmentServiceRequest.Serializer,
+    });
+
+    const response = await this.actions.post(this.coreEndpoint, request);
+
+    const participantGroupStatus = deserialize({
+      data: response.data,
+      serializer: ParticipantGroupStatus,
+    }) as unknown as ParticipantGroupStatus;
+
+    return participantGroupStatus;
+  }
+
+  /**
+   * Invite the participant group with the specified groupId to start participating in its study.
+   * @param groupId The ID of the participant group to invite
+   */
+  async inviteParticipantGroup({ groupId }: { groupId: string }) {
+    const inviteParticipantGroup =
+      new RecruitmentServiceRequest.InviteParticipantGroup(new UUID(groupId));
+
+    const request = serialize({
+      request: inviteParticipantGroup,
+      serializer: RecruitmentServiceRequest.Serializer,
+    });
+
+    const response = await this.actions.post(this.coreEndpoint, request);
+
+    const participantGroupStatus = deserialize({
+      data: response.data,
+      serializer: ParticipantGroupStatus,
+    }) as unknown as ParticipantGroupStatus;
+
+    return participantGroupStatus;
   }
 
   /**

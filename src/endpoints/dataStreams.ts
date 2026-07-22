@@ -37,7 +37,9 @@ class DataStreams extends Endpoint {
     const request = new DataStreamServiceRequest.OpenDataStreams(
       new DataStreamsConfiguration(
         new UUID(studyDeploymentId),
-        toSet(expectedDataStreams),
+        toSet(expectedDataStreams) as unknown as ConstructorParameters<
+          typeof DataStreamsConfiguration
+        >[1],
       ),
     );
 
@@ -70,22 +72,26 @@ class DataStreams extends Endpoint {
           dataType: sequence.dataStream.dataType.toString(),
         },
         firstSequenceId: sequence.firstSequenceId.toNumber(),
-        measurements: sequence.measurements.toArray().map((measurement) => {
-          return {
-            sensorStartTime: measurement.sensorStartTime.toNumber(),
-            data: {
-              ...Object.fromEntries(
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                Object.entries(measurement.data).filter(([_, value]) => value),
-              ),
-              __type: sequence.dataStream.dataType.toString(),
-            },
-          };
-        }),
-        triggerIds: sequence.triggerIds.toArray(),
+        measurements: sequence.measurements
+          .asJsReadonlyArrayView()
+          .map((measurement) => {
+            return {
+              sensorStartTime: measurement.sensorStartTime.toNumber(),
+              data: {
+                ...Object.fromEntries(
+                  Object.entries(measurement.data).filter(
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    ([_, value]) => value,
+                  ),
+                ),
+                __type: sequence.dataStream.dataType.toString(),
+              },
+            };
+          }),
+        triggerIds: [...sequence.triggerIds.asJsReadonlyArrayView()],
         syncPoint: {
           synchronizedOn: new Date(
-            sequence.syncPoint.synchronizedOn.toEpochMilliseconds(),
+            Number(sequence.syncPoint.synchronizedOn.toEpochMilliseconds()),
           ).toISOString(),
           sensorTimestampAtSyncPoint:
             sequence.syncPoint.sensorTimestampAtSyncPoint.toNumber(),
@@ -156,7 +162,9 @@ class DataStreams extends Endpoint {
       const sequence = new MutableDataStreamSequence(
         dataStreamId,
         toLong(data.firstSequenceId),
-        toList(data.triggerIds),
+        toList(data.triggerIds) as unknown as ConstructorParameters<
+          typeof MutableDataStreamSequence
+        >[2],
         SyncPoint.Companion.UnixEpoch,
       );
       const measurements = data.measurements.map((measurement) => {
@@ -167,7 +175,7 @@ class DataStreams extends Endpoint {
           measurement.data,
         );
       });
-      sequence.appendMeasurementsList(toList(measurements));
+      sequence.appendMeasurements(measurements);
       returnValue.sequences.push(sequence);
     });
 
@@ -184,7 +192,11 @@ class DataStreams extends Endpoint {
     studyDeploymentIds: string[];
   }) {
     const request = new DataStreamServiceRequest.CloseDataStreams(
-      toSet(studyDeploymentIds.map((id) => new UUID(id))),
+      toSet(
+        studyDeploymentIds.map((id) => new UUID(id)),
+      ) as unknown as ConstructorParameters<
+        typeof DataStreamServiceRequest.CloseDataStreams
+      >[0],
     );
 
     const serializedRequest = serialize({
@@ -205,7 +217,11 @@ class DataStreams extends Endpoint {
     studyDeploymentIds: string[];
   }) {
     const request = new DataStreamServiceRequest.RemoveDataStreams(
-      toSet(studyDeploymentIds.map((id) => new UUID(id))),
+      toSet(
+        studyDeploymentIds.map((id) => new UUID(id)),
+      ) as unknown as ConstructorParameters<
+        typeof DataStreamServiceRequest.RemoveDataStreams
+      >[0],
     );
 
     const serializedRequest = serialize({

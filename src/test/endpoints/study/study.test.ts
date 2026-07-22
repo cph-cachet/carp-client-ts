@@ -143,7 +143,7 @@ describe("Study", () => {
     expect(retrievedStudy.invitation.name).toBe("Invitation");
     expect(retrievedStudy.invitation.description).toBe("This is an invitation");
     const applicationData = JSON.parse(
-      retrievedStudy.invitation.applicationData,
+      retrievedStudy.invitation.applicationData.data,
     );
     expect(applicationData.studyId).toEqual(study.studyId.stringRepresentation);
     expect(applicationData.key2).toEqual("value2");

@@ -128,23 +128,6 @@ export interface ResourceData {
   [key: string]: any;
 }
 
-export interface ParticipantAccount {
-  email: string;
-  firstName: string;
-  lastName: string;
-  id: string;
-  role: string;
-  username: string;
-}
-
-export interface PaginatedParticipantAccounts {
-  limit: number;
-  offset: number;
-  total: number;
-  search: string;
-  participants: ParticipantAccount[];
-}
-
 export interface InactiveDeployment {
   deploymentId: UUID;
   dateOfLastDataUpload: {

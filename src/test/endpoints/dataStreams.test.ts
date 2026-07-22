@@ -66,6 +66,11 @@ describe("DataStreams", () => {
       studyId: study.studyId.stringRepresentation,
     });
 
+    // HACK: sleep for a while to allow the study to be marked ready for deployment
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
+
     const emails = [import.meta.env.VITE_RESEARCHER_EMAIL];
 
     // add the participants
@@ -118,24 +123,24 @@ describe("DataStreams", () => {
         namespaceId,
       ),
       toLong(0),
-      toList([1]),
+      toList([1]) as unknown as ConstructorParameters<
+        typeof MutableDataStreamSequence
+      >[2],
       SyncPoint.Companion.UnixEpoch,
     );
-    sequence.appendMeasurementsList(
-      toList([
-        new Measurement(
-          toLong(1),
-          null,
-          namespaceId,
-          new CompletedAppTask(
-            "Monitor movement",
-            "sensing",
-            "dk.cachet.carp.geolocation",
-            new Geolocation(57, 45, null) as any,
-          ) as any,
-        ),
-      ]),
-    );
+    sequence.appendMeasurements([
+      new Measurement(
+        toLong(1),
+        null,
+        namespaceId,
+        new CompletedAppTask(
+          "Monitor movement",
+          "sensing",
+          "dk.cachet.carp.geolocation",
+          new Geolocation(57, 45, null) as any,
+        ) as any,
+      ),
+    ]);
 
     batch.sequences = [sequence];
 
@@ -156,22 +161,22 @@ describe("DataStreams", () => {
         new NamespacedId("dk.cachet.carp.data", "unknown"),
       ),
       toLong(2),
-      toList([1]),
+      toList([1]) as unknown as ConstructorParameters<
+        typeof MutableDataStreamSequence
+      >[2],
       SyncPoint.Companion.UnixEpoch,
     );
-    sequence.appendMeasurementsList(
-      toList([
-        new Measurement(
-          toLong(1),
-          null,
-          new NamespacedId("dk.cachet.carp.data", "unknown"),
-          {
-            value: 1,
-            unit: "unknown",
-          } as any,
-        ),
-      ]),
-    );
+    sequence.appendMeasurements([
+      new Measurement(
+        toLong(1),
+        null,
+        new NamespacedId("dk.cachet.carp.data", "unknown"),
+        {
+          value: 1,
+          unit: "unknown",
+        } as any,
+      ),
+    ]);
 
     batch.sequences = [sequence];
 
@@ -192,35 +197,35 @@ describe("DataStreams", () => {
         namespaceId,
       ),
       toLong(1),
-      toList([1]),
+      toList([1]) as unknown as ConstructorParameters<
+        typeof MutableDataStreamSequence
+      >[2],
       SyncPoint.Companion.UnixEpoch,
     );
-    sequence.appendMeasurementsList(
-      toList([
-        new Measurement(
-          toLong(1),
+    sequence.appendMeasurements([
+      new Measurement(
+        toLong(1),
+        null,
+        namespaceId,
+        new CompletedAppTask(
+          "Monitor movement",
+          "sensing",
+          "dk.cachet.carp.geolocation",
+          new Geolocation(57, 45, null) as any,
+        ) as any,
+      ),
+      new Measurement(
+        toLong(1),
+        null,
+        namespaceId,
+        new CompletedAppTask(
+          "Monitor movement",
+          "sensing",
+          "dk.cachet.carp.geolocation",
           null,
-          namespaceId,
-          new CompletedAppTask(
-            "Monitor movement",
-            "sensing",
-            "dk.cachet.carp.geolocation",
-            new Geolocation(57, 45, null) as any,
-          ) as any,
-        ),
-        new Measurement(
-          toLong(1),
-          null,
-          namespaceId,
-          new CompletedAppTask(
-            "Monitor movement",
-            "sensing",
-            "dk.cachet.carp.geolocation",
-            null,
-          ) as any,
-        ),
-      ]),
-    );
+        ) as any,
+      ),
+    ]);
 
     const sequence2 = new MutableDataStreamSequence(
       new DataStreamId(
@@ -229,23 +234,23 @@ describe("DataStreams", () => {
         new NamespacedId("dk.cachet.carp.data", "unknown"),
       ),
       toLong(0),
-      toList([1]),
+      toList([1]) as unknown as ConstructorParameters<
+        typeof MutableDataStreamSequence
+      >[2],
       SyncPoint.Companion.UnixEpoch,
     );
 
-    sequence2.appendMeasurementsList(
-      toList([
-        new Measurement(
-          toLong(1),
-          null,
-          new NamespacedId("dk.cachet.carp.data", "unknown"),
-          {
-            value: 1,
-            unit: "unknown",
-          } as any,
-        ),
-      ]),
-    );
+    sequence2.appendMeasurements([
+      new Measurement(
+        toLong(1),
+        null,
+        new NamespacedId("dk.cachet.carp.data", "unknown"),
+        {
+          value: 1,
+          unit: "unknown",
+        } as any,
+      ),
+    ]);
 
     batch.sequences = [sequence, sequence2];
 
@@ -267,9 +272,9 @@ describe("DataStreams", () => {
 
     expect(response.isEmpty()).toBe(false);
     expect(response.sequences.length).to.be.at.least(1);
-    expect(response.sequences[0].measurements.toArray().length).to.be.at.least(
-      1,
-    );
+    expect(
+      response.sequences[0].measurements.asJsReadonlyArrayView().length,
+    ).to.be.at.least(1);
     response
       .getDataStreamPoints(
         new DataStreamId(
@@ -293,9 +298,9 @@ describe("DataStreams", () => {
 
     expect(response.isEmpty()).toBe(false);
     expect(response.sequences.length).to.be.at.least(1);
-    expect(response.sequences[0].measurements.toArray().length).to.be.at.least(
-      1,
-    );
+    expect(
+      response.sequences[0].measurements.asJsReadonlyArrayView().length,
+    ).to.be.at.least(1);
     response
       .getDataStreamPoints(
         new DataStreamId(
@@ -318,24 +323,24 @@ describe("DataStreams", () => {
         namespaceId,
       ),
       toLong(1),
-      toList([1]),
+      toList([1]) as unknown as ConstructorParameters<
+        typeof MutableDataStreamSequence
+      >[2],
       SyncPoint.Companion.UnixEpoch,
     );
-    sequence.appendMeasurementsList(
-      toList([
-        new Measurement(
-          toLong(1),
-          null,
-          namespaceId,
-          new CompletedAppTask(
-            "Monitor movement",
-            "sensing",
-            "dk.cachet.carp.geolocation",
-            new Geolocation(57, 45, null) as any,
-          ) as any,
-        ),
-      ]),
-    );
+    sequence.appendMeasurements([
+      new Measurement(
+        toLong(1),
+        null,
+        namespaceId,
+        new CompletedAppTask(
+          "Monitor movement",
+          "sensing",
+          "dk.cachet.carp.geolocation",
+          new Geolocation(57, 45, null) as any,
+        ) as any,
+      ),
+    ]);
 
     batch.sequences = [sequence];
 

@@ -1,155 +1,155 @@
-(function (root, factory) {
+(function (factory) {
   if (typeof define === 'function' && define.amd)
-    define(['exports', '@cachet/carp-common-generated', '@cachet/kotlin-kotlin-stdlib', '@cachet/kotlinx-serialization-kotlinx-serialization-core', '@cachet/Kotlin-DateTime-library-kotlinx-datetime'], factory);
+    define(['exports', '@cachet/carp-common-generated', '@cachet/kotlin-kotlin-stdlib', '@cachet/kotlinx-serialization-kotlinx-serialization-core'], factory);
   else if (typeof exports === 'object')
-    factory(module.exports, require('@cachet/carp-common-generated'), require('@cachet/kotlin-kotlin-stdlib'), require('@cachet/kotlinx-serialization-kotlinx-serialization-core'), require('@cachet/Kotlin-DateTime-library-kotlinx-datetime'));
+    factory(module.exports, require('@cachet/carp-common-generated'), require('@cachet/kotlin-kotlin-stdlib'), require('@cachet/kotlinx-serialization-kotlinx-serialization-core'));
   else {
-    if (typeof this['carp-common-generated'] === 'undefined') {
+    if (typeof globalThis['carp-common-generated'] === 'undefined') {
       throw new Error("Error loading module 'carp-protocols-core-generated'. Its dependency 'carp-common-generated' was not found. Please, check whether 'carp-common-generated' is loaded prior to 'carp-protocols-core-generated'.");
     }
-    if (typeof this['kotlin-kotlin-stdlib'] === 'undefined') {
+    if (typeof globalThis['kotlin-kotlin-stdlib'] === 'undefined') {
       throw new Error("Error loading module 'carp-protocols-core-generated'. Its dependency 'kotlin-kotlin-stdlib' was not found. Please, check whether 'kotlin-kotlin-stdlib' is loaded prior to 'carp-protocols-core-generated'.");
     }
-    if (typeof this['kotlinx-serialization-kotlinx-serialization-core'] === 'undefined') {
+    if (typeof globalThis['kotlinx-serialization-kotlinx-serialization-core'] === 'undefined') {
       throw new Error("Error loading module 'carp-protocols-core-generated'. Its dependency 'kotlinx-serialization-kotlinx-serialization-core' was not found. Please, check whether 'kotlinx-serialization-kotlinx-serialization-core' is loaded prior to 'carp-protocols-core-generated'.");
     }
-    if (typeof this['Kotlin-DateTime-library-kotlinx-datetime'] === 'undefined') {
-      throw new Error("Error loading module 'carp-protocols-core-generated'. Its dependency 'Kotlin-DateTime-library-kotlinx-datetime' was not found. Please, check whether 'Kotlin-DateTime-library-kotlinx-datetime' is loaded prior to 'carp-protocols-core-generated'.");
-    }
-    root['carp-protocols-core-generated'] = factory(typeof this['carp-protocols-core-generated'] === 'undefined' ? {} : this['carp-protocols-core-generated'], this['carp-common-generated'], this['kotlin-kotlin-stdlib'], this['kotlinx-serialization-kotlinx-serialization-core'], this['Kotlin-DateTime-library-kotlinx-datetime']);
+    globalThis['carp-protocols-core-generated'] = factory(typeof globalThis['carp-protocols-core-generated'] === 'undefined' ? {} : globalThis['carp-protocols-core-generated'], globalThis['carp-common-generated'], globalThis['kotlin-kotlin-stdlib'], globalThis['kotlinx-serialization-kotlinx-serialization-core']);
   }
-}(this, function (_, kotlin_dk_cachet_carp_common_carp_common, kotlin_kotlin, kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core, kotlin_org_jetbrains_kotlinx_kotlinx_datetime) {
+}(function (_, kotlin_dk_cachet_carp_common_carp_common, kotlin_kotlin, kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core) {
   'use strict';
   //region block: imports
   var imul = Math.imul;
   var ApiVersion = kotlin_dk_cachet_carp_common_carp_common.$_$.d;
-  var protoOf = kotlin_kotlin.$_$.m8;
-  var objectMeta = kotlin_kotlin.$_$.l8;
-  var setMetadataFor = kotlin_kotlin.$_$.n8;
+  var protoOf = kotlin_kotlin.$_$.b9;
+  var initMetadataForCompanion = kotlin_kotlin.$_$.h8;
   var PluginGeneratedSerialDescriptor = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.g2;
-  var StringSerializer_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.u;
-  var InstantIso8601Serializer_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.a;
-  var UnknownFieldException_init_$Create$ = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.f;
-  var THROW_CCE = kotlin_kotlin.$_$.bb;
+  var InstantSerializer_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.k;
+  var THROW_CCE = kotlin_kotlin.$_$.sb;
+  var UnknownFieldException_init_$Create$ = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.v;
+  var StringSerializer_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.o;
   var typeParametersSerializers = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.a2;
   var GeneratedSerializer = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.b2;
-  var VOID = kotlin_kotlin.$_$.f;
-  var throwMissingFieldException = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.l2;
-  var Unit_instance = kotlin_kotlin.$_$.d4;
-  var objectCreate = kotlin_kotlin.$_$.k8;
-  var System_instance = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.b;
-  var getStringHashCode = kotlin_kotlin.$_$.q7;
-  var classMeta = kotlin_kotlin.$_$.i7;
-  var defineProp = kotlin_kotlin.$_$.k7;
-  var ArrayList_init_$Create$ = kotlin_kotlin.$_$.k;
-  var addAll = kotlin_kotlin.$_$.s4;
+  var initMetadataForObject = kotlin_kotlin.$_$.m8;
+  var VOID = kotlin_kotlin.$_$.b;
+  var throwMissingFieldException = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.m2;
+  var Unit_instance = kotlin_kotlin.$_$.u2;
+  var objectCreate = kotlin_kotlin.$_$.a9;
+  var System_instance = kotlin_kotlin.$_$.j2;
+  var getStringHashCode = kotlin_kotlin.$_$.e8;
+  var initMetadataForClass = kotlin_kotlin.$_$.g8;
+  var SerializableWith = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.x2;
+  var ArrayList_init_$Create$ = kotlin_kotlin.$_$.z2;
+  var addAll = kotlin_kotlin.$_$.q4;
   var isPrimary = kotlin_dk_cachet_carp_common_carp_common.$_$.c;
-  var Companion_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.x;
-  var UnitSerializer_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.v;
+  var Companion_instance = kotlin_dk_cachet_carp_common_carp_common.$_$.v;
+  var UnitSerializer_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.p;
   var LinkedHashSetSerializer = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.e2;
-  var Companion_getInstance_0 = kotlin_dk_cachet_carp_common_carp_common.$_$.v;
+  var Companion_instance_0 = kotlin_dk_cachet_carp_common_carp_common.$_$.t;
   var TaskConfiguration = kotlin_dk_cachet_carp_common_carp_common.$_$.e;
-  var getKClass = kotlin_kotlin.$_$.e;
-  var PolymorphicSerializer_init_$Create$ = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.b;
-  var IntSerializer_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.r;
+  var getKClass = kotlin_kotlin.$_$.q9;
+  var PolymorphicSerializer_init_$Create$ = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.r;
+  var IntSerializer_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.l;
   var TriggerConfiguration = kotlin_dk_cachet_carp_common_carp_common.$_$.g;
   var LinkedHashMapSerializer = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.d2;
-  var $serializer_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.z;
-  var $serializer_getInstance_0 = kotlin_dk_cachet_carp_common_carp_common.$_$.e1;
-  var $serializer_getInstance_1 = kotlin_dk_cachet_carp_common_carp_common.$_$.d1;
-  var ApplicationDataSerializer = kotlin_dk_cachet_carp_common_carp_common.$_$.p;
-  var collectionSizeOrDefault = kotlin_kotlin.$_$.x4;
-  var mapCapacity = kotlin_kotlin.$_$.d6;
-  var coerceAtLeast = kotlin_kotlin.$_$.t8;
-  var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.s;
-  var to = kotlin_kotlin.$_$.zb;
-  var toSet = kotlin_kotlin.$_$.u6;
-  var minus = kotlin_kotlin.$_$.f6;
-  var ArrayList_init_$Create$_0 = kotlin_kotlin.$_$.j;
+  var $serializer_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.x;
+  var $serializer_getInstance_0 = kotlin_dk_cachet_carp_common_carp_common.$_$.b1;
+  var $serializer_getInstance_1 = kotlin_dk_cachet_carp_common_carp_common.$_$.a1;
+  var Companion_instance_1 = kotlin_dk_cachet_carp_common_carp_common.$_$.d1;
+  var LazyThreadSafetyMode_PUBLICATION_getInstance = kotlin_kotlin.$_$.x2;
+  var lazy = kotlin_kotlin.$_$.lc;
+  var collectionSizeOrDefault = kotlin_kotlin.$_$.w4;
+  var mapCapacity = kotlin_kotlin.$_$.c6;
+  var coerceAtLeast = kotlin_kotlin.$_$.f9;
+  var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.h3;
+  var to = kotlin_kotlin.$_$.qc;
+  var toSet = kotlin_kotlin.$_$.t6;
+  var minus = kotlin_kotlin.$_$.e6;
+  var ArrayList_init_$Create$_0 = kotlin_kotlin.$_$.y2;
   var TaskControl = kotlin_dk_cachet_carp_common_carp_common.$_$.f;
-  var LinkedHashMap_init_$Create$_0 = kotlin_kotlin.$_$.t;
-  var Roles = kotlin_dk_cachet_carp_common_carp_common.$_$.i;
-  var toMap = kotlin_kotlin.$_$.t6;
-  var UUIDSerializer_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.k1;
+  var LinkedHashMap_init_$Create$_0 = kotlin_kotlin.$_$.i3;
+  var Roles = kotlin_dk_cachet_carp_common_carp_common.$_$.j;
+  var toMap = kotlin_kotlin.$_$.s6;
+  var UUIDSerializer_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.i1;
+  var emptySet = kotlin_kotlin.$_$.n5;
+  var equals = kotlin_kotlin.$_$.z7;
+  var emptyMap = kotlin_kotlin.$_$.m5;
   var get_nullable = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.z;
-  var emptySet = kotlin_kotlin.$_$.o5;
-  var equals = kotlin_kotlin.$_$.l7;
-  var emptyMap = kotlin_kotlin.$_$.n5;
-  var hashCode = kotlin_kotlin.$_$.r7;
-  var Snapshot = kotlin_dk_cachet_carp_common_carp_common.$_$.o;
-  var plus = kotlin_kotlin.$_$.h6;
-  var toList = kotlin_kotlin.$_$.q6;
+  var toString = kotlin_kotlin.$_$.d9;
+  var toString_0 = kotlin_kotlin.$_$.pc;
+  var hashCode = kotlin_kotlin.$_$.f8;
+  var defineProp = kotlin_kotlin.$_$.y7;
+  var Snapshot = kotlin_dk_cachet_carp_common_carp_common.$_$.p;
+  var plus = kotlin_kotlin.$_$.g6;
+  var toList = kotlin_kotlin.$_$.p6;
   var PrimaryDeviceConfiguration = kotlin_dk_cachet_carp_common_carp_common.$_$.b;
-  var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$_$.f1;
-  var sorted = kotlin_kotlin.$_$.n6;
-  var last = kotlin_kotlin.$_$.b6;
-  var first = kotlin_kotlin.$_$.q5;
-  var toString = kotlin_kotlin.$_$.r8;
-  var IllegalStateException_init_$Create$ = kotlin_kotlin.$_$.i1;
-  var Companion_instance = kotlin_dk_cachet_carp_common_carp_common.$_$.j1;
-  var LinkedHashSet_init_$Create$ = kotlin_kotlin.$_$.v;
-  var listOf = kotlin_kotlin.$_$.c6;
-  var All_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.b1;
-  var checkIndexOverflow = kotlin_kotlin.$_$.w4;
-  var indexOf = kotlin_kotlin.$_$.u5;
-  var ensureNotNull = kotlin_kotlin.$_$.qb;
-  var toMap_0 = kotlin_kotlin.$_$.s6;
-  var IllegalArgumentException_init_$Create$_0 = kotlin_kotlin.$_$.h1;
-  var IllegalStateException = kotlin_kotlin.$_$.xa;
-  var AbstractMap = kotlin_kotlin.$_$.e4;
-  var ExtractUniqueKeyMap = kotlin_dk_cachet_carp_common_carp_common.$_$.n;
-  var Map = kotlin_kotlin.$_$.n4;
-  var isInterface = kotlin_kotlin.$_$.b8;
-  var plus_0 = kotlin_kotlin.$_$.i6;
-  var hasNoConflicts = kotlin_dk_cachet_carp_common_carp_common.$_$.j;
-  var IllegalArgumentException = kotlin_kotlin.$_$.wa;
-  var interfaceMeta = kotlin_kotlin.$_$.s7;
-  var noWhenBranchMatchedException = kotlin_kotlin.$_$.wb;
-  var Collection = kotlin_kotlin.$_$.g4;
-  var All = kotlin_dk_cachet_carp_common_carp_common.$_$.h;
-  var AggregateRoot = kotlin_dk_cachet_carp_common_carp_common.$_$.m;
-  var ApiVersionSerializer_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.y;
-  var SealedClassSerializer_init_$Create$ = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.c;
+  var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$_$.s3;
+  var sorted = kotlin_kotlin.$_$.m6;
+  var first = kotlin_kotlin.$_$.p5;
+  var last = kotlin_kotlin.$_$.a6;
+  var IllegalStateException_init_$Create$ = kotlin_kotlin.$_$.v3;
+  var Companion_instance_2 = kotlin_dk_cachet_carp_common_carp_common.$_$.h1;
+  var LinkedHashSet_init_$Create$ = kotlin_kotlin.$_$.k3;
+  var listOf = kotlin_kotlin.$_$.b6;
+  var All_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.y;
+  var checkIndexOverflow = kotlin_kotlin.$_$.v4;
+  var indexOf = kotlin_kotlin.$_$.t5;
+  var ensureNotNull = kotlin_kotlin.$_$.hc;
+  var toMap_0 = kotlin_kotlin.$_$.r6;
+  var IllegalArgumentException_init_$Create$_0 = kotlin_kotlin.$_$.u3;
+  var IllegalStateException = kotlin_kotlin.$_$.pb;
+  var AbstractMap = kotlin_kotlin.$_$.b4;
+  var ExtractUniqueKeyMap = kotlin_dk_cachet_carp_common_carp_common.$_$.o;
+  var KtMap = kotlin_kotlin.$_$.l4;
+  var isInterface = kotlin_kotlin.$_$.v8;
+  var plus_0 = kotlin_kotlin.$_$.h6;
+  var hasNoConflicts = kotlin_dk_cachet_carp_common_carp_common.$_$.k;
+  var IllegalArgumentException = kotlin_kotlin.$_$.ob;
+  var initMetadataForInterface = kotlin_kotlin.$_$.k8;
+  var noWhenBranchMatchedException = kotlin_kotlin.$_$.nc;
+  var Collection = kotlin_kotlin.$_$.d4;
+  var All = kotlin_dk_cachet_carp_common_carp_common.$_$.i;
+  var AggregateRoot = kotlin_dk_cachet_carp_common_carp_common.$_$.n;
+  var constructCallableReference = kotlin_kotlin.$_$.x7;
+  var ApiVersionSerializer_getInstance = kotlin_dk_cachet_carp_common_carp_common.$_$.w;
   var ignoreTypeParameters = kotlin_dk_cachet_carp_common_carp_common.$_$.r;
-  var KSerializer = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.t2;
-  var arrayOf = kotlin_kotlin.$_$.nb;
-  var createKType = kotlin_kotlin.$_$.b;
-  var serializer = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.b3;
-  var LazyThreadSafetyMode_PUBLICATION_getInstance = kotlin_kotlin.$_$.i;
-  var lazy = kotlin_kotlin.$_$.ub;
+  var KSerializer = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.u2;
+  var arrayOf = kotlin_kotlin.$_$.ec;
+  var createKType = kotlin_kotlin.$_$.o9;
+  var serializer = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.c3;
+  var SealedClassSerializer_init_$Create$ = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.s;
   var SerializerFactory = kotlin_org_jetbrains_kotlinx_kotlinx_serialization_core.$_$.h2;
   var ApplicationServiceRequest = kotlin_dk_cachet_carp_common_carp_common.$_$.s;
-  var Unit = kotlin_kotlin.$_$.mb;
-  var List = kotlin_kotlin.$_$.l4;
-  var createInvariantKTypeProjection = kotlin_kotlin.$_$.a;
+  var Unit = kotlin_kotlin.$_$.dc;
+  var KtList = kotlin_kotlin.$_$.i4;
+  var createInvariantKTypeProjection = kotlin_kotlin.$_$.n9;
   //endregion
   //region block: pre-declaration
-  setMetadataFor(Companion, 'Companion', objectMeta);
-  setMetadataFor(Companion_0, 'Companion', objectMeta);
-  setMetadataFor(Companion_1, 'Companion', objectMeta);
-  setMetadataFor($serializer, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(ProtocolVersion, 'ProtocolVersion', classMeta, VOID, VOID, VOID, VOID, {0: $serializer_getInstance_2});
-  setMetadataFor(Companion_2, 'Companion', objectMeta);
-  setMetadataFor($serializer_0, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(DeviceConnection, 'DeviceConnection', classMeta, VOID, VOID, VOID, VOID, {0: $serializer_getInstance_3});
-  setMetadataFor(Companion_3, 'Companion', objectMeta);
-  setMetadataFor($serializer_1, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(StudyProtocolSnapshot, 'StudyProtocolSnapshot', classMeta, VOID, [Snapshot], VOID, VOID, {0: $serializer_getInstance_4});
-  setMetadataFor(Event, 'Event', classMeta);
-  setMetadataFor(PrimaryDeviceAdded, 'PrimaryDeviceAdded', classMeta, Event);
-  setMetadataFor(ConnectedDeviceAdded, 'ConnectedDeviceAdded', classMeta, Event);
-  setMetadataFor(TriggerAdded, 'TriggerAdded', classMeta, Event);
-  setMetadataFor(TaskAdded, 'TaskAdded', classMeta, Event);
-  setMetadataFor(TaskControlAdded, 'TaskControlAdded', classMeta, Event);
-  setMetadataFor(ParticipantRoleAdded, 'ParticipantRoleAdded', classMeta, Event);
-  setMetadataFor(DeviceAssignmentChanged, 'DeviceAssignmentChanged', classMeta, Event);
-  setMetadataFor(ExpectedParticipantDataAdded, 'ExpectedParticipantDataAdded', classMeta, Event);
-  setMetadataFor(Factory, 'Factory', objectMeta);
+  initMetadataForCompanion(Companion);
+  initMetadataForCompanion(Companion_0);
+  initMetadataForCompanion(Companion_1);
+  initMetadataForObject($serializer, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForClass(ProtocolVersion, 'ProtocolVersion', VOID, VOID, VOID, VOID, VOID, {0: $serializer_getInstance_2});
+  initMetadataForCompanion(Companion_2);
+  initMetadataForObject($serializer_0, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForClass(DeviceConnection, 'DeviceConnection', VOID, VOID, VOID, VOID, VOID, {0: $serializer_getInstance_3});
+  initMetadataForCompanion(Companion_3);
+  initMetadataForObject($serializer_1, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForClass(StudyProtocolSnapshot, 'StudyProtocolSnapshot', VOID, VOID, [Snapshot], VOID, VOID, {0: $serializer_getInstance_4});
+  initMetadataForClass(Event, 'Event');
+  initMetadataForClass(PrimaryDeviceAdded, 'PrimaryDeviceAdded', VOID, Event);
+  initMetadataForClass(ConnectedDeviceAdded, 'ConnectedDeviceAdded', VOID, Event);
+  initMetadataForClass(TriggerAdded, 'TriggerAdded', VOID, Event);
+  initMetadataForClass(TaskAdded, 'TaskAdded', VOID, Event);
+  initMetadataForClass(TaskControlAdded, 'TaskControlAdded', VOID, Event);
+  initMetadataForClass(ParticipantRoleAdded, 'ParticipantRoleAdded', VOID, Event);
+  initMetadataForClass(DeviceAssignmentChanged, 'DeviceAssignmentChanged', VOID, Event);
+  initMetadataForClass(ExpectedParticipantDataAdded, 'ExpectedParticipantDataAdded', VOID, Event);
+  initMetadataForObject(Factory, 'Factory');
   function getConnectedDevices$default(primaryDevice, includeChainedDevices, $super) {
     includeChainedDevices = includeChainedDevices === VOID ? false : includeChainedDevices;
-    return $super === VOID ? this.b26(primaryDevice, includeChainedDevices) : $super.b26.call(this, primaryDevice, includeChainedDevices);
+    return $super === VOID ? this.r29(primaryDevice, includeChainedDevices) : $super.r29.call(this, primaryDevice, includeChainedDevices);
   }
-  setMetadataFor(ProtocolDeviceConfiguration, 'ProtocolDeviceConfiguration', interfaceMeta);
+  initMetadataForInterface(ProtocolDeviceConfiguration, 'ProtocolDeviceConfiguration');
   function isValidAssignment(assignment) {
     var tmp;
     if (assignment instanceof All) {
@@ -157,24 +157,23 @@
     } else {
       if (assignment instanceof Roles) {
         // Inline function 'kotlin.collections.map' call
-        var this_0 = this.i24();
+        var this_0 = this.a28();
         // Inline function 'kotlin.collections.mapTo' call
         var destination = ArrayList_init_$Create$_0(collectionSizeOrDefault(this_0, 10));
-        var tmp0_iterator = this_0.t();
-        while (tmp0_iterator.u()) {
-          var item = tmp0_iterator.v();
-          // Inline function 'dk.cachet.carp.protocols.domain.configuration.ProtocolParticipantConfiguration.isValidAssignment.<anonymous>' call
-          var tmp$ret$0 = item.role;
-          destination.q(tmp$ret$0);
+        var _iterator__ex2g4s = this_0.r();
+        while (_iterator__ex2g4s.s()) {
+          var item = _iterator__ex2g4s.t();
+          var tmp$ret$2 = item.role;
+          destination.y(tmp$ret$2);
         }
         var roles = destination;
+        var tmp0 = assignment.roleNames;
         var tmp$ret$3;
         $l$block_0: {
           // Inline function 'kotlin.collections.all' call
-          var this_1 = assignment.roleNames;
           var tmp_0;
-          if (isInterface(this_1, Collection)) {
-            tmp_0 = this_1.y();
+          if (isInterface(tmp0, Collection)) {
+            tmp_0 = tmp0.p();
           } else {
             tmp_0 = false;
           }
@@ -182,11 +181,10 @@
             tmp$ret$3 = true;
             break $l$block_0;
           }
-          var tmp0_iterator_0 = this_1.t();
-          while (tmp0_iterator_0.u()) {
-            var element = tmp0_iterator_0.v();
-            // Inline function 'dk.cachet.carp.protocols.domain.configuration.ProtocolParticipantConfiguration.isValidAssignment.<anonymous>' call
-            if (!roles.p(element)) {
+          var _iterator__ex2g4s_0 = tmp0.r();
+          while (_iterator__ex2g4s_0.s()) {
+            var element = _iterator__ex2g4s_0.t();
+            if (!roles.o1(element)) {
               tmp$ret$3 = false;
               break $l$block_0;
             }
@@ -200,138 +198,135 @@
     }
     return tmp;
   }
-  setMetadataFor(ProtocolParticipantConfiguration, 'ProtocolParticipantConfiguration', interfaceMeta);
-  setMetadataFor(StudyProtocolComposition, 'StudyProtocolComposition', classMeta, AggregateRoot, [ProtocolDeviceConfiguration, ProtocolParticipantConfiguration, AggregateRoot]);
-  setMetadataFor(StudyProtocol, 'StudyProtocol', classMeta, StudyProtocolComposition);
-  setMetadataFor(TaskControl_0, 'TaskControl', classMeta);
-  setMetadataFor(TriggerWithId, 'TriggerWithId', classMeta);
-  setMetadataFor(EmptyProtocolDeviceConfiguration, 'EmptyProtocolDeviceConfiguration', classMeta, AbstractMap, [AbstractMap, ProtocolDeviceConfiguration], EmptyProtocolDeviceConfiguration);
-  setMetadataFor(EmptyProtocolParticipantConfiguration, 'EmptyProtocolParticipantConfiguration', classMeta, VOID, [ProtocolParticipantConfiguration], EmptyProtocolParticipantConfiguration);
-  setMetadataFor(EmptyProtocolTaskConfiguration, 'EmptyProtocolTaskConfiguration', classMeta, AbstractMap, VOID, EmptyProtocolTaskConfiguration);
-  setMetadataFor(BackgroundTaskWithNoMeasuresWarning, 'BackgroundTaskWithNoMeasuresWarning', classMeta);
-  setMetadataFor(NoPrimaryDeviceError, 'NoPrimaryDeviceError', classMeta);
-  setMetadataFor(OnlyOptionalDevicesWarning, 'OnlyOptionalDevicesWarning', classMeta, VOID, VOID, OnlyOptionalDevicesWarning);
-  setMetadataFor(UnexpectedMeasuresWarning, 'UnexpectedMeasuresWarning', classMeta);
-  setMetadataFor(UnstartedTasksWarning, 'UnstartedTasksWarning', classMeta);
-  setMetadataFor(UnusedDevicesWarning, 'UnusedDevicesWarning', classMeta);
-  setMetadataFor(UseCompositeTaskWarning, 'UseCompositeTaskWarning', classMeta);
-  setMetadataFor(Companion_4, 'Companion', objectMeta);
-  setMetadataFor($serializer_2, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(Serializer, 'Serializer', objectMeta, VOID, [KSerializer]);
-  setMetadataFor(ProtocolFactoryServiceRequest, 'ProtocolFactoryServiceRequest', classMeta, ApplicationServiceRequest, VOID, VOID, VOID, {0: Companion_getInstance_7});
-  setMetadataFor(CreateCustomProtocol, 'CreateCustomProtocol', classMeta, ProtocolFactoryServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_5});
-  setMetadataFor(Companion_5, 'Companion', objectMeta, VOID, [SerializerFactory]);
-  setMetadataFor(Companion_6, 'Companion', objectMeta);
-  setMetadataFor($serializer_3, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(Companion_7, 'Companion', objectMeta);
-  setMetadataFor($serializer_4, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(Companion_8, 'Companion', objectMeta);
-  setMetadataFor($serializer_5, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(Companion_9, 'Companion', objectMeta);
-  setMetadataFor($serializer_6, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(Companion_10, 'Companion', objectMeta);
-  setMetadataFor($serializer_7, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(Companion_11, 'Companion', objectMeta);
-  setMetadataFor($serializer_8, '$serializer', objectMeta, VOID, [GeneratedSerializer]);
-  setMetadataFor(Serializer_0, 'Serializer', objectMeta, VOID, [KSerializer]);
-  setMetadataFor(ProtocolServiceRequest, 'ProtocolServiceRequest', classMeta, ApplicationServiceRequest, VOID, VOID, VOID, {0: Companion_getInstance_14});
-  setMetadataFor(Add, 'Add', classMeta, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_6});
-  setMetadataFor(AddVersion, 'AddVersion', classMeta, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_7});
-  setMetadataFor(UpdateParticipantDataConfiguration, 'UpdateParticipantDataConfiguration', classMeta, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_8});
-  setMetadataFor(GetBy, 'GetBy', classMeta, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_9});
-  setMetadataFor(GetAllForOwner, 'GetAllForOwner', classMeta, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_10});
-  setMetadataFor(GetVersionHistoryFor, 'GetVersionHistoryFor', classMeta, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_11});
-  setMetadataFor(Companion_12, 'Companion', objectMeta, VOID, [SerializerFactory]);
+  initMetadataForInterface(ProtocolParticipantConfiguration, 'ProtocolParticipantConfiguration');
+  initMetadataForClass(StudyProtocolComposition, 'StudyProtocolComposition', VOID, AggregateRoot, [ProtocolDeviceConfiguration, ProtocolParticipantConfiguration]);
+  initMetadataForClass(StudyProtocol, 'StudyProtocol', VOID, StudyProtocolComposition);
+  initMetadataForClass(TaskControl_0, 'TaskControl');
+  initMetadataForClass(TriggerWithId, 'TriggerWithId');
+  initMetadataForClass(EmptyProtocolDeviceConfiguration, 'EmptyProtocolDeviceConfiguration', EmptyProtocolDeviceConfiguration, AbstractMap, [ProtocolDeviceConfiguration]);
+  initMetadataForClass(EmptyProtocolParticipantConfiguration, 'EmptyProtocolParticipantConfiguration', EmptyProtocolParticipantConfiguration, VOID, [ProtocolParticipantConfiguration]);
+  initMetadataForClass(EmptyProtocolTaskConfiguration, 'EmptyProtocolTaskConfiguration', EmptyProtocolTaskConfiguration, AbstractMap);
+  initMetadataForClass(BackgroundTaskWithNoMeasuresWarning, 'BackgroundTaskWithNoMeasuresWarning');
+  initMetadataForClass(NoPrimaryDeviceError, 'NoPrimaryDeviceError');
+  initMetadataForClass(OnlyOptionalDevicesWarning, 'OnlyOptionalDevicesWarning', OnlyOptionalDevicesWarning);
+  initMetadataForClass(UnexpectedMeasuresWarning, 'UnexpectedMeasuresWarning');
+  initMetadataForClass(UnstartedTasksWarning, 'UnstartedTasksWarning');
+  initMetadataForClass(UnusedDevicesWarning, 'UnusedDevicesWarning');
+  initMetadataForClass(UseCompositeTaskWarning, 'UseCompositeTaskWarning');
+  initMetadataForCompanion(Companion_4);
+  initMetadataForObject($serializer_2, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForObject(Serializer, 'Serializer', VOID, VOID, [KSerializer]);
+  initMetadataForClass(ProtocolFactoryServiceRequest, 'ProtocolFactoryServiceRequest', VOID, ApplicationServiceRequest, VOID, VOID, VOID, {0: Companion_getInstance_5});
+  initMetadataForClass(CreateCustomProtocol, 'CreateCustomProtocol', VOID, ProtocolFactoryServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_5});
+  initMetadataForCompanion(Companion_5, VOID, [SerializerFactory]);
+  initMetadataForCompanion(Companion_6);
+  initMetadataForObject($serializer_3, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForCompanion(Companion_7);
+  initMetadataForObject($serializer_4, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForCompanion(Companion_8);
+  initMetadataForObject($serializer_5, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForCompanion(Companion_9);
+  initMetadataForObject($serializer_6, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForCompanion(Companion_10);
+  initMetadataForObject($serializer_7, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForCompanion(Companion_11);
+  initMetadataForObject($serializer_8, '$serializer', VOID, VOID, [GeneratedSerializer]);
+  initMetadataForObject(Serializer_0, 'Serializer', VOID, VOID, [KSerializer]);
+  initMetadataForClass(ProtocolServiceRequest, 'ProtocolServiceRequest', VOID, ApplicationServiceRequest, VOID, VOID, VOID, {0: Companion_getInstance_12});
+  initMetadataForClass(Add, 'Add', VOID, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_6});
+  initMetadataForClass(AddVersion, 'AddVersion', VOID, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_7});
+  initMetadataForClass(UpdateParticipantDataConfiguration, 'UpdateParticipantDataConfiguration', VOID, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_8});
+  initMetadataForClass(GetBy, 'GetBy', VOID, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_9});
+  initMetadataForClass(GetAllForOwner, 'GetAllForOwner', VOID, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_10});
+  initMetadataForClass(GetVersionHistoryFor, 'GetVersionHistoryFor', VOID, ProtocolServiceRequest, VOID, VOID, VOID, {0: $serializer_getInstance_11});
+  initMetadataForCompanion(Companion_12, VOID, [SerializerFactory]);
   //endregion
   function Companion() {
-    Companion_instance_0 = this;
-    this.p22_1 = new ApiVersion(1, 1);
+    Companion_instance_3 = this;
+    this.h26_1 = new ApiVersion(1, 1);
   }
-  var Companion_instance_0;
-  function Companion_getInstance_1() {
-    if (Companion_instance_0 == null)
+  var Companion_instance_3;
+  function Companion_getInstance() {
+    if (Companion_instance_3 == null)
       new Companion();
-    return Companion_instance_0;
+    return Companion_instance_3;
   }
   function Companion_0() {
-    Companion_instance_1 = this;
-    this.q22_1 = new ApiVersion(1, 1);
+    Companion_instance_4 = this;
+    this.i26_1 = new ApiVersion(1, 1);
   }
-  var Companion_instance_1;
-  function Companion_getInstance_2() {
-    if (Companion_instance_1 == null)
+  var Companion_instance_4;
+  function Companion_getInstance_0() {
+    if (Companion_instance_4 == null)
       new Companion_0();
-    return Companion_instance_1;
+    return Companion_instance_4;
   }
   function Companion_1() {
   }
-  protoOf(Companion_1).m16 = function () {
-    return $serializer_getInstance_2();
-  };
-  var Companion_instance_2;
-  function Companion_getInstance_3() {
-    return Companion_instance_2;
+  var Companion_instance_5;
+  function Companion_getInstance_1() {
+    return Companion_instance_5;
   }
   function $serializer() {
     $serializer_instance = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.application.ProtocolVersion', this, 2);
-    tmp0_serialDesc.nt('tag', false);
-    tmp0_serialDesc.nt('date', false);
-    this.r22_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('tag', false);
+    tmp0_serialDesc.pv('date', false);
+    this.j26_1 = tmp0_serialDesc;
   }
-  protoOf($serializer).pi = function () {
-    return this.r22_1;
+  protoOf($serializer).k26 = function (encoder, value) {
+    var tmp0_desc = this.j26_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    tmp1_output.mp(tmp0_desc, 0, value.tag);
+    tmp1_output.op(tmp0_desc, 1, InstantSerializer_getInstance(), value.date);
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer).cu = function () {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [StringSerializer_getInstance(), InstantIso8601Serializer_getInstance()];
+  protoOf($serializer).nk = function (encoder, value) {
+    return this.k26(encoder, value instanceof ProtocolVersion ? value : THROW_CCE());
   };
-  protoOf($serializer).ri = function (decoder) {
-    var tmp0_desc = this.r22_1;
+  protoOf($serializer).ok = function (decoder) {
+    var tmp0_desc = this.j26_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
     var tmp4_local0 = null;
     var tmp5_local1 = null;
-    var tmp6_input = decoder.xl(tmp0_desc);
-    if (tmp6_input.om()) {
-      tmp4_local0 = tmp6_input.hm(tmp0_desc, 0);
+    var tmp6_input = decoder.xn(tmp0_desc);
+    if (tmp6_input.no()) {
+      tmp4_local0 = tmp6_input.ho(tmp0_desc, 0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp6_input.jm(tmp0_desc, 1, InstantIso8601Serializer_getInstance(), tmp5_local1);
+      tmp5_local1 = tmp6_input.jo(tmp0_desc, 1, InstantSerializer_getInstance(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp6_input.pm(tmp0_desc);
+        tmp2_index = tmp6_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp6_input.hm(tmp0_desc, 0);
+            tmp4_local0 = tmp6_input.ho(tmp0_desc, 0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp6_input.jm(tmp0_desc, 1, InstantIso8601Serializer_getInstance(), tmp5_local1);
+            tmp5_local1 = tmp6_input.jo(tmp0_desc, 1, InstantSerializer_getInstance(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp6_input.yl(tmp0_desc);
+    tmp6_input.yn(tmp0_desc);
     return ProtocolVersion_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, null);
   };
-  protoOf($serializer).s22 = function (encoder, value) {
-    var tmp0_desc = this.r22_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    tmp1_output.nn(tmp0_desc, 0, value.tag);
-    tmp1_output.pn(tmp0_desc, 1, InstantIso8601Serializer_getInstance(), value.date);
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer).mk = function () {
+    return this.j26_1;
   };
-  protoOf($serializer).qi = function (encoder, value) {
-    return this.s22(encoder, value instanceof ProtocolVersion ? value : THROW_CCE());
+  protoOf($serializer).ew = function () {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [StringSerializer_getInstance(), InstantSerializer_getInstance()];
   };
   var $serializer_instance;
   function $serializer_getInstance_2() {
@@ -339,44 +334,44 @@
       new $serializer();
     return $serializer_instance;
   }
-  function ProtocolVersion_init_$Init$(seen1, tag, date, serializationConstructorMarker, $this) {
-    if (!(3 === (3 & seen1))) {
-      throwMissingFieldException(seen1, 3, $serializer_getInstance_2().r22_1);
+  function ProtocolVersion_init_$Init$(seen0, tag, date, serializationConstructorMarker, $this) {
+    if (!(3 === (3 & seen0))) {
+      throwMissingFieldException(seen0, 3, $serializer_getInstance_2().j26_1);
     }
     $this.tag = tag;
     $this.date = date;
     return $this;
   }
-  function ProtocolVersion_init_$Create$(seen1, tag, date, serializationConstructorMarker) {
-    return ProtocolVersion_init_$Init$(seen1, tag, date, serializationConstructorMarker, objectCreate(protoOf(ProtocolVersion)));
+  function ProtocolVersion_init_$Create$(seen0, tag, date, serializationConstructorMarker) {
+    return ProtocolVersion_init_$Init$(seen0, tag, date, serializationConstructorMarker, objectCreate(protoOf(ProtocolVersion)));
   }
   function ProtocolVersion(tag, date) {
-    date = date === VOID ? System_instance.q13() : date;
+    date = date === VOID ? System_instance.lg() : date;
     this.tag = tag;
     this.date = date;
   }
-  protoOf(ProtocolVersion).t22 = function () {
+  protoOf(ProtocolVersion).l26 = function () {
     return this.tag;
   };
-  protoOf(ProtocolVersion).u22 = function () {
+  protoOf(ProtocolVersion).m26 = function () {
     return this.date;
   };
-  protoOf(ProtocolVersion).od = function () {
+  protoOf(ProtocolVersion).sd = function () {
     return this.tag;
   };
-  protoOf(ProtocolVersion).pd = function () {
+  protoOf(ProtocolVersion).td = function () {
     return this.date;
   };
-  protoOf(ProtocolVersion).v22 = function (tag, date) {
+  protoOf(ProtocolVersion).n26 = function (tag, date) {
     return new ProtocolVersion(tag, date);
   };
   protoOf(ProtocolVersion).copy = function (tag, date, $super) {
     tag = tag === VOID ? this.tag : tag;
     date = date === VOID ? this.date : date;
-    return this.v22(tag, date);
+    return $super === VOID ? this.n26(tag, date) : $super.n26.call(this, tag, date);
   };
   protoOf(ProtocolVersion).toString = function () {
-    return 'ProtocolVersion(tag=' + this.tag + ', date=' + this.date + ')';
+    return 'ProtocolVersion(tag=' + this.tag + ', date=' + this.date.toString() + ')';
   };
   protoOf(ProtocolVersion).hashCode = function () {
     var result = getStringHashCode(this.tag);
@@ -388,82 +383,78 @@
       return true;
     if (!(other instanceof ProtocolVersion))
       return false;
-    var tmp0_other_with_cast = other instanceof ProtocolVersion ? other : THROW_CCE();
-    if (!(this.tag === tmp0_other_with_cast.tag))
+    if (!(this.tag === other.tag))
       return false;
-    if (!this.date.equals(tmp0_other_with_cast.date))
+    if (!this.date.equals(other.date))
       return false;
     return true;
   };
   function Companion_2() {
   }
-  protoOf(Companion_2).m16 = function () {
-    return $serializer_getInstance_3();
-  };
-  var Companion_instance_3;
-  function Companion_getInstance_4() {
-    return Companion_instance_3;
+  var Companion_instance_6;
+  function Companion_getInstance_2() {
+    return Companion_instance_6;
   }
   function $serializer_0() {
     $serializer_instance_0 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.application.StudyProtocolSnapshot.DeviceConnection', this, 2);
-    tmp0_serialDesc.nt('roleName', false);
-    tmp0_serialDesc.nt('connectedToRoleName', false);
-    this.w22_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('roleName', false);
+    tmp0_serialDesc.pv('connectedToRoleName', false);
+    this.o26_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_0).pi = function () {
-    return this.w22_1;
+  protoOf($serializer_0).p26 = function (encoder, value) {
+    var tmp0_desc = this.o26_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    tmp1_output.mp(tmp0_desc, 0, value.roleName);
+    tmp1_output.mp(tmp0_desc, 1, value.connectedToRoleName);
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_0).cu = function () {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [StringSerializer_getInstance(), StringSerializer_getInstance()];
+  protoOf($serializer_0).nk = function (encoder, value) {
+    return this.p26(encoder, value instanceof DeviceConnection ? value : THROW_CCE());
   };
-  protoOf($serializer_0).ri = function (decoder) {
-    var tmp0_desc = this.w22_1;
+  protoOf($serializer_0).ok = function (decoder) {
+    var tmp0_desc = this.o26_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
     var tmp4_local0 = null;
     var tmp5_local1 = null;
-    var tmp6_input = decoder.xl(tmp0_desc);
-    if (tmp6_input.om()) {
-      tmp4_local0 = tmp6_input.hm(tmp0_desc, 0);
+    var tmp6_input = decoder.xn(tmp0_desc);
+    if (tmp6_input.no()) {
+      tmp4_local0 = tmp6_input.ho(tmp0_desc, 0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp6_input.hm(tmp0_desc, 1);
+      tmp5_local1 = tmp6_input.ho(tmp0_desc, 1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp6_input.pm(tmp0_desc);
+        tmp2_index = tmp6_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp6_input.hm(tmp0_desc, 0);
+            tmp4_local0 = tmp6_input.ho(tmp0_desc, 0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp6_input.hm(tmp0_desc, 1);
+            tmp5_local1 = tmp6_input.ho(tmp0_desc, 1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp6_input.yl(tmp0_desc);
+    tmp6_input.yn(tmp0_desc);
     return DeviceConnection_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, null);
   };
-  protoOf($serializer_0).x22 = function (encoder, value) {
-    var tmp0_desc = this.w22_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    tmp1_output.nn(tmp0_desc, 0, value.roleName);
-    tmp1_output.nn(tmp0_desc, 1, value.connectedToRoleName);
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_0).mk = function () {
+    return this.o26_1;
   };
-  protoOf($serializer_0).qi = function (encoder, value) {
-    return this.x22(encoder, value instanceof DeviceConnection ? value : THROW_CCE());
+  protoOf($serializer_0).ew = function () {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [StringSerializer_getInstance(), StringSerializer_getInstance()];
   };
   var $serializer_instance_0;
   function $serializer_getInstance_3() {
@@ -471,55 +462,95 @@
       new $serializer_0();
     return $serializer_instance_0;
   }
-  function DeviceConnection_init_$Init$(seen1, roleName, connectedToRoleName, serializationConstructorMarker, $this) {
-    if (!(3 === (3 & seen1))) {
-      throwMissingFieldException(seen1, 3, $serializer_getInstance_3().w22_1);
+  function DeviceConnection_init_$Init$(seen0, roleName, connectedToRoleName, serializationConstructorMarker, $this) {
+    if (!(3 === (3 & seen0))) {
+      throwMissingFieldException(seen0, 3, $serializer_getInstance_3().o26_1);
     }
     $this.roleName = roleName;
     $this.connectedToRoleName = connectedToRoleName;
     return $this;
   }
-  function DeviceConnection_init_$Create$(seen1, roleName, connectedToRoleName, serializationConstructorMarker) {
-    return DeviceConnection_init_$Init$(seen1, roleName, connectedToRoleName, serializationConstructorMarker, objectCreate(protoOf(DeviceConnection)));
+  function DeviceConnection_init_$Create$(seen0, roleName, connectedToRoleName, serializationConstructorMarker) {
+    return DeviceConnection_init_$Init$(seen0, roleName, connectedToRoleName, serializationConstructorMarker, objectCreate(protoOf(DeviceConnection)));
   }
   function getConnections($this, protocol, primaryDevice) {
     // Inline function 'kotlin.collections.mutableListOf' call
     var connections = ArrayList_init_$Create$();
     // Inline function 'kotlin.collections.forEach' call
-    var tmp0_iterator = protocol.y22(primaryDevice).t();
-    while (tmp0_iterator.u()) {
-      var element = tmp0_iterator.v();
-      // Inline function 'dk.cachet.carp.protocols.application.Companion.getConnections.<anonymous>' call
-      connections.q(new DeviceConnection(element.roleName, primaryDevice.roleName));
+    var _iterator__ex2g4s = protocol.q26(primaryDevice).r();
+    while (_iterator__ex2g4s.s()) {
+      var element = _iterator__ex2g4s.t();
+      connections.y(new DeviceConnection(element.roleName, primaryDevice.roleName));
       if (isPrimary(element)) {
-        addAll(connections, getConnections(Companion_getInstance_5(), protocol, element));
+        addAll(connections, getConnections(Companion_getInstance_3(), protocol, element));
       }
     }
     return connections;
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp() {
+    return new LinkedHashSetSerializer(Companion_instance.y1u(UnitSerializer_getInstance(), UnitSerializer_getInstance()));
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_0() {
+    return new LinkedHashSetSerializer(Companion_instance_0.i1u(UnitSerializer_getInstance(), UnitSerializer_getInstance()));
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_1() {
+    return new LinkedHashSetSerializer($serializer_getInstance_3());
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_2() {
+    var tmp = getKClass(TaskConfiguration);
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$0 = [];
+    return new LinkedHashSetSerializer(PolymorphicSerializer_init_$Create$(tmp, tmp$ret$0));
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_3() {
+    var tmp = IntSerializer_getInstance();
+    var tmp_0 = getKClass(TriggerConfiguration);
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$0 = [];
+    return new LinkedHashMapSerializer(tmp, PolymorphicSerializer_init_$Create$(tmp_0, tmp$ret$0));
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_4() {
+    return new LinkedHashSetSerializer($serializer_getInstance());
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_5() {
+    return new LinkedHashSetSerializer($serializer_getInstance_0());
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_6() {
+    return new LinkedHashMapSerializer(StringSerializer_getInstance(), new LinkedHashSetSerializer(StringSerializer_getInstance()));
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_7() {
+    return new LinkedHashSetSerializer($serializer_getInstance_1());
+  }
+  function StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_8() {
+    return Companion_instance_1.i18();
   }
   function DeviceConnection(roleName, connectedToRoleName) {
     this.roleName = roleName;
     this.connectedToRoleName = connectedToRoleName;
   }
-  protoOf(DeviceConnection).u1o = function () {
+  protoOf(DeviceConnection).q1r = function () {
     return this.roleName;
   };
-  protoOf(DeviceConnection).z22 = function () {
+  protoOf(DeviceConnection).r26 = function () {
     return this.connectedToRoleName;
   };
-  protoOf(DeviceConnection).od = function () {
+  protoOf(DeviceConnection).sd = function () {
     return this.roleName;
   };
-  protoOf(DeviceConnection).pd = function () {
+  protoOf(DeviceConnection).td = function () {
     return this.connectedToRoleName;
   };
-  protoOf(DeviceConnection).r1f = function (roleName, connectedToRoleName) {
+  protoOf(DeviceConnection).m1i = function (roleName, connectedToRoleName) {
     return new DeviceConnection(roleName, connectedToRoleName);
   };
   protoOf(DeviceConnection).copy = function (roleName, connectedToRoleName, $super) {
     roleName = roleName === VOID ? this.roleName : roleName;
     connectedToRoleName = connectedToRoleName === VOID ? this.connectedToRoleName : connectedToRoleName;
-    return this.r1f(roleName, connectedToRoleName);
+    return $super === VOID ? this.m1i(roleName, connectedToRoleName) : $super.m1i.call(this, roleName, connectedToRoleName);
   };
   protoOf(DeviceConnection).toString = function () {
     return 'DeviceConnection(roleName=' + this.roleName + ', connectedToRoleName=' + this.connectedToRoleName + ')';
@@ -534,175 +565,208 @@
       return true;
     if (!(other instanceof DeviceConnection))
       return false;
-    var tmp0_other_with_cast = other instanceof DeviceConnection ? other : THROW_CCE();
-    if (!(this.roleName === tmp0_other_with_cast.roleName))
+    if (!(this.roleName === other.roleName))
       return false;
-    if (!(this.connectedToRoleName === tmp0_other_with_cast.connectedToRoleName))
+    if (!(this.connectedToRoleName === other.connectedToRoleName))
       return false;
     return true;
   };
   function Companion_3() {
-    Companion_instance_4 = this;
+    Companion_instance_7 = this;
     var tmp = this;
-    // Inline function 'kotlin.arrayOf' call
-    var tmp_0 = new LinkedHashSetSerializer(Companion_getInstance().z1q(UnitSerializer_getInstance(), UnitSerializer_getInstance()));
-    var tmp_1 = new LinkedHashSetSerializer(Companion_getInstance_0().z1q(UnitSerializer_getInstance(), UnitSerializer_getInstance()));
-    var tmp_2 = new LinkedHashSetSerializer($serializer_getInstance_3());
-    var tmp_3 = getKClass(TaskConfiguration);
+    var tmp_0 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_1 = lazy(tmp_0, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp);
+    var tmp_2 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_3 = lazy(tmp_2, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_0);
+    var tmp_4 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_5 = lazy(tmp_4, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_1);
+    var tmp_6 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_7 = lazy(tmp_6, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_2);
+    var tmp_8 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_9 = lazy(tmp_8, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_3);
+    var tmp_10 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_11 = lazy(tmp_10, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_4);
+    var tmp_12 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_13 = lazy(tmp_12, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_5);
+    var tmp_14 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_15 = lazy(tmp_14, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_6);
+    var tmp_16 = LazyThreadSafetyMode_PUBLICATION_getInstance();
+    var tmp_17 = lazy(tmp_16, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_7);
+    var tmp_18 = LazyThreadSafetyMode_PUBLICATION_getInstance();
     // Inline function 'kotlin.arrayOf' call
     // Inline function 'kotlin.js.unsafeCast' call
     // Inline function 'kotlin.js.asDynamic' call
-    var tmp$ret$2 = [];
-    var tmp_4 = new LinkedHashSetSerializer(PolymorphicSerializer_init_$Create$(tmp_3, tmp$ret$2));
-    var tmp_5 = IntSerializer_getInstance();
-    var tmp_6 = getKClass(TriggerConfiguration);
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var tmp$ret$5 = [];
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    tmp.a23_1 = [null, null, null, null, null, null, tmp_0, tmp_1, tmp_2, tmp_4, new LinkedHashMapSerializer(tmp_5, PolymorphicSerializer_init_$Create$(tmp_6, tmp$ret$5)), new LinkedHashSetSerializer($serializer_getInstance()), new LinkedHashSetSerializer($serializer_getInstance_0()), new LinkedHashMapSerializer(StringSerializer_getInstance(), new LinkedHashSetSerializer(StringSerializer_getInstance())), new LinkedHashSetSerializer($serializer_getInstance_1()), new ApplicationDataSerializer()];
+    tmp.s26_1 = [null, null, null, null, null, null, tmp_1, tmp_3, tmp_5, tmp_7, tmp_9, tmp_11, tmp_13, tmp_15, tmp_17, lazy(tmp_18, StudyProtocolSnapshot$Companion$$childSerializers$_anonymous__imspvp_8)];
   }
   protoOf(Companion_3).fromProtocol = function (protocol, version) {
     // Inline function 'kotlin.collections.associate' call
-    var this_0 = protocol.q23();
+    var this_0 = protocol.i27();
     var capacity = coerceAtLeast(mapCapacity(collectionSizeOrDefault(this_0, 10)), 16);
     // Inline function 'kotlin.collections.associateTo' call
     var destination = LinkedHashMap_init_$Create$(capacity);
-    var tmp0_iterator = this_0.t();
-    while (tmp0_iterator.u()) {
-      var element = tmp0_iterator.v();
+    var _iterator__ex2g4s = this_0.r();
+    while (_iterator__ex2g4s.s()) {
+      var element = _iterator__ex2g4s.t();
       // Inline function 'kotlin.collections.plusAssign' call
-      // Inline function 'dk.cachet.carp.protocols.application.Companion.fromProtocol.<anonymous>' call
-      var pair = to(element.r23_1, element.s23_1);
-      destination.n2(pair.md_1, pair.nd_1);
+      var pair = to(element.j27_1, element.k27_1);
+      destination.k2(pair.first, pair.second);
     }
     var triggers = destination;
-    var tmp = protocol.ra();
-    var tmp_0 = protocol.o1u();
-    var tmp_1 = toSet(protocol.a24());
-    var tmp_2 = toSet(minus(protocol.b24(), protocol.a24()));
+    var tmp = protocol.k();
+    var tmp_0 = protocol.e1y();
+    var tmp_1 = toSet(protocol.s27());
+    var tmp_2 = toSet(minus(protocol.t27(), protocol.s27()));
     // Inline function 'kotlin.collections.flatMap' call
+    var tmp0 = protocol.s27();
     // Inline function 'kotlin.collections.flatMapTo' call
-    var this_1 = protocol.a24();
     var destination_0 = ArrayList_init_$Create$();
-    var tmp0_iterator_0 = this_1.t();
-    while (tmp0_iterator_0.u()) {
-      var element_0 = tmp0_iterator_0.v();
-      // Inline function 'dk.cachet.carp.protocols.application.Companion.fromProtocol.<anonymous>' call
-      var list = getConnections(Companion_getInstance_5(), protocol, element_0);
+    var _iterator__ex2g4s_0 = tmp0.r();
+    while (_iterator__ex2g4s_0.s()) {
+      var element_0 = _iterator__ex2g4s_0.t();
+      var list = getConnections(Companion_getInstance_3(), protocol, element_0);
       addAll(destination_0, list);
     }
     var tmp_3 = toSet(destination_0);
-    var tmp_4 = toSet(protocol.c24());
-    // Inline function 'kotlin.collections.map' call
+    var tmp_4 = toSet(protocol.u27());
     // Inline function 'kotlin.collections.flatMap' call
     // Inline function 'kotlin.collections.flatMapTo' call
     var destination_1 = ArrayList_init_$Create$();
     // Inline function 'kotlin.collections.iterator' call
-    var tmp0_iterator_1 = triggers.p2().t();
-    while (tmp0_iterator_1.u()) {
-      var element_1 = tmp0_iterator_1.v();
-      // Inline function 'dk.cachet.carp.protocols.application.Companion.fromProtocol.<anonymous>' call
+    var _iterator__ex2g4s_1 = triggers.f1().r();
+    while (_iterator__ex2g4s_1.s()) {
+      var element_1 = _iterator__ex2g4s_1.t();
       // Inline function 'kotlin.collections.map' call
-      var this_2 = protocol.d24(element_1.r2());
+      var this_1 = protocol.v27(element_1.s2());
       // Inline function 'kotlin.collections.mapTo' call
-      var destination_2 = ArrayList_init_$Create$_0(collectionSizeOrDefault(this_2, 10));
-      var tmp0_iterator_2 = this_2.t();
-      while (tmp0_iterator_2.u()) {
-        var item = tmp0_iterator_2.v();
-        // Inline function 'dk.cachet.carp.protocols.application.Companion.fromProtocol.<anonymous>.<anonymous>' call
-        var tmp$ret$7 = to(element_1, item);
-        destination_2.q(tmp$ret$7);
+      var destination_2 = ArrayList_init_$Create$_0(collectionSizeOrDefault(this_1, 10));
+      var _iterator__ex2g4s_2 = this_1.r();
+      while (_iterator__ex2g4s_2.s()) {
+        var item = _iterator__ex2g4s_2.t();
+        var tmp$ret$13 = to(element_1, item);
+        destination_2.y(tmp$ret$13);
       }
       var list_0 = destination_2;
       addAll(destination_1, list_0);
     }
+    // Inline function 'kotlin.collections.map' call
     // Inline function 'kotlin.collections.mapTo' call
     var destination_3 = ArrayList_init_$Create$_0(collectionSizeOrDefault(destination_1, 10));
-    var tmp0_iterator_3 = destination_1.t();
-    while (tmp0_iterator_3.u()) {
-      var item_0 = tmp0_iterator_3.v();
-      // Inline function 'dk.cachet.carp.protocols.application.Companion.fromProtocol.<anonymous>' call
-      var trigger = item_0.od();
-      var tc = item_0.pd();
-      var tmp$ret$13 = new TaskControl(trigger.q2(), tc.f24_1.name, tc.g24_1.roleName, tc.h24_1);
-      destination_3.q(tmp$ret$13);
+    var _iterator__ex2g4s_3 = destination_1.r();
+    while (_iterator__ex2g4s_3.s()) {
+      var item_0 = _iterator__ex2g4s_3.t();
+      var trigger = item_0.sd();
+      var tc = item_0.td();
+      var tmp$ret$16 = new TaskControl(trigger.r2(), tc.x27_1.name, tc.y27_1.roleName, tc.z27_1);
+      destination_3.y(tmp$ret$16);
     }
     var tmp_5 = toSet(destination_3);
-    var tmp_6 = toSet(protocol.i24());
-    // Inline function 'kotlin.collections.map' call
+    var tmp_6 = toSet(protocol.a28());
     // Inline function 'kotlin.collections.filter' call
+    var tmp0_0 = protocol.b28();
     // Inline function 'kotlin.collections.filterTo' call
-    var this_3 = protocol.j24();
     var destination_4 = LinkedHashMap_init_$Create$_0();
     // Inline function 'kotlin.collections.iterator' call
-    var tmp0_iterator_4 = this_3.p2().t();
-    while (tmp0_iterator_4.u()) {
-      var element_2 = tmp0_iterator_4.v();
-      // Inline function 'dk.cachet.carp.protocols.application.Companion.fromProtocol.<anonymous>' call
-      var tmp_7 = element_2.r2();
+    var _iterator__ex2g4s_4 = tmp0_0.f1().r();
+    while (_iterator__ex2g4s_4.s()) {
+      var element_2 = _iterator__ex2g4s_4.t();
+      var tmp_7 = element_2.s2();
       if (tmp_7 instanceof Roles) {
-        destination_4.n2(element_2.q2(), element_2.r2());
+        destination_4.k2(element_2.r2(), element_2.s2());
       }
     }
+    // Inline function 'kotlin.collections.map' call
     // Inline function 'kotlin.collections.mapTo' call
-    var destination_5 = ArrayList_init_$Create$_0(destination_4.n());
+    var destination_5 = ArrayList_init_$Create$_0(destination_4.a1());
     // Inline function 'kotlin.collections.iterator' call
-    var tmp0_iterator_5 = destination_4.p2().t();
-    while (tmp0_iterator_5.u()) {
-      var item_1 = tmp0_iterator_5.v();
-      // Inline function 'dk.cachet.carp.protocols.application.Companion.fromProtocol.<anonymous>' call
-      var tmp_8 = item_1.q2().roleName;
-      var tmp_9 = item_1.r2();
-      var tmp$ret$21 = to(tmp_8, (tmp_9 instanceof Roles ? tmp_9 : THROW_CCE()).roleNames);
-      destination_5.q(tmp$ret$21);
+    var _iterator__ex2g4s_5 = destination_4.f1().r();
+    while (_iterator__ex2g4s_5.s()) {
+      var item_1 = _iterator__ex2g4s_5.t();
+      var tmp_8 = item_1.r2().roleName;
+      var tmp_9 = item_1.s2();
+      var tmp$ret$24 = to(tmp_8, (tmp_9 instanceof Roles ? tmp_9 : THROW_CCE()).roleNames);
+      destination_5.y(tmp$ret$24);
     }
-    return new StudyProtocolSnapshot(protocol.n1y_1, protocol.o1y_1, version, protocol.i23_1, tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, triggers, tmp_5, tmp_6, toMap(destination_5), toSet(protocol.k24()), protocol.o23_1);
+    return new StudyProtocolSnapshot(protocol.a22_1, protocol.b22_1, version, protocol.a27_1, tmp, tmp_0, tmp_1, tmp_2, tmp_3, tmp_4, triggers, tmp_5, tmp_6, toMap(destination_5), toSet(protocol.c28()), protocol.g27_1);
   };
-  protoOf(Companion_3).m16 = function () {
+  protoOf(Companion_3).i18 = function () {
     return $serializer_getInstance_4();
   };
-  var Companion_instance_4;
-  function Companion_getInstance_5() {
-    if (Companion_instance_4 == null)
+  var Companion_instance_7;
+  function Companion_getInstance_3() {
+    if (Companion_instance_7 == null)
       new Companion_3();
-    return Companion_instance_4;
+    return Companion_instance_7;
   }
   function $serializer_1() {
     $serializer_instance_1 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.application.StudyProtocolSnapshot', this, 16);
-    tmp0_serialDesc.nt('id', false);
-    tmp0_serialDesc.nt('createdOn', false);
-    tmp0_serialDesc.nt('version', false);
-    tmp0_serialDesc.nt('ownerId', false);
-    tmp0_serialDesc.nt('name', false);
-    tmp0_serialDesc.nt('description', true);
-    tmp0_serialDesc.nt('primaryDevices', true);
-    tmp0_serialDesc.nt('connectedDevices', true);
-    tmp0_serialDesc.nt('connections', true);
-    tmp0_serialDesc.nt('tasks', true);
-    tmp0_serialDesc.nt('triggers', true);
-    tmp0_serialDesc.nt('taskControls', true);
-    tmp0_serialDesc.nt('participantRoles', true);
-    tmp0_serialDesc.nt('assignedDevices', true);
-    tmp0_serialDesc.nt('expectedParticipantData', true);
-    tmp0_serialDesc.nt('applicationData', true);
-    this.l24_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('id', false);
+    tmp0_serialDesc.pv('createdOn', false);
+    tmp0_serialDesc.pv('version', false);
+    tmp0_serialDesc.pv('ownerId', false);
+    tmp0_serialDesc.pv('name', false);
+    tmp0_serialDesc.pv('description', true);
+    tmp0_serialDesc.pv('primaryDevices', true);
+    tmp0_serialDesc.pv('connectedDevices', true);
+    tmp0_serialDesc.pv('connections', true);
+    tmp0_serialDesc.pv('tasks', true);
+    tmp0_serialDesc.pv('triggers', true);
+    tmp0_serialDesc.pv('taskControls', true);
+    tmp0_serialDesc.pv('participantRoles', true);
+    tmp0_serialDesc.pv('assignedDevices', true);
+    tmp0_serialDesc.pv('expectedParticipantData', true);
+    tmp0_serialDesc.pv('applicationData', true);
+    this.d28_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_1).pi = function () {
-    return this.l24_1;
+  protoOf($serializer_1).e28 = function (encoder, value) {
+    var tmp0_desc = this.d28_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    var tmp2_cached = Companion_getInstance_3().s26_1;
+    tmp1_output.op(tmp0_desc, 0, UUIDSerializer_getInstance(), value.f28_1);
+    tmp1_output.op(tmp0_desc, 1, InstantSerializer_getInstance(), value.g28_1);
+    tmp1_output.hp(tmp0_desc, 2, value.h28_1);
+    tmp1_output.op(tmp0_desc, 3, UUIDSerializer_getInstance(), value.ownerId);
+    tmp1_output.mp(tmp0_desc, 4, value.name);
+    if (tmp1_output.up(tmp0_desc, 5) ? true : !(value.description == null)) {
+      tmp1_output.qp(tmp0_desc, 5, StringSerializer_getInstance(), value.description);
+    }
+    if (tmp1_output.up(tmp0_desc, 6) ? true : !equals(value.primaryDevices, emptySet())) {
+      tmp1_output.op(tmp0_desc, 6, tmp2_cached[6].s2(), value.primaryDevices);
+    }
+    if (tmp1_output.up(tmp0_desc, 7) ? true : !equals(value.connectedDevices, emptySet())) {
+      tmp1_output.op(tmp0_desc, 7, tmp2_cached[7].s2(), value.connectedDevices);
+    }
+    if (tmp1_output.up(tmp0_desc, 8) ? true : !equals(value.connections, emptySet())) {
+      tmp1_output.op(tmp0_desc, 8, tmp2_cached[8].s2(), value.connections);
+    }
+    if (tmp1_output.up(tmp0_desc, 9) ? true : !equals(value.tasks, emptySet())) {
+      tmp1_output.op(tmp0_desc, 9, tmp2_cached[9].s2(), value.tasks);
+    }
+    if (tmp1_output.up(tmp0_desc, 10) ? true : !equals(value.triggers, emptyMap())) {
+      tmp1_output.op(tmp0_desc, 10, tmp2_cached[10].s2(), value.triggers);
+    }
+    if (tmp1_output.up(tmp0_desc, 11) ? true : !equals(value.taskControls, emptySet())) {
+      tmp1_output.op(tmp0_desc, 11, tmp2_cached[11].s2(), value.taskControls);
+    }
+    if (tmp1_output.up(tmp0_desc, 12) ? true : !equals(value.participantRoles, emptySet())) {
+      tmp1_output.op(tmp0_desc, 12, tmp2_cached[12].s2(), value.participantRoles);
+    }
+    if (tmp1_output.up(tmp0_desc, 13) ? true : !equals(value.assignedDevices, emptyMap())) {
+      tmp1_output.op(tmp0_desc, 13, tmp2_cached[13].s2(), value.assignedDevices);
+    }
+    if (tmp1_output.up(tmp0_desc, 14) ? true : !equals(value.expectedParticipantData, emptySet())) {
+      tmp1_output.op(tmp0_desc, 14, tmp2_cached[14].s2(), value.expectedParticipantData);
+    }
+    if (tmp1_output.up(tmp0_desc, 15) ? true : !(value.applicationData == null)) {
+      tmp1_output.qp(tmp0_desc, 15, tmp2_cached[15].s2(), value.applicationData);
+    }
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_1).cu = function () {
-    var tmp0_cached = Companion_getInstance_5().a23_1;
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [UUIDSerializer_getInstance(), InstantIso8601Serializer_getInstance(), IntSerializer_getInstance(), UUIDSerializer_getInstance(), StringSerializer_getInstance(), get_nullable(StringSerializer_getInstance()), tmp0_cached[6], tmp0_cached[7], tmp0_cached[8], tmp0_cached[9], tmp0_cached[10], tmp0_cached[11], tmp0_cached[12], tmp0_cached[13], tmp0_cached[14], get_nullable(tmp0_cached[15])];
+  protoOf($serializer_1).nk = function (encoder, value) {
+    return this.e28(encoder, value instanceof StudyProtocolSnapshot ? value : THROW_CCE());
   };
-  protoOf($serializer_1).ri = function (decoder) {
-    var tmp0_desc = this.l24_1;
+  protoOf($serializer_1).ok = function (decoder) {
+    var tmp0_desc = this.d28_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
@@ -722,165 +786,128 @@
     var tmp17_local13 = null;
     var tmp18_local14 = null;
     var tmp19_local15 = null;
-    var tmp20_input = decoder.xl(tmp0_desc);
-    var tmp21_cached = Companion_getInstance_5().a23_1;
-    if (tmp20_input.om()) {
-      tmp4_local0 = tmp20_input.jm(tmp0_desc, 0, UUIDSerializer_getInstance(), tmp4_local0);
+    var tmp20_input = decoder.xn(tmp0_desc);
+    var tmp21_cached = Companion_getInstance_3().s26_1;
+    if (tmp20_input.no()) {
+      tmp4_local0 = tmp20_input.jo(tmp0_desc, 0, UUIDSerializer_getInstance(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp20_input.jm(tmp0_desc, 1, InstantIso8601Serializer_getInstance(), tmp5_local1);
+      tmp5_local1 = tmp20_input.jo(tmp0_desc, 1, InstantSerializer_getInstance(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
-      tmp6_local2 = tmp20_input.cm(tmp0_desc, 2);
+      tmp6_local2 = tmp20_input.co(tmp0_desc, 2);
       tmp3_bitMask0 = tmp3_bitMask0 | 4;
-      tmp7_local3 = tmp20_input.jm(tmp0_desc, 3, UUIDSerializer_getInstance(), tmp7_local3);
+      tmp7_local3 = tmp20_input.jo(tmp0_desc, 3, UUIDSerializer_getInstance(), tmp7_local3);
       tmp3_bitMask0 = tmp3_bitMask0 | 8;
-      tmp8_local4 = tmp20_input.hm(tmp0_desc, 4);
+      tmp8_local4 = tmp20_input.ho(tmp0_desc, 4);
       tmp3_bitMask0 = tmp3_bitMask0 | 16;
-      tmp9_local5 = tmp20_input.lm(tmp0_desc, 5, StringSerializer_getInstance(), tmp9_local5);
+      tmp9_local5 = tmp20_input.lo(tmp0_desc, 5, StringSerializer_getInstance(), tmp9_local5);
       tmp3_bitMask0 = tmp3_bitMask0 | 32;
-      tmp10_local6 = tmp20_input.jm(tmp0_desc, 6, tmp21_cached[6], tmp10_local6);
+      tmp10_local6 = tmp20_input.jo(tmp0_desc, 6, tmp21_cached[6].s2(), tmp10_local6);
       tmp3_bitMask0 = tmp3_bitMask0 | 64;
-      tmp11_local7 = tmp20_input.jm(tmp0_desc, 7, tmp21_cached[7], tmp11_local7);
+      tmp11_local7 = tmp20_input.jo(tmp0_desc, 7, tmp21_cached[7].s2(), tmp11_local7);
       tmp3_bitMask0 = tmp3_bitMask0 | 128;
-      tmp12_local8 = tmp20_input.jm(tmp0_desc, 8, tmp21_cached[8], tmp12_local8);
+      tmp12_local8 = tmp20_input.jo(tmp0_desc, 8, tmp21_cached[8].s2(), tmp12_local8);
       tmp3_bitMask0 = tmp3_bitMask0 | 256;
-      tmp13_local9 = tmp20_input.jm(tmp0_desc, 9, tmp21_cached[9], tmp13_local9);
+      tmp13_local9 = tmp20_input.jo(tmp0_desc, 9, tmp21_cached[9].s2(), tmp13_local9);
       tmp3_bitMask0 = tmp3_bitMask0 | 512;
-      tmp14_local10 = tmp20_input.jm(tmp0_desc, 10, tmp21_cached[10], tmp14_local10);
+      tmp14_local10 = tmp20_input.jo(tmp0_desc, 10, tmp21_cached[10].s2(), tmp14_local10);
       tmp3_bitMask0 = tmp3_bitMask0 | 1024;
-      tmp15_local11 = tmp20_input.jm(tmp0_desc, 11, tmp21_cached[11], tmp15_local11);
+      tmp15_local11 = tmp20_input.jo(tmp0_desc, 11, tmp21_cached[11].s2(), tmp15_local11);
       tmp3_bitMask0 = tmp3_bitMask0 | 2048;
-      tmp16_local12 = tmp20_input.jm(tmp0_desc, 12, tmp21_cached[12], tmp16_local12);
+      tmp16_local12 = tmp20_input.jo(tmp0_desc, 12, tmp21_cached[12].s2(), tmp16_local12);
       tmp3_bitMask0 = tmp3_bitMask0 | 4096;
-      tmp17_local13 = tmp20_input.jm(tmp0_desc, 13, tmp21_cached[13], tmp17_local13);
+      tmp17_local13 = tmp20_input.jo(tmp0_desc, 13, tmp21_cached[13].s2(), tmp17_local13);
       tmp3_bitMask0 = tmp3_bitMask0 | 8192;
-      tmp18_local14 = tmp20_input.jm(tmp0_desc, 14, tmp21_cached[14], tmp18_local14);
+      tmp18_local14 = tmp20_input.jo(tmp0_desc, 14, tmp21_cached[14].s2(), tmp18_local14);
       tmp3_bitMask0 = tmp3_bitMask0 | 16384;
-      tmp19_local15 = tmp20_input.lm(tmp0_desc, 15, tmp21_cached[15], tmp19_local15);
+      tmp19_local15 = tmp20_input.lo(tmp0_desc, 15, tmp21_cached[15].s2(), tmp19_local15);
       tmp3_bitMask0 = tmp3_bitMask0 | 32768;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp20_input.pm(tmp0_desc);
+        tmp2_index = tmp20_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp20_input.jm(tmp0_desc, 0, UUIDSerializer_getInstance(), tmp4_local0);
+            tmp4_local0 = tmp20_input.jo(tmp0_desc, 0, UUIDSerializer_getInstance(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp20_input.jm(tmp0_desc, 1, InstantIso8601Serializer_getInstance(), tmp5_local1);
+            tmp5_local1 = tmp20_input.jo(tmp0_desc, 1, InstantSerializer_getInstance(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           case 2:
-            tmp6_local2 = tmp20_input.cm(tmp0_desc, 2);
+            tmp6_local2 = tmp20_input.co(tmp0_desc, 2);
             tmp3_bitMask0 = tmp3_bitMask0 | 4;
             break;
           case 3:
-            tmp7_local3 = tmp20_input.jm(tmp0_desc, 3, UUIDSerializer_getInstance(), tmp7_local3);
+            tmp7_local3 = tmp20_input.jo(tmp0_desc, 3, UUIDSerializer_getInstance(), tmp7_local3);
             tmp3_bitMask0 = tmp3_bitMask0 | 8;
             break;
           case 4:
-            tmp8_local4 = tmp20_input.hm(tmp0_desc, 4);
+            tmp8_local4 = tmp20_input.ho(tmp0_desc, 4);
             tmp3_bitMask0 = tmp3_bitMask0 | 16;
             break;
           case 5:
-            tmp9_local5 = tmp20_input.lm(tmp0_desc, 5, StringSerializer_getInstance(), tmp9_local5);
+            tmp9_local5 = tmp20_input.lo(tmp0_desc, 5, StringSerializer_getInstance(), tmp9_local5);
             tmp3_bitMask0 = tmp3_bitMask0 | 32;
             break;
           case 6:
-            tmp10_local6 = tmp20_input.jm(tmp0_desc, 6, tmp21_cached[6], tmp10_local6);
+            tmp10_local6 = tmp20_input.jo(tmp0_desc, 6, tmp21_cached[6].s2(), tmp10_local6);
             tmp3_bitMask0 = tmp3_bitMask0 | 64;
             break;
           case 7:
-            tmp11_local7 = tmp20_input.jm(tmp0_desc, 7, tmp21_cached[7], tmp11_local7);
+            tmp11_local7 = tmp20_input.jo(tmp0_desc, 7, tmp21_cached[7].s2(), tmp11_local7);
             tmp3_bitMask0 = tmp3_bitMask0 | 128;
             break;
           case 8:
-            tmp12_local8 = tmp20_input.jm(tmp0_desc, 8, tmp21_cached[8], tmp12_local8);
+            tmp12_local8 = tmp20_input.jo(tmp0_desc, 8, tmp21_cached[8].s2(), tmp12_local8);
             tmp3_bitMask0 = tmp3_bitMask0 | 256;
             break;
           case 9:
-            tmp13_local9 = tmp20_input.jm(tmp0_desc, 9, tmp21_cached[9], tmp13_local9);
+            tmp13_local9 = tmp20_input.jo(tmp0_desc, 9, tmp21_cached[9].s2(), tmp13_local9);
             tmp3_bitMask0 = tmp3_bitMask0 | 512;
             break;
           case 10:
-            tmp14_local10 = tmp20_input.jm(tmp0_desc, 10, tmp21_cached[10], tmp14_local10);
+            tmp14_local10 = tmp20_input.jo(tmp0_desc, 10, tmp21_cached[10].s2(), tmp14_local10);
             tmp3_bitMask0 = tmp3_bitMask0 | 1024;
             break;
           case 11:
-            tmp15_local11 = tmp20_input.jm(tmp0_desc, 11, tmp21_cached[11], tmp15_local11);
+            tmp15_local11 = tmp20_input.jo(tmp0_desc, 11, tmp21_cached[11].s2(), tmp15_local11);
             tmp3_bitMask0 = tmp3_bitMask0 | 2048;
             break;
           case 12:
-            tmp16_local12 = tmp20_input.jm(tmp0_desc, 12, tmp21_cached[12], tmp16_local12);
+            tmp16_local12 = tmp20_input.jo(tmp0_desc, 12, tmp21_cached[12].s2(), tmp16_local12);
             tmp3_bitMask0 = tmp3_bitMask0 | 4096;
             break;
           case 13:
-            tmp17_local13 = tmp20_input.jm(tmp0_desc, 13, tmp21_cached[13], tmp17_local13);
+            tmp17_local13 = tmp20_input.jo(tmp0_desc, 13, tmp21_cached[13].s2(), tmp17_local13);
             tmp3_bitMask0 = tmp3_bitMask0 | 8192;
             break;
           case 14:
-            tmp18_local14 = tmp20_input.jm(tmp0_desc, 14, tmp21_cached[14], tmp18_local14);
+            tmp18_local14 = tmp20_input.jo(tmp0_desc, 14, tmp21_cached[14].s2(), tmp18_local14);
             tmp3_bitMask0 = tmp3_bitMask0 | 16384;
             break;
           case 15:
-            tmp19_local15 = tmp20_input.lm(tmp0_desc, 15, tmp21_cached[15], tmp19_local15);
+            tmp19_local15 = tmp20_input.lo(tmp0_desc, 15, tmp21_cached[15].s2(), tmp19_local15);
             tmp3_bitMask0 = tmp3_bitMask0 | 32768;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp20_input.yl(tmp0_desc);
+    tmp20_input.yn(tmp0_desc);
     return StudyProtocolSnapshot_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, tmp6_local2, tmp7_local3, tmp8_local4, tmp9_local5, tmp10_local6, tmp11_local7, tmp12_local8, tmp13_local9, tmp14_local10, tmp15_local11, tmp16_local12, tmp17_local13, tmp18_local14, tmp19_local15, null);
   };
-  protoOf($serializer_1).m24 = function (encoder, value) {
-    var tmp0_desc = this.l24_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    var tmp2_cached = Companion_getInstance_5().a23_1;
-    tmp1_output.pn(tmp0_desc, 0, UUIDSerializer_getInstance(), value.n24_1);
-    tmp1_output.pn(tmp0_desc, 1, InstantIso8601Serializer_getInstance(), value.o24_1);
-    tmp1_output.in(tmp0_desc, 2, value.p24_1);
-    tmp1_output.pn(tmp0_desc, 3, UUIDSerializer_getInstance(), value.ownerId);
-    tmp1_output.nn(tmp0_desc, 4, value.name);
-    if (tmp1_output.vn(tmp0_desc, 5) ? true : !(value.description == null)) {
-      tmp1_output.rn(tmp0_desc, 5, StringSerializer_getInstance(), value.description);
-    }
-    if (tmp1_output.vn(tmp0_desc, 6) ? true : !equals(value.primaryDevices, emptySet())) {
-      tmp1_output.pn(tmp0_desc, 6, tmp2_cached[6], value.primaryDevices);
-    }
-    if (tmp1_output.vn(tmp0_desc, 7) ? true : !equals(value.connectedDevices, emptySet())) {
-      tmp1_output.pn(tmp0_desc, 7, tmp2_cached[7], value.connectedDevices);
-    }
-    if (tmp1_output.vn(tmp0_desc, 8) ? true : !equals(value.connections, emptySet())) {
-      tmp1_output.pn(tmp0_desc, 8, tmp2_cached[8], value.connections);
-    }
-    if (tmp1_output.vn(tmp0_desc, 9) ? true : !equals(value.tasks, emptySet())) {
-      tmp1_output.pn(tmp0_desc, 9, tmp2_cached[9], value.tasks);
-    }
-    if (tmp1_output.vn(tmp0_desc, 10) ? true : !equals(value.triggers, emptyMap())) {
-      tmp1_output.pn(tmp0_desc, 10, tmp2_cached[10], value.triggers);
-    }
-    if (tmp1_output.vn(tmp0_desc, 11) ? true : !equals(value.taskControls, emptySet())) {
-      tmp1_output.pn(tmp0_desc, 11, tmp2_cached[11], value.taskControls);
-    }
-    if (tmp1_output.vn(tmp0_desc, 12) ? true : !equals(value.participantRoles, emptySet())) {
-      tmp1_output.pn(tmp0_desc, 12, tmp2_cached[12], value.participantRoles);
-    }
-    if (tmp1_output.vn(tmp0_desc, 13) ? true : !equals(value.assignedDevices, emptyMap())) {
-      tmp1_output.pn(tmp0_desc, 13, tmp2_cached[13], value.assignedDevices);
-    }
-    if (tmp1_output.vn(tmp0_desc, 14) ? true : !equals(value.expectedParticipantData, emptySet())) {
-      tmp1_output.pn(tmp0_desc, 14, tmp2_cached[14], value.expectedParticipantData);
-    }
-    if (tmp1_output.vn(tmp0_desc, 15) ? true : !(value.applicationData == null)) {
-      tmp1_output.rn(tmp0_desc, 15, tmp2_cached[15], value.applicationData);
-    }
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_1).mk = function () {
+    return this.d28_1;
   };
-  protoOf($serializer_1).qi = function (encoder, value) {
-    return this.m24(encoder, value instanceof StudyProtocolSnapshot ? value : THROW_CCE());
+  protoOf($serializer_1).ew = function () {
+    var tmp0_cached = Companion_getInstance_3().s26_1;
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [UUIDSerializer_getInstance(), InstantSerializer_getInstance(), IntSerializer_getInstance(), UUIDSerializer_getInstance(), StringSerializer_getInstance(), get_nullable(StringSerializer_getInstance()), tmp0_cached[6].s2(), tmp0_cached[7].s2(), tmp0_cached[8].s2(), tmp0_cached[9].s2(), tmp0_cached[10].s2(), tmp0_cached[11].s2(), tmp0_cached[12].s2(), tmp0_cached[13].s2(), tmp0_cached[14].s2(), get_nullable(tmp0_cached[15].s2())];
   };
   var $serializer_instance_1;
   function $serializer_getInstance_4() {
@@ -888,66 +915,66 @@
       new $serializer_1();
     return $serializer_instance_1;
   }
-  function StudyProtocolSnapshot_init_$Init$(seen1, id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData, serializationConstructorMarker, $this) {
-    if (!(31 === (31 & seen1))) {
-      throwMissingFieldException(seen1, 31, $serializer_getInstance_4().l24_1);
+  function StudyProtocolSnapshot_init_$Init$(seen0, id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData, serializationConstructorMarker, $this) {
+    if (!(31 === (31 & seen0))) {
+      throwMissingFieldException(seen0, 31, $serializer_getInstance_4().d28_1);
     }
-    $this.n24_1 = id;
-    $this.o24_1 = createdOn;
-    $this.p24_1 = version;
+    $this.f28_1 = id;
+    $this.g28_1 = createdOn;
+    $this.h28_1 = version;
     $this.ownerId = ownerId;
     $this.name = name;
-    if (0 === (seen1 & 32))
+    if (0 === (seen0 & 32))
       $this.description = null;
     else
       $this.description = description;
-    if (0 === (seen1 & 64))
+    if (0 === (seen0 & 64))
       $this.primaryDevices = emptySet();
     else
       $this.primaryDevices = primaryDevices;
-    if (0 === (seen1 & 128))
+    if (0 === (seen0 & 128))
       $this.connectedDevices = emptySet();
     else
       $this.connectedDevices = connectedDevices;
-    if (0 === (seen1 & 256))
+    if (0 === (seen0 & 256))
       $this.connections = emptySet();
     else
       $this.connections = connections;
-    if (0 === (seen1 & 512))
+    if (0 === (seen0 & 512))
       $this.tasks = emptySet();
     else
       $this.tasks = tasks;
-    if (0 === (seen1 & 1024))
+    if (0 === (seen0 & 1024))
       $this.triggers = emptyMap();
     else
       $this.triggers = triggers;
-    if (0 === (seen1 & 2048))
+    if (0 === (seen0 & 2048))
       $this.taskControls = emptySet();
     else
       $this.taskControls = taskControls;
-    if (0 === (seen1 & 4096))
+    if (0 === (seen0 & 4096))
       $this.participantRoles = emptySet();
     else
       $this.participantRoles = participantRoles;
-    if (0 === (seen1 & 8192))
+    if (0 === (seen0 & 8192))
       $this.assignedDevices = emptyMap();
     else
       $this.assignedDevices = assignedDevices;
-    if (0 === (seen1 & 16384))
+    if (0 === (seen0 & 16384))
       $this.expectedParticipantData = emptySet();
     else
       $this.expectedParticipantData = expectedParticipantData;
-    if (0 === (seen1 & 32768))
+    if (0 === (seen0 & 32768))
       $this.applicationData = null;
     else
       $this.applicationData = applicationData;
     return $this;
   }
-  function StudyProtocolSnapshot_init_$Create$(seen1, id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData, serializationConstructorMarker) {
-    return StudyProtocolSnapshot_init_$Init$(seen1, id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData, serializationConstructorMarker, objectCreate(protoOf(StudyProtocolSnapshot)));
+  function StudyProtocolSnapshot_init_$Create$(seen0, id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData, serializationConstructorMarker) {
+    return StudyProtocolSnapshot_init_$Init$(seen0, id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData, serializationConstructorMarker, objectCreate(protoOf(StudyProtocolSnapshot)));
   }
   function StudyProtocolSnapshot(id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData) {
-    Companion_getInstance_5();
+    Companion_getInstance_3();
     description = description === VOID ? null : description;
     primaryDevices = primaryDevices === VOID ? emptySet() : primaryDevices;
     connectedDevices = connectedDevices === VOID ? emptySet() : connectedDevices;
@@ -959,9 +986,9 @@
     assignedDevices = assignedDevices === VOID ? emptyMap() : assignedDevices;
     expectedParticipantData = expectedParticipantData === VOID ? emptySet() : expectedParticipantData;
     applicationData = applicationData === VOID ? null : applicationData;
-    this.n24_1 = id;
-    this.o24_1 = createdOn;
-    this.p24_1 = version;
+    this.f28_1 = id;
+    this.g28_1 = createdOn;
+    this.h28_1 = version;
     this.ownerId = ownerId;
     this.name = name;
     this.description = description;
@@ -976,112 +1003,112 @@
     this.expectedParticipantData = expectedParticipantData;
     this.applicationData = applicationData;
   }
-  protoOf(StudyProtocolSnapshot).z1y = function () {
-    return this.n24_1;
+  protoOf(StudyProtocolSnapshot).m22 = function () {
+    return this.f28_1;
   };
-  protoOf(StudyProtocolSnapshot).a1z = function () {
-    return this.o24_1;
+  protoOf(StudyProtocolSnapshot).n22 = function () {
+    return this.g28_1;
   };
-  protoOf(StudyProtocolSnapshot).b1z = function () {
-    return this.p24_1;
+  protoOf(StudyProtocolSnapshot).o22 = function () {
+    return this.h28_1;
   };
-  protoOf(StudyProtocolSnapshot).q24 = function () {
+  protoOf(StudyProtocolSnapshot).i28 = function () {
     return this.ownerId;
   };
-  protoOf(StudyProtocolSnapshot).ra = function () {
+  protoOf(StudyProtocolSnapshot).k = function () {
     return this.name;
   };
-  protoOf(StudyProtocolSnapshot).o1u = function () {
+  protoOf(StudyProtocolSnapshot).e1y = function () {
     return this.description;
   };
-  protoOf(StudyProtocolSnapshot).a24 = function () {
+  protoOf(StudyProtocolSnapshot).s27 = function () {
     return this.primaryDevices;
   };
-  protoOf(StudyProtocolSnapshot).r24 = function () {
+  protoOf(StudyProtocolSnapshot).j28 = function () {
     return this.connectedDevices;
   };
-  protoOf(StudyProtocolSnapshot).s24 = function () {
+  protoOf(StudyProtocolSnapshot).k28 = function () {
     return this.connections;
   };
-  protoOf(StudyProtocolSnapshot).c24 = function () {
+  protoOf(StudyProtocolSnapshot).u27 = function () {
     return this.tasks;
   };
-  protoOf(StudyProtocolSnapshot).q23 = function () {
+  protoOf(StudyProtocolSnapshot).i27 = function () {
     return this.triggers;
   };
-  protoOf(StudyProtocolSnapshot).t24 = function () {
+  protoOf(StudyProtocolSnapshot).l28 = function () {
     return this.taskControls;
   };
-  protoOf(StudyProtocolSnapshot).i24 = function () {
+  protoOf(StudyProtocolSnapshot).a28 = function () {
     return this.participantRoles;
   };
-  protoOf(StudyProtocolSnapshot).u24 = function () {
+  protoOf(StudyProtocolSnapshot).m28 = function () {
     return this.assignedDevices;
   };
-  protoOf(StudyProtocolSnapshot).k24 = function () {
+  protoOf(StudyProtocolSnapshot).c28 = function () {
     return this.expectedParticipantData;
   };
-  protoOf(StudyProtocolSnapshot).v24 = function () {
+  protoOf(StudyProtocolSnapshot).n28 = function () {
     return this.applicationData;
   };
   protoOf(StudyProtocolSnapshot).toObject = function () {
-    return Factory_instance.w24(this);
+    return Factory_instance.o28(this);
   };
-  protoOf(StudyProtocolSnapshot).od = function () {
-    return this.n24_1;
+  protoOf(StudyProtocolSnapshot).sd = function () {
+    return this.f28_1;
   };
-  protoOf(StudyProtocolSnapshot).pd = function () {
-    return this.o24_1;
+  protoOf(StudyProtocolSnapshot).td = function () {
+    return this.g28_1;
   };
-  protoOf(StudyProtocolSnapshot).r1g = function () {
-    return this.p24_1;
+  protoOf(StudyProtocolSnapshot).m1j = function () {
+    return this.h28_1;
   };
-  protoOf(StudyProtocolSnapshot).q1h = function () {
+  protoOf(StudyProtocolSnapshot).l1k = function () {
     return this.ownerId;
   };
-  protoOf(StudyProtocolSnapshot).r1m = function () {
+  protoOf(StudyProtocolSnapshot).m1p = function () {
     return this.name;
   };
-  protoOf(StudyProtocolSnapshot).l1p = function () {
+  protoOf(StudyProtocolSnapshot).n1s = function () {
     return this.description;
   };
-  protoOf(StudyProtocolSnapshot).x24 = function () {
+  protoOf(StudyProtocolSnapshot).o1s = function () {
     return this.primaryDevices;
   };
-  protoOf(StudyProtocolSnapshot).y24 = function () {
+  protoOf(StudyProtocolSnapshot).p1s = function () {
     return this.connectedDevices;
   };
-  protoOf(StudyProtocolSnapshot).z24 = function () {
+  protoOf(StudyProtocolSnapshot).p28 = function () {
     return this.connections;
   };
-  protoOf(StudyProtocolSnapshot).a25 = function () {
+  protoOf(StudyProtocolSnapshot).q28 = function () {
     return this.tasks;
   };
-  protoOf(StudyProtocolSnapshot).b25 = function () {
+  protoOf(StudyProtocolSnapshot).r28 = function () {
     return this.triggers;
   };
-  protoOf(StudyProtocolSnapshot).c25 = function () {
+  protoOf(StudyProtocolSnapshot).s28 = function () {
     return this.taskControls;
   };
-  protoOf(StudyProtocolSnapshot).d25 = function () {
+  protoOf(StudyProtocolSnapshot).t28 = function () {
     return this.participantRoles;
   };
-  protoOf(StudyProtocolSnapshot).e25 = function () {
+  protoOf(StudyProtocolSnapshot).u28 = function () {
     return this.assignedDevices;
   };
-  protoOf(StudyProtocolSnapshot).f25 = function () {
+  protoOf(StudyProtocolSnapshot).v28 = function () {
     return this.expectedParticipantData;
   };
-  protoOf(StudyProtocolSnapshot).g25 = function () {
+  protoOf(StudyProtocolSnapshot).w28 = function () {
     return this.applicationData;
   };
-  protoOf(StudyProtocolSnapshot).h25 = function (id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData) {
+  protoOf(StudyProtocolSnapshot).x28 = function (id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData) {
     return new StudyProtocolSnapshot(id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData);
   };
   protoOf(StudyProtocolSnapshot).copy = function (id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData, $super) {
-    id = id === VOID ? this.n24_1 : id;
-    createdOn = createdOn === VOID ? this.o24_1 : createdOn;
-    version = version === VOID ? this.p24_1 : version;
+    id = id === VOID ? this.f28_1 : id;
+    createdOn = createdOn === VOID ? this.g28_1 : createdOn;
+    version = version === VOID ? this.h28_1 : version;
     ownerId = ownerId === VOID ? this.ownerId : ownerId;
     name = name === VOID ? this.name : name;
     description = description === VOID ? this.description : description;
@@ -1095,15 +1122,15 @@
     assignedDevices = assignedDevices === VOID ? this.assignedDevices : assignedDevices;
     expectedParticipantData = expectedParticipantData === VOID ? this.expectedParticipantData : expectedParticipantData;
     applicationData = applicationData === VOID ? this.applicationData : applicationData;
-    return this.h25(id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData);
+    return $super === VOID ? this.x28(id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData) : $super.x28.call(this, id, createdOn, version, ownerId, name, description, primaryDevices, connectedDevices, connections, tasks, triggers, taskControls, participantRoles, assignedDevices, expectedParticipantData, applicationData);
   };
   protoOf(StudyProtocolSnapshot).toString = function () {
-    return 'StudyProtocolSnapshot(id=' + this.n24_1 + ', createdOn=' + this.o24_1 + ', version=' + this.p24_1 + ', ownerId=' + this.ownerId + ', name=' + this.name + ', description=' + this.description + ', primaryDevices=' + this.primaryDevices + ', connectedDevices=' + this.connectedDevices + ', connections=' + this.connections + ', tasks=' + this.tasks + ', triggers=' + this.triggers + ', taskControls=' + this.taskControls + ', participantRoles=' + this.participantRoles + ', assignedDevices=' + this.assignedDevices + ', expectedParticipantData=' + this.expectedParticipantData + ', applicationData=' + this.applicationData + ')';
+    return 'StudyProtocolSnapshot(id=' + this.f28_1.toString() + ', createdOn=' + this.g28_1.toString() + ', version=' + this.h28_1 + ', ownerId=' + this.ownerId.toString() + ', name=' + this.name + ', description=' + this.description + ', primaryDevices=' + toString(this.primaryDevices) + ', connectedDevices=' + toString(this.connectedDevices) + ', connections=' + toString(this.connections) + ', tasks=' + toString(this.tasks) + ', triggers=' + toString(this.triggers) + ', taskControls=' + toString(this.taskControls) + ', participantRoles=' + toString(this.participantRoles) + ', assignedDevices=' + toString(this.assignedDevices) + ', expectedParticipantData=' + toString(this.expectedParticipantData) + ', applicationData=' + toString_0(this.applicationData) + ')';
   };
   protoOf(StudyProtocolSnapshot).hashCode = function () {
-    var result = this.n24_1.hashCode();
-    result = imul(result, 31) + this.o24_1.hashCode() | 0;
-    result = imul(result, 31) + this.p24_1 | 0;
+    var result = this.f28_1.hashCode();
+    result = imul(result, 31) + this.g28_1.hashCode() | 0;
+    result = imul(result, 31) + this.h28_1 | 0;
     result = imul(result, 31) + this.ownerId.hashCode() | 0;
     result = imul(result, 31) + getStringHashCode(this.name) | 0;
     result = imul(result, 31) + (this.description == null ? 0 : getStringHashCode(this.description)) | 0;
@@ -1116,7 +1143,7 @@
     result = imul(result, 31) + hashCode(this.participantRoles) | 0;
     result = imul(result, 31) + hashCode(this.assignedDevices) | 0;
     result = imul(result, 31) + hashCode(this.expectedParticipantData) | 0;
-    result = imul(result, 31) + (this.applicationData == null ? 0 : getStringHashCode(this.applicationData)) | 0;
+    result = imul(result, 31) + (this.applicationData == null ? 0 : this.applicationData.hashCode()) | 0;
     return result;
   };
   protoOf(StudyProtocolSnapshot).equals = function (other) {
@@ -1124,72 +1151,70 @@
       return true;
     if (!(other instanceof StudyProtocolSnapshot))
       return false;
-    var tmp0_other_with_cast = other instanceof StudyProtocolSnapshot ? other : THROW_CCE();
-    if (!this.n24_1.equals(tmp0_other_with_cast.n24_1))
+    if (!this.f28_1.equals(other.f28_1))
       return false;
-    if (!this.o24_1.equals(tmp0_other_with_cast.o24_1))
+    if (!this.g28_1.equals(other.g28_1))
       return false;
-    if (!(this.p24_1 === tmp0_other_with_cast.p24_1))
+    if (!(this.h28_1 === other.h28_1))
       return false;
-    if (!this.ownerId.equals(tmp0_other_with_cast.ownerId))
+    if (!this.ownerId.equals(other.ownerId))
       return false;
-    if (!(this.name === tmp0_other_with_cast.name))
+    if (!(this.name === other.name))
       return false;
-    if (!(this.description == tmp0_other_with_cast.description))
+    if (!(this.description == other.description))
       return false;
-    if (!equals(this.primaryDevices, tmp0_other_with_cast.primaryDevices))
+    if (!equals(this.primaryDevices, other.primaryDevices))
       return false;
-    if (!equals(this.connectedDevices, tmp0_other_with_cast.connectedDevices))
+    if (!equals(this.connectedDevices, other.connectedDevices))
       return false;
-    if (!equals(this.connections, tmp0_other_with_cast.connections))
+    if (!equals(this.connections, other.connections))
       return false;
-    if (!equals(this.tasks, tmp0_other_with_cast.tasks))
+    if (!equals(this.tasks, other.tasks))
       return false;
-    if (!equals(this.triggers, tmp0_other_with_cast.triggers))
+    if (!equals(this.triggers, other.triggers))
       return false;
-    if (!equals(this.taskControls, tmp0_other_with_cast.taskControls))
+    if (!equals(this.taskControls, other.taskControls))
       return false;
-    if (!equals(this.participantRoles, tmp0_other_with_cast.participantRoles))
+    if (!equals(this.participantRoles, other.participantRoles))
       return false;
-    if (!equals(this.assignedDevices, tmp0_other_with_cast.assignedDevices))
+    if (!equals(this.assignedDevices, other.assignedDevices))
       return false;
-    if (!equals(this.expectedParticipantData, tmp0_other_with_cast.expectedParticipantData))
+    if (!equals(this.expectedParticipantData, other.expectedParticipantData))
       return false;
-    if (!(this.applicationData == tmp0_other_with_cast.applicationData))
+    if (!equals(this.applicationData, other.applicationData))
       return false;
     return true;
   };
   function PrimaryDeviceAdded(device) {
     Event.call(this);
-    this.i25_1 = device;
+    this.y28_1 = device;
   }
   protoOf(PrimaryDeviceAdded).toString = function () {
-    return 'PrimaryDeviceAdded(device=' + this.i25_1 + ')';
+    return 'PrimaryDeviceAdded(device=' + toString(this.y28_1) + ')';
   };
   protoOf(PrimaryDeviceAdded).hashCode = function () {
-    return hashCode(this.i25_1);
+    return hashCode(this.y28_1);
   };
   protoOf(PrimaryDeviceAdded).equals = function (other) {
     if (this === other)
       return true;
     if (!(other instanceof PrimaryDeviceAdded))
       return false;
-    var tmp0_other_with_cast = other instanceof PrimaryDeviceAdded ? other : THROW_CCE();
-    if (!equals(this.i25_1, tmp0_other_with_cast.i25_1))
+    if (!equals(this.y28_1, other.y28_1))
       return false;
     return true;
   };
   function ConnectedDeviceAdded(connected, primary) {
     Event.call(this);
-    this.j25_1 = connected;
-    this.k25_1 = primary;
+    this.z28_1 = connected;
+    this.a29_1 = primary;
   }
   protoOf(ConnectedDeviceAdded).toString = function () {
-    return 'ConnectedDeviceAdded(connected=' + this.j25_1 + ', primary=' + this.k25_1 + ')';
+    return 'ConnectedDeviceAdded(connected=' + toString(this.z28_1) + ', primary=' + toString(this.a29_1) + ')';
   };
   protoOf(ConnectedDeviceAdded).hashCode = function () {
-    var result = hashCode(this.j25_1);
-    result = imul(result, 31) + hashCode(this.k25_1) | 0;
+    var result = hashCode(this.z28_1);
+    result = imul(result, 31) + hashCode(this.a29_1) | 0;
     return result;
   };
   protoOf(ConnectedDeviceAdded).equals = function (other) {
@@ -1197,104 +1222,99 @@
       return true;
     if (!(other instanceof ConnectedDeviceAdded))
       return false;
-    var tmp0_other_with_cast = other instanceof ConnectedDeviceAdded ? other : THROW_CCE();
-    if (!equals(this.j25_1, tmp0_other_with_cast.j25_1))
+    if (!equals(this.z28_1, other.z28_1))
       return false;
-    if (!equals(this.k25_1, tmp0_other_with_cast.k25_1))
+    if (!equals(this.a29_1, other.a29_1))
       return false;
     return true;
   };
   function TriggerAdded(trigger) {
     Event.call(this);
-    this.l25_1 = trigger;
+    this.b29_1 = trigger;
   }
   protoOf(TriggerAdded).toString = function () {
-    return 'TriggerAdded(trigger=' + this.l25_1 + ')';
+    return 'TriggerAdded(trigger=' + toString(this.b29_1) + ')';
   };
   protoOf(TriggerAdded).hashCode = function () {
-    return hashCode(this.l25_1);
+    return hashCode(this.b29_1);
   };
   protoOf(TriggerAdded).equals = function (other) {
     if (this === other)
       return true;
     if (!(other instanceof TriggerAdded))
       return false;
-    var tmp0_other_with_cast = other instanceof TriggerAdded ? other : THROW_CCE();
-    if (!equals(this.l25_1, tmp0_other_with_cast.l25_1))
+    if (!equals(this.b29_1, other.b29_1))
       return false;
     return true;
   };
   function TaskAdded(task) {
     Event.call(this);
-    this.m25_1 = task;
+    this.c29_1 = task;
   }
   protoOf(TaskAdded).toString = function () {
-    return 'TaskAdded(task=' + this.m25_1 + ')';
+    return 'TaskAdded(task=' + toString(this.c29_1) + ')';
   };
   protoOf(TaskAdded).hashCode = function () {
-    return hashCode(this.m25_1);
+    return hashCode(this.c29_1);
   };
   protoOf(TaskAdded).equals = function (other) {
     if (this === other)
       return true;
     if (!(other instanceof TaskAdded))
       return false;
-    var tmp0_other_with_cast = other instanceof TaskAdded ? other : THROW_CCE();
-    if (!equals(this.m25_1, tmp0_other_with_cast.m25_1))
+    if (!equals(this.c29_1, other.c29_1))
       return false;
     return true;
   };
   function TaskControlAdded(control) {
     Event.call(this);
-    this.n25_1 = control;
+    this.d29_1 = control;
   }
   protoOf(TaskControlAdded).toString = function () {
-    return 'TaskControlAdded(control=' + this.n25_1 + ')';
+    return 'TaskControlAdded(control=' + this.d29_1.toString() + ')';
   };
   protoOf(TaskControlAdded).hashCode = function () {
-    return this.n25_1.hashCode();
+    return this.d29_1.hashCode();
   };
   protoOf(TaskControlAdded).equals = function (other) {
     if (this === other)
       return true;
     if (!(other instanceof TaskControlAdded))
       return false;
-    var tmp0_other_with_cast = other instanceof TaskControlAdded ? other : THROW_CCE();
-    if (!this.n25_1.equals(tmp0_other_with_cast.n25_1))
+    if (!this.d29_1.equals(other.d29_1))
       return false;
     return true;
   };
   function ParticipantRoleAdded(role) {
     Event.call(this);
-    this.o25_1 = role;
+    this.e29_1 = role;
   }
   protoOf(ParticipantRoleAdded).toString = function () {
-    return 'ParticipantRoleAdded(role=' + this.o25_1 + ')';
+    return 'ParticipantRoleAdded(role=' + this.e29_1.toString() + ')';
   };
   protoOf(ParticipantRoleAdded).hashCode = function () {
-    return this.o25_1.hashCode();
+    return this.e29_1.hashCode();
   };
   protoOf(ParticipantRoleAdded).equals = function (other) {
     if (this === other)
       return true;
     if (!(other instanceof ParticipantRoleAdded))
       return false;
-    var tmp0_other_with_cast = other instanceof ParticipantRoleAdded ? other : THROW_CCE();
-    if (!this.o25_1.equals(tmp0_other_with_cast.o25_1))
+    if (!this.e29_1.equals(other.e29_1))
       return false;
     return true;
   };
   function DeviceAssignmentChanged(device, assignedTo) {
     Event.call(this);
-    this.p25_1 = device;
-    this.q25_1 = assignedTo;
+    this.f29_1 = device;
+    this.g29_1 = assignedTo;
   }
   protoOf(DeviceAssignmentChanged).toString = function () {
-    return 'DeviceAssignmentChanged(device=' + this.p25_1 + ', assignedTo=' + this.q25_1 + ')';
+    return 'DeviceAssignmentChanged(device=' + toString(this.f29_1) + ', assignedTo=' + toString(this.g29_1) + ')';
   };
   protoOf(DeviceAssignmentChanged).hashCode = function () {
-    var result = hashCode(this.p25_1);
-    result = imul(result, 31) + hashCode(this.q25_1) | 0;
+    var result = hashCode(this.f29_1);
+    result = imul(result, 31) + hashCode(this.g29_1) | 0;
     return result;
   };
   protoOf(DeviceAssignmentChanged).equals = function (other) {
@@ -1302,30 +1322,28 @@
       return true;
     if (!(other instanceof DeviceAssignmentChanged))
       return false;
-    var tmp0_other_with_cast = other instanceof DeviceAssignmentChanged ? other : THROW_CCE();
-    if (!equals(this.p25_1, tmp0_other_with_cast.p25_1))
+    if (!equals(this.f29_1, other.f29_1))
       return false;
-    if (!equals(this.q25_1, tmp0_other_with_cast.q25_1))
+    if (!equals(this.g29_1, other.g29_1))
       return false;
     return true;
   };
   function ExpectedParticipantDataAdded(expectedData) {
     Event.call(this);
-    this.r25_1 = expectedData;
+    this.h29_1 = expectedData;
   }
   protoOf(ExpectedParticipantDataAdded).toString = function () {
-    return 'ExpectedParticipantDataAdded(expectedData=' + this.r25_1 + ')';
+    return 'ExpectedParticipantDataAdded(expectedData=' + this.h29_1.toString() + ')';
   };
   protoOf(ExpectedParticipantDataAdded).hashCode = function () {
-    return this.r25_1.hashCode();
+    return this.h29_1.hashCode();
   };
   protoOf(ExpectedParticipantDataAdded).equals = function (other) {
     if (this === other)
       return true;
     if (!(other instanceof ExpectedParticipantDataAdded))
       return false;
-    var tmp0_other_with_cast = other instanceof ExpectedParticipantDataAdded ? other : THROW_CCE();
-    if (!this.r25_1.equals(tmp0_other_with_cast.r25_1))
+    if (!this.h29_1.equals(other.h29_1))
       return false;
     return true;
   };
@@ -1333,50 +1351,45 @@
   }
   function Factory() {
   }
-  protoOf(Factory).w24 = function (snapshot) {
+  protoOf(Factory).o28 = function (snapshot) {
     // Inline function 'kotlin.with' call
-    // Inline function 'kotlin.contracts.contract' call
-    // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
-    var protocol = new StudyProtocol(snapshot.ownerId, snapshot.name, snapshot.description, snapshot.n24_1, snapshot.o24_1);
-    protocol.o23_1 = snapshot.applicationData;
+    var protocol = new StudyProtocol(snapshot.ownerId, snapshot.name, snapshot.description, snapshot.f28_1, snapshot.g28_1);
+    protocol.g27_1 = snapshot.applicationData;
     // Inline function 'kotlin.collections.forEach' call
-    var tmp0_iterator = snapshot.primaryDevices.t();
-    while (tmp0_iterator.u()) {
-      var element = tmp0_iterator.v();
-      // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
-      protocol.s25(element);
+    var _iterator__ex2g4s = snapshot.primaryDevices.r();
+    while (_iterator__ex2g4s.s()) {
+      var element = _iterator__ex2g4s.t();
+      protocol.i29(element);
     }
     var allDevices = toList(plus(snapshot.connectedDevices, snapshot.primaryDevices));
     // Inline function 'kotlin.collections.forEach' call
-    var tmp0_iterator_0 = snapshot.connections.t();
-    while (tmp0_iterator_0.u()) {
-      var element_0 = tmp0_iterator_0.v();
-      // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
-      var tmp$ret$5;
+    var _iterator__ex2g4s_0 = snapshot.connections.r();
+    while (_iterator__ex2g4s_0.s()) {
+      var element_0 = _iterator__ex2g4s_0.t();
+      // Inline function 'kotlin.collections.filterIsInstance' call
+      // Inline function 'kotlin.collections.filterIsInstanceTo' call
+      var destination = ArrayList_init_$Create$();
+      var _iterator__ex2g4s_1 = allDevices.r();
+      while (_iterator__ex2g4s_1.s()) {
+        var element_1 = _iterator__ex2g4s_1.t();
+        if (element_1 instanceof PrimaryDeviceConfiguration) {
+          destination.y(element_1);
+        }
+      }
+      var tmp$ret$8;
       $l$block: {
         // Inline function 'kotlin.collections.firstOrNull' call
-        // Inline function 'kotlin.collections.filterIsInstance' call
-        // Inline function 'kotlin.collections.filterIsInstanceTo' call
-        var destination = ArrayList_init_$Create$();
-        var tmp0_iterator_1 = allDevices.t();
-        while (tmp0_iterator_1.u()) {
-          var element_1 = tmp0_iterator_1.v();
-          if (element_1 instanceof PrimaryDeviceConfiguration) {
-            destination.q(element_1);
-          }
-        }
-        var tmp0_iterator_2 = destination.t();
-        while (tmp0_iterator_2.u()) {
-          var element_2 = tmp0_iterator_2.v();
-          // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>.<anonymous>' call
+        var _iterator__ex2g4s_2 = destination.r();
+        while (_iterator__ex2g4s_2.s()) {
+          var element_2 = _iterator__ex2g4s_2.t();
           if (element_2.roleName === element_0.connectedToRoleName) {
-            tmp$ret$5 = element_2;
+            tmp$ret$8 = element_2;
             break $l$block;
           }
         }
-        tmp$ret$5 = null;
+        tmp$ret$8 = null;
       }
-      var tmp0_elvis_lhs = tmp$ret$5;
+      var tmp0_elvis_lhs = tmp$ret$8;
       var tmp;
       if (tmp0_elvis_lhs == null) {
         throw IllegalArgumentException_init_$Create$("Can't find primary device with role name '" + element_0.connectedToRoleName + "' in snapshot.");
@@ -1384,21 +1397,20 @@
         tmp = tmp0_elvis_lhs;
       }
       var primary = tmp;
-      var tmp$ret$7;
+      var tmp$ret$10;
       $l$block_0: {
         // Inline function 'kotlin.collections.firstOrNull' call
-        var tmp0_iterator_3 = allDevices.t();
-        while (tmp0_iterator_3.u()) {
-          var element_3 = tmp0_iterator_3.v();
-          // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>.<anonymous>' call
+        var _iterator__ex2g4s_3 = allDevices.r();
+        while (_iterator__ex2g4s_3.s()) {
+          var element_3 = _iterator__ex2g4s_3.t();
           if (element_3.roleName === element_0.roleName) {
-            tmp$ret$7 = element_3;
+            tmp$ret$10 = element_3;
             break $l$block_0;
           }
         }
-        tmp$ret$7 = null;
+        tmp$ret$10 = null;
       }
-      var tmp1_elvis_lhs = tmp$ret$7;
+      var tmp1_elvis_lhs = tmp$ret$10;
       var tmp_0;
       if (tmp1_elvis_lhs == null) {
         throw IllegalArgumentException_init_$Create$("Can't find connected device with role name '" + element_0.roleName + "' in snapshot.");
@@ -1406,70 +1418,62 @@
         tmp_0 = tmp1_elvis_lhs;
       }
       var connected = tmp_0;
-      protocol.t25(connected, primary);
+      protocol.j29(connected, primary);
     }
     // Inline function 'kotlin.collections.forEach' call
-    var tmp0_iterator_4 = snapshot.tasks.t();
-    while (tmp0_iterator_4.u()) {
-      var element_4 = tmp0_iterator_4.v();
-      // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
-      protocol.u25(element_4);
+    var _iterator__ex2g4s_4 = snapshot.tasks.r();
+    while (_iterator__ex2g4s_4.s()) {
+      var element_4 = _iterator__ex2g4s_4.t();
+      protocol.k29(element_4);
     }
-    var triggerIds = sorted(snapshot.triggers.l2());
+    var triggerIds = sorted(snapshot.triggers.m2());
     // Inline function 'kotlin.collections.isNotEmpty' call
-    if (!triggerIds.y()) {
+    if (!triggerIds.p()) {
       // Inline function 'kotlin.require' call
-      // Inline function 'kotlin.contracts.contract' call
-      if (!(first(triggerIds) === 0 ? last(triggerIds) === (triggerIds.n() - 1 | 0) : false)) {
-        // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
+      if (!(first(triggerIds) === 0 && last(triggerIds) === (triggerIds.a1() - 1 | 0))) {
         var message = 'Triggers should be given sequential IDs starting with 0.';
         throw IllegalArgumentException_init_$Create$(toString(message));
       }
       // Inline function 'kotlin.collections.map' call
       // Inline function 'kotlin.collections.mapTo' call
       var destination_0 = ArrayList_init_$Create$_0(collectionSizeOrDefault(triggerIds, 10));
-      var tmp0_iterator_5 = triggerIds.t();
-      while (tmp0_iterator_5.u()) {
-        var item = tmp0_iterator_5.v();
-        // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
+      var _iterator__ex2g4s_5 = triggerIds.r();
+      while (_iterator__ex2g4s_5.s()) {
+        var item = _iterator__ex2g4s_5.t();
         // Inline function 'kotlin.checkNotNull' call
-        var value = snapshot.triggers.x2(item);
-        // Inline function 'kotlin.contracts.contract' call
-        var tmp$ret$11;
+        var tmp0 = snapshot.triggers.q2(item);
+        var tmp$ret$21;
         $l$block_1: {
           // Inline function 'kotlin.checkNotNull' call
-          // Inline function 'kotlin.contracts.contract' call
-          if (value == null) {
-            // Inline function 'kotlin.checkNotNull.<anonymous>' call
+          if (tmp0 == null) {
             var message_0 = 'Required value was null.';
             throw IllegalStateException_init_$Create$(toString(message_0));
           } else {
-            tmp$ret$11 = value;
+            tmp$ret$21 = tmp0;
             break $l$block_1;
           }
         }
-        var trigger = tmp$ret$11;
-        var tmp$ret$13 = protocol.v25(trigger);
-        destination_0.q(tmp$ret$13);
+        var trigger = tmp$ret$21;
+        var tmp$ret$19 = protocol.l29(trigger);
+        destination_0.y(tmp$ret$19);
       }
     }
     // Inline function 'kotlin.collections.forEach' call
-    var tmp0_iterator_6 = snapshot.taskControls.t();
-    while (tmp0_iterator_6.u()) {
-      var element_5 = tmp0_iterator_6.v();
-      // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
-      var tmp$ret$17;
+    var _iterator__ex2g4s_6 = snapshot.taskControls.r();
+    while (_iterator__ex2g4s_6.s()) {
+      var element_5 = _iterator__ex2g4s_6.t();
+      var tmp0_0 = snapshot.triggers.f1();
+      var tmp$ret$25;
       $l$block_3: {
         // Inline function 'kotlin.collections.singleOrNull' call
         var single = null;
         var found = false;
-        var tmp0_iterator_7 = snapshot.triggers.p2().t();
-        while (tmp0_iterator_7.u()) {
-          var element_6 = tmp0_iterator_7.v();
-          // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>.<anonymous>' call
-          if (element_6.q2() === element_5.triggerId) {
+        var _iterator__ex2g4s_7 = tmp0_0.r();
+        while (_iterator__ex2g4s_7.s()) {
+          var element_6 = _iterator__ex2g4s_7.t();
+          if (element_6.r2() === element_5.triggerId) {
             if (found) {
-              tmp$ret$17 = null;
+              tmp$ret$25 = null;
               break $l$block_3;
             }
             single = element_6;
@@ -1477,12 +1481,12 @@
           }
         }
         if (!found) {
-          tmp$ret$17 = null;
+          tmp$ret$25 = null;
           break $l$block_3;
         }
-        tmp$ret$17 = single;
+        tmp$ret$25 = single;
       }
-      var tmp0_elvis_lhs_0 = tmp$ret$17;
+      var tmp0_elvis_lhs_0 = tmp$ret$25;
       var tmp_1;
       if (tmp0_elvis_lhs_0 == null) {
         throw IllegalArgumentException_init_$Create$("Can't find trigger with id '" + element_5.triggerId + "' in snapshot.");
@@ -1490,18 +1494,18 @@
         tmp_1 = tmp0_elvis_lhs_0;
       }
       var triggerMatch = tmp_1;
-      var tmp$ret$19;
+      var tmp0_1 = protocol.u27();
+      var tmp$ret$27;
       $l$block_5: {
         // Inline function 'kotlin.collections.singleOrNull' call
         var single_0 = null;
         var found_0 = false;
-        var tmp0_iterator_8 = protocol.c24().t();
-        while (tmp0_iterator_8.u()) {
-          var element_7 = tmp0_iterator_8.v();
-          // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>.<anonymous>' call
+        var _iterator__ex2g4s_8 = tmp0_1.r();
+        while (_iterator__ex2g4s_8.s()) {
+          var element_7 = _iterator__ex2g4s_8.t();
           if (element_7.name === element_5.taskName) {
             if (found_0) {
-              tmp$ret$19 = null;
+              tmp$ret$27 = null;
               break $l$block_5;
             }
             single_0 = element_7;
@@ -1509,12 +1513,12 @@
           }
         }
         if (!found_0) {
-          tmp$ret$19 = null;
+          tmp$ret$27 = null;
           break $l$block_5;
         }
-        tmp$ret$19 = single_0;
+        tmp$ret$27 = single_0;
       }
-      var tmp1_elvis_lhs_0 = tmp$ret$19;
+      var tmp1_elvis_lhs_0 = tmp$ret$27;
       var tmp_2;
       if (tmp1_elvis_lhs_0 == null) {
         throw IllegalArgumentException_init_$Create$("Can't find task with name '" + element_5.taskName + "' in snapshot.");
@@ -1522,18 +1526,18 @@
         tmp_2 = tmp1_elvis_lhs_0;
       }
       var task = tmp_2;
-      var tmp$ret$21;
+      var tmp0_2 = protocol.t27();
+      var tmp$ret$29;
       $l$block_7: {
         // Inline function 'kotlin.collections.singleOrNull' call
         var single_1 = null;
         var found_1 = false;
-        var tmp0_iterator_9 = protocol.b24().t();
-        while (tmp0_iterator_9.u()) {
-          var element_8 = tmp0_iterator_9.v();
-          // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>.<anonymous>' call
+        var _iterator__ex2g4s_9 = tmp0_2.r();
+        while (_iterator__ex2g4s_9.s()) {
+          var element_8 = _iterator__ex2g4s_9.t();
           if (element_8.roleName === element_5.destinationDeviceRoleName) {
             if (found_1) {
-              tmp$ret$21 = null;
+              tmp$ret$29 = null;
               break $l$block_7;
             }
             single_1 = element_8;
@@ -1541,12 +1545,12 @@
           }
         }
         if (!found_1) {
-          tmp$ret$21 = null;
+          tmp$ret$29 = null;
           break $l$block_7;
         }
-        tmp$ret$21 = single_1;
+        tmp$ret$29 = single_1;
       }
-      var tmp2_elvis_lhs = tmp$ret$21;
+      var tmp2_elvis_lhs = tmp$ret$29;
       var tmp_3;
       if (tmp2_elvis_lhs == null) {
         throw IllegalArgumentException_init_$Create$("Can't find device with role name '" + element_5.destinationDeviceRoleName + "' in snapshot.");
@@ -1554,75 +1558,70 @@
         tmp_3 = tmp2_elvis_lhs;
       }
       var device = tmp_3;
-      protocol.w25(triggerMatch.r2(), task, device, element_5.control);
+      protocol.m29(triggerMatch.s2(), task, device, element_5.control);
     }
     // Inline function 'kotlin.collections.forEach' call
-    var tmp0_iterator_10 = snapshot.participantRoles.t();
-    while (tmp0_iterator_10.u()) {
-      var element_9 = tmp0_iterator_10.v();
-      // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
-      protocol.x25(element_9);
+    var _iterator__ex2g4s_10 = snapshot.participantRoles.r();
+    while (_iterator__ex2g4s_10.s()) {
+      var element_9 = _iterator__ex2g4s_10.t();
+      protocol.n29(element_9);
     }
     // Inline function 'kotlin.collections.forEach' call
-    var tmp0_iterator_11 = snapshot.expectedParticipantData.t();
-    while (tmp0_iterator_11.u()) {
-      var element_10 = tmp0_iterator_11.v();
-      // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
-      protocol.y25(element_10);
+    var _iterator__ex2g4s_11 = snapshot.expectedParticipantData.r();
+    while (_iterator__ex2g4s_11.s()) {
+      var element_10 = _iterator__ex2g4s_11.t();
+      protocol.o29(element_10);
     }
     // Inline function 'kotlin.collections.forEach' call
     // Inline function 'kotlin.collections.iterator' call
-    var tmp0_iterator_12 = snapshot.assignedDevices.p2().t();
-    while (tmp0_iterator_12.u()) {
-      var element_11 = tmp0_iterator_12.v();
-      // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>' call
+    var _iterator__ex2g4s_12 = snapshot.assignedDevices.f1().r();
+    while (_iterator__ex2g4s_12.s()) {
+      var element_11 = _iterator__ex2g4s_12.t();
       // Inline function 'kotlin.collections.component1' call
-      var deviceRoleName = element_11.q2();
+      var deviceRoleName = element_11.r2();
       // Inline function 'kotlin.collections.component2' call
-      var assignedParticipantRoles = element_11.r2();
-      var tmp$ret$28;
+      var assignedParticipantRoles = element_11.s2();
+      var tmp0_3 = protocol.s27();
+      var tmp$ret$40;
+      $l$block_9: {
+        // Inline function 'kotlin.collections.singleOrNull' call
+        var single_2 = null;
+        var found_2 = false;
+        var _iterator__ex2g4s_13 = tmp0_3.r();
+        while (_iterator__ex2g4s_13.s()) {
+          var element_12 = _iterator__ex2g4s_13.t();
+          if (element_12.roleName === deviceRoleName) {
+            if (found_2) {
+              tmp$ret$40 = null;
+              break $l$block_9;
+            }
+            single_2 = element_12;
+            found_2 = true;
+          }
+        }
+        if (!found_2) {
+          tmp$ret$40 = null;
+          break $l$block_9;
+        }
+        tmp$ret$40 = single_2;
+      }
+      var tmp0_4 = tmp$ret$40;
+      var tmp$ret$42;
       $l$block_10: {
         // Inline function 'kotlin.requireNotNull' call
-        var tmp$ret$26;
-        $l$block_9: {
-          // Inline function 'kotlin.collections.singleOrNull' call
-          var single_2 = null;
-          var found_2 = false;
-          var tmp0_iterator_13 = protocol.a24().t();
-          while (tmp0_iterator_13.u()) {
-            var element_12 = tmp0_iterator_13.v();
-            // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>.<anonymous>' call
-            if (element_12.roleName === deviceRoleName) {
-              if (found_2) {
-                tmp$ret$26 = null;
-                break $l$block_9;
-              }
-              single_2 = element_12;
-              found_2 = true;
-            }
-          }
-          if (!found_2) {
-            tmp$ret$26 = null;
-            break $l$block_9;
-          }
-          tmp$ret$26 = single_2;
-        }
-        var value_0 = tmp$ret$26;
-        // Inline function 'kotlin.contracts.contract' call
-        if (value_0 == null) {
-          // Inline function 'dk.cachet.carp.protocols.domain.Factory.fromSnapshot.<anonymous>.<anonymous>' call
+        if (tmp0_4 == null) {
           var message_1 = "Can't find device with role name '" + deviceRoleName + "' in snapshot.";
           throw IllegalArgumentException_init_$Create$(toString(message_1));
         } else {
-          tmp$ret$28 = value_0;
+          tmp$ret$42 = tmp0_4;
           break $l$block_10;
         }
       }
-      var device_0 = tmp$ret$28;
-      protocol.z25(device_0, new Roles(assignedParticipantRoles));
+      var device_0 = tmp$ret$42;
+      protocol.p29(device_0, new Roles(assignedParticipantRoles));
     }
-    protocol.u1y();
-    protocol.r1y(snapshot);
+    protocol.h22();
+    protocol.e22(snapshot);
     return protocol;
   };
   var Factory_instance;
@@ -1656,77 +1655,76 @@
   }
   function StudyProtocol(ownerId, name, description, id, createdOn) {
     description = description === VOID ? null : description;
-    id = id === VOID ? Companion_instance.randomUUID() : id;
-    createdOn = createdOn === VOID ? System_instance.q13() : createdOn;
+    id = id === VOID ? Companion_instance_2.randomUUID() : id;
+    createdOn = createdOn === VOID ? System_instance.lg() : createdOn;
     StudyProtocolComposition.call(this, new EmptyProtocolDeviceConfiguration(), new EmptyProtocolTaskConfiguration(), new EmptyProtocolParticipantConfiguration(), id, createdOn);
-    this.i23_1 = ownerId;
-    this.j23_1 = name;
-    this.k23_1 = description;
-    this.l23_1 = LinkedHashSet_init_$Create$();
+    this.a27_1 = ownerId;
+    this.b27_1 = name;
+    this.c27_1 = description;
+    this.d27_1 = LinkedHashSet_init_$Create$();
     var tmp = this;
     // Inline function 'kotlin.collections.mutableMapOf' call
-    tmp.m23_1 = LinkedHashMap_init_$Create$_0();
+    tmp.e27_1 = LinkedHashMap_init_$Create$_0();
     var tmp_0 = this;
     // Inline function 'kotlin.collections.mutableMapOf' call
-    tmp_0.n23_1 = LinkedHashMap_init_$Create$_0();
-    this.o23_1 = null;
-    this.p23_1 = listOf([new NoPrimaryDeviceError(), new OnlyOptionalDevicesWarning(), new UnstartedTasksWarning(), new BackgroundTaskWithNoMeasuresWarning(), new UseCompositeTaskWarning(), new UnusedDevicesWarning(), new UnexpectedMeasuresWarning()]);
+    tmp_0.f27_1 = LinkedHashMap_init_$Create$_0();
+    this.g27_1 = null;
+    this.h27_1 = listOf([new NoPrimaryDeviceError(), new OnlyOptionalDevicesWarning(), new UnstartedTasksWarning(), new BackgroundTaskWithNoMeasuresWarning(), new UseCompositeTaskWarning(), new UnusedDevicesWarning(), new UnexpectedMeasuresWarning()]);
   }
-  protoOf(StudyProtocol).ra = function () {
-    return this.j23_1;
+  protoOf(StudyProtocol).k = function () {
+    return this.b27_1;
   };
-  protoOf(StudyProtocol).o1u = function () {
-    return this.k23_1;
+  protoOf(StudyProtocol).e1y = function () {
+    return this.c27_1;
   };
-  protoOf(StudyProtocol).s25 = function (primaryDevice) {
-    var isAdded = protoOf(StudyProtocolComposition).s25.call(this, primaryDevice);
+  protoOf(StudyProtocol).i29 = function (primaryDevice) {
+    var isAdded = protoOf(StudyProtocolComposition).i29.call(this, primaryDevice);
     if (isAdded) {
+      var tmp0 = this.f27_1;
       // Inline function 'kotlin.collections.set' call
-      var this_0 = this.n23_1;
       var value = All_getInstance();
-      this_0.n2(primaryDevice, value);
-      this.s1y(new PrimaryDeviceAdded(primaryDevice));
+      tmp0.k2(primaryDevice, value);
+      this.f22(new PrimaryDeviceAdded(primaryDevice));
     }
     return isAdded;
   };
-  protoOf(StudyProtocol).t25 = function (device, primaryDevice) {
-    var tmp = protoOf(StudyProtocolComposition).t25.call(this, device, primaryDevice);
-    return this.t1y(tmp, true, StudyProtocol$addConnectedDevice$lambda(device, primaryDevice));
+  protoOf(StudyProtocol).j29 = function (device, primaryDevice) {
+    var tmp = protoOf(StudyProtocolComposition).j29.call(this, device, primaryDevice);
+    return this.g22(tmp, true, StudyProtocol$addConnectedDevice$lambda(device, primaryDevice));
   };
-  protoOf(StudyProtocol).q23 = function () {
+  protoOf(StudyProtocol).i27 = function () {
     // Inline function 'kotlin.collections.mapIndexed' call
-    var this_0 = this.l23_1;
+    var this_0 = this.d27_1;
     // Inline function 'kotlin.collections.mapIndexedTo' call
     var destination = ArrayList_init_$Create$_0(collectionSizeOrDefault(this_0, 10));
     var index = 0;
-    var tmp0_iterator = this_0.t();
-    while (tmp0_iterator.u()) {
-      var item = tmp0_iterator.v();
-      // Inline function 'dk.cachet.carp.protocols.domain.StudyProtocol.<get-triggers>.<anonymous>' call
-      var tmp1 = index;
-      index = tmp1 + 1 | 0;
-      var index_0 = checkIndexOverflow(tmp1);
-      var tmp$ret$0 = new TriggerWithId(index_0, item);
-      destination.q(tmp$ret$0);
+    var _iterator__ex2g4s = this_0.r();
+    while (_iterator__ex2g4s.s()) {
+      var item = _iterator__ex2g4s.t();
+      var _unary__edvuaz = index;
+      index = _unary__edvuaz + 1 | 0;
+      var index_0 = checkIndexOverflow(_unary__edvuaz);
+      var tmp$ret$2 = new TriggerWithId(index_0, item);
+      destination.y(tmp$ret$2);
     }
     return destination;
   };
-  protoOf(StudyProtocol).v25 = function (trigger) {
-    var tmp$ret$1;
+  protoOf(StudyProtocol).l29 = function (trigger) {
+    var tmp0 = this.p27_1.t27();
+    var tmp$ret$0;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = this.x23_1.b24().t();
-      while (tmp0_iterator.u()) {
-        var element = tmp0_iterator.v();
-        // Inline function 'dk.cachet.carp.protocols.domain.StudyProtocol.addTrigger.<anonymous>' call
+      var _iterator__ex2g4s = tmp0.r();
+      while (_iterator__ex2g4s.s()) {
+        var element = _iterator__ex2g4s.t();
         if (element.roleName === trigger.sourceDeviceRoleName) {
-          tmp$ret$1 = element;
+          tmp$ret$0 = element;
           break $l$block;
         }
       }
-      tmp$ret$1 = null;
+      tmp$ret$0 = null;
     }
-    var tmp0_elvis_lhs = tmp$ret$1;
+    var tmp0_elvis_lhs = tmp$ret$0;
     var tmp;
     if (tmp0_elvis_lhs == null) {
       throw IllegalArgumentException_init_$Create$('The passed trigger does not belong to any device specified in this study protocol.');
@@ -1735,97 +1733,87 @@
     }
     var device = tmp;
     // Inline function 'kotlin.require' call
-    // Inline function 'kotlin.contracts.contract' call
-    if (!(!trigger.requiresPrimaryDevice ? true : isPrimary(device))) {
-      // Inline function 'dk.cachet.carp.protocols.domain.StudyProtocol.addTrigger.<anonymous>' call
+    if (!(!trigger.requiresPrimaryDevice || isPrimary(device))) {
       var message = 'The passed trigger cannot be initiated by the specified device since it is not a primary device.';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    var isAdded = this.l23_1.q(trigger);
+    var isAdded = this.d27_1.y(trigger);
     if (isAdded) {
-      // Inline function 'kotlin.collections.set' call
-      var this_0 = this.m23_1;
+      var tmp0_0 = this.e27_1;
       // Inline function 'kotlin.collections.mutableSetOf' call
+      // Inline function 'kotlin.collections.set' call
       var value = LinkedHashSet_init_$Create$();
-      this_0.n2(trigger, value);
-      this.s1y(new TriggerAdded(trigger));
+      tmp0_0.k2(trigger, value);
+      this.f22(new TriggerAdded(trigger));
     }
-    return new TriggerWithId(indexOf(this.l23_1, trigger), trigger);
+    return new TriggerWithId(indexOf(this.d27_1, trigger), trigger);
   };
-  protoOf(StudyProtocol).w25 = function (trigger, task, destinationDevice, control) {
+  protoOf(StudyProtocol).m29 = function (trigger, task, destinationDevice, control) {
     // Inline function 'kotlin.require' call
-    // Inline function 'kotlin.contracts.contract' call
-    if (!this.b24().p(destinationDevice)) {
-      // Inline function 'dk.cachet.carp.protocols.domain.StudyProtocol.addTaskControl.<anonymous>' call
+    if (!this.t27().o1(destinationDevice)) {
       var message = 'The passed device to which the task needs to be sent is not included in this study protocol.';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    this.v25(trigger);
-    this.u25(task);
+    this.l29(trigger);
+    this.k29(task);
     var taskControl = new TaskControl_0(trigger, task, destinationDevice, control);
-    var tmp = ensureNotNull(this.m23_1.x2(trigger)).q(taskControl);
-    return this.t1y(tmp, true, StudyProtocol$addTaskControl$lambda(taskControl));
+    var tmp = ensureNotNull(this.e27_1.q2(trigger)).y(taskControl);
+    return this.g22(tmp, true, StudyProtocol$addTaskControl$lambda(taskControl));
   };
-  protoOf(StudyProtocol).d24 = function (trigger) {
+  protoOf(StudyProtocol).v27 = function (trigger) {
     // Inline function 'kotlin.require' call
-    // Inline function 'kotlin.contracts.contract' call
-    if (!this.l23_1.p(trigger)) {
-      // Inline function 'dk.cachet.carp.protocols.domain.StudyProtocol.getTaskControls.<anonymous>' call
+    if (!this.d27_1.o1(trigger)) {
       var message = 'The passed trigger is not part of this study protocol.';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    return ensureNotNull(this.m23_1.x2(trigger));
+    return ensureNotNull(this.e27_1.q2(trigger));
   };
-  protoOf(StudyProtocol).u25 = function (task) {
-    var tmp = protoOf(StudyProtocolComposition).u25.call(this, task);
-    return this.t1y(tmp, true, StudyProtocol$addTask$lambda(task));
+  protoOf(StudyProtocol).k29 = function (task) {
+    var tmp = protoOf(StudyProtocolComposition).k29.call(this, task);
+    return this.g22(tmp, true, StudyProtocol$addTask$lambda(task));
   };
-  protoOf(StudyProtocol).x25 = function (role) {
-    var tmp = protoOf(StudyProtocolComposition).x25.call(this, role);
-    return this.t1y(tmp, true, StudyProtocol$addParticipantRole$lambda(role));
+  protoOf(StudyProtocol).n29 = function (role) {
+    var tmp = protoOf(StudyProtocolComposition).n29.call(this, role);
+    return this.g22(tmp, true, StudyProtocol$addParticipantRole$lambda(role));
   };
-  protoOf(StudyProtocol).y25 = function (expectedData) {
-    var tmp = protoOf(StudyProtocolComposition).y25.call(this, expectedData);
-    return this.t1y(tmp, true, StudyProtocol$addExpectedParticipantData$lambda(expectedData));
+  protoOf(StudyProtocol).o29 = function (expectedData) {
+    var tmp = protoOf(StudyProtocolComposition).o29.call(this, expectedData);
+    return this.g22(tmp, true, StudyProtocol$addExpectedParticipantData$lambda(expectedData));
   };
-  protoOf(StudyProtocol).j24 = function () {
-    return toMap_0(this.n23_1);
+  protoOf(StudyProtocol).b28 = function () {
+    return toMap_0(this.f27_1);
   };
-  protoOf(StudyProtocol).z25 = function (device, assignedTo) {
+  protoOf(StudyProtocol).p29 = function (device, assignedTo) {
     // Inline function 'kotlin.require' call
-    // Inline function 'kotlin.contracts.contract' call
-    if (!this.n23_1.u2(device)) {
-      // Inline function 'dk.cachet.carp.protocols.domain.StudyProtocol.changeDeviceAssignment.<anonymous>' call
+    if (!this.f27_1.o2(device)) {
       var message = 'The device configuration is not part of this protocol.';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
     // Inline function 'kotlin.require' call
-    // Inline function 'kotlin.contracts.contract' call
-    if (!this.a26(assignedTo)) {
-      // Inline function 'dk.cachet.carp.protocols.domain.StudyProtocol.changeDeviceAssignment.<anonymous>' call
+    if (!this.q29(assignedTo)) {
       var message_0 = 'One of the assigned participant roles is not part of this protocol.';
       throw IllegalArgumentException_init_$Create$(toString(message_0));
     }
-    var isChanged = !equals(this.n23_1.n2(device, assignedTo), assignedTo);
+    var isChanged = !equals(this.f27_1.k2(device, assignedTo), assignedTo);
     if (isChanged) {
-      this.s1y(new DeviceAssignmentChanged(device, assignedTo));
+      this.f22(new DeviceAssignmentChanged(device, assignedTo));
     }
     return isChanged;
   };
   function TaskControl_0(trigger, task, destinationDevice, control) {
-    this.e24_1 = trigger;
-    this.f24_1 = task;
-    this.g24_1 = destinationDevice;
-    this.h24_1 = control;
+    this.w27_1 = trigger;
+    this.x27_1 = task;
+    this.y27_1 = destinationDevice;
+    this.z27_1 = control;
   }
   protoOf(TaskControl_0).toString = function () {
-    return 'TaskControl(trigger=' + this.e24_1 + ', task=' + this.f24_1 + ', destinationDevice=' + this.g24_1 + ', control=' + this.h24_1 + ')';
+    return 'TaskControl(trigger=' + toString(this.w27_1) + ', task=' + toString(this.x27_1) + ', destinationDevice=' + toString(this.y27_1) + ', control=' + this.z27_1.toString() + ')';
   };
   protoOf(TaskControl_0).hashCode = function () {
-    var result = hashCode(this.e24_1);
-    result = imul(result, 31) + hashCode(this.f24_1) | 0;
-    result = imul(result, 31) + hashCode(this.g24_1) | 0;
-    result = imul(result, 31) + this.h24_1.hashCode() | 0;
+    var result = hashCode(this.w27_1);
+    result = imul(result, 31) + hashCode(this.x27_1) | 0;
+    result = imul(result, 31) + hashCode(this.y27_1) | 0;
+    result = imul(result, 31) + this.z27_1.hashCode() | 0;
     return result;
   };
   protoOf(TaskControl_0).equals = function (other) {
@@ -1833,27 +1821,26 @@
       return true;
     if (!(other instanceof TaskControl_0))
       return false;
-    var tmp0_other_with_cast = other instanceof TaskControl_0 ? other : THROW_CCE();
-    if (!equals(this.e24_1, tmp0_other_with_cast.e24_1))
+    if (!equals(this.w27_1, other.w27_1))
       return false;
-    if (!equals(this.f24_1, tmp0_other_with_cast.f24_1))
+    if (!equals(this.x27_1, other.x27_1))
       return false;
-    if (!equals(this.g24_1, tmp0_other_with_cast.g24_1))
+    if (!equals(this.y27_1, other.y27_1))
       return false;
-    if (!this.h24_1.equals(tmp0_other_with_cast.h24_1))
+    if (!this.z27_1.equals(other.z27_1))
       return false;
     return true;
   };
   function TriggerWithId(id, trigger) {
-    this.r23_1 = id;
-    this.s23_1 = trigger;
+    this.j27_1 = id;
+    this.k27_1 = trigger;
   }
   protoOf(TriggerWithId).toString = function () {
-    return 'TriggerWithId(id=' + this.r23_1 + ', trigger=' + this.s23_1 + ')';
+    return 'TriggerWithId(id=' + this.j27_1 + ', trigger=' + toString(this.k27_1) + ')';
   };
   protoOf(TriggerWithId).hashCode = function () {
-    var result = this.r23_1;
-    result = imul(result, 31) + hashCode(this.s23_1) | 0;
+    var result = this.j27_1;
+    result = imul(result, 31) + hashCode(this.k27_1) | 0;
     return result;
   };
   protoOf(TriggerWithId).equals = function (other) {
@@ -1861,10 +1848,9 @@
       return true;
     if (!(other instanceof TriggerWithId))
       return false;
-    var tmp0_other_with_cast = other instanceof TriggerWithId ? other : THROW_CCE();
-    if (!(this.r23_1 === tmp0_other_with_cast.r23_1))
+    if (!(this.j27_1 === other.j27_1))
       return false;
-    if (!equals(this.s23_1, tmp0_other_with_cast.s23_1))
+    if (!equals(this.k27_1, other.k27_1))
       return false;
     return true;
   };
@@ -1885,14 +1871,12 @@
     return tmp;
   }
   function verifyPrimaryDevice($this, device) {
-    // Inline function 'kotlin.contracts.contract' call
-    var tmp;
-    if (!$this.b24().p(device)) {
-      // Inline function 'dk.cachet.carp.protocols.domain.configuration.EmptyProtocolDeviceConfiguration.verifyPrimaryDevice.<anonymous>' call
+    // Inline function 'kotlin.require' call
+    if (!$this.t27().o1(device)) {
       var message = 'The passed primary device with role name "' + device.roleName + '" is not part of this device configuration.';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    return tmp;
+    return Unit_instance;
   }
   function EmptyProtocolDeviceConfiguration$_devices$lambda(device) {
     return device.roleName;
@@ -1904,74 +1888,72 @@
     AbstractMap.call(this);
     var tmp = this;
     var tmp_0 = EmptyProtocolDeviceConfiguration$_devices$lambda;
-    tmp.e26_1 = new ExtractUniqueKeyMap(tmp_0, EmptyProtocolDeviceConfiguration$_devices$lambda_0);
+    tmp.u29_1 = new ExtractUniqueKeyMap(tmp_0, EmptyProtocolDeviceConfiguration$_devices$lambda_0);
     var tmp_1 = this;
     // Inline function 'kotlin.collections.mutableMapOf' call
-    tmp_1.f26_1 = LinkedHashMap_init_$Create$_0();
+    tmp_1.v29_1 = LinkedHashMap_init_$Create$_0();
     var tmp_2 = this;
     // Inline function 'kotlin.collections.mutableSetOf' call
-    tmp_2.g26_1 = LinkedHashSet_init_$Create$();
+    tmp_2.w29_1 = LinkedHashSet_init_$Create$();
   }
-  protoOf(EmptyProtocolDeviceConfiguration).p2 = function () {
-    return this.e26_1.p2();
+  protoOf(EmptyProtocolDeviceConfiguration).f1 = function () {
+    return this.u29_1.f1();
   };
-  protoOf(EmptyProtocolDeviceConfiguration).b24 = function () {
-    return toSet(this.e26_1.m2());
+  protoOf(EmptyProtocolDeviceConfiguration).t27 = function () {
+    return toSet(this.u29_1.n2());
   };
-  protoOf(EmptyProtocolDeviceConfiguration).a24 = function () {
-    return this.g26_1;
+  protoOf(EmptyProtocolDeviceConfiguration).s27 = function () {
+    return this.w29_1;
   };
-  protoOf(EmptyProtocolDeviceConfiguration).s25 = function (primaryDevice) {
+  protoOf(EmptyProtocolDeviceConfiguration).i29 = function (primaryDevice) {
     verifySamplingConfigurations(this, primaryDevice);
-    var isNewDevice = this.e26_1.y1y(primaryDevice);
-    this.g26_1.q(primaryDevice);
+    var isNewDevice = this.u29_1.l22(primaryDevice);
+    this.w29_1.y(primaryDevice);
     return isNewDevice;
   };
-  protoOf(EmptyProtocolDeviceConfiguration).t25 = function (device, primaryDevice) {
+  protoOf(EmptyProtocolDeviceConfiguration).j29 = function (device, primaryDevice) {
     verifySamplingConfigurations(this, device);
     verifyPrimaryDevice(this, primaryDevice);
-    this.e26_1.y1y(device);
+    this.u29_1.l22(device);
     // Inline function 'kotlin.collections.getOrPut' call
-    var this_0 = this.f26_1;
-    var value = this_0.x2(primaryDevice);
+    var this_0 = this.v29_1;
+    var value = this_0.q2(primaryDevice);
     var tmp;
     if (value == null) {
-      // Inline function 'dk.cachet.carp.protocols.domain.configuration.EmptyProtocolDeviceConfiguration.addConnectedDevice.<anonymous>' call
       // Inline function 'kotlin.collections.mutableSetOf' call
       var answer = LinkedHashSet_init_$Create$();
-      this_0.n2(primaryDevice, answer);
+      this_0.k2(primaryDevice, answer);
       tmp = answer;
     } else {
       tmp = value;
     }
-    return tmp.q(device);
+    return tmp.y(device);
   };
-  protoOf(EmptyProtocolDeviceConfiguration).b26 = function (primaryDevice, includeChainedDevices) {
+  protoOf(EmptyProtocolDeviceConfiguration).r29 = function (primaryDevice, includeChainedDevices) {
     verifyPrimaryDevice(this, primaryDevice);
     // Inline function 'kotlin.collections.mutableListOf' call
     var connectedDevices = ArrayList_init_$Create$();
     // Inline function 'kotlin.collections.contains' call
     // Inline function 'kotlin.collections.containsKey' call
-    var this_0 = this.f26_1;
-    if ((isInterface(this_0, Map) ? this_0 : THROW_CCE()).u2(primaryDevice)) {
-      connectedDevices.r(ensureNotNull(this.f26_1.x2(primaryDevice)));
+    var this_0 = this.v29_1;
+    if ((isInterface(this_0, KtMap) ? this_0 : THROW_CCE()).o2(primaryDevice)) {
+      connectedDevices.c1(ensureNotNull(this.v29_1.q2(primaryDevice)));
       if (includeChainedDevices) {
-        // Inline function 'kotlin.collections.forEach' call
         // Inline function 'kotlin.collections.filterIsInstance' call
         // Inline function 'kotlin.collections.filterIsInstanceTo' call
         var destination = ArrayList_init_$Create$();
-        var tmp0_iterator = connectedDevices.t();
-        while (tmp0_iterator.u()) {
-          var element = tmp0_iterator.v();
+        var _iterator__ex2g4s = connectedDevices.r();
+        while (_iterator__ex2g4s.s()) {
+          var element = _iterator__ex2g4s.t();
           if (element instanceof PrimaryDeviceConfiguration) {
-            destination.q(element);
+            destination.y(element);
           }
         }
-        var tmp0_iterator_0 = destination.t();
-        while (tmp0_iterator_0.u()) {
-          var element_0 = tmp0_iterator_0.v();
-          // Inline function 'dk.cachet.carp.protocols.domain.configuration.EmptyProtocolDeviceConfiguration.getConnectedDevices.<anonymous>' call
-          addAll(connectedDevices, this.b26(element_0, true));
+        // Inline function 'kotlin.collections.forEach' call
+        var _iterator__ex2g4s_0 = destination.r();
+        while (_iterator__ex2g4s_0.s()) {
+          var element_0 = _iterator__ex2g4s_0.t();
+          addAll(connectedDevices, this.r29(element_0, true));
         }
       }
     }
@@ -1986,27 +1968,25 @@
   function EmptyProtocolParticipantConfiguration() {
     var tmp = this;
     // Inline function 'kotlin.collections.mutableSetOf' call
-    tmp.h26_1 = LinkedHashSet_init_$Create$();
+    tmp.x29_1 = LinkedHashSet_init_$Create$();
     var tmp_0 = this;
     var tmp_1 = EmptyProtocolParticipantConfiguration$_participantRoles$lambda;
-    tmp_0.i26_1 = new ExtractUniqueKeyMap(tmp_1, EmptyProtocolParticipantConfiguration$_participantRoles$lambda_0);
+    tmp_0.y29_1 = new ExtractUniqueKeyMap(tmp_1, EmptyProtocolParticipantConfiguration$_participantRoles$lambda_0);
   }
-  protoOf(EmptyProtocolParticipantConfiguration).k24 = function () {
-    return toSet(this.h26_1);
+  protoOf(EmptyProtocolParticipantConfiguration).c28 = function () {
+    return toSet(this.x29_1);
   };
-  protoOf(EmptyProtocolParticipantConfiguration).i24 = function () {
-    return toSet(this.i26_1.m2());
+  protoOf(EmptyProtocolParticipantConfiguration).a28 = function () {
+    return toSet(this.y29_1.n2());
   };
-  protoOf(EmptyProtocolParticipantConfiguration).y25 = function (expectedData) {
+  protoOf(EmptyProtocolParticipantConfiguration).o29 = function (expectedData) {
     // Inline function 'kotlin.require' call
-    // Inline function 'kotlin.contracts.contract' call
-    if (!this.a26(expectedData.assignedTo)) {
-      // Inline function 'dk.cachet.carp.protocols.domain.configuration.EmptyProtocolParticipantConfiguration.addExpectedParticipantData.<anonymous>' call
+    if (!this.q29(expectedData.assignedTo)) {
       var message = "The expected data contains participant role names which aren't part of this participant configuration.";
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
     try {
-      hasNoConflicts(plus_0(this.k24(), expectedData), true);
+      hasNoConflicts(plus_0(this.c28(), expectedData), true);
     } catch ($p) {
       if ($p instanceof IllegalArgumentException) {
         var ex = $p;
@@ -2015,10 +1995,10 @@
         throw $p;
       }
     }
-    return this.h26_1.q(expectedData);
+    return this.x29_1.y(expectedData);
   };
-  protoOf(EmptyProtocolParticipantConfiguration).x25 = function (role) {
-    return this.i26_1.y1y(role);
+  protoOf(EmptyProtocolParticipantConfiguration).n29 = function (role) {
+    return this.y29_1.l22(role);
   };
   function EmptyProtocolTaskConfiguration$_tasks$lambda(task) {
     return task.name;
@@ -2030,16 +2010,16 @@
     AbstractMap.call(this);
     var tmp = this;
     var tmp_0 = EmptyProtocolTaskConfiguration$_tasks$lambda;
-    tmp.l26_1 = new ExtractUniqueKeyMap(tmp_0, EmptyProtocolTaskConfiguration$_tasks$lambda_0);
+    tmp.b2a_1 = new ExtractUniqueKeyMap(tmp_0, EmptyProtocolTaskConfiguration$_tasks$lambda_0);
   }
-  protoOf(EmptyProtocolTaskConfiguration).p2 = function () {
-    return this.l26_1.p2();
+  protoOf(EmptyProtocolTaskConfiguration).f1 = function () {
+    return this.b2a_1.f1();
   };
-  protoOf(EmptyProtocolTaskConfiguration).c24 = function () {
-    return toSet(this.l26_1.m2());
+  protoOf(EmptyProtocolTaskConfiguration).u27 = function () {
+    return toSet(this.b2a_1.n2());
   };
-  protoOf(EmptyProtocolTaskConfiguration).u25 = function (task) {
-    return this.l26_1.y1y(task);
+  protoOf(EmptyProtocolTaskConfiguration).k29 = function (task) {
+    return this.b2a_1.l22(task);
   };
   function ProtocolDeviceConfiguration() {
   }
@@ -2047,104 +2027,103 @@
   }
   function StudyProtocolComposition(deviceConfiguration, taskConfiguration, participantConfiguration, id, createdOn) {
     AggregateRoot.call(this, id, createdOn);
-    this.x23_1 = deviceConfiguration;
-    this.y23_1 = taskConfiguration;
-    this.z23_1 = participantConfiguration;
+    this.p27_1 = deviceConfiguration;
+    this.q27_1 = taskConfiguration;
+    this.r27_1 = participantConfiguration;
   }
-  protoOf(StudyProtocolComposition).b24 = function () {
-    return this.x23_1.b24();
+  protoOf(StudyProtocolComposition).t27 = function () {
+    return this.p27_1.t27();
   };
-  protoOf(StudyProtocolComposition).a24 = function () {
-    return this.x23_1.a24();
+  protoOf(StudyProtocolComposition).s27 = function () {
+    return this.p27_1.s27();
   };
-  protoOf(StudyProtocolComposition).t25 = function (device, primaryDevice) {
-    return this.x23_1.t25(device, primaryDevice);
+  protoOf(StudyProtocolComposition).i29 = function (primaryDevice) {
+    return this.p27_1.i29(primaryDevice);
   };
-  protoOf(StudyProtocolComposition).s25 = function (primaryDevice) {
-    return this.x23_1.s25(primaryDevice);
+  protoOf(StudyProtocolComposition).j29 = function (device, primaryDevice) {
+    return this.p27_1.j29(device, primaryDevice);
   };
-  protoOf(StudyProtocolComposition).b26 = function (primaryDevice, includeChainedDevices) {
-    return this.x23_1.b26(primaryDevice, includeChainedDevices);
+  protoOf(StudyProtocolComposition).r29 = function (primaryDevice, includeChainedDevices) {
+    return this.p27_1.r29(primaryDevice, includeChainedDevices);
   };
-  protoOf(StudyProtocolComposition).c24 = function () {
-    return this.y23_1.c24();
+  protoOf(StudyProtocolComposition).u27 = function () {
+    return this.q27_1.u27();
   };
-  protoOf(StudyProtocolComposition).u25 = function (task) {
-    return this.y23_1.u25(task);
+  protoOf(StudyProtocolComposition).k29 = function (task) {
+    return this.q27_1.k29(task);
   };
-  protoOf(StudyProtocolComposition).k24 = function () {
-    return this.z23_1.k24();
+  protoOf(StudyProtocolComposition).a28 = function () {
+    return this.r27_1.a28();
   };
-  protoOf(StudyProtocolComposition).i24 = function () {
-    return this.z23_1.i24();
+  protoOf(StudyProtocolComposition).c28 = function () {
+    return this.r27_1.c28();
   };
-  protoOf(StudyProtocolComposition).y25 = function (expectedData) {
-    return this.z23_1.y25(expectedData);
+  protoOf(StudyProtocolComposition).n29 = function (role) {
+    return this.r27_1.n29(role);
   };
-  protoOf(StudyProtocolComposition).x25 = function (role) {
-    return this.z23_1.x25(role);
+  protoOf(StudyProtocolComposition).q29 = function (assignment) {
+    return this.r27_1.q29(assignment);
   };
-  protoOf(StudyProtocolComposition).a26 = function (assignment) {
-    return this.z23_1.a26(assignment);
+  protoOf(StudyProtocolComposition).o29 = function (expectedData) {
+    return this.r27_1.o29(expectedData);
   };
   function BackgroundTaskWithNoMeasuresWarning() {
-    this.m26_1 = "The study protocol contains a background task which doesn't contain any measures. A background task without any measures doesn't do anything.";
+    this.c2a_1 = "The study protocol contains a background task which doesn't contain any measures. A background task without any measures doesn't do anything.";
   }
   function NoPrimaryDeviceError() {
-    this.n26_1 = 'At least one primary device needs to be specified in a study protocol. Without a primary device, no data can be collected.';
+    this.d2a_1 = 'At least one primary device needs to be specified in a study protocol. Without a primary device, no data can be collected.';
   }
   function OnlyOptionalDevicesWarning() {
-    this.o26_1 = "The study protocol only contains optional primary devices. This implies that a deployment could 'start' without any devices or participants, indicating a problem.";
+    this.e2a_1 = "The study protocol only contains optional primary devices. This implies that a deployment could 'start' without any devices or participants, indicating a problem.";
   }
   function UnexpectedMeasuresWarning() {
-    this.p26_1 = "The study protocol contains measures that are requested on a device for which the requested data type isn't expected. This is allowed, but requires the client implementation to have corresponding support to handle this unexpected data type.";
+    this.f2a_1 = "The study protocol contains measures that are requested on a device for which the requested data type isn't expected. This is allowed, but requires the client implementation to have corresponding support to handle this unexpected data type.";
   }
   function UnstartedTasksWarning() {
-    this.q26_1 = 'The study protocol contains tasks which are never started by a trigger. Tasks which are never started by a trigger are never used during the study.';
+    this.g2a_1 = 'The study protocol contains tasks which are never started by a trigger. Tasks which are never started by a trigger are never used during the study.';
   }
   function UnusedDevicesWarning() {
-    this.r26_1 = 'The study protocol contains devices which are never used as the source or target of triggers, or to relay data (primary device). These devices thus serve no purpose as part of the specified study protocol.';
+    this.h2a_1 = 'The study protocol contains devices which are never used as the source or target of triggers, or to relay data (primary device). These devices thus serve no purpose as part of the specified study protocol.';
   }
   function UseCompositeTaskWarning() {
-    this.s26_1 = 'The study protocol contains triggers which send multiple tasks to a single device. It is recommended to model this as one composite task instead, for clarity and to circumvent potential concurrency issues.';
+    this.i2a_1 = 'The study protocol contains triggers which send multiple tasks to a single device. It is recommended to model this as one composite task instead, for clarity and to circumvent potential concurrency issues.';
   }
-  function ProtocolFactoryServiceRequest$Companion$serializer$ref($boundThis) {
-    var l = function (p0) {
-      return $boundThis.d1r(p0);
-    };
-    l.callableName = 'serializer';
-    return l;
+  function ProtocolFactoryServiceRequest$Companion$serializer$ref(p0) {
+    return constructCallableReference(function (p0_0) {
+      return p0.j2a(p0_0);
+    }, 1, 0, 14, 'serializer', [p0]);
   }
   function Companion_4() {
   }
-  protoOf(Companion_4).m16 = function () {
-    return $serializer_getInstance_5();
-  };
-  var Companion_instance_5;
-  function Companion_getInstance_6() {
-    return Companion_instance_5;
+  var Companion_instance_8;
+  function Companion_getInstance_4() {
+    return Companion_instance_8;
   }
   function $serializer_2() {
     $serializer_instance_2 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.infrastructure.ProtocolFactoryServiceRequest.CreateCustomProtocol', this, 5);
-    tmp0_serialDesc.nt('apiVersion', false);
-    tmp0_serialDesc.nt('ownerId', false);
-    tmp0_serialDesc.nt('name', false);
-    tmp0_serialDesc.nt('customProtocol', false);
-    tmp0_serialDesc.nt('description', false);
-    this.u26_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('apiVersion', false);
+    tmp0_serialDesc.pv('ownerId', false);
+    tmp0_serialDesc.pv('name', false);
+    tmp0_serialDesc.pv('customProtocol', false);
+    tmp0_serialDesc.pv('description', false);
+    this.k2a_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_2).pi = function () {
-    return this.u26_1;
+  protoOf($serializer_2).l2a = function (encoder, value) {
+    var tmp0_desc = this.k2a_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    tmp1_output.op(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
+    tmp1_output.op(tmp0_desc, 1, UUIDSerializer_getInstance(), value.ownerId);
+    tmp1_output.mp(tmp0_desc, 2, value.name);
+    tmp1_output.mp(tmp0_desc, 3, value.customProtocol);
+    tmp1_output.qp(tmp0_desc, 4, StringSerializer_getInstance(), value.description);
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_2).cu = function () {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance(), StringSerializer_getInstance(), StringSerializer_getInstance(), get_nullable(StringSerializer_getInstance())];
+  protoOf($serializer_2).nk = function (encoder, value) {
+    return this.l2a(encoder, value instanceof CreateCustomProtocol ? value : THROW_CCE());
   };
-  protoOf($serializer_2).ri = function (decoder) {
-    var tmp0_desc = this.u26_1;
+  protoOf($serializer_2).ok = function (decoder) {
+    var tmp0_desc = this.k2a_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
@@ -2153,64 +2132,60 @@
     var tmp6_local2 = null;
     var tmp7_local3 = null;
     var tmp8_local4 = null;
-    var tmp9_input = decoder.xl(tmp0_desc);
-    if (tmp9_input.om()) {
-      tmp4_local0 = tmp9_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+    var tmp9_input = decoder.xn(tmp0_desc);
+    if (tmp9_input.no()) {
+      tmp4_local0 = tmp9_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp9_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+      tmp5_local1 = tmp9_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
-      tmp6_local2 = tmp9_input.hm(tmp0_desc, 2);
+      tmp6_local2 = tmp9_input.ho(tmp0_desc, 2);
       tmp3_bitMask0 = tmp3_bitMask0 | 4;
-      tmp7_local3 = tmp9_input.hm(tmp0_desc, 3);
+      tmp7_local3 = tmp9_input.ho(tmp0_desc, 3);
       tmp3_bitMask0 = tmp3_bitMask0 | 8;
-      tmp8_local4 = tmp9_input.lm(tmp0_desc, 4, StringSerializer_getInstance(), tmp8_local4);
+      tmp8_local4 = tmp9_input.lo(tmp0_desc, 4, StringSerializer_getInstance(), tmp8_local4);
       tmp3_bitMask0 = tmp3_bitMask0 | 16;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp9_input.pm(tmp0_desc);
+        tmp2_index = tmp9_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp9_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+            tmp4_local0 = tmp9_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp9_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+            tmp5_local1 = tmp9_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           case 2:
-            tmp6_local2 = tmp9_input.hm(tmp0_desc, 2);
+            tmp6_local2 = tmp9_input.ho(tmp0_desc, 2);
             tmp3_bitMask0 = tmp3_bitMask0 | 4;
             break;
           case 3:
-            tmp7_local3 = tmp9_input.hm(tmp0_desc, 3);
+            tmp7_local3 = tmp9_input.ho(tmp0_desc, 3);
             tmp3_bitMask0 = tmp3_bitMask0 | 8;
             break;
           case 4:
-            tmp8_local4 = tmp9_input.lm(tmp0_desc, 4, StringSerializer_getInstance(), tmp8_local4);
+            tmp8_local4 = tmp9_input.lo(tmp0_desc, 4, StringSerializer_getInstance(), tmp8_local4);
             tmp3_bitMask0 = tmp3_bitMask0 | 16;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp9_input.yl(tmp0_desc);
+    tmp9_input.yn(tmp0_desc);
     return CreateCustomProtocol_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, tmp6_local2, tmp7_local3, tmp8_local4, null);
   };
-  protoOf($serializer_2).v26 = function (encoder, value) {
-    var tmp0_desc = this.u26_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    tmp1_output.pn(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
-    tmp1_output.pn(tmp0_desc, 1, UUIDSerializer_getInstance(), value.ownerId);
-    tmp1_output.nn(tmp0_desc, 2, value.name);
-    tmp1_output.nn(tmp0_desc, 3, value.customProtocol);
-    tmp1_output.rn(tmp0_desc, 4, StringSerializer_getInstance(), value.description);
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_2).mk = function () {
+    return this.k2a_1;
   };
-  protoOf($serializer_2).qi = function (encoder, value) {
-    return this.v26(encoder, value instanceof CreateCustomProtocol ? value : THROW_CCE());
+  protoOf($serializer_2).ew = function () {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance(), StringSerializer_getInstance(), StringSerializer_getInstance(), get_nullable(StringSerializer_getInstance())];
   };
   var $serializer_instance_2;
   function $serializer_getInstance_5() {
@@ -2218,55 +2193,36 @@
       new $serializer_2();
     return $serializer_instance_2;
   }
-  function CreateCustomProtocol_init_$Init$(seen1, apiVersion, ownerId, name, customProtocol, description, serializationConstructorMarker, $this) {
-    if (!(31 === (31 & seen1))) {
-      throwMissingFieldException(seen1, 31, $serializer_getInstance_5().u26_1);
+  function CreateCustomProtocol_init_$Init$(seen0, apiVersion, ownerId, name, customProtocol, description, serializationConstructorMarker, $this) {
+    if (!(31 === (31 & seen0))) {
+      throwMissingFieldException(seen0, 31, $serializer_getInstance_5().k2a_1);
     }
-    ProtocolFactoryServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this);
+    ProtocolFactoryServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this);
     $this.ownerId = ownerId;
     $this.name = name;
     $this.customProtocol = customProtocol;
     $this.description = description;
     return $this;
   }
-  function CreateCustomProtocol_init_$Create$(seen1, apiVersion, ownerId, name, customProtocol, description, serializationConstructorMarker) {
-    return CreateCustomProtocol_init_$Init$(seen1, apiVersion, ownerId, name, customProtocol, description, serializationConstructorMarker, objectCreate(protoOf(CreateCustomProtocol)));
-  }
-  function _get_$cachedSerializer__te6jhj($this) {
-    return $this.t26_1.r2();
-  }
-  function ProtocolFactoryServiceRequest$Companion$_anonymous__my7w03() {
-    var tmp = getKClass(ProtocolFactoryServiceRequest);
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var tmp_0 = [getKClass(CreateCustomProtocol)];
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var tmp_1 = [$serializer_getInstance_5()];
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var tmp$ret$8 = [];
-    return SealedClassSerializer_init_$Create$('dk.cachet.carp.protocols.infrastructure.ProtocolFactoryServiceRequest', tmp, tmp_0, tmp_1, tmp$ret$8);
+  function CreateCustomProtocol_init_$Create$(seen0, apiVersion, ownerId, name, customProtocol, description, serializationConstructorMarker) {
+    return CreateCustomProtocol_init_$Init$(seen0, apiVersion, ownerId, name, customProtocol, description, serializationConstructorMarker, objectCreate(protoOf(CreateCustomProtocol)));
   }
   function Serializer() {
     Serializer_instance = this;
     var tmp = this;
-    tmp.x26_1 = ignoreTypeParameters(ProtocolFactoryServiceRequest$Companion$serializer$ref(Companion_getInstance_7()));
+    tmp.n2a_1 = ignoreTypeParameters(ProtocolFactoryServiceRequest$Companion$serializer$ref(Companion_instance_9));
   }
-  protoOf(Serializer).pi = function () {
-    return this.x26_1.pi();
+  protoOf(Serializer).mk = function () {
+    return this.n2a_1.mk();
   };
-  protoOf(Serializer).ri = function (decoder) {
-    return this.x26_1.ri(decoder);
+  protoOf(Serializer).o2a = function (encoder, value) {
+    this.n2a_1.nk(encoder, value);
   };
-  protoOf(Serializer).y26 = function (encoder, value) {
-    this.x26_1.qi(encoder, value);
+  protoOf(Serializer).nk = function (encoder, value) {
+    return this.o2a(encoder, value instanceof ProtocolFactoryServiceRequest ? value : THROW_CCE());
   };
-  protoOf(Serializer).qi = function (encoder, value) {
-    return this.y26(encoder, value instanceof ProtocolFactoryServiceRequest ? value : THROW_CCE());
+  protoOf(Serializer).ok = function (decoder) {
+    return this.n2a_1.ok(decoder);
   };
   var Serializer_instance;
   function Serializer_getInstance() {
@@ -2281,16 +2237,16 @@
     this.customProtocol = customProtocol;
     this.description = description;
   }
-  protoOf(CreateCustomProtocol).q24 = function () {
+  protoOf(CreateCustomProtocol).i28 = function () {
     return this.ownerId;
   };
-  protoOf(CreateCustomProtocol).ra = function () {
+  protoOf(CreateCustomProtocol).k = function () {
     return this.name;
   };
-  protoOf(CreateCustomProtocol).z26 = function () {
+  protoOf(CreateCustomProtocol).p2a = function () {
     return this.customProtocol;
   };
-  protoOf(CreateCustomProtocol).o1u = function () {
+  protoOf(CreateCustomProtocol).e1y = function () {
     return this.description;
   };
   protoOf(CreateCustomProtocol).getResponseSerializer = function () {
@@ -2299,19 +2255,19 @@
     var this_0 = serializer(createKType(getKClass(StudyProtocolSnapshot), arrayOf([]), false));
     return isInterface(this_0, KSerializer) ? this_0 : THROW_CCE();
   };
-  protoOf(CreateCustomProtocol).od = function () {
+  protoOf(CreateCustomProtocol).sd = function () {
     return this.ownerId;
   };
-  protoOf(CreateCustomProtocol).pd = function () {
+  protoOf(CreateCustomProtocol).td = function () {
     return this.name;
   };
-  protoOf(CreateCustomProtocol).r1g = function () {
+  protoOf(CreateCustomProtocol).m1j = function () {
     return this.customProtocol;
   };
-  protoOf(CreateCustomProtocol).q1h = function () {
+  protoOf(CreateCustomProtocol).l1k = function () {
     return this.description;
   };
-  protoOf(CreateCustomProtocol).a27 = function (ownerId, name, customProtocol, description) {
+  protoOf(CreateCustomProtocol).q2a = function (ownerId, name, customProtocol, description) {
     return new CreateCustomProtocol(ownerId, name, customProtocol, description);
   };
   protoOf(CreateCustomProtocol).copy = function (ownerId, name, customProtocol, description, $super) {
@@ -2319,10 +2275,10 @@
     name = name === VOID ? this.name : name;
     customProtocol = customProtocol === VOID ? this.customProtocol : customProtocol;
     description = description === VOID ? this.description : description;
-    return this.a27(ownerId, name, customProtocol, description);
+    return $super === VOID ? this.q2a(ownerId, name, customProtocol, description) : $super.q2a.call(this, ownerId, name, customProtocol, description);
   };
   protoOf(CreateCustomProtocol).toString = function () {
-    return 'CreateCustomProtocol(ownerId=' + this.ownerId + ', name=' + this.name + ', customProtocol=' + this.customProtocol + ', description=' + this.description + ')';
+    return 'CreateCustomProtocol(ownerId=' + this.ownerId.toString() + ', name=' + this.name + ', customProtocol=' + this.customProtocol + ', description=' + this.description + ')';
   };
   protoOf(CreateCustomProtocol).hashCode = function () {
     var result = this.ownerId.hashCode();
@@ -2336,135 +2292,135 @@
       return true;
     if (!(other instanceof CreateCustomProtocol))
       return false;
-    var tmp0_other_with_cast = other instanceof CreateCustomProtocol ? other : THROW_CCE();
-    if (!this.ownerId.equals(tmp0_other_with_cast.ownerId))
+    if (!this.ownerId.equals(other.ownerId))
       return false;
-    if (!(this.name === tmp0_other_with_cast.name))
+    if (!(this.name === other.name))
       return false;
-    if (!(this.customProtocol === tmp0_other_with_cast.customProtocol))
+    if (!(this.customProtocol === other.customProtocol))
       return false;
-    if (!(this.description == tmp0_other_with_cast.description))
+    if (!(this.description == other.description))
       return false;
     return true;
   };
   function Companion_5() {
-    Companion_instance_6 = this;
-    var tmp = this;
-    var tmp_0 = LazyThreadSafetyMode_PUBLICATION_getInstance();
-    tmp.t26_1 = lazy(tmp_0, ProtocolFactoryServiceRequest$Companion$_anonymous__my7w03);
   }
-  protoOf(Companion_5).d1r = function (typeSerial0) {
-    return _get_$cachedSerializer__te6jhj(this);
+  protoOf(Companion_5).j2a = function (typeSerial0) {
+    var tmp = getKClass(ProtocolFactoryServiceRequest);
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp_0 = [getKClass(CreateCustomProtocol)];
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp_1 = [$serializer_getInstance_5()];
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$6 = [];
+    return SealedClassSerializer_init_$Create$('dk.cachet.carp.protocols.infrastructure.ProtocolFactoryServiceRequest', tmp, tmp_0, tmp_1, tmp$ret$6);
   };
-  protoOf(Companion_5).nu = function (typeParamsSerializers) {
-    return this.d1r(typeParamsSerializers[0]);
+  protoOf(Companion_5).pw = function (typeParamsSerializers) {
+    return this.j2a(typeParamsSerializers[0]);
   };
-  var Companion_instance_6;
-  function Companion_getInstance_7() {
-    if (Companion_instance_6 == null)
-      new Companion_5();
-    return Companion_instance_6;
+  var Companion_instance_9;
+  function Companion_getInstance_5() {
+    return Companion_instance_9;
   }
-  function ProtocolFactoryServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this) {
+  function ProtocolFactoryServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this) {
     ApplicationServiceRequest.call($this);
-    $this.b27_1 = apiVersion;
+    $this.r2a_1 = apiVersion;
     return $this;
   }
   function ProtocolFactoryServiceRequest() {
-    Companion_getInstance_7();
     ApplicationServiceRequest.call(this);
-    this.b27_1 = Companion_getInstance_1().p22_1;
+    this.r2a_1 = Companion_getInstance().h26_1;
   }
-  protoOf(ProtocolFactoryServiceRequest).o22 = function () {
-    return this.b27_1;
+  protoOf(ProtocolFactoryServiceRequest).g26 = function () {
+    return this.r2a_1;
   };
-  function ProtocolServiceRequest$Companion$serializer$ref($boundThis) {
-    var l = function (p0) {
-      return $boundThis.d1r(p0);
-    };
-    l.callableName = 'serializer';
-    return l;
+  function ProtocolServiceRequest$Companion$serializer$ref(p0) {
+    return constructCallableReference(function (p0_0) {
+      return p0.j2a(p0_0);
+    }, 1, 0, 15, 'serializer', [p0]);
   }
   function Companion_6() {
   }
-  protoOf(Companion_6).m16 = function () {
-    return $serializer_getInstance_6();
-  };
-  var Companion_instance_7;
-  function Companion_getInstance_8() {
-    return Companion_instance_7;
+  var Companion_instance_10;
+  function Companion_getInstance_6() {
+    return Companion_instance_10;
   }
   function $serializer_3() {
     $serializer_instance_3 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest.Add', this, 3);
-    tmp0_serialDesc.nt('apiVersion', false);
-    tmp0_serialDesc.nt('protocol', false);
-    tmp0_serialDesc.nt('versionTag', true);
-    this.d27_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('apiVersion', false);
+    tmp0_serialDesc.pv('protocol', false);
+    tmp0_serialDesc.pv('versionTag', true);
+    this.s2a_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_3).pi = function () {
-    return this.d27_1;
+  protoOf($serializer_3).t2a = function (encoder, value) {
+    var tmp0_desc = this.s2a_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    tmp1_output.op(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
+    tmp1_output.op(tmp0_desc, 1, $serializer_getInstance_4(), value.protocol);
+    if (tmp1_output.up(tmp0_desc, 2) ? true : !(value.versionTag === 'Initial')) {
+      tmp1_output.mp(tmp0_desc, 2, value.versionTag);
+    }
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_3).cu = function () {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [ApiVersionSerializer_getInstance(), $serializer_getInstance_4(), StringSerializer_getInstance()];
+  protoOf($serializer_3).nk = function (encoder, value) {
+    return this.t2a(encoder, value instanceof Add ? value : THROW_CCE());
   };
-  protoOf($serializer_3).ri = function (decoder) {
-    var tmp0_desc = this.d27_1;
+  protoOf($serializer_3).ok = function (decoder) {
+    var tmp0_desc = this.s2a_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
     var tmp4_local0 = null;
     var tmp5_local1 = null;
     var tmp6_local2 = null;
-    var tmp7_input = decoder.xl(tmp0_desc);
-    if (tmp7_input.om()) {
-      tmp4_local0 = tmp7_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+    var tmp7_input = decoder.xn(tmp0_desc);
+    if (tmp7_input.no()) {
+      tmp4_local0 = tmp7_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp7_input.jm(tmp0_desc, 1, $serializer_getInstance_4(), tmp5_local1);
+      tmp5_local1 = tmp7_input.jo(tmp0_desc, 1, $serializer_getInstance_4(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
-      tmp6_local2 = tmp7_input.hm(tmp0_desc, 2);
+      tmp6_local2 = tmp7_input.ho(tmp0_desc, 2);
       tmp3_bitMask0 = tmp3_bitMask0 | 4;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp7_input.pm(tmp0_desc);
+        tmp2_index = tmp7_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp7_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+            tmp4_local0 = tmp7_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp7_input.jm(tmp0_desc, 1, $serializer_getInstance_4(), tmp5_local1);
+            tmp5_local1 = tmp7_input.jo(tmp0_desc, 1, $serializer_getInstance_4(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           case 2:
-            tmp6_local2 = tmp7_input.hm(tmp0_desc, 2);
+            tmp6_local2 = tmp7_input.ho(tmp0_desc, 2);
             tmp3_bitMask0 = tmp3_bitMask0 | 4;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp7_input.yl(tmp0_desc);
+    tmp7_input.yn(tmp0_desc);
     return Add_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, tmp6_local2, null);
   };
-  protoOf($serializer_3).e27 = function (encoder, value) {
-    var tmp0_desc = this.d27_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    tmp1_output.pn(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
-    tmp1_output.pn(tmp0_desc, 1, $serializer_getInstance_4(), value.protocol);
-    if (tmp1_output.vn(tmp0_desc, 2) ? true : !(value.versionTag === 'Initial')) {
-      tmp1_output.nn(tmp0_desc, 2, value.versionTag);
-    }
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_3).mk = function () {
+    return this.s2a_1;
   };
-  protoOf($serializer_3).qi = function (encoder, value) {
-    return this.e27(encoder, value instanceof Add ? value : THROW_CCE());
+  protoOf($serializer_3).ew = function () {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [ApiVersionSerializer_getInstance(), $serializer_getInstance_4(), StringSerializer_getInstance()];
   };
   var $serializer_instance_3;
   function $serializer_getInstance_6() {
@@ -2472,101 +2428,98 @@
       new $serializer_3();
     return $serializer_instance_3;
   }
-  function Add_init_$Init$(seen1, apiVersion, protocol, versionTag, serializationConstructorMarker, $this) {
-    if (!(3 === (3 & seen1))) {
-      throwMissingFieldException(seen1, 3, $serializer_getInstance_6().d27_1);
+  function Add_init_$Init$(seen0, apiVersion, protocol, versionTag, serializationConstructorMarker, $this) {
+    if (!(3 === (3 & seen0))) {
+      throwMissingFieldException(seen0, 3, $serializer_getInstance_6().s2a_1);
     }
-    ProtocolServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this);
+    ProtocolServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this);
     $this.protocol = protocol;
-    if (0 === (seen1 & 4))
+    if (0 === (seen0 & 4))
       $this.versionTag = 'Initial';
     else
       $this.versionTag = versionTag;
     return $this;
   }
-  function Add_init_$Create$(seen1, apiVersion, protocol, versionTag, serializationConstructorMarker) {
-    return Add_init_$Init$(seen1, apiVersion, protocol, versionTag, serializationConstructorMarker, objectCreate(protoOf(Add)));
+  function Add_init_$Create$(seen0, apiVersion, protocol, versionTag, serializationConstructorMarker) {
+    return Add_init_$Init$(seen0, apiVersion, protocol, versionTag, serializationConstructorMarker, objectCreate(protoOf(Add)));
   }
   function Companion_7() {
   }
-  protoOf(Companion_7).m16 = function () {
-    return $serializer_getInstance_7();
-  };
-  var Companion_instance_8;
-  function Companion_getInstance_9() {
-    return Companion_instance_8;
+  var Companion_instance_11;
+  function Companion_getInstance_7() {
+    return Companion_instance_11;
   }
   function $serializer_4() {
     $serializer_instance_4 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest.AddVersion', this, 3);
-    tmp0_serialDesc.nt('apiVersion', false);
-    tmp0_serialDesc.nt('protocol', false);
-    tmp0_serialDesc.nt('versionTag', true);
-    this.g27_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('apiVersion', false);
+    tmp0_serialDesc.pv('protocol', false);
+    tmp0_serialDesc.pv('versionTag', true);
+    this.v2a_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_4).pi = function () {
-    return this.g27_1;
+  protoOf($serializer_4).w2a = function (encoder, value) {
+    var tmp0_desc = this.v2a_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    tmp1_output.op(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
+    tmp1_output.op(tmp0_desc, 1, $serializer_getInstance_4(), value.protocol);
+    if (tmp1_output.up(tmp0_desc, 2) ? true : !(value.versionTag === System_instance.lg().toString())) {
+      tmp1_output.mp(tmp0_desc, 2, value.versionTag);
+    }
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_4).cu = function () {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [ApiVersionSerializer_getInstance(), $serializer_getInstance_4(), StringSerializer_getInstance()];
+  protoOf($serializer_4).nk = function (encoder, value) {
+    return this.w2a(encoder, value instanceof AddVersion ? value : THROW_CCE());
   };
-  protoOf($serializer_4).ri = function (decoder) {
-    var tmp0_desc = this.g27_1;
+  protoOf($serializer_4).ok = function (decoder) {
+    var tmp0_desc = this.v2a_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
     var tmp4_local0 = null;
     var tmp5_local1 = null;
     var tmp6_local2 = null;
-    var tmp7_input = decoder.xl(tmp0_desc);
-    if (tmp7_input.om()) {
-      tmp4_local0 = tmp7_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+    var tmp7_input = decoder.xn(tmp0_desc);
+    if (tmp7_input.no()) {
+      tmp4_local0 = tmp7_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp7_input.jm(tmp0_desc, 1, $serializer_getInstance_4(), tmp5_local1);
+      tmp5_local1 = tmp7_input.jo(tmp0_desc, 1, $serializer_getInstance_4(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
-      tmp6_local2 = tmp7_input.hm(tmp0_desc, 2);
+      tmp6_local2 = tmp7_input.ho(tmp0_desc, 2);
       tmp3_bitMask0 = tmp3_bitMask0 | 4;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp7_input.pm(tmp0_desc);
+        tmp2_index = tmp7_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp7_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+            tmp4_local0 = tmp7_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp7_input.jm(tmp0_desc, 1, $serializer_getInstance_4(), tmp5_local1);
+            tmp5_local1 = tmp7_input.jo(tmp0_desc, 1, $serializer_getInstance_4(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           case 2:
-            tmp6_local2 = tmp7_input.hm(tmp0_desc, 2);
+            tmp6_local2 = tmp7_input.ho(tmp0_desc, 2);
             tmp3_bitMask0 = tmp3_bitMask0 | 4;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp7_input.yl(tmp0_desc);
+    tmp7_input.yn(tmp0_desc);
     return AddVersion_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, tmp6_local2, null);
   };
-  protoOf($serializer_4).h27 = function (encoder, value) {
-    var tmp0_desc = this.g27_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    tmp1_output.pn(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
-    tmp1_output.pn(tmp0_desc, 1, $serializer_getInstance_4(), value.protocol);
-    if (tmp1_output.vn(tmp0_desc, 2) ? true : !(value.versionTag === System_instance.q13().toString())) {
-      tmp1_output.nn(tmp0_desc, 2, value.versionTag);
-    }
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_4).mk = function () {
+    return this.v2a_1;
   };
-  protoOf($serializer_4).qi = function (encoder, value) {
-    return this.h27(encoder, value instanceof AddVersion ? value : THROW_CCE());
+  protoOf($serializer_4).ew = function () {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [ApiVersionSerializer_getInstance(), $serializer_getInstance_4(), StringSerializer_getInstance()];
   };
   var $serializer_instance_4;
   function $serializer_getInstance_7() {
@@ -2574,59 +2527,63 @@
       new $serializer_4();
     return $serializer_instance_4;
   }
-  function AddVersion_init_$Init$(seen1, apiVersion, protocol, versionTag, serializationConstructorMarker, $this) {
-    if (!(3 === (3 & seen1))) {
-      throwMissingFieldException(seen1, 3, $serializer_getInstance_7().g27_1);
+  function AddVersion_init_$Init$(seen0, apiVersion, protocol, versionTag, serializationConstructorMarker, $this) {
+    if (!(3 === (3 & seen0))) {
+      throwMissingFieldException(seen0, 3, $serializer_getInstance_7().v2a_1);
     }
-    ProtocolServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this);
+    ProtocolServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this);
     $this.protocol = protocol;
-    if (0 === (seen1 & 4))
-      $this.versionTag = System_instance.q13().toString();
+    if (0 === (seen0 & 4))
+      $this.versionTag = System_instance.lg().toString();
     else
       $this.versionTag = versionTag;
     return $this;
   }
-  function AddVersion_init_$Create$(seen1, apiVersion, protocol, versionTag, serializationConstructorMarker) {
-    return AddVersion_init_$Init$(seen1, apiVersion, protocol, versionTag, serializationConstructorMarker, objectCreate(protoOf(AddVersion)));
+  function AddVersion_init_$Create$(seen0, apiVersion, protocol, versionTag, serializationConstructorMarker) {
+    return AddVersion_init_$Init$(seen0, apiVersion, protocol, versionTag, serializationConstructorMarker, objectCreate(protoOf(AddVersion)));
+  }
+  function ProtocolServiceRequest$UpdateParticipantDataConfiguration$Companion$$childSerializers$_anonymous__ysx6lm() {
+    return new LinkedHashSetSerializer($serializer_getInstance_1());
   }
   function Companion_8() {
-    Companion_instance_9 = this;
+    Companion_instance_12 = this;
     var tmp = this;
+    var tmp_0 = LazyThreadSafetyMode_PUBLICATION_getInstance();
     // Inline function 'kotlin.arrayOf' call
     // Inline function 'kotlin.js.unsafeCast' call
     // Inline function 'kotlin.js.asDynamic' call
-    tmp.j27_1 = [null, null, null, new LinkedHashSetSerializer($serializer_getInstance_1())];
+    tmp.y2a_1 = [null, null, null, lazy(tmp_0, ProtocolServiceRequest$UpdateParticipantDataConfiguration$Companion$$childSerializers$_anonymous__ysx6lm)];
   }
-  protoOf(Companion_8).m16 = function () {
-    return $serializer_getInstance_8();
-  };
-  var Companion_instance_9;
-  function Companion_getInstance_10() {
-    if (Companion_instance_9 == null)
+  var Companion_instance_12;
+  function Companion_getInstance_8() {
+    if (Companion_instance_12 == null)
       new Companion_8();
-    return Companion_instance_9;
+    return Companion_instance_12;
   }
   function $serializer_5() {
     $serializer_instance_5 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest.UpdateParticipantDataConfiguration', this, 4);
-    tmp0_serialDesc.nt('apiVersion', false);
-    tmp0_serialDesc.nt('protocolId', false);
-    tmp0_serialDesc.nt('versionTag', false);
-    tmp0_serialDesc.nt('expectedParticipantData', false);
-    this.k27_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('apiVersion', false);
+    tmp0_serialDesc.pv('protocolId', false);
+    tmp0_serialDesc.pv('versionTag', false);
+    tmp0_serialDesc.pv('expectedParticipantData', false);
+    this.z2a_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_5).pi = function () {
-    return this.k27_1;
+  protoOf($serializer_5).a2b = function (encoder, value) {
+    var tmp0_desc = this.z2a_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    var tmp2_cached = Companion_getInstance_8().y2a_1;
+    tmp1_output.op(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
+    tmp1_output.op(tmp0_desc, 1, UUIDSerializer_getInstance(), value.protocolId);
+    tmp1_output.mp(tmp0_desc, 2, value.versionTag);
+    tmp1_output.op(tmp0_desc, 3, tmp2_cached[3].s2(), value.expectedParticipantData);
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_5).cu = function () {
-    var tmp0_cached = Companion_getInstance_10().j27_1;
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance(), StringSerializer_getInstance(), tmp0_cached[3]];
+  protoOf($serializer_5).nk = function (encoder, value) {
+    return this.a2b(encoder, value instanceof UpdateParticipantDataConfiguration ? value : THROW_CCE());
   };
-  protoOf($serializer_5).ri = function (decoder) {
-    var tmp0_desc = this.k27_1;
+  protoOf($serializer_5).ok = function (decoder) {
+    var tmp0_desc = this.z2a_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
@@ -2634,59 +2591,56 @@
     var tmp5_local1 = null;
     var tmp6_local2 = null;
     var tmp7_local3 = null;
-    var tmp8_input = decoder.xl(tmp0_desc);
-    var tmp9_cached = Companion_getInstance_10().j27_1;
-    if (tmp8_input.om()) {
-      tmp4_local0 = tmp8_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+    var tmp8_input = decoder.xn(tmp0_desc);
+    var tmp9_cached = Companion_getInstance_8().y2a_1;
+    if (tmp8_input.no()) {
+      tmp4_local0 = tmp8_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp8_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+      tmp5_local1 = tmp8_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
-      tmp6_local2 = tmp8_input.hm(tmp0_desc, 2);
+      tmp6_local2 = tmp8_input.ho(tmp0_desc, 2);
       tmp3_bitMask0 = tmp3_bitMask0 | 4;
-      tmp7_local3 = tmp8_input.jm(tmp0_desc, 3, tmp9_cached[3], tmp7_local3);
+      tmp7_local3 = tmp8_input.jo(tmp0_desc, 3, tmp9_cached[3].s2(), tmp7_local3);
       tmp3_bitMask0 = tmp3_bitMask0 | 8;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp8_input.pm(tmp0_desc);
+        tmp2_index = tmp8_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp8_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+            tmp4_local0 = tmp8_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp8_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+            tmp5_local1 = tmp8_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           case 2:
-            tmp6_local2 = tmp8_input.hm(tmp0_desc, 2);
+            tmp6_local2 = tmp8_input.ho(tmp0_desc, 2);
             tmp3_bitMask0 = tmp3_bitMask0 | 4;
             break;
           case 3:
-            tmp7_local3 = tmp8_input.jm(tmp0_desc, 3, tmp9_cached[3], tmp7_local3);
+            tmp7_local3 = tmp8_input.jo(tmp0_desc, 3, tmp9_cached[3].s2(), tmp7_local3);
             tmp3_bitMask0 = tmp3_bitMask0 | 8;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp8_input.yl(tmp0_desc);
+    tmp8_input.yn(tmp0_desc);
     return UpdateParticipantDataConfiguration_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, tmp6_local2, tmp7_local3, null);
   };
-  protoOf($serializer_5).l27 = function (encoder, value) {
-    var tmp0_desc = this.k27_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    var tmp2_cached = Companion_getInstance_10().j27_1;
-    tmp1_output.pn(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
-    tmp1_output.pn(tmp0_desc, 1, UUIDSerializer_getInstance(), value.protocolId);
-    tmp1_output.nn(tmp0_desc, 2, value.versionTag);
-    tmp1_output.pn(tmp0_desc, 3, tmp2_cached[3], value.expectedParticipantData);
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_5).mk = function () {
+    return this.z2a_1;
   };
-  protoOf($serializer_5).qi = function (encoder, value) {
-    return this.l27(encoder, value instanceof UpdateParticipantDataConfiguration ? value : THROW_CCE());
+  protoOf($serializer_5).ew = function () {
+    var tmp0_cached = Companion_getInstance_8().y2a_1;
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance(), StringSerializer_getInstance(), tmp0_cached[3].s2()];
   };
   var $serializer_instance_5;
   function $serializer_getInstance_8() {
@@ -2694,99 +2648,96 @@
       new $serializer_5();
     return $serializer_instance_5;
   }
-  function UpdateParticipantDataConfiguration_init_$Init$(seen1, apiVersion, protocolId, versionTag, expectedParticipantData, serializationConstructorMarker, $this) {
-    if (!(15 === (15 & seen1))) {
-      throwMissingFieldException(seen1, 15, $serializer_getInstance_8().k27_1);
+  function UpdateParticipantDataConfiguration_init_$Init$(seen0, apiVersion, protocolId, versionTag, expectedParticipantData, serializationConstructorMarker, $this) {
+    if (!(15 === (15 & seen0))) {
+      throwMissingFieldException(seen0, 15, $serializer_getInstance_8().z2a_1);
     }
-    ProtocolServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this);
+    ProtocolServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this);
     $this.protocolId = protocolId;
     $this.versionTag = versionTag;
     $this.expectedParticipantData = expectedParticipantData;
     return $this;
   }
-  function UpdateParticipantDataConfiguration_init_$Create$(seen1, apiVersion, protocolId, versionTag, expectedParticipantData, serializationConstructorMarker) {
-    return UpdateParticipantDataConfiguration_init_$Init$(seen1, apiVersion, protocolId, versionTag, expectedParticipantData, serializationConstructorMarker, objectCreate(protoOf(UpdateParticipantDataConfiguration)));
+  function UpdateParticipantDataConfiguration_init_$Create$(seen0, apiVersion, protocolId, versionTag, expectedParticipantData, serializationConstructorMarker) {
+    return UpdateParticipantDataConfiguration_init_$Init$(seen0, apiVersion, protocolId, versionTag, expectedParticipantData, serializationConstructorMarker, objectCreate(protoOf(UpdateParticipantDataConfiguration)));
   }
   function Companion_9() {
   }
-  protoOf(Companion_9).m16 = function () {
-    return $serializer_getInstance_9();
-  };
-  var Companion_instance_10;
-  function Companion_getInstance_11() {
-    return Companion_instance_10;
+  var Companion_instance_13;
+  function Companion_getInstance_9() {
+    return Companion_instance_13;
   }
   function $serializer_6() {
     $serializer_instance_6 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest.GetBy', this, 3);
-    tmp0_serialDesc.nt('apiVersion', false);
-    tmp0_serialDesc.nt('protocolId', false);
-    tmp0_serialDesc.nt('versionTag', true);
-    this.n27_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('apiVersion', false);
+    tmp0_serialDesc.pv('protocolId', false);
+    tmp0_serialDesc.pv('versionTag', true);
+    this.c2b_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_6).pi = function () {
-    return this.n27_1;
+  protoOf($serializer_6).d2b = function (encoder, value) {
+    var tmp0_desc = this.c2b_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    tmp1_output.op(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
+    tmp1_output.op(tmp0_desc, 1, UUIDSerializer_getInstance(), value.protocolId);
+    if (tmp1_output.up(tmp0_desc, 2) ? true : !(value.versionTag == null)) {
+      tmp1_output.qp(tmp0_desc, 2, StringSerializer_getInstance(), value.versionTag);
+    }
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_6).cu = function () {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance(), get_nullable(StringSerializer_getInstance())];
+  protoOf($serializer_6).nk = function (encoder, value) {
+    return this.d2b(encoder, value instanceof GetBy ? value : THROW_CCE());
   };
-  protoOf($serializer_6).ri = function (decoder) {
-    var tmp0_desc = this.n27_1;
+  protoOf($serializer_6).ok = function (decoder) {
+    var tmp0_desc = this.c2b_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
     var tmp4_local0 = null;
     var tmp5_local1 = null;
     var tmp6_local2 = null;
-    var tmp7_input = decoder.xl(tmp0_desc);
-    if (tmp7_input.om()) {
-      tmp4_local0 = tmp7_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+    var tmp7_input = decoder.xn(tmp0_desc);
+    if (tmp7_input.no()) {
+      tmp4_local0 = tmp7_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp7_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+      tmp5_local1 = tmp7_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
-      tmp6_local2 = tmp7_input.lm(tmp0_desc, 2, StringSerializer_getInstance(), tmp6_local2);
+      tmp6_local2 = tmp7_input.lo(tmp0_desc, 2, StringSerializer_getInstance(), tmp6_local2);
       tmp3_bitMask0 = tmp3_bitMask0 | 4;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp7_input.pm(tmp0_desc);
+        tmp2_index = tmp7_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp7_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+            tmp4_local0 = tmp7_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp7_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+            tmp5_local1 = tmp7_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           case 2:
-            tmp6_local2 = tmp7_input.lm(tmp0_desc, 2, StringSerializer_getInstance(), tmp6_local2);
+            tmp6_local2 = tmp7_input.lo(tmp0_desc, 2, StringSerializer_getInstance(), tmp6_local2);
             tmp3_bitMask0 = tmp3_bitMask0 | 4;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp7_input.yl(tmp0_desc);
+    tmp7_input.yn(tmp0_desc);
     return GetBy_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, tmp6_local2, null);
   };
-  protoOf($serializer_6).o27 = function (encoder, value) {
-    var tmp0_desc = this.n27_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    tmp1_output.pn(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
-    tmp1_output.pn(tmp0_desc, 1, UUIDSerializer_getInstance(), value.protocolId);
-    if (tmp1_output.vn(tmp0_desc, 2) ? true : !(value.versionTag == null)) {
-      tmp1_output.rn(tmp0_desc, 2, StringSerializer_getInstance(), value.versionTag);
-    }
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_6).mk = function () {
+    return this.c2b_1;
   };
-  protoOf($serializer_6).qi = function (encoder, value) {
-    return this.o27(encoder, value instanceof GetBy ? value : THROW_CCE());
+  protoOf($serializer_6).ew = function () {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance(), get_nullable(StringSerializer_getInstance())];
   };
   var $serializer_instance_6;
   function $serializer_getInstance_9() {
@@ -2794,90 +2745,87 @@
       new $serializer_6();
     return $serializer_instance_6;
   }
-  function GetBy_init_$Init$(seen1, apiVersion, protocolId, versionTag, serializationConstructorMarker, $this) {
-    if (!(3 === (3 & seen1))) {
-      throwMissingFieldException(seen1, 3, $serializer_getInstance_9().n27_1);
+  function GetBy_init_$Init$(seen0, apiVersion, protocolId, versionTag, serializationConstructorMarker, $this) {
+    if (!(3 === (3 & seen0))) {
+      throwMissingFieldException(seen0, 3, $serializer_getInstance_9().c2b_1);
     }
-    ProtocolServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this);
+    ProtocolServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this);
     $this.protocolId = protocolId;
-    if (0 === (seen1 & 4))
+    if (0 === (seen0 & 4))
       $this.versionTag = null;
     else
       $this.versionTag = versionTag;
     return $this;
   }
-  function GetBy_init_$Create$(seen1, apiVersion, protocolId, versionTag, serializationConstructorMarker) {
-    return GetBy_init_$Init$(seen1, apiVersion, protocolId, versionTag, serializationConstructorMarker, objectCreate(protoOf(GetBy)));
+  function GetBy_init_$Create$(seen0, apiVersion, protocolId, versionTag, serializationConstructorMarker) {
+    return GetBy_init_$Init$(seen0, apiVersion, protocolId, versionTag, serializationConstructorMarker, objectCreate(protoOf(GetBy)));
   }
   function Companion_10() {
   }
-  protoOf(Companion_10).m16 = function () {
-    return $serializer_getInstance_10();
-  };
-  var Companion_instance_11;
-  function Companion_getInstance_12() {
-    return Companion_instance_11;
+  var Companion_instance_14;
+  function Companion_getInstance_10() {
+    return Companion_instance_14;
   }
   function $serializer_7() {
     $serializer_instance_7 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest.GetAllForOwner', this, 2);
-    tmp0_serialDesc.nt('apiVersion', false);
-    tmp0_serialDesc.nt('ownerId', false);
-    this.q27_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('apiVersion', false);
+    tmp0_serialDesc.pv('ownerId', false);
+    this.f2b_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_7).pi = function () {
-    return this.q27_1;
+  protoOf($serializer_7).g2b = function (encoder, value) {
+    var tmp0_desc = this.f2b_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    tmp1_output.op(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
+    tmp1_output.op(tmp0_desc, 1, UUIDSerializer_getInstance(), value.ownerId);
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_7).cu = function () {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance()];
+  protoOf($serializer_7).nk = function (encoder, value) {
+    return this.g2b(encoder, value instanceof GetAllForOwner ? value : THROW_CCE());
   };
-  protoOf($serializer_7).ri = function (decoder) {
-    var tmp0_desc = this.q27_1;
+  protoOf($serializer_7).ok = function (decoder) {
+    var tmp0_desc = this.f2b_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
     var tmp4_local0 = null;
     var tmp5_local1 = null;
-    var tmp6_input = decoder.xl(tmp0_desc);
-    if (tmp6_input.om()) {
-      tmp4_local0 = tmp6_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+    var tmp6_input = decoder.xn(tmp0_desc);
+    if (tmp6_input.no()) {
+      tmp4_local0 = tmp6_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp6_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+      tmp5_local1 = tmp6_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp6_input.pm(tmp0_desc);
+        tmp2_index = tmp6_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp6_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+            tmp4_local0 = tmp6_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp6_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+            tmp5_local1 = tmp6_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp6_input.yl(tmp0_desc);
+    tmp6_input.yn(tmp0_desc);
     return GetAllForOwner_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, null);
   };
-  protoOf($serializer_7).r27 = function (encoder, value) {
-    var tmp0_desc = this.q27_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    tmp1_output.pn(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
-    tmp1_output.pn(tmp0_desc, 1, UUIDSerializer_getInstance(), value.ownerId);
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_7).mk = function () {
+    return this.f2b_1;
   };
-  protoOf($serializer_7).qi = function (encoder, value) {
-    return this.r27(encoder, value instanceof GetAllForOwner ? value : THROW_CCE());
+  protoOf($serializer_7).ew = function () {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance()];
   };
   var $serializer_instance_7;
   function $serializer_getInstance_10() {
@@ -2885,86 +2833,83 @@
       new $serializer_7();
     return $serializer_instance_7;
   }
-  function GetAllForOwner_init_$Init$(seen1, apiVersion, ownerId, serializationConstructorMarker, $this) {
-    if (!(3 === (3 & seen1))) {
-      throwMissingFieldException(seen1, 3, $serializer_getInstance_10().q27_1);
+  function GetAllForOwner_init_$Init$(seen0, apiVersion, ownerId, serializationConstructorMarker, $this) {
+    if (!(3 === (3 & seen0))) {
+      throwMissingFieldException(seen0, 3, $serializer_getInstance_10().f2b_1);
     }
-    ProtocolServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this);
+    ProtocolServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this);
     $this.ownerId = ownerId;
     return $this;
   }
-  function GetAllForOwner_init_$Create$(seen1, apiVersion, ownerId, serializationConstructorMarker) {
-    return GetAllForOwner_init_$Init$(seen1, apiVersion, ownerId, serializationConstructorMarker, objectCreate(protoOf(GetAllForOwner)));
+  function GetAllForOwner_init_$Create$(seen0, apiVersion, ownerId, serializationConstructorMarker) {
+    return GetAllForOwner_init_$Init$(seen0, apiVersion, ownerId, serializationConstructorMarker, objectCreate(protoOf(GetAllForOwner)));
   }
   function Companion_11() {
   }
-  protoOf(Companion_11).m16 = function () {
-    return $serializer_getInstance_11();
-  };
-  var Companion_instance_12;
-  function Companion_getInstance_13() {
-    return Companion_instance_12;
+  var Companion_instance_15;
+  function Companion_getInstance_11() {
+    return Companion_instance_15;
   }
   function $serializer_8() {
     $serializer_instance_8 = this;
     var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('dk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest.GetVersionHistoryFor', this, 2);
-    tmp0_serialDesc.nt('apiVersion', false);
-    tmp0_serialDesc.nt('protocolId', false);
-    this.t27_1 = tmp0_serialDesc;
+    tmp0_serialDesc.pv('apiVersion', false);
+    tmp0_serialDesc.pv('protocolId', false);
+    this.i2b_1 = tmp0_serialDesc;
   }
-  protoOf($serializer_8).pi = function () {
-    return this.t27_1;
+  protoOf($serializer_8).j2b = function (encoder, value) {
+    var tmp0_desc = this.i2b_1;
+    var tmp1_output = encoder.xn(tmp0_desc);
+    tmp1_output.op(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
+    tmp1_output.op(tmp0_desc, 1, UUIDSerializer_getInstance(), value.protocolId);
+    tmp1_output.yn(tmp0_desc);
   };
-  protoOf($serializer_8).cu = function () {
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance()];
+  protoOf($serializer_8).nk = function (encoder, value) {
+    return this.j2b(encoder, value instanceof GetVersionHistoryFor ? value : THROW_CCE());
   };
-  protoOf($serializer_8).ri = function (decoder) {
-    var tmp0_desc = this.t27_1;
+  protoOf($serializer_8).ok = function (decoder) {
+    var tmp0_desc = this.i2b_1;
     var tmp1_flag = true;
     var tmp2_index = 0;
     var tmp3_bitMask0 = 0;
     var tmp4_local0 = null;
     var tmp5_local1 = null;
-    var tmp6_input = decoder.xl(tmp0_desc);
-    if (tmp6_input.om()) {
-      tmp4_local0 = tmp6_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+    var tmp6_input = decoder.xn(tmp0_desc);
+    if (tmp6_input.no()) {
+      tmp4_local0 = tmp6_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp6_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+      tmp5_local1 = tmp6_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp6_input.pm(tmp0_desc);
+        tmp2_index = tmp6_input.oo(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp6_input.jm(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
+            tmp4_local0 = tmp6_input.jo(tmp0_desc, 0, ApiVersionSerializer_getInstance(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp6_input.jm(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
+            tmp5_local1 = tmp6_input.jo(tmp0_desc, 1, UUIDSerializer_getInstance(), tmp5_local1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           default:
             throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp6_input.yl(tmp0_desc);
+    tmp6_input.yn(tmp0_desc);
     return GetVersionHistoryFor_init_$Create$(tmp3_bitMask0, tmp4_local0, tmp5_local1, null);
   };
-  protoOf($serializer_8).u27 = function (encoder, value) {
-    var tmp0_desc = this.t27_1;
-    var tmp1_output = encoder.xl(tmp0_desc);
-    tmp1_output.pn(tmp0_desc, 0, ApiVersionSerializer_getInstance(), value.apiVersion);
-    tmp1_output.pn(tmp0_desc, 1, UUIDSerializer_getInstance(), value.protocolId);
-    tmp1_output.yl(tmp0_desc);
+  protoOf($serializer_8).mk = function () {
+    return this.i2b_1;
   };
-  protoOf($serializer_8).qi = function (encoder, value) {
-    return this.u27(encoder, value instanceof GetVersionHistoryFor ? value : THROW_CCE());
+  protoOf($serializer_8).ew = function () {
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    return [ApiVersionSerializer_getInstance(), UUIDSerializer_getInstance()];
   };
   var $serializer_instance_8;
   function $serializer_getInstance_11() {
@@ -2972,52 +2917,33 @@
       new $serializer_8();
     return $serializer_instance_8;
   }
-  function GetVersionHistoryFor_init_$Init$(seen1, apiVersion, protocolId, serializationConstructorMarker, $this) {
-    if (!(3 === (3 & seen1))) {
-      throwMissingFieldException(seen1, 3, $serializer_getInstance_11().t27_1);
+  function GetVersionHistoryFor_init_$Init$(seen0, apiVersion, protocolId, serializationConstructorMarker, $this) {
+    if (!(3 === (3 & seen0))) {
+      throwMissingFieldException(seen0, 3, $serializer_getInstance_11().i2b_1);
     }
-    ProtocolServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this);
+    ProtocolServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this);
     $this.protocolId = protocolId;
     return $this;
   }
-  function GetVersionHistoryFor_init_$Create$(seen1, apiVersion, protocolId, serializationConstructorMarker) {
-    return GetVersionHistoryFor_init_$Init$(seen1, apiVersion, protocolId, serializationConstructorMarker, objectCreate(protoOf(GetVersionHistoryFor)));
-  }
-  function _get_$cachedSerializer__te6jhj_0($this) {
-    return $this.c27_1.r2();
-  }
-  function ProtocolServiceRequest$Companion$_anonymous__cea8fx() {
-    var tmp = getKClass(ProtocolServiceRequest);
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var tmp_0 = [getKClass(Add), getKClass(AddVersion), getKClass(GetAllForOwner), getKClass(GetBy), getKClass(GetVersionHistoryFor), getKClass(UpdateParticipantDataConfiguration)];
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var tmp_1 = [$serializer_getInstance_6(), $serializer_getInstance_7(), $serializer_getInstance_10(), $serializer_getInstance_9(), $serializer_getInstance_11(), $serializer_getInstance_8()];
-    // Inline function 'kotlin.arrayOf' call
-    // Inline function 'kotlin.js.unsafeCast' call
-    // Inline function 'kotlin.js.asDynamic' call
-    var tmp$ret$8 = [];
-    return SealedClassSerializer_init_$Create$('dk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest', tmp, tmp_0, tmp_1, tmp$ret$8);
+  function GetVersionHistoryFor_init_$Create$(seen0, apiVersion, protocolId, serializationConstructorMarker) {
+    return GetVersionHistoryFor_init_$Init$(seen0, apiVersion, protocolId, serializationConstructorMarker, objectCreate(protoOf(GetVersionHistoryFor)));
   }
   function Serializer_0() {
     Serializer_instance_0 = this;
     var tmp = this;
-    tmp.w27_1 = ignoreTypeParameters(ProtocolServiceRequest$Companion$serializer$ref(Companion_getInstance_14()));
+    tmp.l2b_1 = ignoreTypeParameters(ProtocolServiceRequest$Companion$serializer$ref(Companion_instance_16));
   }
-  protoOf(Serializer_0).pi = function () {
-    return this.w27_1.pi();
+  protoOf(Serializer_0).mk = function () {
+    return this.l2b_1.mk();
   };
-  protoOf(Serializer_0).ri = function (decoder) {
-    return this.w27_1.ri(decoder);
+  protoOf(Serializer_0).m2b = function (encoder, value) {
+    this.l2b_1.nk(encoder, value);
   };
-  protoOf(Serializer_0).x27 = function (encoder, value) {
-    this.w27_1.qi(encoder, value);
+  protoOf(Serializer_0).nk = function (encoder, value) {
+    return this.m2b(encoder, value instanceof ProtocolServiceRequest ? value : THROW_CCE());
   };
-  protoOf(Serializer_0).qi = function (encoder, value) {
-    return this.x27(encoder, value instanceof ProtocolServiceRequest ? value : THROW_CCE());
+  protoOf(Serializer_0).ok = function (decoder) {
+    return this.l2b_1.ok(decoder);
   };
   var Serializer_instance_0;
   function Serializer_getInstance_0() {
@@ -3031,10 +2957,10 @@
     this.protocol = protocol;
     this.versionTag = versionTag;
   }
-  protoOf(Add).y27 = function () {
+  protoOf(Add).n2b = function () {
     return this.protocol;
   };
-  protoOf(Add).z27 = function () {
+  protoOf(Add).o2b = function () {
     return this.versionTag;
   };
   protoOf(Add).getResponseSerializer = function () {
@@ -3043,22 +2969,22 @@
     var this_0 = serializer(createKType(getKClass(Unit), arrayOf([]), false));
     return isInterface(this_0, KSerializer) ? this_0 : THROW_CCE();
   };
-  protoOf(Add).od = function () {
+  protoOf(Add).sd = function () {
     return this.protocol;
   };
-  protoOf(Add).pd = function () {
+  protoOf(Add).td = function () {
     return this.versionTag;
   };
-  protoOf(Add).a28 = function (protocol, versionTag) {
+  protoOf(Add).p2b = function (protocol, versionTag) {
     return new Add(protocol, versionTag);
   };
   protoOf(Add).copy = function (protocol, versionTag, $super) {
     protocol = protocol === VOID ? this.protocol : protocol;
     versionTag = versionTag === VOID ? this.versionTag : versionTag;
-    return this.a28(protocol, versionTag);
+    return $super === VOID ? this.p2b(protocol, versionTag) : $super.p2b.call(this, protocol, versionTag);
   };
   protoOf(Add).toString = function () {
-    return 'Add(protocol=' + this.protocol + ', versionTag=' + this.versionTag + ')';
+    return 'Add(protocol=' + this.protocol.toString() + ', versionTag=' + this.versionTag + ')';
   };
   protoOf(Add).hashCode = function () {
     var result = this.protocol.hashCode();
@@ -3070,23 +2996,22 @@
       return true;
     if (!(other instanceof Add))
       return false;
-    var tmp0_other_with_cast = other instanceof Add ? other : THROW_CCE();
-    if (!this.protocol.equals(tmp0_other_with_cast.protocol))
+    if (!this.protocol.equals(other.protocol))
       return false;
-    if (!(this.versionTag === tmp0_other_with_cast.versionTag))
+    if (!(this.versionTag === other.versionTag))
       return false;
     return true;
   };
   function AddVersion(protocol, versionTag) {
-    versionTag = versionTag === VOID ? System_instance.q13().toString() : versionTag;
+    versionTag = versionTag === VOID ? System_instance.lg().toString() : versionTag;
     ProtocolServiceRequest.call(this);
     this.protocol = protocol;
     this.versionTag = versionTag;
   }
-  protoOf(AddVersion).y27 = function () {
+  protoOf(AddVersion).n2b = function () {
     return this.protocol;
   };
-  protoOf(AddVersion).z27 = function () {
+  protoOf(AddVersion).o2b = function () {
     return this.versionTag;
   };
   protoOf(AddVersion).getResponseSerializer = function () {
@@ -3095,22 +3020,22 @@
     var this_0 = serializer(createKType(getKClass(Unit), arrayOf([]), false));
     return isInterface(this_0, KSerializer) ? this_0 : THROW_CCE();
   };
-  protoOf(AddVersion).od = function () {
+  protoOf(AddVersion).sd = function () {
     return this.protocol;
   };
-  protoOf(AddVersion).pd = function () {
+  protoOf(AddVersion).td = function () {
     return this.versionTag;
   };
-  protoOf(AddVersion).a28 = function (protocol, versionTag) {
+  protoOf(AddVersion).p2b = function (protocol, versionTag) {
     return new AddVersion(protocol, versionTag);
   };
   protoOf(AddVersion).copy = function (protocol, versionTag, $super) {
     protocol = protocol === VOID ? this.protocol : protocol;
     versionTag = versionTag === VOID ? this.versionTag : versionTag;
-    return this.a28(protocol, versionTag);
+    return $super === VOID ? this.p2b(protocol, versionTag) : $super.p2b.call(this, protocol, versionTag);
   };
   protoOf(AddVersion).toString = function () {
-    return 'AddVersion(protocol=' + this.protocol + ', versionTag=' + this.versionTag + ')';
+    return 'AddVersion(protocol=' + this.protocol.toString() + ', versionTag=' + this.versionTag + ')';
   };
   protoOf(AddVersion).hashCode = function () {
     var result = this.protocol.hashCode();
@@ -3122,27 +3047,26 @@
       return true;
     if (!(other instanceof AddVersion))
       return false;
-    var tmp0_other_with_cast = other instanceof AddVersion ? other : THROW_CCE();
-    if (!this.protocol.equals(tmp0_other_with_cast.protocol))
+    if (!this.protocol.equals(other.protocol))
       return false;
-    if (!(this.versionTag === tmp0_other_with_cast.versionTag))
+    if (!(this.versionTag === other.versionTag))
       return false;
     return true;
   };
   function UpdateParticipantDataConfiguration(protocolId, versionTag, expectedParticipantData) {
-    Companion_getInstance_10();
+    Companion_getInstance_8();
     ProtocolServiceRequest.call(this);
     this.protocolId = protocolId;
     this.versionTag = versionTag;
     this.expectedParticipantData = expectedParticipantData;
   }
-  protoOf(UpdateParticipantDataConfiguration).c28 = function () {
+  protoOf(UpdateParticipantDataConfiguration).r2b = function () {
     return this.protocolId;
   };
-  protoOf(UpdateParticipantDataConfiguration).z27 = function () {
+  protoOf(UpdateParticipantDataConfiguration).o2b = function () {
     return this.versionTag;
   };
-  protoOf(UpdateParticipantDataConfiguration).k24 = function () {
+  protoOf(UpdateParticipantDataConfiguration).c28 = function () {
     return this.expectedParticipantData;
   };
   protoOf(UpdateParticipantDataConfiguration).getResponseSerializer = function () {
@@ -3151,26 +3075,26 @@
     var this_0 = serializer(createKType(getKClass(StudyProtocolSnapshot), arrayOf([]), false));
     return isInterface(this_0, KSerializer) ? this_0 : THROW_CCE();
   };
-  protoOf(UpdateParticipantDataConfiguration).od = function () {
+  protoOf(UpdateParticipantDataConfiguration).sd = function () {
     return this.protocolId;
   };
-  protoOf(UpdateParticipantDataConfiguration).pd = function () {
+  protoOf(UpdateParticipantDataConfiguration).td = function () {
     return this.versionTag;
   };
-  protoOf(UpdateParticipantDataConfiguration).r1g = function () {
+  protoOf(UpdateParticipantDataConfiguration).m1j = function () {
     return this.expectedParticipantData;
   };
-  protoOf(UpdateParticipantDataConfiguration).d28 = function (protocolId, versionTag, expectedParticipantData) {
+  protoOf(UpdateParticipantDataConfiguration).s2b = function (protocolId, versionTag, expectedParticipantData) {
     return new UpdateParticipantDataConfiguration(protocolId, versionTag, expectedParticipantData);
   };
   protoOf(UpdateParticipantDataConfiguration).copy = function (protocolId, versionTag, expectedParticipantData, $super) {
     protocolId = protocolId === VOID ? this.protocolId : protocolId;
     versionTag = versionTag === VOID ? this.versionTag : versionTag;
     expectedParticipantData = expectedParticipantData === VOID ? this.expectedParticipantData : expectedParticipantData;
-    return this.d28(protocolId, versionTag, expectedParticipantData);
+    return $super === VOID ? this.s2b(protocolId, versionTag, expectedParticipantData) : $super.s2b.call(this, protocolId, versionTag, expectedParticipantData);
   };
   protoOf(UpdateParticipantDataConfiguration).toString = function () {
-    return 'UpdateParticipantDataConfiguration(protocolId=' + this.protocolId + ', versionTag=' + this.versionTag + ', expectedParticipantData=' + this.expectedParticipantData + ')';
+    return 'UpdateParticipantDataConfiguration(protocolId=' + this.protocolId.toString() + ', versionTag=' + this.versionTag + ', expectedParticipantData=' + toString(this.expectedParticipantData) + ')';
   };
   protoOf(UpdateParticipantDataConfiguration).hashCode = function () {
     var result = this.protocolId.hashCode();
@@ -3183,12 +3107,11 @@
       return true;
     if (!(other instanceof UpdateParticipantDataConfiguration))
       return false;
-    var tmp0_other_with_cast = other instanceof UpdateParticipantDataConfiguration ? other : THROW_CCE();
-    if (!this.protocolId.equals(tmp0_other_with_cast.protocolId))
+    if (!this.protocolId.equals(other.protocolId))
       return false;
-    if (!(this.versionTag === tmp0_other_with_cast.versionTag))
+    if (!(this.versionTag === other.versionTag))
       return false;
-    if (!equals(this.expectedParticipantData, tmp0_other_with_cast.expectedParticipantData))
+    if (!equals(this.expectedParticipantData, other.expectedParticipantData))
       return false;
     return true;
   };
@@ -3198,10 +3121,10 @@
     this.protocolId = protocolId;
     this.versionTag = versionTag;
   }
-  protoOf(GetBy).c28 = function () {
+  protoOf(GetBy).r2b = function () {
     return this.protocolId;
   };
-  protoOf(GetBy).z27 = function () {
+  protoOf(GetBy).o2b = function () {
     return this.versionTag;
   };
   protoOf(GetBy).getResponseSerializer = function () {
@@ -3210,22 +3133,22 @@
     var this_0 = serializer(createKType(getKClass(StudyProtocolSnapshot), arrayOf([]), false));
     return isInterface(this_0, KSerializer) ? this_0 : THROW_CCE();
   };
-  protoOf(GetBy).od = function () {
+  protoOf(GetBy).sd = function () {
     return this.protocolId;
   };
-  protoOf(GetBy).pd = function () {
+  protoOf(GetBy).td = function () {
     return this.versionTag;
   };
-  protoOf(GetBy).e28 = function (protocolId, versionTag) {
+  protoOf(GetBy).t2b = function (protocolId, versionTag) {
     return new GetBy(protocolId, versionTag);
   };
   protoOf(GetBy).copy = function (protocolId, versionTag, $super) {
     protocolId = protocolId === VOID ? this.protocolId : protocolId;
     versionTag = versionTag === VOID ? this.versionTag : versionTag;
-    return this.e28(protocolId, versionTag);
+    return $super === VOID ? this.t2b(protocolId, versionTag) : $super.t2b.call(this, protocolId, versionTag);
   };
   protoOf(GetBy).toString = function () {
-    return 'GetBy(protocolId=' + this.protocolId + ', versionTag=' + this.versionTag + ')';
+    return 'GetBy(protocolId=' + this.protocolId.toString() + ', versionTag=' + this.versionTag + ')';
   };
   protoOf(GetBy).hashCode = function () {
     var result = this.protocolId.hashCode();
@@ -3237,10 +3160,9 @@
       return true;
     if (!(other instanceof GetBy))
       return false;
-    var tmp0_other_with_cast = other instanceof GetBy ? other : THROW_CCE();
-    if (!this.protocolId.equals(tmp0_other_with_cast.protocolId))
+    if (!this.protocolId.equals(other.protocolId))
       return false;
-    if (!(this.versionTag == tmp0_other_with_cast.versionTag))
+    if (!(this.versionTag == other.versionTag))
       return false;
     return true;
   };
@@ -3248,27 +3170,27 @@
     ProtocolServiceRequest.call(this);
     this.ownerId = ownerId;
   }
-  protoOf(GetAllForOwner).q24 = function () {
+  protoOf(GetAllForOwner).i28 = function () {
     return this.ownerId;
   };
   protoOf(GetAllForOwner).getResponseSerializer = function () {
     // Inline function 'kotlinx.serialization.serializer' call
     // Inline function 'kotlinx.serialization.internal.cast' call
-    var this_0 = serializer(createKType(getKClass(List), arrayOf([createInvariantKTypeProjection(createKType(getKClass(StudyProtocolSnapshot), arrayOf([]), false))]), false));
+    var this_0 = serializer(createKType(getKClass(KtList), arrayOf([createInvariantKTypeProjection(createKType(getKClass(StudyProtocolSnapshot), arrayOf([]), false))]), false));
     return isInterface(this_0, KSerializer) ? this_0 : THROW_CCE();
   };
-  protoOf(GetAllForOwner).od = function () {
+  protoOf(GetAllForOwner).sd = function () {
     return this.ownerId;
   };
-  protoOf(GetAllForOwner).f28 = function (ownerId) {
+  protoOf(GetAllForOwner).u2b = function (ownerId) {
     return new GetAllForOwner(ownerId);
   };
   protoOf(GetAllForOwner).copy = function (ownerId, $super) {
     ownerId = ownerId === VOID ? this.ownerId : ownerId;
-    return this.f28(ownerId);
+    return $super === VOID ? this.u2b(ownerId) : $super.u2b.call(this, ownerId);
   };
   protoOf(GetAllForOwner).toString = function () {
-    return 'GetAllForOwner(ownerId=' + this.ownerId + ')';
+    return 'GetAllForOwner(ownerId=' + this.ownerId.toString() + ')';
   };
   protoOf(GetAllForOwner).hashCode = function () {
     return this.ownerId.hashCode();
@@ -3278,8 +3200,7 @@
       return true;
     if (!(other instanceof GetAllForOwner))
       return false;
-    var tmp0_other_with_cast = other instanceof GetAllForOwner ? other : THROW_CCE();
-    if (!this.ownerId.equals(tmp0_other_with_cast.ownerId))
+    if (!this.ownerId.equals(other.ownerId))
       return false;
     return true;
   };
@@ -3287,27 +3208,27 @@
     ProtocolServiceRequest.call(this);
     this.protocolId = protocolId;
   }
-  protoOf(GetVersionHistoryFor).c28 = function () {
+  protoOf(GetVersionHistoryFor).r2b = function () {
     return this.protocolId;
   };
   protoOf(GetVersionHistoryFor).getResponseSerializer = function () {
     // Inline function 'kotlinx.serialization.serializer' call
     // Inline function 'kotlinx.serialization.internal.cast' call
-    var this_0 = serializer(createKType(getKClass(List), arrayOf([createInvariantKTypeProjection(createKType(getKClass(ProtocolVersion), arrayOf([]), false))]), false));
+    var this_0 = serializer(createKType(getKClass(KtList), arrayOf([createInvariantKTypeProjection(createKType(getKClass(ProtocolVersion), arrayOf([]), false))]), false));
     return isInterface(this_0, KSerializer) ? this_0 : THROW_CCE();
   };
-  protoOf(GetVersionHistoryFor).od = function () {
+  protoOf(GetVersionHistoryFor).sd = function () {
     return this.protocolId;
   };
-  protoOf(GetVersionHistoryFor).f28 = function (protocolId) {
+  protoOf(GetVersionHistoryFor).u2b = function (protocolId) {
     return new GetVersionHistoryFor(protocolId);
   };
   protoOf(GetVersionHistoryFor).copy = function (protocolId, $super) {
     protocolId = protocolId === VOID ? this.protocolId : protocolId;
-    return this.f28(protocolId);
+    return $super === VOID ? this.u2b(protocolId) : $super.u2b.call(this, protocolId);
   };
   protoOf(GetVersionHistoryFor).toString = function () {
-    return 'GetVersionHistoryFor(protocolId=' + this.protocolId + ')';
+    return 'GetVersionHistoryFor(protocolId=' + this.protocolId.toString() + ')';
   };
   protoOf(GetVersionHistoryFor).hashCode = function () {
     return this.protocolId.hashCode();
@@ -3317,125 +3238,121 @@
       return true;
     if (!(other instanceof GetVersionHistoryFor))
       return false;
-    var tmp0_other_with_cast = other instanceof GetVersionHistoryFor ? other : THROW_CCE();
-    if (!this.protocolId.equals(tmp0_other_with_cast.protocolId))
+    if (!this.protocolId.equals(other.protocolId))
       return false;
     return true;
   };
   function Companion_12() {
-    Companion_instance_13 = this;
-    var tmp = this;
-    var tmp_0 = LazyThreadSafetyMode_PUBLICATION_getInstance();
-    tmp.c27_1 = lazy(tmp_0, ProtocolServiceRequest$Companion$_anonymous__cea8fx);
   }
-  protoOf(Companion_12).d1r = function (typeSerial0) {
-    return _get_$cachedSerializer__te6jhj_0(this);
+  protoOf(Companion_12).j2a = function (typeSerial0) {
+    var tmp = getKClass(ProtocolServiceRequest);
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp_0 = [getKClass(Add), getKClass(AddVersion), getKClass(GetAllForOwner), getKClass(GetBy), getKClass(GetVersionHistoryFor), getKClass(UpdateParticipantDataConfiguration)];
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp_1 = [$serializer_getInstance_6(), $serializer_getInstance_7(), $serializer_getInstance_10(), $serializer_getInstance_9(), $serializer_getInstance_11(), $serializer_getInstance_8()];
+    // Inline function 'kotlin.arrayOf' call
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$6 = [];
+    return SealedClassSerializer_init_$Create$('dk.cachet.carp.protocols.infrastructure.ProtocolServiceRequest', tmp, tmp_0, tmp_1, tmp$ret$6);
   };
-  protoOf(Companion_12).nu = function (typeParamsSerializers) {
-    return this.d1r(typeParamsSerializers[0]);
+  protoOf(Companion_12).pw = function (typeParamsSerializers) {
+    return this.j2a(typeParamsSerializers[0]);
   };
-  var Companion_instance_13;
-  function Companion_getInstance_14() {
-    if (Companion_instance_13 == null)
-      new Companion_12();
-    return Companion_instance_13;
+  var Companion_instance_16;
+  function Companion_getInstance_12() {
+    return Companion_instance_16;
   }
-  function ProtocolServiceRequest_init_$Init$(seen1, apiVersion, serializationConstructorMarker, $this) {
+  function ProtocolServiceRequest_init_$Init$(seen0, apiVersion, serializationConstructorMarker, $this) {
     ApplicationServiceRequest.call($this);
-    $this.b28_1 = apiVersion;
+    $this.q2b_1 = apiVersion;
     return $this;
   }
   function ProtocolServiceRequest() {
-    Companion_getInstance_14();
     ApplicationServiceRequest.call(this);
-    this.b28_1 = Companion_getInstance_2().q22_1;
+    this.q2b_1 = Companion_getInstance_0().i26_1;
   }
-  protoOf(ProtocolServiceRequest).o22 = function () {
-    return this.b28_1;
+  protoOf(ProtocolServiceRequest).g26 = function () {
+    return this.q2b_1;
   };
   //region block: post-declaration
-  protoOf($serializer).du = typeParametersSerializers;
-  protoOf($serializer_0).du = typeParametersSerializers;
-  protoOf($serializer_1).du = typeParametersSerializers;
+  protoOf($serializer).fw = typeParametersSerializers;
+  protoOf($serializer_0).fw = typeParametersSerializers;
+  protoOf($serializer_1).fw = typeParametersSerializers;
   defineProp(protoOf(StudyProtocolSnapshot), 'id', function () {
-    return this.z1y();
+    return this.m22();
   });
   defineProp(protoOf(StudyProtocolSnapshot), 'createdOn', function () {
-    return this.a1z();
+    return this.n22();
   });
   defineProp(protoOf(StudyProtocolSnapshot), 'version', function () {
-    return this.b1z();
+    return this.o22();
   });
-  protoOf(StudyProtocolComposition).y22 = getConnectedDevices$default;
-  protoOf(EmptyProtocolDeviceConfiguration).y22 = getConnectedDevices$default;
-  protoOf(EmptyProtocolParticipantConfiguration).a26 = isValidAssignment;
-  protoOf($serializer_2).du = typeParametersSerializers;
-  protoOf($serializer_3).du = typeParametersSerializers;
-  protoOf($serializer_4).du = typeParametersSerializers;
-  protoOf($serializer_5).du = typeParametersSerializers;
-  protoOf($serializer_6).du = typeParametersSerializers;
-  protoOf($serializer_7).du = typeParametersSerializers;
-  protoOf($serializer_8).du = typeParametersSerializers;
+  protoOf(StudyProtocolComposition).q26 = getConnectedDevices$default;
+  protoOf(EmptyProtocolDeviceConfiguration).q26 = getConnectedDevices$default;
+  protoOf(EmptyProtocolParticipantConfiguration).q29 = isValidAssignment;
+  protoOf($serializer_2).fw = typeParametersSerializers;
+  protoOf($serializer_3).fw = typeParametersSerializers;
+  protoOf($serializer_4).fw = typeParametersSerializers;
+  protoOf($serializer_5).fw = typeParametersSerializers;
+  protoOf($serializer_6).fw = typeParametersSerializers;
+  protoOf($serializer_7).fw = typeParametersSerializers;
+  protoOf($serializer_8).fw = typeParametersSerializers;
   //endregion
   //region block: init
-  Companion_instance_2 = new Companion_1();
-  Companion_instance_3 = new Companion_2();
+  Companion_instance_5 = new Companion_1();
+  Companion_instance_6 = new Companion_2();
   Factory_instance = new Factory();
-  Companion_instance_5 = new Companion_4();
-  Companion_instance_7 = new Companion_6();
-  Companion_instance_8 = new Companion_7();
-  Companion_instance_10 = new Companion_9();
-  Companion_instance_11 = new Companion_10();
-  Companion_instance_12 = new Companion_11();
+  Companion_instance_8 = new Companion_4();
+  Companion_instance_9 = new Companion_5();
+  Companion_instance_10 = new Companion_6();
+  Companion_instance_11 = new Companion_7();
+  Companion_instance_13 = new Companion_9();
+  Companion_instance_14 = new Companion_10();
+  Companion_instance_15 = new Companion_11();
+  Companion_instance_16 = new Companion_12();
   //endregion
   //region block: exports
   function $jsExportAll$(_) {
-    var $dk = _.dk || (_.dk = {});
-    var $dk$cachet = $dk.cachet || ($dk.cachet = {});
-    var $dk$cachet$carp = $dk$cachet.carp || ($dk$cachet.carp = {});
-    var $dk$cachet$carp$protocols = $dk$cachet$carp.protocols || ($dk$cachet$carp.protocols = {});
-    var $dk$cachet$carp$protocols$application = $dk$cachet$carp$protocols.application || ($dk$cachet$carp$protocols.application = {});
-    $dk$cachet$carp$protocols$application.ProtocolVersion = ProtocolVersion;
-    defineProp($dk$cachet$carp$protocols$application.ProtocolVersion, 'Companion', Companion_getInstance_3);
-    var $dk = _.dk || (_.dk = {});
-    var $dk$cachet = $dk.cachet || ($dk.cachet = {});
-    var $dk$cachet$carp = $dk$cachet.carp || ($dk$cachet.carp = {});
-    var $dk$cachet$carp$protocols = $dk$cachet$carp.protocols || ($dk$cachet$carp.protocols = {});
-    var $dk$cachet$carp$protocols$application = $dk$cachet$carp$protocols.application || ($dk$cachet$carp$protocols.application = {});
-    $dk$cachet$carp$protocols$application.StudyProtocolSnapshot = StudyProtocolSnapshot;
-    $dk$cachet$carp$protocols$application.StudyProtocolSnapshot.DeviceConnection = DeviceConnection;
-    defineProp($dk$cachet$carp$protocols$application.StudyProtocolSnapshot.DeviceConnection, 'Companion', Companion_getInstance_4);
-    defineProp($dk$cachet$carp$protocols$application.StudyProtocolSnapshot, 'Companion', Companion_getInstance_5);
-    var $dk = _.dk || (_.dk = {});
-    var $dk$cachet = $dk.cachet || ($dk.cachet = {});
-    var $dk$cachet$carp = $dk$cachet.carp || ($dk$cachet.carp = {});
-    var $dk$cachet$carp$protocols = $dk$cachet$carp.protocols || ($dk$cachet$carp.protocols = {});
-    var $dk$cachet$carp$protocols$infrastructure = $dk$cachet$carp$protocols.infrastructure || ($dk$cachet$carp$protocols.infrastructure = {});
-    $dk$cachet$carp$protocols$infrastructure.ProtocolFactoryServiceRequest = ProtocolFactoryServiceRequest;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolFactoryServiceRequest, 'Serializer', Serializer_getInstance);
-    $dk$cachet$carp$protocols$infrastructure.ProtocolFactoryServiceRequest.CreateCustomProtocol = CreateCustomProtocol;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolFactoryServiceRequest.CreateCustomProtocol, 'Companion', Companion_getInstance_6);
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolFactoryServiceRequest, 'Companion', Companion_getInstance_7);
-    var $dk = _.dk || (_.dk = {});
-    var $dk$cachet = $dk.cachet || ($dk.cachet = {});
-    var $dk$cachet$carp = $dk$cachet.carp || ($dk$cachet.carp = {});
-    var $dk$cachet$carp$protocols = $dk$cachet$carp.protocols || ($dk$cachet$carp.protocols = {});
-    var $dk$cachet$carp$protocols$infrastructure = $dk$cachet$carp$protocols.infrastructure || ($dk$cachet$carp$protocols.infrastructure = {});
-    $dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest = ProtocolServiceRequest;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest, 'Serializer', Serializer_getInstance_0);
-    $dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.Add = Add;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.Add, 'Companion', Companion_getInstance_8);
-    $dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.AddVersion = AddVersion;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.AddVersion, 'Companion', Companion_getInstance_9);
-    $dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.UpdateParticipantDataConfiguration = UpdateParticipantDataConfiguration;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.UpdateParticipantDataConfiguration, 'Companion', Companion_getInstance_10);
-    $dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.GetBy = GetBy;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.GetBy, 'Companion', Companion_getInstance_11);
-    $dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.GetAllForOwner = GetAllForOwner;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.GetAllForOwner, 'Companion', Companion_getInstance_12);
-    $dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.GetVersionHistoryFor = GetVersionHistoryFor;
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest.GetVersionHistoryFor, 'Companion', Companion_getInstance_13);
-    defineProp($dk$cachet$carp$protocols$infrastructure.ProtocolServiceRequest, 'Companion', Companion_getInstance_14);
+    var dk = _.dk || (_.dk = {});
+    var cachet = dk.cachet || (dk.cachet = {});
+    var carp = cachet.carp || (cachet.carp = {});
+    var protocols = carp.protocols || (carp.protocols = {});
+    var application = protocols.application || (protocols.application = {});
+    application.ProtocolVersion = ProtocolVersion;
+    var dk_0 = _.dk || (_.dk = {});
+    var cachet_0 = dk_0.cachet || (dk_0.cachet = {});
+    var carp_0 = cachet_0.carp || (cachet_0.carp = {});
+    var protocols_0 = carp_0.protocols || (carp_0.protocols = {});
+    var application_0 = protocols_0.application || (protocols_0.application = {});
+    application_0.StudyProtocolSnapshot = StudyProtocolSnapshot;
+    application_0.StudyProtocolSnapshot.DeviceConnection = DeviceConnection;
+    defineProp(application_0.StudyProtocolSnapshot, 'Companion', Companion_getInstance_3, VOID, true);
+    var dk_1 = _.dk || (_.dk = {});
+    var cachet_1 = dk_1.cachet || (dk_1.cachet = {});
+    var carp_1 = cachet_1.carp || (cachet_1.carp = {});
+    var protocols_1 = carp_1.protocols || (carp_1.protocols = {});
+    var infrastructure = protocols_1.infrastructure || (protocols_1.infrastructure = {});
+    infrastructure.ProtocolFactoryServiceRequest = ProtocolFactoryServiceRequest;
+    defineProp(infrastructure.ProtocolFactoryServiceRequest, 'Serializer', Serializer_getInstance, VOID, true);
+    infrastructure.ProtocolFactoryServiceRequest.CreateCustomProtocol = CreateCustomProtocol;
+    var dk_2 = _.dk || (_.dk = {});
+    var cachet_2 = dk_2.cachet || (dk_2.cachet = {});
+    var carp_2 = cachet_2.carp || (cachet_2.carp = {});
+    var protocols_2 = carp_2.protocols || (carp_2.protocols = {});
+    var infrastructure_0 = protocols_2.infrastructure || (protocols_2.infrastructure = {});
+    infrastructure_0.ProtocolServiceRequest = ProtocolServiceRequest;
+    defineProp(infrastructure_0.ProtocolServiceRequest, 'Serializer', Serializer_getInstance_0, VOID, true);
+    infrastructure_0.ProtocolServiceRequest.Add = Add;
+    infrastructure_0.ProtocolServiceRequest.AddVersion = AddVersion;
+    infrastructure_0.ProtocolServiceRequest.UpdateParticipantDataConfiguration = UpdateParticipantDataConfiguration;
+    infrastructure_0.ProtocolServiceRequest.GetBy = GetBy;
+    infrastructure_0.ProtocolServiceRequest.GetAllForOwner = GetAllForOwner;
+    infrastructure_0.ProtocolServiceRequest.GetVersionHistoryFor = GetVersionHistoryFor;
   }
   $jsExportAll$(_);
   _.$jsExportAll$ = $jsExportAll$;
