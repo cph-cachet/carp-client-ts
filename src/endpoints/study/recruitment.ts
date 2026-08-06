@@ -1,6 +1,7 @@
 import {
   AnonymousLinksRequest,
   AnonymousLinksResponse,
+  DeploymentStatusCountsDto,
   InactiveDeployment,
   PaginatedResponseDto,
   ParticipantAccountsRequestDto,
@@ -27,6 +28,16 @@ import {
   serialize,
   toSet,
 } from "@/shared";
+
+/**
+ * Query for participant-group status. The API contract requires `page` and `size` together, so the
+ * union type permits either both (paginated) or neither (full list) — never just one.
+ */
+export type ParticipantGroupStatusQuery = {
+  studyId: string;
+  search?: string;
+  status?: string;
+} & ({ page: number; size: number } | { page?: undefined; size?: undefined });
 
 class Recruitment extends Endpoint {
   coreEndpoint: string = "/api/recruitment-service";
@@ -264,12 +275,49 @@ class Recruitment extends Endpoint {
   }
 
   /**
-   * Get participant group accounts and status
+   * Get participant group accounts and status.
+   *
+   * When both `page` and `size` are provided the server returns one page of matching groups plus a
+   * `total`; when omitted it returns every group (legacy behavior). `search` matches deployment id
+   * and participant account identity; `status` filters by deployment state (e.g. "Running").
    * @param studyId The ID of the study
    */
-  async getParticipantGroupAccountsAndStatus({ studyId }: { studyId: string }) {
+  async getParticipantGroupAccountsAndStatus({
+    studyId,
+    page,
+    size,
+    search,
+    status,
+  }: ParticipantGroupStatusQuery) {
+    // Runtime guard for non-TypeScript callers: pagination is all-or-nothing.
+    if ((page === undefined) !== (size === undefined)) {
+      throw new Error(
+        "getParticipantGroupAccountsAndStatus: 'page' and 'size' must be provided together, or neither.",
+      );
+    }
+    const params = new URLSearchParams();
+    if (page !== undefined) params.set("page", String(page));
+    if (size !== undefined) params.set("size", String(size));
+    if (search) params.set("query", search);
+    if (status) params.set("status", status);
+    const queryString = params.toString();
+
     const response = await this.actions.get<ParticipantGroups>(
-      `${this.wsEndpoint}/${studyId}/participantGroup/status`,
+      `${this.wsEndpoint}/${studyId}/participantGroup/status${
+        queryString ? `?${queryString}` : ""
+      }`,
+    );
+
+    return response.data;
+  }
+
+  /**
+   * Get aggregate counts of participant-group deployment statuses (for the overview pie chart).
+   * @param studyId The ID of the study
+   */
+  async getParticipantGroupStatusCounts({ studyId }: { studyId: string }) {
+    const response = await this.actions.get<DeploymentStatusCountsDto>(
+      `${this.wsEndpoint}/${studyId}/participantGroup/counts`,
     );
 
     return response.data;

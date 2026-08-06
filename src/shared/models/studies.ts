@@ -39,6 +39,8 @@ export type ParticipantWithRoles = {
 export type ParticipantGroups = {
   groups: ParticipantGroup[];
   groupStatuses: any[];
+  // Total matching groups before paging; present only when the request is paginated.
+  total?: number | null;
 };
 
 export interface ParticipantGroup {

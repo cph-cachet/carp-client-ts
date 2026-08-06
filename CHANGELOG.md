@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added `getParticipantGroupStatusCounts` endpoint for deployment-status totals
+- Added `page`/`size`/`search`/`status` (paginate, search, filter) to `getParticipantGroupAccountsAndStatus`; `page` and `size` are required together
 - Added `getStudyResearchAssistants` endpoint
 - `is_descending` parameters to `getParticipantAccounts` endpoint
 - Added `subdomain` optional parameter to `generateAnonymousAccounts` endpoint
