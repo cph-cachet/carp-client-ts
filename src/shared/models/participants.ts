@@ -26,3 +26,11 @@ export type ParticipantAccountSummaryDto = {
   isDeployed: boolean;
   carpUser: boolean;
 };
+
+export type DeploymentStatusCountsDto = {
+  invited: number;
+  deployingDevices: number;
+  running: number;
+  stopped: number;
+  total: number;
+};
