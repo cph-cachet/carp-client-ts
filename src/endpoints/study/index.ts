@@ -19,6 +19,7 @@ import Recruitment from "./recruitment";
 import Deployments from "./deployments";
 import Collections from "./collections";
 import Files from "./files";
+import SelfSignup from "./selfSignup";
 
 /**
  * Endpoint for interacting with a particular study
@@ -38,6 +39,8 @@ class Study extends Endpoint {
 
   files: Files;
 
+  selfSignup: SelfSignup;
+
   constructor(client: CarpClient) {
     super(client);
 
@@ -47,6 +50,7 @@ class Study extends Endpoint {
     this.deployments = new Deployments(client);
     this.collections = new Collections(client);
     this.files = new Files(client);
+    this.selfSignup = new SelfSignup(client);
   }
 
   /**

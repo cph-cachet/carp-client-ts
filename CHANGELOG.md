@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added self-signup endpoints: `getConfig`, `enable` and `end` on `study.selfSignup`, and the public `selfSignup.signUp`
 - Added `getParticipantGroupStatusCounts` endpoint for deployment-status totals
 - Added `page`/`size`/`search`/`status` (paginate, search, filter) to `getParticipantGroupAccountsAndStatus`; `page` and `size` are required together
 - Added `getStudyResearchAssistants` endpoint

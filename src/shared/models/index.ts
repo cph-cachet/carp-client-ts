@@ -9,3 +9,4 @@ export * from "./participantInfo";
 export * from "./dataStream";
 export * from "./pagination";
 export * from "./participants";
+export * from "./selfSignup";

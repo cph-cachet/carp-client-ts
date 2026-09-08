@@ -5,5 +5,15 @@ import Participation from "./participation";
 import Studies from "./studies";
 import Email from "./email";
 import DataStreams from "./dataStreams";
+import SelfSignup from "./selfSignup";
 
-export { Accounts, Auth, Study, Studies, Participation, Email, DataStreams };
+export {
+  Accounts,
+  Auth,
+  Study,
+  Studies,
+  Participation,
+  Email,
+  DataStreams,
+  SelfSignup,
+};

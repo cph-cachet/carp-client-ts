@@ -5,6 +5,7 @@ import {
   DataStreams,
   Email,
   Participation,
+  SelfSignup,
   Studies,
   Study,
 } from "@/endpoints";
@@ -28,6 +29,8 @@ export default class CarpClient {
   email: Email;
 
   dataStreams: DataStreams;
+
+  selfSignup: SelfSignup;
 
   public get getInstance(): AxiosInstance {
     return this.instance;
@@ -108,5 +111,6 @@ export default class CarpClient {
     this.protocols = new Protocols(this);
     this.email = new Email(this);
     this.dataStreams = new DataStreams(this);
+    this.selfSignup = new SelfSignup(this);
   }
 }
